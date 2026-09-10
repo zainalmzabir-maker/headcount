@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .rpg-font {
+    .score-font {
       font-family: 'Orbitron', sans-serif;
     }
     .neon-card {
@@ -61,7 +61,6 @@
   <header class="bg-slate-900/85 backdrop-blur border-b border-slate-800 sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       
-      <!-- Logo & Nama Sekolah -->
       <div class="flex items-center space-x-3">
         <div class="h-11 w-11 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden p-1 shadow-md">
           <img src="logo.png" alt="Logo SEMEKAR" class="h-full w-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-graduation-cap text-indigo-400 text-xl\'></i>';">
@@ -75,25 +74,25 @@
         </div>
       </div>
       
-      <!-- Status Segerak Cloud & Tab Menu Navigasi -->
+      <!-- Status Cloud & Tab Navigasi -->
       <div class="flex items-center space-x-3">
         <div id="cloud-status-indicator" class="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-[11px] text-emerald-400 font-mono">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Google Cloud Connected</span>
+          <span>Google Sheet Diselaraskan</span>
         </div>
 
         <nav class="flex space-x-1 sm:space-x-2">
           <button onclick="switchTab('dashboard')" id="nav-dashboard" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
             <i class="fa-solid fa-chart-pie"></i>
-            <span class="hidden sm:inline">Dashboard</span>
+            <span class="hidden sm:inline">Papan Pemuka</span>
           </button>
           <button onclick="switchTab('data-entry')" id="nav-data-entry" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <i class="fa-solid fa-pen-to-square"></i>
             <span class="hidden sm:inline">Pengisian Data</span>
           </button>
           <button onclick="switchTab('cetakan')" id="nav-cetakan" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800">
             <i class="fa-solid fa-print"></i>
-            <span class="hidden sm:inline">Slip Cetakan</span>
+            <span class="hidden sm:inline">Slip Pelaporan</span>
           </button>
         </nav>
       </div>
@@ -106,11 +105,11 @@
   <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
 
     <!-- ============================================== -->
-    <!-- 1. DASHBOARD & RPG REPUTATION -->
+    <!-- 1. PAPAN PEMUKA & VISUAL PRESTASI INDIVIDU -->
     <!-- ============================================== -->
     <section id="tab-dashboard" class="space-y-8">
       
-      <!-- Kad Metrik Ringkasan Atas -->
+      <!-- Kad Metrik Ringkasan -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
@@ -127,25 +126,25 @@
         <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>JUMLAH CALON</span>
-            <i class="fa-solid fa-user-graduate text-blue-400"></i>
+            <i class="fa-solid fa-users text-blue-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-3xl font-black text-white" id="stat-total-calon">40</span>
-            <span class="text-xs text-slate-400">Calon Berdaftar</span>
+            <span class="text-xs text-slate-400">Calon Lengkap</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">3 Kelas (5S1, 5S2, 5S3)</p>
+          <p class="text-[11px] text-slate-400 mt-1">5S1 (9), 5S2 (19), 5S3 (12)</p>
         </div>
 
         <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>SUBJEK TERBAIK (AR2)</span>
-            <i class="fa-solid fa-star text-amber-400"></i>
+            <i class="fa-solid fa-award text-amber-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-2xl font-black text-amber-400 truncate">P. Islam</span>
             <span class="text-xs text-amber-300 font-mono">2.89</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">Diikuti BM (3.93)</p>
+          <p class="text-[11px] text-slate-400 mt-1">Asas Kelestarian: 3.29</p>
         </div>
 
         <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
@@ -157,69 +156,88 @@
             <span class="text-3xl font-black text-rose-400">4.85</span>
             <span class="text-xs text-slate-400">Sasaran Akhir</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">GPS Sasaran SPM 2026</p>
+          <p class="text-[11px] text-slate-400 mt-1">SPM 2026</p>
         </div>
       </div>
 
-      <!-- VIDEO GAME STYLE REPUTATION & SPIDER WEB GRAPH -->
+      <!-- VISUAL PRESTASI INDIVIDU (RADAR POTENSI & REPUTASI AKADEMIK) -->
       <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 lg:p-8 relative overflow-hidden neon-card">
         <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- Header RPG Section -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
           <div>
-            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold tracking-widest uppercase rpg-font">
-              <i class="fa-solid fa-gamepad"></i>
-              <span>Gamer Reputation & Stat Polygon</span>
+            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold tracking-widest uppercase score-font">
+              <i class="fa-solid fa-compass-drafting"></i>
+              <span>Profil Reputasi & Radar Potensi Calon</span>
             </div>
-            <h2 class="text-2xl font-black tracking-tight text-white mt-1">Pencapaian Murid (Visual Gamer RPG)</h2>
+            <h2 class="text-2xl font-black tracking-tight text-white mt-1">Pencapaian Mata Pelajaran Calon</h2>
           </div>
           
-          <!-- Dropdown Pemilihan Murid -->
-          <div class="flex items-center space-x-2">
-            <label class="text-xs font-bold text-slate-400 whitespace-nowrap">PILIH CALON:</label>
-            <select id="studentSelect" onchange="renderStudentRadar()" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-72 shadow-inner">
+          <div class="flex flex-wrap items-center gap-3">
+            <select id="radarClassFilter" onchange="filterStudentDropdownByClass()" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-3 py-2 text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="ALL">Semua Kelas</option>
+              <option value="5S1">5S1</option>
+              <option value="5S2">5S2</option>
+              <option value="5S3">5S3</option>
+            </select>
+
+            <select id="studentSelect" onchange="renderStudentRadar()" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-80 shadow-inner">
               <!-- Diisi automatik oleh JS -->
             </select>
           </div>
         </div>
 
-        <!-- Gamer HUD & Radar Chart Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
           
-          <!-- Gamer Card / Avatar Profile -->
+          <!-- Kad Status Calon & Foto Muka -->
           <div class="lg:col-span-4 bg-slate-950/70 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center relative backdrop-blur">
-            <div id="rpg-rank" class="absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[11px] px-3 py-1 rounded-full font-black uppercase rpg-font badge-glow border border-amber-500/30">
-              RANK S
+            <!-- Lencana Tahap Pencapaian -->
+            <div id="rpg-rank" class="absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font badge-glow border border-amber-500/30">
+              TAHAP: CEMERLANG
             </div>
             
-            <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-rose-500 p-1 mb-4 shadow-xl shadow-indigo-500/20">
-              <div class="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                <i class="fa-solid fa-shield-halved text-4xl text-indigo-400" id="avatar-icon"></i>
+            <!-- FRAME GAMBAR MUKA MURID -->
+            <div class="relative group my-2">
+              <div class="w-28 h-28 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-rose-500 p-1 shadow-xl shadow-indigo-500/20">
+                <div class="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center overflow-hidden relative">
+                  <img id="avatar-img" src="" alt="Muka Calon" class="w-full h-full object-cover hidden">
+                  <div id="avatar-placeholder" class="flex flex-col items-center justify-center text-slate-400">
+                    <i class="fa-solid fa-user-graduate text-4xl text-indigo-400 mb-1"></i>
+                    <span class="text-[9px] font-mono uppercase text-slate-500">Tiada Foto</span>
+                  </div>
+                </div>
               </div>
+
+              <!-- Butang Muat Naik Foto -->
+              <label for="studentPhotoInput" class="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-full cursor-pointer shadow-lg transition-transform hover:scale-110 flex items-center justify-center border-2 border-slate-900" title="Muat Naik Foto Calon">
+                <i class="fa-solid fa-camera text-xs"></i>
+              </label>
+              <input type="file" id="studentPhotoInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
             </div>
 
-            <h3 class="text-lg font-bold text-white tracking-wide" id="rpg-name">AFIF HAFIY BIN MOHD AFIQ</h3>
+            <h3 class="text-base sm:text-lg font-bold text-white tracking-wide leading-snug mt-2" id="rpg-name">AFIF HAFIY BIN MOHD AFIQ</h3>
             <p class="text-xs text-indigo-400 font-semibold mt-0.5" id="rpg-class">TINGKATAN 5S1</p>
             
-            <div class="mt-3 px-3.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-mono text-slate-300 shadow-sm" id="rpg-title">
-              ⚔️ "Scholar Grandmaster"
+            <div class="mt-2.5 px-3.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs font-mono text-slate-300 shadow-sm" id="rpg-title">
+              ⭐ "Tokoh Harapan Cemerlang"
             </div>
 
-            <div class="w-full grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-slate-800 text-left">
+            <!-- Petunjuk Skor Calon -->
+            <div class="w-full grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-slate-800 text-left">
               <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800/80">
-                <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Combat Power (CP)</span>
-                <p class="text-xl font-black text-amber-400 rpg-font mt-1" id="rpg-combat-power">740 CP</p>
+                <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Indeks Prestasi (IPC)</span>
+                <p class="text-xl font-black text-amber-400 score-font mt-1" id="rpg-combat-power">740 IPC</p>
               </div>
               <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800/80">
                 <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Purata Markah</span>
-                <p class="text-xl font-black text-emerald-400 rpg-font mt-1" id="rpg-avg">74%</p>
+                <p class="text-xl font-black text-emerald-400 score-font mt-1" id="rpg-avg">74%</p>
               </div>
             </div>
 
+            <!-- Bar Kemajuan ETR -->
             <div class="w-full mt-4">
               <div class="flex justify-between text-[11px] font-mono text-slate-400 mb-1">
-                <span>XP ke Sasaran ETR</span>
+                <span>Pencapaian Menuju ETR</span>
                 <span id="rpg-progress-text" class="text-indigo-300 font-bold">88%</span>
               </div>
               <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
@@ -228,7 +246,7 @@
             </div>
           </div>
 
-          <!-- Spider Web Graph / Radar Chart -->
+          <!-- Radar Prestasi Calon (Spider Web Graph) -->
           <div class="lg:col-span-8 flex flex-col items-center justify-center p-2">
             <div class="w-full max-w-lg aspect-square">
               <canvas id="studentRadarChart"></canvas>
@@ -236,11 +254,11 @@
             <div class="flex flex-wrap items-center justify-center gap-6 mt-3 text-xs text-slate-400 font-medium">
               <span class="flex items-center gap-2">
                 <span class="w-3.5 h-3.5 rounded-md bg-indigo-500 inline-block shadow-sm"></span> 
-                Pencapaian AR2 (Semasa)
+                Keputusan Peperiksaan AR2 (Semasa)
               </span>
               <span class="flex items-center gap-2">
                 <span class="w-3.5 h-3.5 rounded-md bg-amber-400 inline-block shadow-sm"></span> 
-                Sasaran ETR (Target Akhir)
+                Sasaran Akhir (ETR)
               </span>
             </div>
           </div>
@@ -248,12 +266,95 @@
         </div>
       </div>
 
-      <!-- Trend GPS & Perbandingan Mengikut Subjek -->
+      <!-- ANALISIS MENGIKUT MATA PELAJARAN -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-6">
+          <div>
+            <span class="text-xs text-blue-400 font-bold uppercase tracking-wider font-mono">PRESTASI MATA PELAJARAN</span>
+            <h3 class="text-xl font-black text-white mt-0.5">Analisis Prestasi Mengikut Mata Pelajaran</h3>
+            <p class="text-xs text-slate-400">Pilih mata pelajaran untuk melihat taburan gred dan kedudukan calon.</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <label class="text-xs font-bold text-slate-400">SUBJEK:</label>
+            <select id="subjectAnalysisSelect" onchange="renderSubjectBreakdown()" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none">
+              <!-- Diisi dinamik -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-4 bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-slate-400 uppercase font-semibold" id="sub-detail-title">BAHASA MELAYU</p>
+                <h4 class="text-3xl font-black text-blue-400 mt-1" id="sub-detail-gps">3.93</h4>
+                <p class="text-[11px] text-slate-400">GPS Peperiksaan AR2</p>
+              </div>
+              <div class="text-right">
+                <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-lg border border-emerald-500/20" id="sub-detail-calon">40 Calon</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-xs">
+              <div class="bg-slate-900 p-2.5 rounded-xl">
+                <span class="text-slate-400">GPS OTR1:</span>
+                <p class="text-white font-bold font-mono text-sm" id="sub-detail-otr1">5.43</p>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl">
+                <span class="text-slate-400">GPS AR1:</span>
+                <p class="text-white font-bold font-mono text-sm" id="sub-detail-ar1">4.88</p>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl">
+                <span class="text-slate-400">GPS OTR2:</span>
+                <p class="text-white font-bold font-mono text-sm" id="sub-detail-otr2">4.63</p>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-blue-500/30">
+                <span class="text-blue-300">GPS AR2 (Semasa):</span>
+                <p class="text-blue-400 font-black font-mono text-sm" id="sub-detail-ar2">3.93</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-8 bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+            <h4 class="text-xs font-bold text-slate-300 mb-3 uppercase tracking-wider">Taburan Bilangan Gred Calon (AR2)</h4>
+            <div class="h-56">
+              <canvas id="subjectGradeDistributionChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <h4 class="text-xs font-bold text-slate-300 mb-3 uppercase tracking-wider">Kedudukan Markah Calon Mengikut Subjek</h4>
+          <div class="overflow-x-auto rounded-xl border border-slate-800 max-h-64 overflow-y-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800">
+                <tr>
+                  <th class="p-3">Kedudukan</th>
+                  <th class="p-3">Nama Calon</th>
+                  <th class="p-3">Kelas</th>
+                  <th class="p-3 text-center">TOV</th>
+                  <th class="p-3 text-center">OTR1</th>
+                  <th class="p-3 text-center">AR1</th>
+                  <th class="p-3 text-center">OTR2</th>
+                  <th class="p-3 text-center bg-blue-950/40 text-blue-300">AR2</th>
+                  <th class="p-3 text-center">ETR</th>
+                </tr>
+              </thead>
+              <tbody id="subjectStudentRankingBody" class="divide-y divide-slate-800/60 font-medium">
+                <!-- Diisi dinamik -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trend GPS & Graf Keseluruhan -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h3 class="text-base font-bold text-white">Trend GPS Keseluruhan Sekolah</h3>
+              <h3 class="text-base font-bold text-white">Trend Gred Purata Sekolah (GPS)</h3>
               <p class="text-xs text-slate-400">Analisis OTR1, AR1, OTR2, dan AR2 (Skor lebih rendah lebih baik)</p>
             </div>
             <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-mono font-bold rounded-lg border border-blue-500/20">SPM 2026</span>
@@ -266,8 +367,8 @@
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h3 class="text-base font-bold text-white">Pencapaian GPS Mengikut Subjek (AR2)</h3>
-              <p class="text-xs text-slate-400">Gred Purata Subjek bagi peperiksaan terkini</p>
+              <h3 class="text-base font-bold text-white">Gred Purata Mata Pelajaran (GPMP AR2)</h3>
+              <p class="text-xs text-slate-400">Pencapaian gred purata setiap subjek peperiksaan terkini</p>
             </div>
             <span class="px-2.5 py-1 bg-indigo-500/10 text-indigo-400 text-xs font-mono font-bold rounded-lg border border-indigo-500/20">AR2</span>
           </div>
@@ -279,53 +380,48 @@
     </section>
 
     <!-- ============================================== -->
-    <!-- 2. PENGISIAN & KEMASKINI CLOUD DATA -->
+    <!-- 2. PENGISIAN DATA & PENGURUSAN FOTO CALON -->
     <!-- ============================================== -->
     <section id="tab-data-entry" class="hidden space-y-6">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
         
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h2 class="text-xl font-bold text-white">Penyelarasan Data Langsung (Google Sheet)</h2>
-            <p class="text-xs text-slate-400 mt-1">Data disambung terus ke Google Sheet ID <span class="font-mono text-indigo-300">14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0</span>.</p>
+            <h2 class="text-xl font-bold text-white">Pengurusan Maklumat Calon & Foto Pelajar</h2>
+            <p class="text-xs text-slate-400 mt-1">Muat naik foto murid dan kemas kini markah terus ke pangkalan data Google Sheet.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <button onclick="fetchGoogleSheetData()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition shadow-md shadow-emerald-600/30 flex items-center gap-1.5">
               <i class="fa-solid fa-rotate"></i> Muat Semula Data Sheet
             </button>
             <button onclick="exportDataCSV()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-md shadow-indigo-600/30">
-              <i class="fa-solid fa-file-arrow-down mr-1.5"></i> Eksport Fail CSV
+              <i class="fa-solid fa-file-arrow-down mr-1.5"></i> Muat Turun CSV
             </button>
           </div>
         </div>
 
-        <!-- Maklumat Konfigurasi Cloud -->
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
-          <div class="flex items-center space-x-2 text-slate-300">
-            <i class="fa-solid fa-database text-emerald-400 text-base"></i>
-            <span>Google Sheet ID: <strong class="text-white font-mono">14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0</strong></span>
-          </div>
-          <span id="sync-time-indicator" class="text-slate-500 font-mono">Status: Sedia Segerak</span>
-        </div>
-
-        <!-- Penapis Carian & Kelas -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-          <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="Cari nama murid..." class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
+          <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="Cari nama calon..." class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
           
           <select id="tableClassFilter" onchange="filterStudentTable()" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
-            <option value="ALL">Semua Kelas (5S1, 5S2, 5S3)</option>
-            <option value="5S1">5 Sains 1 (5S1)</option>
-            <option value="5S2">5 Sains 2 (5S2)</option>
-            <option value="5S3">5 Sains 3 (5S3)</option>
+            <option value="ALL">Semua Kelas (40 Calon)</option>
+            <option value="5S1">5 Sains 1 (5S1 - 9 Calon)</option>
+            <option value="5S2">5 Sains 2 (5S2 - 19 Calon)</option>
+            <option value="5S3">5 Sains 3 (5S3 - 12 Calon)</option>
           </select>
+
+          <div class="flex items-center text-xs text-slate-400 px-3 bg-slate-950 rounded-xl border border-slate-800" id="tableRecordCount">
+            Memaparkan 40 Calon
+          </div>
         </div>
 
-        <!-- Jadual Data Interaktif -->
+        <!-- Jadual Data Murid -->
         <div class="overflow-x-auto rounded-2xl border border-slate-800">
           <table class="w-full text-left text-xs text-slate-300">
             <thead class="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
               <tr>
                 <th class="p-3.5">Bil</th>
+                <th class="p-3.5">Foto</th>
                 <th class="p-3.5">Nama Penuh Calon</th>
                 <th class="p-3.5">Kelas</th>
                 <th class="p-3.5 text-center">BM (AR2)</th>
@@ -336,7 +432,7 @@
               </tr>
             </thead>
             <tbody id="studentTableBody" class="divide-y divide-slate-800/60 font-medium">
-              <!-- Diisi secara dinamik -->
+              <!-- Diisi dinamik -->
             </tbody>
           </table>
         </div>
@@ -344,18 +440,17 @@
     </section>
 
     <!-- ============================================== -->
-    <!-- 3. SLIP CETAKAN RASMI (A4 PRINTABLE) -->
+    <!-- 3. SLIP CETAKAN RASMI (PELAPORAN HEADCOUNT) -->
     <!-- ============================================== -->
     <section id="tab-cetakan" class="hidden space-y-6">
       
-      <!-- Panel Kawalan Cetakan -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 no-print flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <h2 class="text-xl font-bold text-white">Penjana Slip Cetakan Pelaporan Headcount</h2>
-          <p class="text-xs text-slate-400 mt-1">Pilih calon murid dan klik butang cetak untuk format kertas rasmi A4.</p>
+          <h2 class="text-xl font-bold text-white">Cetak Slip Pelaporan Prestasi Murid</h2>
+          <p class="text-xs text-slate-400 mt-1">Pilih mana-mana calon untuk menjana format laporan rasmi A4 bersama foto murid.</p>
         </div>
         <div class="flex items-center space-x-3 w-full md:w-auto">
-          <select id="printSelect" onchange="renderPrintSlip()" class="flex-grow md:flex-initial bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-64">
+          <select id="printSelect" onchange="renderPrintSlip()" class="flex-grow md:flex-initial bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-80">
             <!-- Diisi automatik oleh JS -->
           </select>
           <button onclick="window.print()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-indigo-600/30 whitespace-nowrap">
@@ -367,7 +462,6 @@
       <!-- KERTAS SLIP CETAKAN (A4) -->
       <div id="print-area" class="bg-white text-slate-900 p-8 sm:p-12 rounded-3xl shadow-2xl max-w-4xl mx-auto border border-slate-200">
         
-        <!-- Kepala Surat Rasmi Sekolah -->
         <div class="flex items-center border-b-2 border-slate-900 pb-5 mb-6">
           <div class="w-20 h-20 flex-shrink-0 flex items-center justify-center mr-5">
             <img src="logo.png" alt="Logo SEMEKAR" class="h-20 w-auto object-contain" onerror="this.style.display='none'">
@@ -380,19 +474,20 @@
           <div class="w-20 hidden sm:block"></div>
         </div>
 
-        <!-- Maklumat Calon -->
-        <div class="grid grid-cols-2 gap-4 text-xs mb-6 border border-slate-300 p-4 rounded-xl bg-slate-50">
-          <div>
-            <p class="mb-1"><span class="font-bold text-slate-600">NAMA MURID:</span> <span id="p-name" class="font-extrabold text-slate-900 text-sm uppercase">AFIF HAFIY BIN MOHD AFIQ</span></p>
-            <p><span class="font-bold text-slate-600">KELAS:</span> <span id="p-class" class="font-bold text-slate-900">5S1</span></p>
+        <div class="flex items-center justify-between border border-slate-300 p-4 rounded-xl bg-slate-50 mb-6">
+          <div class="text-xs space-y-1">
+            <p><span class="font-bold text-slate-600">NAMA CALON:</span> <span id="p-name" class="font-extrabold text-slate-900 text-sm uppercase">AFIF HAFIY BIN MOHD AFIQ</span></p>
+            <p><span class="font-bold text-slate-600">TINGKATAN:</span> <span id="p-class" class="font-bold text-slate-900">5S1</span></p>
+            <p><span class="font-bold text-slate-600">TAHUN PEPERIKSAAN:</span> <span class="font-bold">SPM 2026</span></p>
+            <p><span class="font-bold text-slate-600">SYARAT LAYAK SIJIL SPM:</span> <span id="p-cert-status" class="font-black text-emerald-700">LAYAK</span></p>
           </div>
-          <div class="text-right">
-            <p class="mb-1"><span class="font-bold text-slate-600">TAHUN SPM:</span> <span class="font-bold">2026</span></p>
-            <p><span class="font-bold text-slate-600">STATUS SIJIL SPM:</span> <span id="p-cert-status" class="font-black text-emerald-700">LAYAK</span></p>
+          
+          <div class="w-20 h-24 border-2 border-slate-400 rounded-lg overflow-hidden bg-white flex items-center justify-center flex-shrink-0">
+            <img id="p-photo" src="" alt="Foto Calon" class="w-full h-full object-cover hidden">
+            <span id="p-photo-placeholder" class="text-[9px] text-slate-400 text-center font-mono">Foto Calon</span>
           </div>
         </div>
 
-        <!-- Jadual Markah Headcount Rasmi -->
         <table class="w-full text-xs border border-collapse border-slate-400 mb-6 text-center">
           <thead class="bg-slate-100 font-bold border-b border-slate-400 text-slate-800">
             <tr>
@@ -410,20 +505,18 @@
           </tbody>
         </table>
 
-        <!-- Analisis & Rumusan Guru -->
         <div class="grid grid-cols-2 gap-4 text-xs mb-10">
           <div class="border border-slate-300 p-3.5 rounded-xl">
-            <p class="font-bold text-slate-700 mb-1.5">Rumusan Markah (AR2):</p>
+            <p class="font-bold text-slate-700 mb-1.5">Rumusan Pencapaian AR2:</p>
             <p>Purata Markah Keseluruhan: <span id="p-avg" class="font-bold text-slate-900 text-sm">74%</span></p>
             <p>Gred Purata Individu (GPI): <span id="p-gpi" class="font-bold text-slate-900">3.40</span></p>
           </div>
           <div class="border border-slate-300 p-3.5 rounded-xl">
             <p class="font-bold text-slate-700 mb-1.5">Ulasan Guru Tingkatan:</p>
-            <p class="italic text-slate-600">"Pencapaian menunjukkan peningkatan berterusan. Fokus kepada mata pelajaran yang belum mencapai sasaran ETR."</p>
+            <p class="italic text-slate-600">"Pencapaian menunjukkan peningkatan yang positif. Tingkatkan usaha bagi mata pelajaran yang belum melepasi sasaran ETR."</p>
           </div>
         </div>
 
-        <!-- Ruang Tandatangan Rasmi -->
         <div class="grid grid-cols-3 gap-8 text-center text-xs pt-12">
           <div>
             <div class="border-b border-slate-900 pb-12"></div>
@@ -445,119 +538,482 @@
   </main>
 
   <!-- ============================================== -->
-  <!-- JAVASCRIPT LOGIC & GOOGLE APPS SCRIPT API -->
+  <!-- JAVASCRIPT & ENJIN PENGIRAAN AKADEMIK -->
   <!-- ============================================== -->
   <script>
-    // Konfigurasi Google Cloud API
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    // Pangkalan Data Asal (In-Memory Runtime)
+    // Pangkalan Data Lengkap 40 Calon SEMEKAR
     let students = [
-      {
-        id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1",
-        marks: {
-          "Bahasa Melayu": { tov: 65, otr1: 68, ar1: 72, otr2: 72, ar2: 75, etr: 75 },
-          "Bahasa Inggeris": { tov: 77, otr1: 79, ar1: 70, otr2: 81, ar2: 76, etr: 83 },
-          "Matematik": { tov: 41, otr1: 49, ar1: 43, otr2: 57, ar2: 50, etr: 65 },
-          "Sejarah": { tov: 53, otr1: 57, ar1: 65, otr2: 61, ar2: 55, etr: 65 },
-          "Pendidikan Islam": { tov: 70, otr1: 73, ar1: 83, otr2: 77, ar2: 93, etr: 80 },
-          "Fizik": { tov: 38, otr1: 40, ar1: 49, otr2: 42, ar2: 50, etr: 44 },
-          "Kimia": { tov: 23, otr1: 29, ar1: 38, otr2: 34, ar2: 50, etr: 40 },
-          "Matematik Tambahan": { tov: 8, otr1: 19, ar1: 6, otr2: 29, ar2: 10, etr: 40 }
-        }
-      },
-      {
-        id: 2, name: "CHENG ZHI XUEN", class: "5S1",
-        marks: {
-          "Bahasa Melayu": { tov: 69, otr1: 72, ar1: 75, otr2: 76, ar2: 80, etr: 79 },
-          "Bahasa Inggeris": { tov: 68, otr1: 70, ar1: 64, otr2: 73, ar2: 73, etr: 75 },
-          "Matematik": { tov: 75, otr1: 77, ar1: 81, otr2: 78, ar2: 81, etr: 80 },
-          "Sejarah": { tov: 46, otr1: 51, ar1: 52, otr2: 55, ar2: 52, etr: 60 },
-          "Pendidikan Moral": { tov: 54, otr1: 63, ar1: 55, otr2: 71, ar2: 70, etr: 80 },
-          "Biologi": { tov: 40, otr1: 43, ar1: 27, otr2: 47, ar2: 40, etr: 50 },
-          "Kimia": { tov: 35, otr1: 43, ar1: 34, otr2: 52, ar2: 43, etr: 60 },
-          "Bahasa Cina": { tov: 75, otr1: 77, ar1: 65, otr2: 78, ar2: 73, etr: 80 }
-        }
-      },
-      {
-        id: 4, name: "JENNISER YOW YI EN", class: "5S1",
-        marks: {
-          "Bahasa Melayu": { tov: 66, otr1: 72, ar1: 74, otr2: 79, ar2: 82, etr: 85 },
-          "Bahasa Inggeris": { tov: 54, otr1: 57, ar1: 55, otr2: 59, ar2: 60, etr: 62 },
-          "Matematik": { tov: 91, otr1: 92, ar1: 95, otr2: 94, ar2: 92, etr: 95 },
-          "Sejarah": { tov: 46, otr1: 56, ar1: 65, otr2: 65, ar2: 65, etr: 75 },
-          "Pendidikan Moral": { tov: 61, otr1: 67, ar1: 58, otr2: 74, ar2: 73, etr: 80 },
-          "Biologi": { tov: 76, otr1: 78, ar1: 41, otr2: 79, ar2: 65, etr: 81 },
-          "Matematik Tambahan": { tov: 72, otr1: 75, ar1: 90, otr2: 77, ar2: 70, etr: 80 },
-          "Bahasa Cina": { tov: 78, otr1: 79, ar1: 68, otr2: 79, ar2: 79, etr: 80 }
-        }
-      },
-      {
-        id: 10, name: "ABBY ALKASHA BINTI ANUAR", class: "5S2",
-        marks: {
-          "Bahasa Melayu": { tov: 68, otr1: 71, ar1: 63, otr2: 75, ar2: 73, etr: 78 },
-          "Bahasa Inggeris": { tov: 51, otr1: 54, ar1: 52, otr2: 57, ar2: 67, etr: 60 },
-          "Matematik": { tov: 19, otr1: 28, ar1: 41, otr2: 36, ar2: 23, etr: 45 },
-          "Sejarah": { tov: 49, otr1: 51, ar1: 42, otr2: 53, ar2: 60, etr: 55 },
-          "Pendidikan Islam": { tov: 47, otr1: 50, ar1: 81, otr2: 53, ar2: 70, etr: 56 },
-          "Pendidikan Seni Visual": { tov: 65, otr1: 69, ar1: 67, otr2: 73, ar2: 50, etr: 77 },
-          "Sains": { tov: 50, otr1: 53, ar1: 55, otr2: 57, ar2: 55, etr: 60 }
-        }
-      },
-      {
-        id: 14, name: "KHADIJAH BINTI SALIHEN", class: "5S2",
-        marks: {
-          "Bahasa Melayu": { tov: 60, otr1: 65, ar1: 65, otr2: 70, ar2: 77, etr: 75 },
-          "Bahasa Inggeris": { tov: 50, otr1: 53, ar1: 48, otr2: 56, ar2: 50, etr: 59 },
-          "Matematik": { tov: 31, otr1: 37, ar1: 40, otr2: 44, ar2: 29, etr: 50 },
-          "Sejarah": { tov: 73, otr1: 75, ar1: 76, otr2: 78, ar2: 75, etr: 80 },
-          "Pendidikan Islam": { tov: 80, otr1: 83, ar1: 90, otr2: 87, ar2: 90, etr: 90 },
-          "Sains": { tov: 63, otr1: 69, ar1: 55, otr2: 76, ar2: 73, etr: 82 },
-          "Tasawwur Islam": { tov: 90, otr1: 92, ar1: 81, otr2: 93, ar2: 83, etr: 95 }
-        }
-      },
-      {
-        id: 30, name: "SITINORMASHIDATUL BINTI MOHD ROZI", class: "5S3",
-        marks: {
-          "Bahasa Melayu": { tov: 49, otr1: 53, ar1: 64, otr2: 56, ar2: 79, etr: 60 },
-          "Bahasa Inggeris": { tov: 32, otr1: 35, ar1: 34, otr2: 37, ar2: 40, etr: 40 },
-          "Matematik": { tov: 16, otr1: 24, ar1: 19, otr2: 32, ar2: 22, etr: 40 },
-          "Sejarah": { tov: 41, otr1: 44, ar1: 50, otr2: 47, ar2: 58, etr: 50 },
-          "Pendidikan Islam": { tov: 64, otr1: 66, ar1: 71, otr2: 68, ar2: 77, etr: 70 },
-          "Pendidikan Seni Visual": { tov: 75, otr1: 76, ar1: 63, otr2: 78, ar2: 55, etr: 79 },
-          "Sains": { tov: 36, otr1: 44, ar1: 24, otr2: 52, ar2: 49, etr: 60 }
-        }
-      },
-      {
-        id: 33, name: "MUHAMMAD DANIEL SHAH BIN HASZELLI", class: "5S3",
-        marks: {
-          "Bahasa Melayu": { tov: 40, otr1: 45, ar1: 52, otr2: 50, ar2: 71, etr: 55 },
-          "Bahasa Inggeris": { tov: 29, otr1: 33, ar1: 24, otr2: 36, ar2: 30, etr: 40 },
-          "Matematik": { tov: 10, otr1: 20, ar1: 15, otr2: 30, ar2: 15, etr: 40 },
-          "Sejarah": { tov: 40, otr1: 42, ar1: 40, otr2: 43, ar2: 46, etr: 45 },
-          "Pendidikan Islam": { tov: 50, otr1: 52, ar1: 62, otr2: 54, ar2: 67, etr: 56 },
-          "Pendidikan Seni Visual": { tov: 56, otr1: 57, ar1: 44, otr2: 58, ar2: 52, etr: 59 },
-          "Sains": { tov: 40, otr1: 48, ar1: 24, otr2: 57, ar2: 51, etr: 65 }
-        }
-      }
+      // 5S1 (9 CALON)
+      { id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:65,otr1:68,ar1:72,otr2:72,ar2:75,etr:75},
+        "Bahasa Inggeris": {tov:77,otr1:79,ar1:70,otr2:81,ar2:76,etr:83},
+        "Matematik": {tov:41,otr1:49,ar1:43,otr2:57,ar2:50,etr:65},
+        "Sejarah": {tov:53,otr1:57,ar1:65,otr2:61,ar2:55,etr:65},
+        "Pendidikan Islam": {tov:70,otr1:73,ar1:83,otr2:77,ar2:93,etr:80},
+        "Fizik": {tov:38,otr1:40,ar1:49,otr2:42,ar2:50,etr:44},
+        "Kimia": {tov:23,otr1:29,ar1:38,otr2:34,ar2:50,etr:40},
+        "Matematik Tambahan": {tov:8,otr1:19,ar1:6,otr2:29,ar2:10,etr:40},
+        "Asas Kelestarian": {tov:40,otr1:48,ar1:53,otr2:57,ar2:71,etr:65},
+        "Tasawwur Islam": {tov:70,otr1:73,ar1:51,otr2:77,ar2:60,etr:80}
+      }},
+      { id: 2, name: "CHENG ZHI XUEN", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:69,otr1:72,ar1:75,otr2:76,ar2:80,etr:79},
+        "Bahasa Inggeris": {tov:68,otr1:70,ar1:64,otr2:73,ar2:73,etr:75},
+        "Matematik": {tov:75,otr1:77,ar1:81,otr2:78,ar2:81,etr:80},
+        "Sejarah": {tov:46,otr1:51,ar1:52,otr2:55,ar2:52,etr:60},
+        "Pendidikan Moral": {tov:54,otr1:63,ar1:55,otr2:71,ar2:70,etr:80},
+        "Biologi": {tov:40,otr1:43,ar1:27,otr2:47,ar2:40,etr:50},
+        "Fizik": {tov:48,otr1:54,ar1:53,otr2:59,ar2:46,etr:65},
+        "Kimia": {tov:35,otr1:43,ar1:34,otr2:52,ar2:43,etr:60},
+        "Matematik Tambahan": {tov:34,otr1:36,ar1:43,otr2:38,ar2:41,etr:40},
+        "Bahasa Cina": {tov:75,otr1:77,ar1:65,otr2:78,ar2:73,etr:80}
+      }},
+      { id: 3, name: "HONG ZI XIN", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:51,otr1:54,ar1:61,otr2:57,ar2:67,etr:60},
+        "Bahasa Inggeris": {tov:56,otr1:58,ar1:62,otr2:60,ar2:65,etr:62},
+        "Matematik": {tov:81,otr1:84,ar1:62,otr2:87,ar2:63,etr:90},
+        "Sejarah": {tov:61,otr1:64,ar1:50,otr2:67,ar2:67,etr:70},
+        "Pendidikan Moral": {tov:51,otr1:61,ar1:43,otr2:70,ar2:71,etr:80},
+        "Biologi": {tov:23,otr1:29,ar1:11,otr2:34,ar2:30,etr:40},
+        "Fizik": {tov:40,otr1:47,ar1:39,otr2:53,ar2:36,etr:60},
+        "Kimia": {tov:17,otr1:25,ar1:28,otr2:32,ar2:40,etr:40},
+        "Matematik Tambahan": {tov:41,otr1:42,ar1:51,otr2:43,ar2:27,etr:44},
+        "Bahasa Cina": {tov:73,otr1:75,ar1:75,otr2:78,ar2:72,etr:80}
+      }},
+      { id: 4, name: "JENNISER YOW YI EN", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:66,otr1:72,ar1:74,otr2:79,ar2:82,etr:85},
+        "Bahasa Inggeris": {tov:54,otr1:57,ar1:55,otr2:59,ar2:60,etr:62},
+        "Matematik": {tov:91,otr1:92,ar1:95,otr2:94,ar2:92,etr:95},
+        "Sejarah": {tov:46,otr1:56,ar1:65,otr2:65,ar2:65,etr:75},
+        "Pendidikan Moral": {tov:61,otr1:67,ar1:58,otr2:74,ar2:73,etr:80},
+        "Biologi": {tov:76,otr1:78,ar1:41,otr2:79,ar2:65,etr:81},
+        "Fizik": {tov:55,otr1:60,ar1:57,otr2:65,ar2:60,etr:70},
+        "Kimia": {tov:47,otr1:55,ar1:68,otr2:62,ar2:60,etr:70},
+        "Matematik Tambahan": {tov:72,otr1:75,ar1:90,otr2:77,ar2:70,etr:80},
+        "Bahasa Cina": {tov:78,otr1:79,ar1:68,otr2:79,ar2:79,etr:80}
+      }},
+      { id: 5, name: "JONATHAN TAN HAO YUAN", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:55,otr1:58,ar1:70,otr2:62,ar2:70,etr:65},
+        "Bahasa Inggeris": {tov:66,otr1:68,ar1:65,otr2:70,ar2:67,etr:72},
+        "Matematik": {tov:46,otr1:57,ar1:54,otr2:69,ar2:46,etr:80},
+        "Sejarah": {tov:51,otr1:57,ar1:41,otr2:64,ar2:60,etr:70},
+        "Pendidikan Moral": {tov:59,otr1:66,ar1:57,otr2:73,ar2:66,etr:80},
+        "Biologi": {tov:77,otr1:79,ar1:70,otr2:80,ar2:89,etr:82},
+        "Fizik": {tov:82,otr1:84,ar1:64,otr2:87,ar2:70,etr:89},
+        "Kimia": {tov:26,otr1:36,ar1:52,otr2:45,ar2:27,etr:55},
+        "Matematik Tambahan": {tov:10,otr1:20,ar1:11,otr2:30,ar2:20,etr:40},
+        "Bahasa Cina": {tov:51,otr1:54,ar1:41,otr2:57,ar2:55,etr:60}
+      }},
+      { id: 6, name: "LIM QI SHENG", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:55,otr1:58,ar1:71,otr2:62,ar2:63,etr:65},
+        "Bahasa Inggeris": {tov:46,otr1:49,ar1:50,otr2:52,ar2:49,etr:55},
+        "Matematik": {tov:90,otr1:92,ar1:83,otr2:93,ar2:81,etr:95},
+        "Sejarah": {tov:66,otr1:72,ar1:74,otr2:79,ar2:65,etr:85},
+        "Pendidikan Moral": {tov:61,otr1:71,ar1:50,otr2:80,ar2:72,etr:90},
+        "Biologi": {tov:56,otr1:59,ar1:44,otr2:63,ar2:66,etr:66},
+        "Fizik": {tov:54,otr1:58,ar1:52,otr2:61,ar2:60,etr:65},
+        "Kimia": {tov:53,otr1:62,ar1:61,otr2:71,ar2:65,etr:80},
+        "Matematik Tambahan": {tov:56,otr1:57,ar1:55,otr2:59,ar2:70,etr:60},
+        "Bahasa Cina": {tov:65,otr1:70,ar1:63,otr2:75,ar2:70,etr:80}
+      }},
+      { id: 7, name: "MARCUS EE PIAO XUAN", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:51,otr1:56,ar1:61,otr2:60,ar2:65,etr:65},
+        "Bahasa Inggeris": {tov:56,otr1:58,ar1:56,otr2:60,ar2:68,etr:62},
+        "Matematik": {tov:72,otr1:75,ar1:54,otr2:77,ar2:49,etr:80},
+        "Sejarah": {tov:62,otr1:65,ar1:40,otr2:67,ar2:45,etr:70},
+        "Pendidikan Moral": {tov:29,otr1:46,ar1:41,otr2:63,ar2:56,etr:80},
+        "Biologi": {tov:24,otr1:29,ar1:25,otr2:35,ar2:32,etr:40},
+        "Fizik": {tov:37,otr1:38,ar1:45,otr2:39,ar2:34,etr:40},
+        "Kimia": {tov:23,otr1:30,ar1:32,otr2:38,ar2:32,etr:45},
+        "Matematik Tambahan": {tov:8,otr1:19,ar1:28,otr2:29,ar2:16,etr:40},
+        "Bahasa Cina": {tov:56,otr1:64,ar1:65,otr2:72,ar2:61,etr:80}
+      }},
+      { id: 8, name: "NUR ALIESYA TAN BINTI ABDULLAH", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:71,otr1:74,ar1:75,otr2:78,ar2:80,etr:81},
+        "Bahasa Inggeris": {tov:64,otr1:66,ar1:70,otr2:68,ar2:75,etr:70},
+        "Matematik": {tov:76,otr1:77,ar1:75,otr2:79,ar2:85,etr:80},
+        "Sejarah": {tov:68,otr1:72,ar1:55,otr2:76,ar2:70,etr:80},
+        "Pendidikan Islam": {tov:87,otr1:88,ar1:77,otr2:89,ar2:86,etr:90},
+        "Biologi": {tov:30,otr1:33,ar1:24,otr2:37,ar2:46,etr:40},
+        "Fizik": {tov:46,otr1:49,ar1:53,otr2:52,ar2:60,etr:55},
+        "Kimia": {tov:40,otr1:48,ar1:63,otr2:57,ar2:60,etr:65},
+        "Matematik Tambahan": {tov:32,otr1:35,ar1:40,otr2:39,ar2:50,etr:42},
+        "Tasawwur Islam": {tov:87,otr1:88,ar1:67,otr2:88,ar2:80,etr:89}
+      }},
+      { id: 9, name: "NUR SYAAFIAH SABRINA BINTI ABDULLAH", class: "5S1", photo: "", marks: {
+        "Bahasa Melayu": {tov:73,otr1:79,ar1:81,otr2:84,ar2:85,etr:90},
+        "Bahasa Inggeris": {tov:72,otr1:74,ar1:77,otr2:76,ar2:82,etr:78},
+        "Matematik": {tov:61,otr1:67,ar1:50,otr2:74,ar2:63,etr:80},
+        "Sejarah": {tov:70,otr1:75,ar1:60,otr2:80,ar2:80,etr:85},
+        "Pendidikan Islam": {tov:70,otr1:73,ar1:79,otr2:77,ar2:92,etr:80},
+        "Biologi": {tov:47,otr1:50,ar1:33,otr2:54,ar2:60,etr:57},
+        "Fizik": {tov:48,otr1:50,ar1:52,otr2:53,ar2:45,etr:55},
+        "Kimia": {tov:42,otr1:50,ar1:60,otr2:57,ar2:61,etr:65},
+        "Matematik Tambahan": {tov:11,otr1:21,ar1:22,otr2:30,ar2:15,etr:40},
+        "Tasawwur Islam": {tov:70,otr1:73,ar1:71,otr2:77,ar2:70,etr:80}
+      }},
+
+      // 5S2 (19 CALON)
+      { id: 10, name: "ABBY ALKASHA BINTI ANUAR", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:68,otr1:71,ar1:63,otr2:75,ar2:73,etr:78},
+        "Bahasa Inggeris": {tov:51,otr1:54,ar1:52,otr2:57,ar2:67,etr:60},
+        "Matematik": {tov:19,otr1:28,ar1:41,otr2:36,ar2:23,etr:45},
+        "Sejarah": {tov:49,otr1:51,ar1:42,otr2:53,ar2:60,etr:55},
+        "Pendidikan Islam": {tov:47,otr1:50,ar1:81,otr2:53,ar2:70,etr:56},
+        "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:67,otr2:73,ar2:50,etr:77},
+        "Sains": {tov:50,otr1:53,ar1:55,otr2:57,ar2:55,etr:60},
+        "Asas Kelestarian": {tov:40,otr1:48,ar1:50,otr2:57,ar2:65,etr:65},
+        "Tasawwur Islam": {tov:67,otr1:68,ar1:49,otr2:69,ar2:67,etr:70}
+      }},
+      { id: 11, name: "ADAM RAYYAN BIN KHAIRUL ANUAR", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:57,otr1:58,ar1:0,otr2:59,ar2:58,etr:60},
+        "Bahasa Inggeris": {tov:33,otr1:35,ar1:21,otr2:38,ar2:40,etr:40},
+        "Matematik": {tov:13,otr1:22,ar1:11,otr2:31,ar2:22,etr:40},
+        "Sejarah": {tov:42,otr1:46,ar1:0,otr2:51,ar2:43,etr:55},
+        "Pendidikan Islam": {tov:55,otr1:58,ar1:0,otr2:62,ar2:65,etr:65},
+        "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:48,otr2:59,ar2:45,etr:60},
+        "Sains": {tov:33,otr1:39,ar1:19,otr2:46,ar2:41,etr:52},
+        "Perniagaan": {tov:40,otr1:41,ar1:40,otr2:43,ar2:26,etr:44},
+        "Tasawwur Islam": {tov:57,otr1:58,ar1:29,otr2:59,ar2:44,etr:60}
+      }},
+      { id: 12, name: "AMMAR SHAKIR BIN MAZLAN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:49,otr1:53,ar1:47,otr2:56,ar2:51,etr:60},
+        "Bahasa Inggeris": {tov:56,otr1:58,ar1:63,otr2:60,ar2:75,etr:62},
+        "Matematik": {tov:16,otr1:24,ar1:24,otr2:32,ar2:17,etr:40},
+        "Sejarah": {tov:40,otr1:42,ar1:32,otr2:43,ar2:42,etr:45},
+        "Pendidikan Islam": {tov:52,otr1:55,ar1:52,otr2:58,ar2:56,etr:61},
+        "Pendidikan Seni Visual": {tov:55,otr1:56,ar1:39,otr2:58,ar2:56,etr:59},
+        "Sains": {tov:26,otr1:33,ar1:33,otr2:41,ar2:27,etr:48},
+        "Perniagaan": {tov:26,otr1:31,ar1:30,otr2:35,ar2:32,etr:40},
+        "Tasawwur Islam": {tov:60,otr1:62,ar1:32,otr2:63,ar2:40,etr:65}
+      }},
+      { id: 13, name: "JUNO WONG JUN LE", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:53,otr1:57,ar1:60,otr2:61,ar2:62,etr:65},
+        "Bahasa Inggeris": {tov:48,otr1:48,ar1:42,otr2:48,ar2:45,etr:48},
+        "Matematik": {tov:23,otr1:29,ar1:23,otr2:34,ar2:47,etr:40},
+        "Sejarah": {tov:38,otr1:39,ar1:45,otr2:39,ar2:47,etr:40},
+        "Pendidikan Moral": {tov:38,otr1:49,ar1:36,otr2:59,ar2:56,etr:70},
+        "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:38,otr2:59,ar2:40,etr:60},
+        "Sains": {tov:52,otr1:55,ar1:36,otr2:59,ar2:50,etr:62},
+        "Bahasa Cina": {tov:43,otr1:50,ar1:41,otr2:58,ar2:48,etr:65},
+        "Tasawwur Islam": {tov:26,otr1:31,ar1:14,otr2:35,ar2:28,etr:40}
+      }},
+      { id: 14, name: "KHADIJAH BINTI SALIHEN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:60,otr1:65,ar1:65,otr2:70,ar2:77,etr:75},
+        "Bahasa Inggeris": {tov:50,otr1:53,ar1:48,otr2:56,ar2:50,etr:59},
+        "Matematik": {tov:31,otr1:37,ar1:40,otr2:44,ar2:29,etr:50},
+        "Sejarah": {tov:73,otr1:75,ar1:76,otr2:78,ar2:75,etr:80},
+        "Pendidikan Islam": {tov:80,otr1:83,ar1:90,otr2:87,ar2:90,etr:90},
+        "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:42,otr2:73,ar2:55,etr:77},
+        "Sains": {tov:63,otr1:69,ar1:55,otr2:76,ar2:73,etr:82},
+        "Asas Kelestarian": {tov:50,otr1:60,ar1:55,otr2:70,ar2:71,etr:80},
+        "Tasawwur Islam": {tov:90,otr1:92,ar1:81,otr2:93,ar2:83,etr:95}
+      }},
+      { id: 15, name: "MUHAMAD AFIQ BIN NORAZLI", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:55,otr1:58,ar1:61,otr2:62,ar2:61,etr:65},
+        "Bahasa Inggeris": {tov:37,otr1:38,ar1:32,otr2:39,ar2:40,etr:40},
+        "Matematik": {tov:18,otr1:29,ar1:34,otr2:39,ar2:22,etr:50},
+        "Sejarah": {tov:57,otr1:60,ar1:51,otr2:62,ar2:60,etr:65},
+        "Pendidikan Islam": {tov:75,otr1:80,ar1:82,otr2:85,ar2:85,etr:90},
+        "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:52,otr2:74,ar2:55,etr:78},
+        "Sains": {tov:48,otr1:56,ar1:44,otr2:63,ar2:43,etr:71},
+        "Perniagaan": {tov:61,otr1:64,ar1:60,otr2:66,ar2:54,etr:69},
+        "Tasawwur Islam": {tov:71,otr1:72,ar1:53,otr2:74,ar2:55,etr:75}
+      }},
+      { id: 16, name: "MUHAMMAD AZIQ THAQIF BIN MOHD ISA", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:1,otr1:22,ar1:0,otr2:44,ar2:53,etr:65},
+        "Bahasa Inggeris": {tov:35,otr1:38,ar1:49,otr2:40,ar2:50,etr:43},
+        "Matematik": {tov:10,otr1:20,ar1:12,otr2:30,ar2:12,etr:40},
+        "Sejarah": {tov:19,otr1:26,ar1:7,otr2:33,ar2:30,etr:40},
+        "Pendidikan Islam": {tov:40,otr1:44,ar1:27,otr2:47,ar2:50,etr:51},
+        "Pendidikan Seni Visual": {tov:52,otr1:53,ar1:37,otr2:53,ar2:45,etr:54},
+        "Sains": {tov:28,otr1:34,ar1:29,otr2:40,ar2:26,etr:46},
+        "Perniagaan": {tov:19,otr1:26,ar1:29,otr2:33,ar2:19,etr:40},
+        "Tasawwur Islam": {tov:45,otr1:47,ar1:22,otr2:48,ar2:36,etr:50}
+      }},
+      { id: 17, name: "MUHAMMAD DANIAL ARASH BIN SARKAN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:53,otr1:59,ar1:50,otr2:64,ar2:60,etr:70},
+        "Bahasa Inggeris": {tov:73,otr1:75,ar1:55,otr2:78,ar2:73,etr:80},
+        "Matematik": {tov:14,otr1:23,ar1:14,otr2:31,ar2:13,etr:40},
+        "Sejarah": {tov:40,otr1:45,ar1:19,otr2:50,ar2:41,etr:55},
+        "Pendidikan Islam": {tov:40,otr1:44,ar1:56,otr2:47,ar2:67,etr:51},
+        "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:56,otr2:78,ar2:50,etr:79},
+        "Sains": {tov:46,otr1:52,ar1:53,otr2:59,ar2:46,etr:65},
+        "Perniagaan": {tov:27,otr1:31,ar1:30,otr2:36,ar2:50,etr:40},
+        "Tasawwur Islam": {tov:32,otr1:35,ar1:32,otr2:37,ar2:53,etr:40}
+      }},
+      { id: 18, name: "MUHAMMAD MU'IZ BIN RAZALI", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:60,otr1:63,ar1:73,otr2:67,ar2:68,etr:70},
+        "Bahasa Inggeris": {tov:49,otr1:51,ar1:50,otr2:53,ar2:57,etr:55},
+        "Matematik": {tov:19,otr1:28,ar1:23,otr2:36,ar2:25,etr:45},
+        "Sejarah": {tov:41,otr1:46,ar1:14,otr2:50,ar2:50,etr:55},
+        "Pendidikan Islam": {tov:67,otr1:71,ar1:88,otr2:76,ar2:90,etr:80},
+        "Pendidikan Seni Visual": {tov:52,otr1:53,ar1:45,otr2:55,ar2:51,etr:56},
+        "Sains": {tov:60,otr1:63,ar1:52,otr2:67,ar2:46,etr:70},
+        "Asas Kelestarian": {tov:35,otr1:42,ar1:26,otr2:48,ar2:45,etr:55},
+        "Tasawwur Islam": {tov:73,otr1:75,ar1:45,otr2:78,ar2:52,etr:80}
+      }},
+      { id: 19, name: "NUR FATIHA BINTI KAHAR", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:60,otr1:67,ar1:74,otr2:73,ar2:75,etr:80},
+        "Bahasa Inggeris": {tov:67,otr1:69,ar1:73,otr2:71,ar2:75,etr:73},
+        "Matematik": {tov:24,otr1:33,ar1:36,otr2:41,ar2:24,etr:50},
+        "Sejarah": {tov:51,otr1:57,ar1:46,otr2:64,ar2:63,etr:70},
+        "Pendidikan Islam": {tov:66,otr1:71,ar1:82,otr2:75,ar2:83,etr:80},
+        "Pendidikan Seni Visual": {tov:71,otr1:74,ar1:55,otr2:76,ar2:50,etr:79},
+        "Sains": {tov:72,otr1:75,ar1:65,otr2:77,ar2:62,etr:80},
+        "Asas Kelestarian": {tov:48,otr1:55,ar1:48,otr2:61,ar2:66,etr:68},
+        "Tasawwur Islam": {tov:74,otr1:76,ar1:56,otr2:78,ar2:48,etr:80}
+      }},
+      { id: 20, name: "NURFAHANA BINTI MOHD YUSUF", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:52,otr1:56,ar1:65,otr2:61,ar2:64,etr:65},
+        "Bahasa Inggeris": {tov:31,otr1:34,ar1:41,otr2:37,ar2:45,etr:40},
+        "Matematik": {tov:22,otr1:28,ar1:40,otr2:34,ar2:24,etr:40},
+        "Sejarah": {tov:46,otr1:49,ar1:50,otr2:52,ar2:50,etr:55},
+        "Pendidikan Islam": {tov:56,otr1:58,ar1:86,otr2:59,ar2:91,etr:61},
+        "Pendidikan Seni Visual": {tov:60,otr1:62,ar1:70,otr2:63,ar2:55,etr:65},
+        "Sains": {tov:48,otr1:54,ar1:50,otr2:60,ar2:42,etr:66},
+        "Perniagaan": {tov:40,otr1:41,ar1:50,otr2:43,ar2:60,etr:44},
+        "Tasawwur Islam": {tov:60,otr1:62,ar1:51,otr2:63,ar2:61,etr:65}
+      }},
+      { id: 21, name: "PUTERA AZHAD BIN MOHD ROUB", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:64,otr1:69,ar1:69,otr2:75,ar2:63,etr:80},
+        "Bahasa Inggeris": {tov:65,otr1:67,ar1:65,otr2:69,ar2:67,etr:71},
+        "Matematik": {tov:18,otr1:29,ar1:20,otr2:39,ar2:19,etr:50},
+        "Sejarah": {tov:42,otr1:46,ar1:40,otr2:51,ar2:50,etr:55},
+        "Pendidikan Islam": {tov:71,otr1:74,ar1:81,otr2:78,ar2:86,etr:81},
+        "Pendidikan Seni Visual": {tov:57,otr1:58,ar1:50,otr2:60,ar2:47,etr:61},
+        "Sains": {tov:51,otr1:61,ar1:45,otr2:72,ar2:47,etr:82},
+        "Asas Kelestarian": {tov:43,otr1:50,ar1:38,otr2:56,ar2:62,etr:63},
+        "Tasawwur Islam": {tov:85,otr1:86,ar1:53,otr2:88,ar2:60,etr:89}
+      }},
+      { id: 22, name: "PUTERI NATASYA ALYAA BINTI ZAIDI", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:63,otr1:66,ar1:66,otr2:70,ar2:76,etr:73},
+        "Bahasa Inggeris": {tov:57,otr1:58,ar1:61,otr2:59,ar2:65,etr:60},
+        "Matematik": {tov:44,otr1:53,ar1:40,otr2:61,ar2:19,etr:70},
+        "Sejarah": {tov:40,otr1:45,ar1:45,otr2:50,ar2:40,etr:55},
+        "Pendidikan Islam": {tov:60,otr1:62,ar1:80,otr2:64,ar2:80,etr:66},
+        "Pendidikan Seni Visual": {tov:77,otr1:80,ar1:62,otr2:84,ar2:51,etr:87},
+        "Sains": {tov:61,otr1:65,ar1:60,otr2:68,ar2:58,etr:72},
+        "Perniagaan": {tov:53,otr1:55,ar1:60,otr2:57,ar2:63,etr:59},
+        "Tasawwur Islam": {tov:65,otr1:67,ar1:54,otr2:68,ar2:57,etr:70}
+      }},
+      { id: 23, name: "PUTERI QALEESYA ARYANA BINTI BAHRIN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:60,otr1:63,ar1:67,otr2:67,ar2:76,etr:70},
+        "Bahasa Inggeris": {tov:51,otr1:53,ar1:60,otr2:55,ar2:67,etr:57},
+        "Matematik": {tov:30,otr1:33,ar1:41,otr2:37,ar2:18,etr:40},
+        "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:70,etr:55},
+        "Pendidikan Islam": {tov:50,otr1:52,ar1:78,otr2:54,ar2:80,etr:56},
+        "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:50,otr2:78,ar2:50,etr:79},
+        "Sains": {tov:48,otr1:54,ar1:50,otr2:59,ar2:50,etr:65},
+        "Perniagaan": {tov:46,otr1:49,ar1:60,otr2:51,ar2:61,etr:54},
+        "Tasawwur Islam": {tov:65,otr1:67,ar1:47,otr2:68,ar2:61,etr:70}
+      }},
+      { id: 24, name: "HARINI A/P VADIVELAN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:45,otr1:48,ar1:49,otr2:52,ar2:53,etr:55},
+        "Bahasa Inggeris": {tov:38,otr1:39,ar1:43,otr2:39,ar2:56,etr:40},
+        "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:20,etr:40},
+        "Sejarah": {tov:31,otr1:34,ar1:40,otr2:37,ar2:45,etr:40},
+        "Pendidikan Moral": {tov:26,otr1:36,ar1:32,otr2:45,ar2:50,etr:55},
+        "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:28,otr2:59,ar2:42,etr:60},
+        "Sains": {tov:32,otr1:36,ar1:26,otr2:41,ar2:42,etr:45},
+        "Perniagaan": {tov:22,otr1:28,ar1:23,otr2:34,ar2:47,etr:40}
+      }},
+      { id: 25, name: "SURENTARN A/L K NARAYANAN", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:46,otr1:49,ar1:54,otr2:53,ar2:54,etr:56},
+        "Bahasa Inggeris": {tov:46,otr1:48,ar1:47,otr2:50,ar2:47,etr:52},
+        "Matematik": {tov:12,otr1:21,ar1:26,otr2:31,ar2:18,etr:40},
+        "Sejarah": {tov:36,otr1:37,ar1:45,otr2:39,ar2:51,etr:40},
+        "Pendidikan Moral": {tov:55,otr1:63,ar1:32,otr2:72,ar2:54,etr:80},
+        "Pendidikan Seni Visual": {tov:51,otr1:52,ar1:44,otr2:54,ar2:51,etr:55},
+        "Sains": {tov:40,otr1:45,ar1:25,otr2:50,ar2:32,etr:55},
+        "Perniagaan": {tov:26,otr1:31,ar1:40,otr2:35,ar2:46,etr:40},
+        "Tasawwur Islam": {tov:26,otr1:31,ar1:32,otr2:35,ar2:25,etr:40}
+      }},
+      { id: 26, name: "TAN TAI FENG", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:37,otr1:41,ar1:43,otr2:46,ar2:48,etr:50},
+        "Bahasa Inggeris": {tov:29,otr1:33,ar1:41,otr2:36,ar2:41,etr:40},
+        "Matematik": {tov:41,otr1:49,ar1:55,otr2:57,ar2:40,etr:65},
+        "Sejarah": {tov:34,otr1:38,ar1:26,otr2:41,ar2:30,etr:45},
+        "Pendidikan Moral": {tov:6,otr1:19,ar1:9,otr2:32,ar2:30,etr:45},
+        "Pendidikan Seni Visual": {tov:58,otr1:59,ar1:48,otr2:61,ar2:51,etr:62},
+        "Sains": {tov:18,otr1:27,ar1:25,otr2:36,ar2:28,etr:45},
+        "Perniagaan": {tov:14,otr1:23,ar1:24,otr2:31,ar2:41,etr:40},
+        "Bahasa Cina": {tov:57,otr1:60,ar1:51,otr2:62,ar2:52,etr:65}
+      }},
+      { id: 27, name: "NUR FARAH ALYSAH BINTI ZULKEFPLAI", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:63,otr1:69,ar1:72,otr2:74,ar2:78,etr:80},
+        "Bahasa Inggeris": {tov:63,otr1:65,ar1:53,otr2:68,ar2:55,etr:70},
+        "Matematik": {tov:19,otr1:28,ar1:44,otr2:36,ar2:28,etr:45},
+        "Sejarah": {tov:71,otr1:74,ar1:70,otr2:77,ar2:75,etr:80},
+        "Pendidikan Islam": {tov:76,otr1:78,ar1:88,otr2:79,ar2:90,etr:81},
+        "Pendidikan Seni Visual": {tov:77,otr1:78,ar1:68,otr2:78,ar2:55,etr:79},
+        "Sains": {tov:48,otr1:54,ar1:61,otr2:60,ar2:65,etr:66},
+        "Perniagaan": {tov:65,otr1:68,ar1:60,otr2:72,ar2:63,etr:75},
+        "Tasawwur Islam": {tov:80,otr1:82,ar1:66,otr2:83,ar2:67,etr:85}
+      }},
+      { id: 28, name: "PUTERI ILEEYA MAISARA BINTI ISMAIL", class: "5S2", photo: "", marks: {
+        "Bahasa Melayu": {tov:73,otr1:77,ar1:75,otr2:81,ar2:78,etr:85},
+        "Bahasa Inggeris": {tov:51,otr1:52,ar1:52,otr2:53,ar2:67,etr:54},
+        "Matematik": {tov:21,otr1:29,ar1:26,otr2:37,ar2:15,etr:45},
+        "Sejarah": {tov:47,otr1:51,ar1:45,otr2:56,ar2:61,etr:60},
+        "Pendidikan Islam": {tov:55,otr1:57,ar1:86,otr2:58,ar2:82,etr:60},
+        "Pendidikan Seni Visual": {tov:51,otr1:52,ar1:72,otr2:54,ar2:50,etr:55},
+        "Sains": {tov:60,otr1:63,ar1:53,otr2:67,ar2:54,etr:70},
+        "Asas Kelestarian": {tov:37,otr1:44,ar1:52,otr2:50,ar2:70,etr:57},
+        "Tasawwur Islam": {tov:72,otr1:75,ar1:54,otr2:77,ar2:66,etr:80}
+      }},
+
+      // 5S3 (12 CALON)
+      { id: 29, name: "GOH YU ZHE", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:19,otr1:26,ar1:20,otr2:33,ar2:29,etr:40},
+        "Bahasa Inggeris": {tov:26,otr1:31,ar1:32,otr2:35,ar2:38,etr:40},
+        "Matematik": {tov:26,otr1:32,ar1:25,otr2:39,ar2:40,etr:45},
+        "Sejarah": {tov:32,otr1:35,ar1:24,otr2:37,ar2:34,etr:40},
+        "Pendidikan Moral": {tov:3,otr1:15,ar1:4,otr2:28,ar2:10,etr:40},
+        "Pendidikan Seni Visual": {tov:48,otr1:49,ar1:38,otr2:51,ar2:40,etr:52},
+        "Sains": {tov:21,otr1:28,ar1:16,otr2:35,ar2:28,etr:42},
+        "Bahasa Cina": {tov:50,otr1:52,ar1:43,otr2:53,ar2:65,etr:55}
+      }},
+      { id: 30, name: "SITINORMASHIDATUL BINTI MOHD ROZI", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:49,otr1:53,ar1:64,otr2:56,ar2:79,etr:60},
+        "Bahasa Inggeris": {tov:32,otr1:35,ar1:34,otr2:37,ar2:40,etr:40},
+        "Matematik": {tov:16,otr1:24,ar1:19,otr2:32,ar2:22,etr:40},
+        "Sejarah": {tov:41,otr1:44,ar1:50,otr2:47,ar2:58,etr:50},
+        "Pendidikan Islam": {tov:64,otr1:66,ar1:71,otr2:68,ar2:77,etr:70},
+        "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:63,otr2:78,ar2:55,etr:79},
+        "Sains": {tov:36,otr1:44,ar1:24,otr2:52,ar2:49,etr:60}
+      }},
+      { id: 31, name: "MUHAMMAD ALIF SAFWAN BIN ABDULLAH", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:29,otr1:34,ar1:35,otr2:40,ar2:50,etr:45},
+        "Bahasa Inggeris": {tov:25,otr1:30,ar1:22,otr2:35,ar2:30,etr:40},
+        "Matematik": {tov:14,otr1:23,ar1:20,otr2:31,ar2:20,etr:40},
+        "Sejarah": {tov:35,otr1:37,ar1:19,otr2:38,ar2:41,etr:40},
+        "Pendidikan Islam": {tov:7,otr1:18,ar1:32,otr2:29,ar2:45,etr:40},
+        "Pendidikan Seni Visual": {tov:55,otr1:56,ar1:45,otr2:58,ar2:51,etr:59},
+        "Sains": {tov:27,otr1:32,ar1:19,otr2:36,ar2:41,etr:41}
+      }},
+      { id: 32, name: "MUHAMMAD ASFA RAZAN BIN MOHD GHARIB", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:1,otr1:14,ar1:29,otr2:27,ar2:43,etr:40},
+        "Bahasa Inggeris": {tov:1,otr1:14,ar1:25,otr2:27,ar2:35,etr:40},
+        "Matematik": {tov:0,otr1:13,ar1:18,otr2:27,ar2:7,etr:40},
+        "Sejarah": {tov:10,otr1:20,ar1:15,otr2:30,ar2:31,etr:40},
+        "Pendidikan Islam": {tov:0,otr1:13,ar1:31,otr2:27,ar2:31,etr:40},
+        "Pendidikan Seni Visual": {tov:0,otr1:14,ar1:30,otr2:29,ar2:41,etr:43},
+        "Sains": {tov:0,otr1:14,ar1:10,otr2:27,ar2:14,etr:41}
+      }},
+      { id: 33, name: "MUHAMMAD DANIEL SHAH BIN HASZELLI", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:40,otr1:45,ar1:52,otr2:50,ar2:71,etr:55},
+        "Bahasa Inggeris": {tov:29,otr1:33,ar1:24,otr2:36,ar2:30,etr:40},
+        "Matematik": {tov:10,otr1:20,ar1:15,otr2:30,ar2:15,etr:40},
+        "Sejarah": {tov:40,otr1:42,ar1:40,otr2:43,ar2:46,etr:45},
+        "Pendidikan Islam": {tov:50,otr1:52,ar1:62,otr2:54,ar2:67,etr:56},
+        "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:44,otr2:58,ar2:52,etr:59},
+        "Sains": {tov:40,otr1:48,ar1:24,otr2:57,ar2:51,etr:65}
+      }},
+      { id: 34, name: "MUHAMMAD IRFAN BIN ABDUL JABAR ALI", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:30,otr1:37,ar1:29,otr2:43,ar2:40,etr:50},
+        "Bahasa Inggeris": {tov:29,otr1:33,ar1:22,otr2:36,ar2:30,etr:40},
+        "Matematik": {tov:6,otr1:17,ar1:18,otr2:29,ar2:13,etr:40},
+        "Sejarah": {tov:33,otr1:37,ar1:29,otr2:41,ar2:18,etr:45},
+        "Pendidikan Islam": {tov:25,otr1:30,ar1:37,otr2:35,ar2:40,etr:40},
+        "Pendidikan Seni Visual": {tov:53,otr1:53,ar1:43,otr2:54,ar2:42,etr:54},
+        "Sains": {tov:23,otr1:31,ar1:11,otr2:38,ar2:28,etr:46}
+      }},
+      { id: 35, name: "MUHAMMAD RAYYAN BIN HEDLY", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:34,otr1:38,ar1:31,otr2:41,ar2:57,etr:45},
+        "Bahasa Inggeris": {tov:31,otr1:34,ar1:31,otr2:37,ar2:38,etr:40},
+        "Matematik": {tov:6,otr1:17,ar1:17,otr2:29,ar2:9,etr:40},
+        "Sejarah": {tov:22,otr1:28,ar1:22,otr2:34,ar2:23,etr:40},
+        "Pendidikan Islam": {tov:18,otr1:25,ar1:36,otr2:33,ar2:40,etr:40},
+        "Pendidikan Seni Visual": {tov:41,otr1:42,ar1:35,otr2:43,ar2:45,etr:44},
+        "Sains": {tov:18,otr1:26,ar1:16,otr2:34,ar2:28,etr:42}
+      }},
+      { id: 36, name: "NUR AIN ADLINA BINTI ABDUL RAHMAN", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:47,otr1:53,ar1:61,otr2:59,ar2:74,etr:65},
+        "Bahasa Inggeris": {tov:31,otr1:34,ar1:31,otr2:37,ar2:35,etr:40},
+        "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:15,etr:40},
+        "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:46,etr:55},
+        "Pendidikan Islam": {tov:56,otr1:58,ar1:76,otr2:59,ar2:57,etr:61},
+        "Pendidikan Seni Visual": {tov:70,otr1:73,ar1:75,otr2:76,ar2:50,etr:79},
+        "Sains": {tov:36,otr1:42,ar1:19,otr2:49,ar2:48,etr:55}
+      }},
+      { id: 37, name: "NUR QASEH BINTI RAZIM", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:52,otr1:56,ar1:68,otr2:61,ar2:80,etr:65},
+        "Bahasa Inggeris": {tov:39,otr1:39,ar1:43,otr2:40,ar2:45,etr:40},
+        "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:12,etr:40},
+        "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:50,etr:55},
+        "Pendidikan Islam": {tov:64,otr1:66,ar1:69,otr2:68,ar2:60,etr:70},
+        "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:61,otr2:59,ar2:52,etr:60},
+        "Sains": {tov:34,otr1:39,ar1:10,otr2:45,ar2:41,etr:50}
+      }},
+      { id: 38, name: "TEO KAH ZHENG", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:24,otr1:29,ar1:0,otr2:35,ar2:15,etr:40},
+        "Bahasa Inggeris": {tov:16,otr1:24,ar1:14,otr2:32,ar2:30,etr:40},
+        "Matematik": {tov:10,otr1:20,ar1:0,otr2:30,ar2:0,etr:40},
+        "Sejarah": {tov:18,otr1:25,ar1:0,otr2:33,ar2:6,etr:40},
+        "Pendidikan Moral": {tov:4,otr1:18,ar1:0,otr2:31,ar2:10,etr:45},
+        "Pendidikan Seni Visual": {tov:32,otr1:36,ar1:25,otr2:39,ar2:40,etr:43},
+        "Sains": {tov:19,otr1:26,ar1:11,otr2:33,ar2:12,etr:40},
+        "Bahasa Cina": {tov:18,otr1:25,ar1:28,otr2:33,ar2:0,etr:40}
+      }},
+      { id: 39, name: "TEY MING FONG", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:17,otr1:25,ar1:23,otr2:32,ar2:26,etr:40},
+        "Bahasa Inggeris": {tov:23,otr1:29,ar1:26,otr2:34,ar2:35,etr:40},
+        "Matematik": {tov:9,otr1:19,ar1:18,otr2:30,ar2:0,etr:40},
+        "Sejarah": {tov:21,otr1:27,ar1:11,otr2:34,ar2:20,etr:40},
+        "Pendidikan Moral": {tov:2,otr1:18,ar1:8,otr2:34,ar2:12,etr:50},
+        "Pendidikan Seni Visual": {tov:46,otr1:46,ar1:33,otr2:47,ar2:40,etr:47},
+        "Sains": {tov:19,otr1:28,ar1:12,otr2:36,ar2:17,etr:45},
+        "Bahasa Cina": {tov:23,otr1:29,ar1:10,otr2:34,ar2:13,etr:40}
+      }},
+      { id: 40, name: "MUHAMMAD NAZRAN BIN HASBULLAH", class: "5S3", photo: "", marks: {
+        "Bahasa Melayu": {tov:34,otr1:39,ar1:47,otr2:45,ar2:55,etr:50},
+        "Bahasa Inggeris": {tov:23,otr1:29,ar1:32,otr2:34,ar2:43,etr:40},
+        "Matematik": {tov:15,otr1:23,ar1:18,otr2:32,ar2:15,etr:40},
+        "Sejarah": {tov:34,otr1:36,ar1:30,otr2:38,ar2:41,etr:40},
+        "Pendidikan Islam": {tov:30,otr1:33,ar1:50,otr2:37,ar2:53,etr:40},
+        "Pendidikan Seni Visual": {tov:40,otr1:42,ar1:48,otr2:43,ar2:50,etr:45},
+        "Sains": {tov:30,otr1:38,ar1:21,otr2:47,ar2:45,etr:55}
+      }}
     ];
 
-    let radarChartInstance = null;
+    const subjectAnalysisData = {
+      "Bahasa Melayu": { calon: 40, otr1: 5.43, ar1: 4.88, otr2: 4.63, ar2: 3.93, grades: { "A+":0, "A":5, "A-":12, "B+":3, "B":6, "C+":3, "C":5, "D":1, "E":2, "G":3 } },
+      "Bahasa Inggeris": { calon: 40, otr1: 6.53, ar1: 6.43, otr2: 6.20, ar2: 5.60, grades: { "A+":0, "A":1, "A-":6, "B+":8, "B":1, "C+":3, "C":2, "D":5, "E":5, "G":9 } },
+      "Matematik": { calon: 40, otr1: 7.43, ar1: 7.58, otr2: 7.13, ar2: 7.65, grades: { "A+":1, "A":3, "A-":0, "B+":0, "B":2, "C+":0, "C":1, "D":3, "E":2, "G":28 } },
+      "Sejarah": { calon: 40, otr1: 6.60, ar1: 6.05, otr2: 6.05, ar2: 5.98, grades: { "A+":0, "A":1, "A-":4, "B+":3, "B":5, "C+":2, "C":6, "D":5, "E":6, "G":8 } },
+      "Pendidikan Islam": { calon: 27, otr1: 4.78, ar1: 4.67, otr2: 4.67, ar2: 2.89, grades: { "A+":6, "A":7, "A-":2, "B+":3, "B":1, "C+":2, "C":2, "D":1, "E":2, "G":1 } },
+      "Pendidikan Moral": { calon: 13, otr1: 6.23, ar1: 7.69, otr2: 4.85, ar2: 5.31, grades: { "A+":0, "A":0, "A-":4, "B+":1, "B":0, "C+":2, "C":2, "D":0, "E":0, "G":4 } },
+      "Pendidikan Seni Visual": { calon: 31, otr1: 4.81, ar1: 6.45, otr2: 4.58, ar2: 6.39, grades: { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":6, "C":14, "D":4, "E":7, "G":0 } },
+      "Sains": { calon: 31, otr1: 6.97, ar1: 7.65, otr2: 6.06, ar2: 7.19, grades: { "A+":0, "A":0, "A-":1, "B+":1, "B":1, "C+":2, "C":4, "D":6, "E":6, "G":10 } },
+      "Biologi": { calon: 8, otr1: 6.25, ar1: 7.88, otr2: 5.88, ar2: 5.50, grades: { "A+":0, "A":1, "A-":0, "B+":2, "B":1, "C+":0, "C":0, "D":1, "E":1, "G":2 } },
+      "Fizik": { calon: 9, otr1: 6.00, ar1: 6.22, otr2: 5.33, ar2: 5.78, grades: { "A+":0, "A":0, "A-":1, "B+":0, "B":3, "C+":0, "C":1, "D":2, "E":0, "G":2 } },
+      "Perniagaan": { calon: 12, otr1: 7.42, ar1: 6.92, otr2: 7.17, ar2: 6.42, grades: { "A+":0, "A":0, "A-":0, "B+":0, "B":4, "C+":0, "C":2, "D":2, "E":1, "G":3 } },
+      "Kimia": { calon: 9, otr1: 7.33, ar1: 6.22, otr2: 6.22, ar2: 6.11, grades: { "A+":0, "A":0, "A-":0, "B+":1, "B":3, "C+":0, "C":1, "D":0, "E":2, "G":2 } },
+      "Asas Kelestarian": { calon: 7, otr1: 6.71, ar1: 6.86, otr2: 4.86, ar2: 3.29, grades: { "A+":0, "A":0, "A-":3, "B+":2, "B":1, "C+":0, "C":0, "D":1, "E":0, "G":0 } },
+      "Matematik Tambahan": { calon: 9, otr1: 7.67, ar1: 7.00, otr2: 7.67, ar2: 7.00, grades: { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":1, "C":1, "D":0, "E":2, "G":4 } },
+      "Bahasa Cina": { calon: 11, otr1: 4.73, ar1: 5.73, otr2: 4.36, ar2: 4.64, grades: { "A+":0, "A":0, "A-":4, "B+":1, "B":1, "C+":1, "C":1, "D":1, "E":0, "G":2 } },
+      "Tasawwur Islam": { calon: 20, otr1: 3.35, ar1: 6.25, otr2: 3.55, ar2: 5.05, grades: { "A+":0, "A":2, "A-":1, "B+":3, "B":4, "C+":2, "C":2, "D":1, "E":2, "G":3 } }
+    };
 
-    // Inisialisasi Aplikasi
+    let radarChartInstance = null;
+    let subjectGradeChartInstance = null;
+    let currentUploadTargetStudentId = null;
+
     window.addEventListener("DOMContentLoaded", () => {
       populateStudentDropdowns();
+      populateSubjectDropdown();
       renderDashboardCharts();
       renderStudentRadar();
+      renderSubjectBreakdown();
       renderDataTable();
       renderPrintSlip();
-
-      // Muat data langsung dari Google Apps Script
       fetchGoogleSheetData();
     });
 
-    // Menukar Tab
     function switchTab(tab) {
       ['dashboard', 'data-entry', 'cetakan'].forEach(t => {
         document.getElementById(`tab-${t}`).classList.add('hidden');
@@ -568,7 +1024,6 @@
       document.getElementById(`nav-${tab}`).className = "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30";
     }
 
-    // Mengisi Dropdown Murid
     function populateStudentDropdowns() {
       const studentSelect = document.getElementById("studentSelect");
       const printSelect = document.getElementById("printSelect");
@@ -576,15 +1031,101 @@
       printSelect.innerHTML = "";
 
       students.forEach(s => {
-        studentSelect.add(new Option(`${s.name} (${s.class})`, s.id));
-        printSelect.add(new Option(`${s.name} (${s.class})`, s.id));
+        studentSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
+        printSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
       });
     }
 
-    // SPIDER WEB / RADAR CHART & GAMER HUD
+    function filterStudentDropdownByClass() {
+      const cls = document.getElementById("radarClassFilter").value;
+      const studentSelect = document.getElementById("studentSelect");
+      studentSelect.innerHTML = "";
+
+      const filtered = (cls === "ALL") ? students : students.filter(s => s.class === cls);
+      filtered.forEach(s => {
+        studentSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
+      });
+      renderStudentRadar();
+    }
+
+    function populateSubjectDropdown() {
+      const select = document.getElementById("subjectAnalysisSelect");
+      select.innerHTML = "";
+      Object.keys(subjectAnalysisData).forEach(sub => {
+        select.add(new Option(sub, sub));
+      });
+    }
+
+    function triggerRowUpload(studentId) {
+      currentUploadTargetStudentId = studentId;
+      document.getElementById("studentPhotoInput").click();
+    }
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const targetId = currentUploadTargetStudentId || parseInt(document.getElementById("studentSelect").value) || students[0].id;
+      const student = students.find(s => s.id === targetId);
+      if (!student) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          
+          const MAX_WIDTH = 300;
+          const scale = MAX_WIDTH / img.width;
+          canvas.width = MAX_WIDTH;
+          canvas.height = img.height * scale;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+
+          student.photo = compressedBase64;
+
+          fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: "update_photo",
+              sheetId: SHEET_ID,
+              studentId: student.id,
+              photoBase64: compressedBase64
+            })
+          });
+
+          renderStudentRadar();
+          renderDataTable();
+          renderPrintSlip();
+          currentUploadTargetStudentId = null;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      event.target.value = "";
+    }
+
+    // VISUAL GAYA RADAR AKADEMIK & TAHAP KEJAYAAN
     function renderStudentRadar() {
       const currentId = parseInt(document.getElementById("studentSelect").value) || students[0].id;
       const student = students.find(s => s.id === currentId) || students[0];
+
+      const avatarImg = document.getElementById("avatar-img");
+      const avatarPlaceholder = document.getElementById("avatar-placeholder");
+
+      if (student.photo) {
+        avatarImg.src = student.photo;
+        avatarImg.classList.remove("hidden");
+        avatarPlaceholder.classList.add("hidden");
+      } else {
+        avatarImg.src = "";
+        avatarImg.classList.add("hidden");
+        avatarPlaceholder.classList.remove("hidden");
+      }
 
       const subjects = Object.keys(student.marks);
       const ar2Scores = subjects.map(sub => student.marks[sub].ar2 || 0);
@@ -596,28 +1137,30 @@
       const totalMarks = ar2Scores.reduce((a, b) => a + b, 0);
       const avg = Math.round(totalMarks / (ar2Scores.length || 1));
       
-      document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} CP`;
+      // Indeks Prestasi Calon (IPC) menggantikan CP
+      document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} IPC`;
       document.getElementById("rpg-avg").innerText = `${avg}%`;
 
       const rankBadge = document.getElementById("rpg-rank");
       const titleBadge = document.getElementById("rpg-title");
-      const icon = document.getElementById("avatar-icon");
 
+      // Istilah Prestasi Pendidikan Mudah Faham
       if (avg >= 80) {
-        rankBadge.innerText = "RANK SSS";
-        rankBadge.className = "absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[11px] px-3 py-1 rounded-full font-black uppercase rpg-font badge-glow border border-amber-500/40";
-        titleBadge.innerText = "👑 Mythic High-Achiever";
-        icon.className = "fa-solid fa-crown text-4xl text-amber-400";
+        rankBadge.innerText = "TAHAP: MUMTAZ (A)";
+        rankBadge.className = "absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font badge-glow border border-amber-500/40";
+        titleBadge.innerText = "⭐ Tokoh Akademik Terbilang";
       } else if (avg >= 65) {
-        rankBadge.innerText = "RANK S";
-        rankBadge.className = "absolute top-4 right-4 bg-indigo-500/20 text-indigo-300 text-[11px] px-3 py-1 rounded-full font-black uppercase rpg-font border border-indigo-500/40";
-        titleBadge.innerText = "⚔️ Scholar Grandmaster";
-        icon.className = "fa-solid fa-shield-halved text-4xl text-indigo-400";
+        rankBadge.innerText = "TAHAP: CEMERLANG (B+)";
+        rankBadge.className = "absolute top-4 right-4 bg-indigo-500/20 text-indigo-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font border border-indigo-500/40";
+        titleBadge.innerText = "✨ Pelajar Berpotensi Tinggi";
+      } else if (avg >= 50) {
+        rankBadge.innerText = "TAHAP: KEPUJIAN (C+)";
+        rankBadge.className = "absolute top-4 right-4 bg-emerald-500/20 text-emerald-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font border border-emerald-500/40";
+        titleBadge.innerText = "🎯 Sasaran Lulus Mantap";
       } else {
-        rankBadge.innerText = "RANK A";
-        rankBadge.className = "absolute top-4 right-4 bg-emerald-500/20 text-emerald-300 text-[11px] px-3 py-1 rounded-full font-black uppercase rpg-font border border-emerald-500/40";
-        titleBadge.innerText = "🛡️ Academic Ranger";
-        icon.className = "fa-solid fa-bolt text-4xl text-emerald-400";
+        rankBadge.innerText = "TAHAP: HARAPAN (D/E)";
+        rankBadge.className = "absolute top-4 right-4 bg-rose-500/20 text-rose-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font border border-rose-500/40";
+        titleBadge.innerText = "🌱 Permata Harapan Sekolah";
       }
 
       const totalETR = etrScores.reduce((a, b) => a + b, 0);
@@ -625,7 +1168,6 @@
       document.getElementById("rpg-progress-text").innerText = `${progress}%`;
       document.getElementById("rpg-xp-bar").style.width = `${progress}%`;
 
-      // Render Spider Web Radar Chart
       const ctx = document.getElementById("studentRadarChart").getContext("2d");
       if (radarChartInstance) radarChartInstance.destroy();
 
@@ -665,21 +1207,106 @@
               grid: { color: 'rgba(255, 255, 255, 0.08)' },
               pointLabels: {
                 color: '#e2e8f0',
-                font: { size: 11, weight: '700' }
+                font: { size: 10, weight: '700' }
               },
               suggestedMin: 0,
               suggestedMax: 100,
               ticks: { display: false }
             }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
     }
 
-    // GRAF DASHBOARD
+    // ANALISIS SETIAP MATA PELAJARAN
+    function renderSubjectBreakdown() {
+      const subject = document.getElementById("subjectAnalysisSelect").value;
+      const data = subjectAnalysisData[subject];
+      if (!data) return;
+
+      document.getElementById("sub-detail-title").innerText = subject;
+      document.getElementById("sub-detail-gps").innerText = data.ar2.toFixed(2);
+      document.getElementById("sub-detail-calon").innerText = `${data.calon} Calon`;
+      document.getElementById("sub-detail-otr1").innerText = data.otr1.toFixed(2);
+      document.getElementById("sub-detail-ar1").innerText = data.ar1.toFixed(2);
+      document.getElementById("sub-detail-otr2").innerText = data.otr2.toFixed(2);
+      document.getElementById("sub-detail-ar2").innerText = data.ar2.toFixed(2);
+
+      const ctx = document.getElementById("subjectGradeDistributionChart").getContext("2d");
+      if (subjectGradeChartInstance) subjectGradeChartInstance.destroy();
+
+      subjectGradeChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(data.grades),
+          datasets: [{
+            label: 'Bilangan Calon',
+            data: Object.values(data.grades),
+            backgroundColor: [
+              '#10b981', '#059669', '#34d399',
+              '#3b82f6', '#60a5fa',
+              '#f59e0b', '#fbbf24',
+              '#f97316', '#fb923c',
+              '#ef4444'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+              ticks: { color: '#94a3b8', stepSize: 2 }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8', font: { weight: 'bold' } }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      const tbody = document.getElementById("subjectStudentRankingBody");
+      tbody.innerHTML = "";
+
+      const studentListForSub = [];
+      students.forEach(s => {
+        if (s.marks[subject]) {
+          studentListForSub.push({
+            id: s.id,
+            name: s.name,
+            class: s.class,
+            marks: s.marks[subject]
+          });
+        }
+      });
+
+      studentListForSub.sort((a, b) => (b.marks.ar2 || 0) - (a.marks.ar2 || 0));
+
+      studentListForSub.forEach((st, idx) => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 text-slate-400 font-mono">${idx + 1}</td>
+          <td class="p-3 font-bold text-white">${st.name}</td>
+          <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${st.class}</span></td>
+          <td class="p-3 text-center font-mono">${st.marks.tov ?? '-'}</td>
+          <td class="p-3 text-center font-mono">${st.marks.otr1 ?? '-'}</td>
+          <td class="p-3 text-center font-mono">${st.marks.ar1 ?? '-'}</td>
+          <td class="p-3 text-center font-mono">${st.marks.otr2 ?? '-'}</td>
+          <td class="p-3 text-center font-mono font-black bg-blue-950/40 text-blue-300">${st.marks.ar2 ?? '-'}</td>
+          <td class="p-3 text-center font-mono text-slate-400">${st.marks.etr ?? '-'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // DASHBOARD CHARTS
     function renderDashboardCharts() {
       new Chart(document.getElementById("gpsTrendChart").getContext("2d"), {
         type: 'line',
@@ -718,15 +1345,12 @@
       new Chart(document.getElementById("subjectGpaChart").getContext("2d"), {
         type: 'bar',
         data: {
-          labels: ['P.Islam', 'BM', 'BI', 'Fizik', 'Sejarah', 'Kimia', 'Sains', 'Matematik'],
+          labels: ['P.Islam', 'Kelestarian', 'BM', 'BC', 'P.Moral', 'Biologi', 'BI', 'Fizik', 'Sejarah', 'Kimia', 'PSV', 'Perniagaan', 'M.Tamb', 'Sains', 'Matematik'],
           datasets: [{
-            label: 'GPS Subjek AR2',
-            data: [2.89, 3.93, 5.60, 5.78, 5.98, 6.11, 7.19, 7.65],
-            backgroundColor: [
-              '#10b981', '#3b82f6', '#6366f1', '#8b5cf6', 
-              '#ec4899', '#f97316', '#eab308', '#ef4444'
-            ],
-            borderRadius: 8
+            label: 'GPMP AR2',
+            data: [2.89, 3.29, 3.93, 4.64, 5.31, 5.50, 5.60, 5.78, 5.98, 6.11, 6.39, 6.42, 7.00, 7.19, 7.65],
+            backgroundColor: '#818cf8',
+            borderRadius: 6
           }]
         },
         options: {
@@ -740,14 +1364,14 @@
             },
             x: {
               grid: { display: false },
-              ticks: { color: '#94a3b8', font: { size: 10, weight: '600' } }
+              ticks: { color: '#94a3b8', font: { size: 9, weight: '600' } }
             }
           }
         }
       });
     }
 
-    // JADUAL PENGURUSAN MARKAH (CLOUD LIVE EDIT)
+    // JADUAL DATA & UPLOAD GAMBAR
     function renderDataTable() {
       const tbody = document.getElementById("studentTableBody");
       tbody.innerHTML = "";
@@ -758,17 +1382,25 @@
         const mat = s.marks["Matematik"]?.ar2 ?? "-";
         const sej = s.marks["Sejarah"]?.ar2 ?? "-";
 
+        const photoHtml = s.photo 
+          ? `<img src="${s.photo}" class="w-8 h-8 rounded-full object-cover border border-indigo-500">`
+          : `<div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 font-bold text-[10px]">${s.name.substring(0, 2)}</div>`;
+
         const tr = document.createElement("tr");
         tr.className = "hover:bg-slate-800/40 transition-colors";
         tr.innerHTML = `
           <td class="p-3.5 text-slate-400 font-mono">${index + 1}</td>
+          <td class="p-3.5">${photoHtml}</td>
           <td class="p-3.5 font-bold text-white">${s.name}</td>
           <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
           <td class="p-3.5 text-center font-mono font-bold">${bm}</td>
           <td class="p-3.5 text-center font-mono font-bold">${bi}</td>
           <td class="p-3.5 text-center font-mono font-bold">${mat}</td>
           <td class="p-3.5 text-center font-mono font-bold">${sej}</td>
-          <td class="p-3.5 text-center">
+          <td class="p-3.5 text-center space-x-1.5">
+            <button onclick="triggerRowUpload(${s.id})" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-semibold" title="Muat Naik Foto Calon">
+              <i class="fa-solid fa-camera mr-1"></i> Foto
+            </button>
             <button onclick="quickEditMark(${s.id})" class="px-2.5 py-1 bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white rounded-lg transition text-[11px] font-bold">
               <i class="fa-solid fa-pen-to-square mr-1"></i> Kemaskini BM
             </button>
@@ -776,9 +1408,10 @@
         `;
         tbody.appendChild(tr);
       });
+
+      document.getElementById("tableRecordCount").innerText = `Memaparkan ${students.length} Calon`;
     }
 
-    // KEMASKINI MARKAH TERUS KE GOOGLE APPS SCRIPT (POST)
     function quickEditMark(id) {
       const s = students.find(item => item.id === id);
       const currentBM = s.marks["Bahasa Melayu"]?.ar2 || 0;
@@ -788,16 +1421,12 @@
         if (!s.marks["Bahasa Melayu"]) s.marks["Bahasa Melayu"] = {};
         s.marks["Bahasa Melayu"].ar2 = parseInt(input);
 
-        const statusLabel = document.getElementById("sync-time-indicator");
-        statusLabel.innerText = "Menghantar kemas kini ke Google Sheet...";
-        statusLabel.className = "text-amber-400 font-mono";
-
-        // Hantar POST request ke Google Apps Script
         fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            action: "update_score",
             sheetId: SHEET_ID,
             studentId: s.id,
             studentName: s.name,
@@ -806,49 +1435,29 @@
             score: parseInt(input),
             updatedAt: new Date().toISOString()
           })
-        }).then(() => {
-          statusLabel.innerText = "Terselaras di Google Sheet: " + new Date().toLocaleTimeString();
-          statusLabel.className = "text-emerald-400 font-mono";
-        }).catch(err => {
-          console.error("Gagal sync ke Cloud:", err);
-          statusLabel.innerText = "Ralat sync ke Google Sheet";
-          statusLabel.className = "text-rose-400 font-mono";
         });
 
         renderDataTable();
         renderStudentRadar();
+        renderSubjectBreakdown();
         renderPrintSlip();
       }
     }
 
-    // TARIK DATA DARI GOOGLE APPS SCRIPT (GET)
     function fetchGoogleSheetData() {
-      const statusLabel = document.getElementById("sync-time-indicator");
-      statusLabel.innerText = "Menyegerak dari Google Sheet...";
-      statusLabel.className = "text-amber-400 font-mono";
-
       fetch(`${SCRIPT_URL}?sheetId=${SHEET_ID}`)
         .then(res => res.json())
         .then(data => {
-          if (Array.isArray(data) && data.length > 0) {
-            console.log("Data berjaya dimuatkan dari Google Sheet:", data);
-            // Sekiranya Google Apps Script menghantar senarai murid dalam format JSON yang sepadan
-            if (data[0].marks) {
-              students = data;
-              populateStudentDropdowns();
-              renderStudentRadar();
-              renderDataTable();
-              renderPrintSlip();
-            }
+          if (Array.isArray(data) && data.length > 0 && data[0].marks) {
+            students = data;
+            populateStudentDropdowns();
+            renderStudentRadar();
+            renderSubjectBreakdown();
+            renderDataTable();
+            renderPrintSlip();
           }
-          statusLabel.innerText = "Terkini dari Google Sheet: " + new Date().toLocaleTimeString();
-          statusLabel.className = "text-emerald-400 font-mono";
         })
-        .catch(err => {
-          console.warn("Menggunakan data memori (Panggilan script GET dioptimumkan):", err);
-          statusLabel.innerText = "Tersambung ke Cloud API: " + new Date().toLocaleTimeString();
-          statusLabel.className = "text-emerald-400 font-mono";
-        });
+        .catch(err => console.log("Google Apps Script standby."));
     }
 
     function filterStudentTable() {
@@ -856,13 +1465,20 @@
       const cls = document.getElementById("tableClassFilter").value;
       const rows = document.querySelectorAll("#studentTableBody tr");
 
+      let count = 0;
       rows.forEach(r => {
-        const name = r.children[1].innerText.toLowerCase();
-        const studentClass = r.children[2].innerText.trim();
+        const name = r.children[2].innerText.toLowerCase();
+        const studentClass = r.children[3].innerText.trim();
         const matchName = name.includes(term);
         const matchClass = (cls === 'ALL' || studentClass === cls);
-        r.style.display = (matchName && matchClass) ? "" : "none";
+        if (matchName && matchClass) {
+          r.style.display = "";
+          count++;
+        } else {
+          r.style.display = "none";
+        }
       });
+      document.getElementById("tableRecordCount").innerText = `Memaparkan ${count} Calon`;
     }
 
     function exportDataCSV() {
@@ -883,13 +1499,26 @@
       document.body.removeChild(link);
     }
 
-    // PENJANAAN SLIP CETAKAN
+    // SLIP CETAKAN
     function renderPrintSlip() {
       const selectedId = parseInt(document.getElementById("printSelect").value) || students[0].id;
       const student = students.find(s => s.id === selectedId) || students[0];
 
       document.getElementById("p-name").innerText = student.name;
       document.getElementById("p-class").innerText = student.class;
+
+      const pPhoto = document.getElementById("p-photo");
+      const pPlaceholder = document.getElementById("p-photo-placeholder");
+
+      if (student.photo) {
+        pPhoto.src = student.photo;
+        pPhoto.classList.remove("hidden");
+        pPlaceholder.classList.add("hidden");
+      } else {
+        pPhoto.src = "";
+        pPhoto.classList.add("hidden");
+        pPlaceholder.classList.remove("hidden");
+      }
 
       const tbody = document.getElementById("printSubjectTable");
       tbody.innerHTML = "";
