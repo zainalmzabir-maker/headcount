@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Headcount SPM - SEMEKAR</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .rpg-font {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .neon-border {
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.1);
+    }
+    .badge-glow {
+      box-shadow: 0 0 12px rgba(234, 179, 8, 0.6);
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP NAVBAR -->
+  <header class="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div class="flex items-center space-x-3">
+        <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 text-white p-2.5 rounded-xl shadow-lg shadow-blue-500/30">
+          <i class="fa-solid fa-graduation-cap text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight tracking-wide">SPM HEADCOUNT <span class="text-blue-400">SEMEKAR</span></h1>
+          <p class="text-xs text-slate-400">Tingkatan 5 Sesi 2026</p>
+        </div>
+      </div>
+      
+      <!-- NAVIGATION TABS -->
+      <nav class="flex space-x-1 sm:space-x-2">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 bg-blue-600 text-white">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span class="hidden sm:inline">Dashboard</span>
+        </button>
+        <button onclick="switchTab('data-entry')" id="nav-data-entry" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800">
+          <i class="fa-solid fa-database"></i>
+          <span class="hidden sm:inline">Pengisian Data</span>
+        </button>
+        <button onclick="switchTab('cetakan')" id="nav-cetakan" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800">
+          <i class="fa-solid fa-print"></i>
+          <span class="hidden sm:inline">Slip Cetakan</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+
+    <!-- ============================================== -->
+    <!-- TAB 1: DASHBOARD -->
+    <!-- ============================================== -->
+    <section id="tab-dashboard" class="space-y-8">
+      <!-- Ringkasan Kad Atas -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+          <p class="text-xs text-slate-400 font-medium">GPS AR2 Terkini</p>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span class="text-3xl font-extrabold text-blue-400" id="stat-gps">5.65</span>
+            <span class="text-xs text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-trend-up"></i> +0.74 dari AR1</span>
+          </div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+          <p class="text-xs text-slate-400 font-medium">Bilangan Calon</p>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span class="text-3xl font-extrabold text-white" id="stat-calon">40</span>
+            <span class="text-xs text-slate-400">Orang Murid</span>
+          </div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+          <p class="text-xs text-slate-400 font-medium">GPS OTR2 Sasaran</p>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span class="text-3xl font-extrabold text-amber-400">5.59</span>
+            <span class="text-xs text-slate-400">Sasaran</span>
+          </div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+          <p class="text-xs text-slate-400 font-medium">Subjek Terbaik (AR2)</p>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span class="text-xl font-bold text-purple-400 truncate">P. Islam</span>
+            <span class="text-xs text-purple-300">(GPS 2.89)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEO GAME STYLE REPUTATION / SPIDER WEB SECTION -->
+      <div class="bg-slate-900/90 border border-indigo-500/30 rounded-3xl p-6 relative overflow-hidden neon-border">
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold tracking-widest uppercase rpg-font">
+              <i class="fa-solid fa-gamepad"></i>
+              <span>Gamer Reputation & Stat Polygon</span>
+            </div>
+            <h2 class="text-2xl font-black tracking-tight text-white mt-1">Pencapaian Individu Murid</h2>
+          </div>
+          
+          <!-- Dropdown Pilihan Murid -->
+          <div class="flex flex-wrap items-center gap-3">
+            <label class="text-xs text-slate-400">Pilih Calon:</label>
+            <select id="studentSelect" onchange="renderStudentRadar()" class="bg-slate-800 text-slate-200 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-64">
+              <!-- Diisi secara automatik oleh JS -->
+            </select>
+          </div>
+        </div>
+
+        <!-- GAMING STATS HUD -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
+          
+          <!-- Left: Gamer Profile Card -->
+          <div class="lg:col-span-4 bg-slate-950/80 border border-slate-800 rounded-2xl p-5 flex flex-col items-center text-center relative">
+            <div class="absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-full font-bold uppercase rpg-font badge-glow" id="rpg-rank">
+              RANK S
+            </div>
+            
+            <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-1 mb-3 shadow-lg shadow-indigo-500/30">
+              <div class="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center overflow-hidden">
+                <i class="fa-solid fa-shield-cat text-4xl text-indigo-400" id="avatar-icon"></i>
+              </div>
+            </div>
+
+            <h3 class="text-lg font-bold text-white" id="rpg-name">AFIF HAFIY BIN MOHD AFIQ</h3>
+            <p class="text-xs text-indigo-400 font-semibold" id="rpg-class">5 SAINS 1 (5S1)</p>
+            <div class="mt-3 inline-block px-3 py-1 bg-slate-800 rounded-lg text-xs font-mono text-slate-300" id="rpg-title">
+              ⚔️ "Scholar Grandmaster"
+            </div>
+
+            <div class="w-full grid grid-cols-2 gap-3 mt-6 pt-5 border-t border-slate-800 text-left">
+              <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Power Score (AR2)</span>
+                <p class="text-xl font-bold text-amber-400 rpg-font" id="rpg-combat-power">742 CP</p>
+              </div>
+              <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Purata Markah</span>
+                <p class="text-xl font-bold text-emerald-400 rpg-font" id="rpg-avg">74.2%</p>
+              </div>
+            </div>
+
+            <!-- XP/Level Progress Bar -->
+            <div class="w-full mt-4">
+              <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                <span>Progress ke ETR</span>
+                <span id="rpg-progress-text">88%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                <div id="rpg-xp-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full w-[88%] transition-all duration-500"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Spider Web / Radar Chart -->
+          <div class="lg:col-span-8 flex flex-col items-center justify-center p-2">
+            <div class="w-full max-w-md md:max-w-lg aspect-square">
+              <canvas id="studentRadarChart"></canvas>
+            </div>
+            <div class="flex items-center gap-6 mt-2 text-xs text-slate-400">
+              <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-indigo-500 inline-block"></span> AR2 (Pencapaian Semasa)</span>
+              <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span> ETR (Sasaran Akhir)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Trend GPS & Perbandingan Matapelajaran -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+          <h3 class="text-lg font-bold text-white mb-1">Trend Keseluruhan GPS Sekolah</h3>
+          <p class="text-xs text-slate-400 mb-4">Perbandingan OTR1, AR1, OTR2, dan AR2 (Skor lebih rendah lebih baik)</p>
+          <div class="h-64">
+            <canvas id="gpsTrendChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+          <h3 class="text-lg font-bold text-white mb-1">Pencapaian GPS Mengikut Subjek (AR2)</h3>
+          <p class="text-xs text-slate-400 mb-4">Mata Kredit GPS bagi setiap mata pelajaran</p>
+          <div class="h-64">
+            <canvas id="subjectGpaChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- TAB 2: PENGISIAN DATA -->
+    <!-- ============================================== -->
+    <section id="tab-data-entry" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-white">Pengisian & Kemaskini Data Calon</h2>
+            <p class="text-xs text-slate-400">Ubah markah secara langsung di bawah. Data disimpan dalam storan pelayar atau import fail CSV.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="resetToDefaultData()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">
+              <i class="fa-solid fa-rotate-left mr-1"></i> Pulih Data Asal
+            </button>
+            <button onclick="exportDataCSV()" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold">
+              <i class="fa-solid fa-file-csv mr-1"></i> Eksport CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Pilihan Import Google Sheets -->
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 flex flex-col md:flex-row items-center gap-3">
+          <i class="fa-brands fa-google-drive text-emerald-400 text-2xl"></i>
+          <input type="text" id="sheetsUrl" placeholder="Tampal Google Sheets CSV URL atau link berkongsi..." class="flex-grow bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none w-full">
+          <button onclick="syncGoogleSheets()" class="w-full md:w-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold whitespace-nowrap">
+            <i class="fa-solid fa-arrows-rotate mr-1"></i> Muat Turun Data
+          </button>
+        </div>
+
+        <!-- Jadual Data Murid -->
+        <div class="overflow-x-auto rounded-xl border border-slate-800">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
+              <tr>
+                <th class="p-3">Bil</th>
+                <th class="p-3">Nama Murid</th>
+                <th class="p-3">Kelas</th>
+                <th class="p-3">BM (AR2)</th>
+                <th class="p-3">BI (AR2)</th>
+                <th class="p-3">MAT (AR2)</th>
+                <th class="p-3">SEJ (AR2)</th>
+                <th class="p-3">Tindakan</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody" class="divide-y divide-slate-800/60 font-medium">
+              <!-- Diisi oleh JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- TAB 3: SLIP CETAKAN -->
+    <!-- ============================================== -->
+    <section id="tab-cetakan" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 no-print flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white">Slip Headcount & Pelaporan Prestasi</h2>
+          <p class="text-xs text-slate-400">Pilih calon untuk melihat dan mencetak slip rasmi format SPM.</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <select id="printSelect" onchange="renderPrintSlip()" class="bg-slate-800 text-slate-200 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none w-64">
+            <!-- Diisi oleh JS -->
+          </select>
+          <button onclick="window.print()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold flex items-center gap-2 shadow-lg shadow-blue-500/20">
+            <i class="fa-solid fa-print"></i> Cetak Slip
+          </button>
+        </div>
+      </div>
+
+      <!-- KAWASAN CETAKAN (A4 FORMAT) -->
+      <div id="print-area" class="bg-white text-black p-8 md:p-12 rounded-2xl shadow-xl max-w-4xl mx-auto border border-gray-200">
+        <!-- Kepala Surat Sekolah -->
+        <div class="text-center border-b-2 border-black pb-4 mb-6">
+          <h2 class="text-xl font-extrabold uppercase tracking-wide">SMK KAMARUL ARIFFIN (SEMEKAR)</h2>
+          <p class="text-xs font-serif text-gray-700">PELAPORAN HEADCOUNT & PENCAPAIAN CALON SPM 2026</p>
+          <p class="text-[11px] text-gray-600 mt-1">Analisis Pencapaian: TOV, OTR, AR1, AR2 dan Sasaran ETR</p>
+        </div>
+
+        <!-- Butiran Murid -->
+        <div class="grid grid-cols-2 gap-4 text-xs mb-6 border p-3 rounded-lg bg-gray-50 border-gray-300">
+          <div>
+            <p><span class="font-bold">NAMA CALON:</span> <span id="p-name">AFIF HAFIY BIN MOHD AFIQ</span></p>
+            <p><span class="font-bold">KELAS:</span> <span id="p-class">5 SAINS 1 (5S1)</span></p>
+          </div>
+          <div class="text-right">
+            <p><span class="font-bold">TAHUN PEPERIKSAAN:</span> 2026</p>
+            <p><span class="font-bold">STATUS KELAYAKAN SIJIL:</span> <span id="p-cert-status" class="font-bold text-emerald-700">LAYAK (BM & SEJ LULUS)</span></p>
+          </div>
+        </div>
+
+        <!-- Jadual Markah Penuh Setiap Subjek -->
+        <table class="w-full text-xs border border-collapse border-gray-400 mb-6 text-center">
+          <thead class="bg-gray-100 font-bold border-b border-gray-400">
+            <tr>
+              <th class="border border-gray-400 p-2 text-left">Mata Pelajaran</th>
+              <th class="border border-gray-400 p-2">TOV</th>
+              <th class="border border-gray-400 p-2">OTR1</th>
+              <th class="border border-gray-400 p-2">AR1</th>
+              <th class="border border-gray-400 p-2">OTR2</th>
+              <th class="border border-gray-400 p-2 bg-blue-50">AR2</th>
+              <th class="border border-gray-400 p-2">ETR</th>
+            </tr>
+          </thead>
+          <tbody id="printSubjectTable" class="divide-y divide-gray-300">
+            <!-- Diisi secara dinamik -->
+          </tbody>
+        </table>
+
+        <!-- Ringkasan Gred & Catatan Guru -->
+        <div class="grid grid-cols-2 gap-4 text-xs mb-10">
+          <div class="border border-gray-300 p-3 rounded-lg">
+            <p class="font-bold mb-1">Rumusan Pencapaian AR2:</p>
+            <p>Purata Markah: <span id="p-avg" class="font-bold">75%</span></p>
+            <p>Gred Purata Individu (GPI): <span id="p-gpi" class="font-bold">3.40</span></p>
+          </div>
+          <div class="border border-gray-300 p-3 rounded-lg">
+            <p class="font-bold mb-1">Ulasan Guru Tingkatan:</p>
+            <p class="italic text-gray-700">"Menunjukkan peningkatan yang konsisten dalam AR2. Gandakan usaha untuk mencapai ETR dalam peperiksaan sebenar."</p>
+          </div>
+        </div>
+
+        <!-- Ruangan Tandatangan -->
+        <div class="grid grid-cols-3 gap-8 text-center text-xs pt-12">
+          <div>
+            <div class="border-b border-black pb-12"></div>
+            <p class="mt-2 font-semibold">Tandatangan Murid</p>
+          </div>
+          <div>
+            <div class="border-b border-black pb-12"></div>
+            <p class="mt-2 font-semibold">Guru Tingkatan</p>
+          </div>
+          <div>
+            <div class="border-b border-black pb-12"></div>
+            <p class="mt-2 font-semibold">Pengetua / GPK Pentadbiran</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JAVASCRIPT LOGIC & EMBEDDED DATA -->
+  <script>
+    // Data asas yang diekstrak daripada fail HC_SPM_SEMEKAR T52026_2.xlsx
+    const defaultStudents = [
+      {
+        id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1",
+        marks: {
+          "Bahasa Melayu": { tov: 65, otr1: 68, ar1: 72, otr2: 72, ar2: 75, etr: 75 },
+          "Bahasa Inggeris": { tov: 77, otr1: 79, ar1: 70, otr2: 81, ar2: 76, etr: 83 },
+          "Matematik": { tov: 41, otr1: 49, ar1: 43, otr2: 57, ar2: 50, etr: 65 },
+          "Sejarah": { tov: 53, otr1: 57, ar1: 65, otr2: 61, ar2: 55, etr: 65 },
+          "Pendidikan Islam": { tov: 70, otr1: 73, ar1: 83, otr2: 77, ar2: 93, etr: 80 },
+          "Fizik": { tov: 38, otr1: 40, ar1: 49, otr2: 42, ar2: 50, etr: 44 },
+          "Kimia": { tov: 23, otr1: 29, ar1: 38, otr2: 34, ar2: 50, etr: 40 },
+          "Matematik Tambahan": { tov: 8, otr1: 19, ar1: 6, otr2: 29, ar2: 10, etr: 40 }
+        }
+      },
+      {
+        id: 2, name: "CHENG ZHI XUEN", class: "5S1",
+        marks: {
+          "Bahasa Melayu": { tov: 69, otr1: 72, ar1: 75, otr2: 76, ar2: 80, etr: 79 },
+          "Bahasa Inggeris": { tov: 68, otr1: 70, ar1: 64, otr2: 73, ar2: 73, etr: 75 },
+          "Matematik": { tov: 75, otr1: 77, ar1: 81, otr2: 78, ar2: 81, etr: 80 },
+          "Sejarah": { tov: 46, otr1: 51, ar1: 52, otr2: 55, ar2: 52, etr: 60 },
+          "Pendidikan Moral": { tov: 54, otr1: 63, ar1: 55, otr2: 71, ar2: 70, etr: 80 },
+          "Biologi": { tov: 40, otr1: 43, ar1: 27, otr2: 47, ar2: 40, etr: 50 },
+          "Kimia": { tov: 35, otr1: 43, ar1: 34, otr2: 52, ar2: 43, etr: 60 },
+          "Bahasa Cina": { tov: 75, otr1: 77, ar1: 65, otr2: 78, ar2: 73, etr: 80 }
+        }
+      },
+      {
+        id: 4, name: "JENNISER YOW YI EN", class: "5S1",
+        marks: {
+          "Bahasa Melayu": { tov: 66, otr1: 72, ar1: 74, otr2: 79, ar2: 82, etr: 85 },
+          "Bahasa Inggeris": { tov: 54, otr1: 57, ar1: 55, otr2: 59, ar2: 60, etr: 62 },
+          "Matematik": { tov: 91, otr1: 92, ar1: 95, otr2: 94, ar2: 92, etr: 95 },
+          "Sejarah": { tov: 46, otr1: 56, ar1: 65, otr2: 65, ar2: 65, etr: 75 },
+          "Pendidikan Moral": { tov: 61, otr1: 67, ar1: 58, otr2: 74, ar2: 73, etr: 80 },
+          "Biologi": { tov: 76, otr1: 78, ar1: 41, otr2: 79, ar2: 65, etr: 81 },
+          "Matematik Tambahan": { tov: 72, otr1: 75, ar1: 90, otr2: 77, ar2: 70, etr: 80 },
+          "Bahasa Cina": { tov: 78, otr1: 79, ar1: 68, otr2: 79, ar2: 79, etr: 80 }
+        }
+      },
+      {
+        id: 14, name: "KHADIJAH BINTI SALIHEN", class: "5S2",
+        marks: {
+          "Bahasa Melayu": { tov: 60, otr1: 65, ar1: 65, otr2: 70, ar2: 77, etr: 75 },
+          "Bahasa Inggeris": { tov: 50, otr1: 53, ar1: 48, otr2: 56, ar2: 50, etr: 59 },
+          "Matematik": { tov: 31, otr1: 37, ar1: 40, otr2: 44, ar2: 29, etr: 50 },
+          "Sejarah": { tov: 73, otr1: 75, ar1: 76, otr2: 78, ar2: 75, etr: 80 },
+          "Pendidikan Islam": { tov: 80, otr1: 83, ar1: 90, otr2: 87, ar2: 90, etr: 90 },
+          "Sains": { tov: 63, otr1: 69, ar1: 55, otr2: 76, ar2: 73, etr: 82 },
+          "Tasawwur Islam": { tov: 90, otr1: 92, ar1: 81, otr2: 93, ar2: 83, etr: 95 }
+        }
+      },
+      {
+        id: 30, name: "SITINORMASHIDATUL BINTI MOHD ROZI", class: "5S3",
+        marks: {
+          "Bahasa Melayu": { tov: 49, otr1: 53, ar1: 64, otr2: 56, ar2: 79, etr: 60 },
+          "Bahasa Inggeris": { tov: 32, otr1: 35, ar1: 34, otr2: 37, ar2: 40, etr: 40 },
+          "Matematik": { tov: 16, otr1: 24, ar1: 19, otr2: 32, ar2: 22, etr: 40 },
+          "Sejarah": { tov: 41, otr1: 44, ar1: 50, otr2: 47, ar2: 58, etr: 50 },
+          "Pendidikan Islam": { tov: 64, otr1: 66, ar1: 71, otr2: 68, ar2: 77, etr: 70 },
+          "Pendidikan Seni Visual": { tov: 75, otr1: 76, ar1: 63, otr2: 78, ar2: 55, etr: 79 },
+          "Sains": { tov: 36, otr1: 44, ar1: 24, otr2: 52, ar2: 49, etr: 60 }
+        }
+      }
+    ];
+
+    let students = JSON.parse(localStorage.getItem("spm_headcount_students")) || defaultStudents;
+    let radarChartInstance = null;
+
+    // Inisialisasi Aplikasi
+    window.addEventListener("DOMContentLoaded", () => {
+      populateStudentDropdowns();
+      renderDashboardCharts();
+      renderStudentRadar();
+      renderDataTable();
+      renderPrintSlip();
+    });
+
+    // Pertukaran Tab Menu
+    function switchTab(tab) {
+      ['dashboard', 'data-entry', 'cetakan'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).className = "px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 text-slate-400 hover:text-white hover:bg-slate-800";
+      });
+
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+      document.getElementById(`nav-${tab}`).className = "px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center space-x-2 bg-blue-600 text-white";
+    }
+
+    // Mengisi Dropdown Murid
+    function populateStudentDropdowns() {
+      const studentSelect = document.getElementById("studentSelect");
+      const printSelect = document.getElementById("printSelect");
+      studentSelect.innerHTML = "";
+      printSelect.innerHTML = "";
+
+      students.forEach(s => {
+        const opt1 = new Option(`${s.name} (${s.class})`, s.id);
+        const opt2 = new Option(`${s.name} (${s.class})`, s.id);
+        studentSelect.add(opt1);
+        printSelect.add(opt2);
+      });
+    }
+
+    // SPIDER WEB / RADAR CHART GAYA RPG
+    function renderStudentRadar() {
+      const currentId = parseInt(document.getElementById("studentSelect").value);
+      const student = students.find(s => s.id === currentId) || students[0];
+
+      const subjects = Object.keys(student.marks);
+      const ar2Scores = subjects.map(sub => student.marks[sub].ar2 || 0);
+      const etrScores = subjects.map(sub => student.marks[sub].etr || 0);
+
+      // Kemaskini Profil RPG
+      document.getElementById("rpg-name").innerText = student.name;
+      document.getElementById("rpg-class").innerText = `KELAS ${student.class}`;
+
+      const totalMarks = ar2Scores.reduce((a, b) => a + b, 0);
+      const avg = Math.round(totalMarks / ar2Scores.length);
+      document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} CP`;
+      document.getElementById("rpg-avg").innerText = `${avg}%`;
+
+      // Gelaran & Rank RPG
+      const rankBadge = document.getElementById("rpg-rank");
+      const titleBadge = document.getElementById("rpg-title");
+      if (avg >= 80) {
+        rankBadge.innerText = "RANK SSS";
+        rankBadge.className = "absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-full font-bold uppercase rpg-font badge-glow";
+        titleBadge.innerText = "👑 Mythic High Achiever";
+      } else if (avg >= 65) {
+        rankBadge.innerText = "RANK S";
+        rankBadge.className = "absolute top-4 right-4 bg-indigo-500/20 text-indigo-300 text-xs px-2.5 py-1 rounded-full font-bold uppercase rpg-font";
+        titleBadge.innerText = "⚔️ Scholar Grandmaster";
+      } else {
+        rankBadge.innerText = "RANK A";
+        rankBadge.className = "absolute top-4 right-4 bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-full font-bold uppercase rpg-font";
+        titleBadge.innerText = "🛡️ Academic Ranger";
+      }
+
+      // Render Radar Chart
+      const ctx = document.getElementById("studentRadarChart").getContext("2d");
+      if (radarChartInstance) radarChartInstance.destroy();
+
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: subjects,
+          datasets: [
+            {
+              label: 'Pencapaian AR2',
+              data: ar2Scores,
+              backgroundColor: 'rgba(99, 102, 241, 0.35)',
+              borderColor: '#6366f1',
+              borderWidth: 2.5,
+              pointBackgroundColor: '#818cf8',
+              pointBorderColor: '#fff',
+              pointRadius: 4
+            },
+            {
+              label: 'Sasaran ETR',
+              data: etrScores,
+              backgroundColor: 'rgba(245, 158, 11, 0.15)',
+              borderColor: '#f59e0b',
+              borderWidth: 1.5,
+              borderDash: [4, 4],
+              pointBackgroundColor: '#f59e0b',
+              pointRadius: 3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              pointLabels: {
+                color: '#cbd5e1',
+                font: { size: 10, weight: 'bold' }
+              },
+              suggestedMin: 0,
+              suggestedMax: 100,
+              ticks: { display: false }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // DASHBOARD OVERALL CHARTS
+    function renderDashboardCharts() {
+      // 1. GPS Trend Chart
+      new Chart(document.getElementById("gpsTrendChart").getContext("2d"), {
+        type: 'line',
+        data: {
+          labels: ['OTR1', 'AR1', 'OTR2', 'AR2'],
+          datasets: [{
+            label: 'GPS Sekolah',
+            data: [6.07, 6.39, 5.59, 5.65],
+            borderColor: '#38bdf8',
+            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 3,
+            pointBackgroundColor: '#38bdf8',
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              reverse: true, // Kerana nilai GPS lebih kecil lebih cemerlang
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8' }
+            }
+          }
+        }
+      });
+
+      // 2. Subject GPS Bar Chart
+      new Chart(document.getElementById("subjectGpaChart").getContext("2d"), {
+        type: 'bar',
+        data: {
+          labels: ['P.Islam', 'BM', 'BI', 'Fizik', 'Sejarah', 'Kimia', 'Sains', 'Matematik'],
+          datasets: [{
+            label: 'GPS Subjek AR2',
+            data: [2.89, 3.93, 5.60, 5.78, 5.98, 6.11, 7.19, 7.65],
+            backgroundColor: '#818cf8',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              reverse: true,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8', font: { size: 10 } }
+            }
+          }
+        }
+      });
+    }
+
+    // PENGISIAN DATA TABLE
+    function renderDataTable() {
+      const tbody = document.getElementById("studentTableBody");
+      tbody.innerHTML = "";
+
+      students.forEach((s, index) => {
+        const bm = s.marks["Bahasa Melayu"]?.ar2 || "-";
+        const bi = s.marks["Bahasa Inggeris"]?.ar2 || "-";
+        const mat = s.marks["Matematik"]?.ar2 || "-";
+        const sej = s.marks["Sejarah"]?.ar2 || "-";
+
+        const row = document.createElement("tr");
+        row.className = "hover:bg-slate-800/40 transition-colors";
+        row.innerHTML = `
+          <td class="p-3">${index + 1}</td>
+          <td class="p-3 font-semibold text-white">${s.name}</td>
+          <td class="p-3">${s.class}</td>
+          <td class="p-3"><span class="px-2 py-1 bg-slate-800 rounded font-mono">${bm}</span></td>
+          <td class="p-3"><span class="px-2 py-1 bg-slate-800 rounded font-mono">${bi}</span></td>
+          <td class="p-3"><span class="px-2 py-1 bg-slate-800 rounded font-mono">${mat}</span></td>
+          <td class="p-3"><span class="px-2 py-1 bg-slate-800 rounded font-mono">${sej}</span></td>
+          <td class="p-3">
+            <button onclick="editStudent(${s.id})" class="text-blue-400 hover:text-blue-300 mr-2"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function editStudent(id) {
+      const s = students.find(item => item.id === id);
+      const newBM = prompt(`Kemaskini Markah BM AR2 bagi ${s.name}:`, s.marks["Bahasa Melayu"]?.ar2 || 0);
+      if (newBM !== null) {
+        if (!s.marks["Bahasa Melayu"]) s.marks["Bahasa Melayu"] = {};
+        s.marks["Bahasa Melayu"].ar2 = parseInt(newBM);
+        localStorage.setItem("spm_headcount_students", JSON.stringify(students));
+        renderDataTable();
+        renderStudentRadar();
+      }
+    }
+
+    function resetToDefaultData() {
+      if (confirm("Adakah anda pasti mahu memulihkan data asal daripada SEMEKAR?")) {
+        localStorage.removeItem("spm_headcount_students");
+        students = defaultStudents;
+        renderDataTable();
+        populateStudentDropdowns();
+        renderStudentRadar();
+      }
+    }
+
+    // CETAKAN SLIP
+    function renderPrintSlip() {
+      const selectedId = parseInt(document.getElementById("printSelect").value) || students[0].id;
+      const student = students.find(s => s.id === selectedId) || students[0];
+
+      document.getElementById("p-name").innerText = student.name;
+      document.getElementById("p-class").innerText = `${student.class}`;
+
+      const tbody = document.getElementById("printSubjectTable");
+      tbody.innerHTML = "";
+
+      let totalAR2 = 0;
+      let count = 0;
+
+      for (const [sub, data] of Object.entries(student.marks)) {
+        totalAR2 += (data.ar2 || 0);
+        count++;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="border border-gray-400 p-2 text-left font-semibold">${sub}</td>
+          <td class="border border-gray-400 p-2">${data.tov || '-'}</td>
+          <td class="border border-gray-400 p-2">${data.otr1 || '-'}</td>
+          <td class="border border-gray-400 p-2">${data.ar1 || '-'}</td>
+          <td class="border border-gray-400 p-2">${data.otr2 || '-'}</td>
+          <td class="border border-gray-400 p-2 font-bold bg-blue-50">${data.ar2 || '-'}</td>
+          <td class="border border-gray-400 p-2 font-semibold text-gray-700">${data.etr || '-'}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      const avg = Math.round(totalAR2 / (count || 1));
+      document.getElementById("p-avg").innerText = `${avg}%`;
+
+      // Status Kelayakan SPM (Lulus BM & Sejarah min 40 markah)
+      const bmScore = student.marks["Bahasa Melayu"]?.ar2 || 0;
+      const sejScore = student.marks["Sejarah"]?.ar2 || 0;
+      const cert = document.getElementById("p-cert-status");
+      if (bmScore >= 40 && sejScore >= 40) {
+        cert.innerText = "LAYAK MENDAPAT SIJIL SPM";
+        cert.className = "font-bold text-emerald-700";
+      } else {
+        cert.innerText = "BELUM LAYAK (Gagal BM/Sejarah)";
+        cert.className = "font-bold text-red-600";
+      }
+    }
+  </script>
+</body>
+</html>
