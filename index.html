@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -20,11 +20,19 @@
     .score-font {
       font-family: 'Orbitron', sans-serif;
     }
-    .neon-card {
-      box-shadow: 0 0 20px rgba(79, 70, 229, 0.15), inset 0 0 15px rgba(99, 102, 241, 0.05);
-    }
     .badge-glow {
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.5);
+      border-radius: 4px;
     }
 
     /* Tetapan Cetakan Rasmi A4 */
@@ -55,28 +63,31 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- NAVBAR ATAS DENGAN LOGO SEKOLAH -->
-  <header class="bg-slate-900/85 backdrop-blur border-b border-slate-800 sticky top-0 z-50 no-print">
+  <!-- ============================================== -->
+  <!-- NAVBAR ATAS (TERATUR & KEMAS) -->
+  <!-- ============================================== -->
+  <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       
+      <!-- Logo Sekolah & Nama -->
       <div class="flex items-center space-x-3">
         <div class="h-11 w-11 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden p-1 shadow-md">
           <img src="logo.png" alt="Logo SEMEKAR" class="h-full w-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-graduation-cap text-indigo-400 text-xl\'></i>';">
         </div>
         <div>
           <div class="flex items-center space-x-2">
-            <h1 class="font-black text-base sm:text-lg tracking-wide leading-tight">SPM HEADCOUNT <span class="text-indigo-400">SEMEKAR</span></h1>
+            <h1 class="font-black text-sm sm:text-base tracking-wide text-white leading-tight">HEADCOUNT SPM <span class="text-indigo-400">SEMEKAR</span></h1>
             <span class="text-[10px] bg-indigo-500/20 text-indigo-300 font-mono px-2 py-0.5 rounded border border-indigo-500/30">JEA7039</span>
           </div>
-          <p class="text-[11px] text-slate-400">SMK Kamarul Ariffin • Tingkatan 5 (2026)</p>
+          <p class="text-[11px] text-slate-400">SMK Kamarul Ariffin • Tingkatan 5 Sesi 2026</p>
         </div>
       </div>
       
-      <!-- Status Cloud & Navigasi Utama -->
+      <!-- Status Cloud & Menu Utama -->
       <div class="flex items-center space-x-3">
-        <div id="cloud-status-indicator" class="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-[11px] text-emerald-400 font-mono">
+        <div id="cloud-status-indicator" class="hidden md:flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-[11px] text-emerald-400 font-mono">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Google Sheet Diselaraskan</span>
+          <span>Google Sheet Aktif</span>
         </div>
 
         <nav class="flex space-x-1 sm:space-x-2">
@@ -97,7 +108,9 @@
     </div>
   </header>
 
+  <!-- ============================================== -->
   <!-- KANDUNGAN UTAMA -->
+  <!-- ============================================== -->
   <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
 
     <!-- ============================================== -->
@@ -105,33 +118,33 @@
     <!-- ============================================== -->
     <section id="tab-dashboard" class="space-y-8">
       
-      <!-- Kad Ringkasan Atas -->
+      <!-- KAD METRIK RINGKASAN ATAS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>GPS AR2 TERKINI</span>
             <i class="fa-solid fa-chart-line text-indigo-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-3xl font-black text-indigo-400">5.65</span>
-            <span class="text-xs text-emerald-400 font-bold"><i class="fa-solid fa-arrow-trend-up"></i> +0.74 dr AR1</span>
+            <span class="text-xs text-emerald-400 font-bold"><i class="fa-solid fa-arrow-trend-up"></i> +0.74</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Sasaran OTR2: 5.59</p>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>JUMLAH CALON</span>
             <i class="fa-solid fa-users text-blue-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-3xl font-black text-white" id="stat-total-calon">40</span>
-            <span class="text-xs text-slate-400">Calon Lengkap</span>
+            <span class="text-xs text-slate-400">Calon</span>
           </div>
-          <p class="text-[11px] text-slate-400 mt-1">5S1 (9), 5S2 (19), 5S3 (12)</p>
+          <p class="text-[11px] text-slate-400 mt-1">5S1 (9) • 5S2 (19) • 5S3 (12)</p>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>SUBJEK TERBAIK (AR2)</span>
             <i class="fa-solid fa-award text-amber-400"></i>
@@ -143,7 +156,7 @@
           <p class="text-[11px] text-slate-400 mt-1">Asas Kelestarian: 3.29</p>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-sm">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-sm">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
             <span>SASARAN ETR</span>
             <i class="fa-solid fa-bullseye text-rose-400"></i>
@@ -157,43 +170,43 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL UTAMA: PAPARAN PERJALANAN PENCAPAIAN (JOURNEY & TRAJECTORY) -->
+      <!-- MODUL 1: PERJALANAN PENCAPAIAN (SEKOLAH, KELAS, SUBJEK, INDIVIDU) -->
       <!-- ============================================================== -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8 space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
           <div>
             <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest font-mono">
               <i class="fa-solid fa-route"></i>
               <span>Peta Perjalanan Pencapaian Headcount</span>
             </div>
-            <h3 class="text-2xl font-black text-white mt-1">Perjalanan Pencapaian: Sekolah, Kelas, Subjek &amp; Individu</h3>
-            <p class="text-xs text-slate-400 mt-0.5">Analisis visual trajektori peningkatan dari TOV ➔ OTR1 ➔ AR1 ➔ OTR2 ➔ AR2 ➔ ETR.</p>
+            <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Perjalanan Pencapaian SPM 2026</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Analisis trajektori pencapaian dari TOV ➔ OTR1 ➔ AR1 ➔ OTR2 ➔ AR2 ➔ Sasaran ETR.</p>
           </div>
 
-          <!-- Navigasi 4 Tahap Perjalanan -->
-          <div class="flex bg-slate-950 p-1.5 rounded-2xl border border-slate-800 space-x-1">
-            <button onclick="switchJourneyLevel('school')" id="btn-journey-school" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow">
-              <i class="fa-solid fa-school mr-1.5"></i>Sekolah
+          <!-- Tab Pemilih Peringkat -->
+          <div class="flex bg-slate-950 p-1 rounded-2xl border border-slate-800 space-x-1 self-start md:self-auto">
+            <button onclick="switchJourneyLevel('school')" id="btn-journey-school" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow">
+              <i class="fa-solid fa-school mr-1"></i>Sekolah
             </button>
-            <button onclick="switchJourneyLevel('class')" id="btn-journey-class" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
-              <i class="fa-solid fa-users mr-1.5"></i>Kelas
+            <button onclick="switchJourneyLevel('class')" id="btn-journey-class" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
+              <i class="fa-solid fa-users mr-1"></i>Kelas
             </button>
-            <button onclick="switchJourneyLevel('subject')" id="btn-journey-subject" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
-              <i class="fa-solid fa-book-open mr-1.5"></i>Subjek
+            <button onclick="switchJourneyLevel('subject')" id="btn-journey-subject" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
+              <i class="fa-solid fa-book-open mr-1"></i>Subjek
             </button>
-            <button onclick="switchJourneyLevel('student')" id="btn-journey-student" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
-              <i class="fa-solid fa-user-graduate mr-1.5"></i>Individu
+            <button onclick="switchJourneyLevel('student')" id="btn-journey-student" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">
+              <i class="fa-solid fa-user-graduate mr-1"></i>Individu
             </button>
           </div>
         </div>
 
-        <!-- 1. Peringkat Sekolah -->
+        <!-- Peringkat 1: Sekolah -->
         <div id="journey-school-view" class="space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-8 bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
-              <div class="flex items-center justify-between mb-2">
-                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Trajektori GPS Keseluruhan SEMEKAR</h4>
-                <span class="text-[10px] text-indigo-400 font-mono">Nilai Rendah = Lebih Cemerlang</span>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Trajektori GPS Keseluruhan Sekolah</span>
+                <span class="text-[10px] text-indigo-300 font-mono bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-500/20">Nilai Rendah = Cemerlang</span>
               </div>
               <div class="h-64">
                 <canvas id="journeySchoolChart"></canvas>
@@ -201,46 +214,45 @@
             </div>
 
             <div class="lg:col-span-4 space-y-3">
-              <!-- Milestone Steps -->
-              <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] text-slate-400 uppercase font-bold">Titik Permulaan (TOV)</span>
-                  <p class="text-lg font-black text-slate-300 score-font">6.39</p>
+              <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 uppercase font-bold">Titik Mula (TOV)</span>
+                <div class="flex items-baseline justify-between mt-1">
+                  <span class="text-2xl font-black text-slate-200 score-font">6.39</span>
+                  <span class="text-xs text-slate-400 font-mono">Tahap Asas</span>
                 </div>
-                <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-lg text-xs font-mono">Asas</span>
               </div>
 
-              <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] text-indigo-400 uppercase font-bold">Pencapaian Semasa (AR2)</span>
-                  <p class="text-2xl font-black text-indigo-400 score-font">5.65</p>
+              <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                <span class="text-[10px] text-indigo-400 uppercase font-bold">Pencapaian Semasa (AR2)</span>
+                <div class="flex items-baseline justify-between mt-1">
+                  <span class="text-2xl font-black text-indigo-400 score-font">5.65</span>
+                  <span class="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Lonjakan +0.74</span>
                 </div>
-                <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-lg text-xs font-bold border border-emerald-500/20">Meningkat +0.74</span>
               </div>
 
-              <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] text-amber-400 uppercase font-bold">Sasaran SPM (ETR)</span>
-                  <p class="text-2xl font-black text-amber-400 score-font">4.85</p>
+              <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                <span class="text-[10px] text-amber-400 uppercase font-bold">Sasaran Sekolah (ETR)</span>
+                <div class="flex items-baseline justify-between mt-1">
+                  <span class="text-2xl font-black text-amber-400 score-font">4.85</span>
+                  <span class="text-xs text-amber-300 font-mono">Sasaran SPM</span>
                 </div>
-                <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-lg text-xs font-bold border border-amber-500/20">Target Sekolah</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 2. Peringkat Kelas -->
+        <!-- Peringkat 2: Kelas -->
         <div id="journey-class-view" class="hidden space-y-6">
           <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
               <div>
-                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Perbandingan Garis Masa Mengikut Kelas (5S1, 5S2, 5S3)</h4>
-                <p class="text-[11px] text-slate-400">Pencapaian purata markah keseluruhan mengikut fasa headcount.</p>
+                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Perjalanan Purata Markah Mengikut Kelas</h4>
+                <p class="text-[11px] text-slate-400">Perbandingan trajektori markah purata antara 5S1, 5S2, dan 5S3.</p>
               </div>
-              <div class="flex gap-4 text-xs font-mono">
-                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span> 5S1</span>
-                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-indigo-500 inline-block"></span> 5S2</span>
-                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> 5S3</span>
+              <div class="flex gap-4 text-xs font-mono font-bold">
+                <span class="text-blue-400">● 5S1</span>
+                <span class="text-indigo-400">● 5S2</span>
+                <span class="text-emerald-400">● 5S3</span>
               </div>
             </div>
             <div class="h-64">
@@ -249,35 +261,35 @@
           </div>
         </div>
 
-        <!-- 3. Peringkat Mata Pelajaran -->
-        <div id="journey-subject-view" class="hidden space-y-6">
-          <div class="flex items-center justify-between bg-slate-950 p-4 rounded-2xl border border-slate-800">
-            <div class="flex items-center space-x-2">
+        <!-- Peringkat 3: Mata Pelajaran -->
+        <div id="journey-subject-view" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-4 rounded-2xl border border-slate-800 gap-3">
+            <div class="flex items-center space-x-3">
               <label class="text-xs font-bold text-slate-400">PILIH MATA PELAJARAN:</label>
               <select id="journeySubjectSelect" onchange="updateSubjectJourneyChart()" class="bg-slate-900 border border-slate-700 text-slate-100 rounded-xl px-3 py-1.5 text-xs font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
                 <!-- Diisi dinamik -->
               </select>
             </div>
-            <span class="text-xs text-indigo-400 font-mono" id="journeySubjectStatusLabel">Status: Dalam Laluan Sasaran</span>
+            <span class="text-xs text-indigo-400 font-mono font-bold" id="journeySubjectStatusLabel">Status: Memuaskan</span>
           </div>
 
           <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
-            <h4 class="text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Garis Masa GPS Subjek (Sasaran OTR vs Sebenar AR)</h4>
+            <h4 class="text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Trajektori GPS Subjek (Sasaran OTR vs Sebenar AR)</h4>
             <div class="h-64">
               <canvas id="journeySubjectChart"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- 4. Peringkat Individu (Hubungan ke Calon) -->
-        <div id="journey-student-view" class="hidden space-y-6">
+        <!-- Peringkat 4: Individu Murid -->
+        <div id="journey-student-view" class="hidden space-y-4">
           <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div>
                 <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Perjalanan Skor Murid Terpilih</h4>
-                <p class="text-[11px] text-slate-400">Perbandingan markah purata calon dari TOV hingga ETR.</p>
+                <p class="text-[11px] text-slate-400">Graf peningkatan markah purata calon dari TOV hingga ETR.</p>
               </div>
-              <div class="text-xs font-bold text-indigo-400 font-mono" id="journeyStudentNameBadge">
+              <div class="text-xs font-bold text-indigo-400 font-mono bg-indigo-950/60 px-3 py-1.5 rounded-xl border border-indigo-500/20" id="journeyStudentNameBadge">
                 AFIF HAFIY BIN MOHD AFIQ (5S1)
               </div>
             </div>
@@ -288,71 +300,65 @@
         </div>
       </div>
 
-      <!-- ============================================== -->
-      <!-- 4 KATEGORI ANALISIS & INTERVENSI SASARAN SPM   -->
-      <!-- ============================================== -->
-      <div class="space-y-6">
-        <div class="flex items-center justify-between">
+      <!-- ============================================================== -->
+      <!-- MODUL 2: ANALISIS KUMPULAN SASARAN & INTERVENSI (TERATUR & JELAS) -->
+      <!-- ============================================================== -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 class="text-xl font-black text-white">Analisis Calon &amp; Kumpulan Sasaran Intervensi</h3>
-            <p class="text-xs text-slate-400">Pemantauan calon berpotensi cemerlang dan calon intervensi kritikal SPM.</p>
+            <h3 class="text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
+            <p class="text-xs text-slate-400">Klik mana-mana kad untuk memaparkan senarai calon yang terlibat secara terperinci.</p>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-semibold">Data AR2</span>
+          <span class="self-start sm:self-auto px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-mono font-semibold">Berdasarkan AR2</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div onclick="showFocusTab('top15')" class="cursor-pointer bg-gradient-to-br from-amber-950/30 to-slate-900 p-4 rounded-2xl border border-amber-500/30 hover:border-amber-500 transition shadow-sm">
+        <!-- 4 Kad Navigasi Pilihan -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div onclick="showFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition-all shadow-md">
             <div class="flex items-center justify-between text-amber-400 text-xs font-bold uppercase">
-              <span>Potensi Terbaik</span>
-              <i class="fa-solid fa-medal text-lg"></i>
+              <span>Potensi Terbaik (Top 15)</span>
+              <i class="fa-solid fa-crown text-base"></i>
             </div>
             <div class="text-2xl font-black text-white mt-2" id="count-top15">15 Calon</div>
-            <p class="text-[11px] text-slate-400 mt-1">Minima 15 Calon Skor Purata Tertinggi</p>
+            <p class="text-[11px] text-slate-400 mt-1">Calon Skor Purata Tertinggi</p>
           </div>
 
-          <div onclick="showFocusTab('failSej')" class="cursor-pointer bg-gradient-to-br from-rose-950/30 to-slate-900 p-4 rounded-2xl border border-rose-500/30 hover:border-rose-500 transition shadow-sm">
+          <div onclick="showFocusTab('failSej')" id="card-focus-failSej" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-rose-500/60 transition-all">
             <div class="flex items-center justify-between text-rose-400 text-xs font-bold uppercase">
               <span>Gagal Sejarah (&lt;40)</span>
-              <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+              <i class="fa-solid fa-clock-rotate-left text-base"></i>
             </div>
             <div class="text-2xl font-black text-white mt-2" id="count-failSej">8 Calon</div>
-            <p class="text-[11px] text-slate-400 mt-1">Intervensi Lulus Sejarah</p>
+            <p class="text-[11px] text-slate-400 mt-1">Intervensi Bimbingan Sejarah</p>
           </div>
 
-          <div onclick="showFocusTab('failBm')" class="cursor-pointer bg-gradient-to-br from-orange-950/30 to-slate-900 p-4 rounded-2xl border border-orange-500/30 hover:border-orange-500 transition shadow-sm">
+          <div onclick="showFocusTab('failBm')" id="card-focus-failBm" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-orange-500/60 transition-all">
             <div class="flex items-center justify-between text-orange-400 text-xs font-bold uppercase">
               <span>Gagal BM (&lt;40)</span>
-              <i class="fa-solid fa-book-bookmark text-lg"></i>
+              <i class="fa-solid fa-book-bookmark text-base"></i>
             </div>
             <div class="text-2xl font-black text-white mt-2" id="count-failBm">3 Calon</div>
-            <p class="text-[11px] text-slate-400 mt-1">Intervensi Lulus Bahasa Melayu</p>
+            <p class="text-[11px] text-slate-400 mt-1">Intervensi Bimbingan BM</p>
           </div>
 
-          <div onclick="showFocusTab('failBoth')" class="cursor-pointer bg-gradient-to-br from-red-950/50 to-slate-900 p-4 rounded-2xl border border-red-500/50 hover:border-red-400 transition shadow-sm">
+          <div onclick="showFocusTab('failBoth')" id="card-focus-failBoth" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-red-500/60 transition-all">
             <div class="flex items-center justify-between text-red-400 text-xs font-bold uppercase">
               <span>Gagal BM &amp; Sejarah</span>
-              <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+              <i class="fa-solid fa-triangle-exclamation text-base"></i>
             </div>
             <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Kritikal Tidak Layak Sijil SPM</p>
           </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <div class="flex items-center space-x-2">
-              <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
-              <h4 class="font-bold text-white text-sm" id="focusTableTitle">Senarai Murid Potensi Terbaik (Top 15 SPM SEMEKAR)</h4>
-            </div>
-            <div class="flex space-x-1.5 text-xs">
-              <button onclick="showFocusTab('top15')" id="btn-focus-top15" class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold">Terbaik (15)</button>
-              <button onclick="showFocusTab('failSej')" id="btn-focus-failSej" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-semibold">Gagal Sej</button>
-              <button onclick="showFocusTab('failBm')" id="btn-focus-failBm" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-semibold">Gagal BM</button>
-              <button onclick="showFocusTab('failBoth')" id="btn-focus-failBoth" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-semibold">Gagal Kedua-dua</button>
-            </div>
+        <!-- Jadual Calon Kumpulan Terpilih -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="font-bold text-white text-sm" id="focusTableTitle">Senarai Murid Potensi Terbaik (Top 15 SPM SEMEKAR)</h4>
+            <span class="text-xs text-slate-400 font-mono" id="focusTableCount">15 Rekod</span>
           </div>
 
-          <div class="overflow-x-auto rounded-xl border border-slate-800 max-h-72 overflow-y-auto">
+          <div class="overflow-x-auto rounded-2xl border border-slate-800 custom-scrollbar max-h-80 overflow-y-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800">
                 <tr>
@@ -364,30 +370,31 @@
                   <th class="p-3 text-center">Sejarah (AR2)</th>
                   <th class="p-3 text-center">Purata Markah</th>
                   <th class="p-3 text-center">Indeks Prestasi</th>
-                  <th class="p-3 text-center">Status Sijil</th>
+                  <th class="p-3 text-center">Status Kelayakan Sijil</th>
                 </tr>
               </thead>
               <tbody id="focusTableBody" class="divide-y divide-slate-800/60 font-medium">
-                <!-- Diisi secara dinamik -->
+                <!-- Diisi dinamik -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- VISUAL PRESTASI INDIVIDU (RADAR POTENSI & REPUTASI AKADEMIK) -->
-      <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 lg:p-8 relative overflow-hidden neon-card">
-        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+      <!-- ============================================================== -->
+      <!-- MODUL 3: PROFIL REPUTASI & RADAR POTENSI INDIVIDU CALON -->
+      <!-- ============================================================== -->
+      <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 lg:p-7 relative overflow-hidden shadow-xl">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
           <div>
-            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold tracking-widest uppercase score-font">
+            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest score-font">
               <i class="fa-solid fa-compass-drafting"></i>
               <span>Profil Reputasi &amp; Radar Potensi Calon</span>
             </div>
-            <h2 class="text-2xl font-black tracking-tight text-white mt-1">Pencapaian Mata Pelajaran Calon</h2>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-1">Pencapaian Mata Pelajaran Calon Terpilih</h2>
           </div>
           
+          <!-- Pemilih Calon -->
           <div class="flex flex-wrap items-center gap-3">
             <select id="radarClassFilter" onchange="filterStudentDropdownByClass()" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-3 py-2 text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500">
               <option value="ALL">Semua Kelas</option>
@@ -396,15 +403,14 @@
               <option value="5S3">5S3</option>
             </select>
 
-            <select id="studentSelect" onchange="renderStudentRadar()" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-80 shadow-inner">
+            <select id="studentSelect" onchange="renderStudentRadar(); updateStudentJourneyChart();" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-80 shadow-inner">
               <!-- Diisi automatik oleh JS -->
             </select>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
-          
-          <!-- Kad Status Calon & Foto Muka -->
+          <!-- Kad Profil Calon & Foto Muka -->
           <div class="lg:col-span-4 bg-slate-950/70 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center relative backdrop-blur">
             <div id="rpg-rank" class="absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[11px] px-3 py-1 rounded-full font-black uppercase score-font badge-glow border border-amber-500/30">
               TAHAP: CEMERLANG
@@ -421,6 +427,7 @@
                 </div>
               </div>
 
+              <!-- Butang Muat Naik Foto -->
               <label for="studentPhotoInput" class="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-full cursor-pointer shadow-lg transition-transform hover:scale-110 flex items-center justify-center border-2 border-slate-900" title="Muat Naik Foto Calon">
                 <i class="fa-solid fa-camera text-xs"></i>
               </label>
@@ -436,7 +443,7 @@
 
             <div class="w-full grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-slate-800 text-left">
               <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800/80">
-                <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Indeks Prestasi (IPC)</span>
+                <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Indeks Prestasi</span>
                 <p class="text-xl font-black text-amber-400 score-font mt-1" id="rpg-combat-power">740 IPC</p>
               </div>
               <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-800/80">
@@ -464,7 +471,7 @@
             <div class="flex flex-wrap items-center justify-center gap-6 mt-3 text-xs text-slate-400 font-medium">
               <span class="flex items-center gap-2">
                 <span class="w-3.5 h-3.5 rounded-md bg-indigo-500 inline-block shadow-sm"></span> 
-                Keputusan Peperiksaan AR2 (Semasa)
+                Pencapaian AR2 (Semasa)
               </span>
               <span class="flex items-center gap-2">
                 <span class="w-3.5 h-3.5 rounded-md bg-amber-400 inline-block shadow-sm"></span> 
@@ -472,33 +479,33 @@
               </span>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
     <!-- ============================================== -->
-    <!-- 2. PENGISIAN DATA & KEMASKINI SEMUA SUBJEK -->
+    <!-- 2. PENGISIAN DATA & PENGURUSAN SEMUA CALON -->
     <!-- ============================================== -->
     <section id="tab-data-entry" class="hidden space-y-6">
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-sm">
         
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h2 class="text-xl font-bold text-white">Pengurusan Calon &amp; Kemaskini Semua Mata Pelajaran</h2>
-            <p class="text-xs text-slate-400 mt-1">Tekan butang "Kemaskini Semua Mata Pelajaran" untuk mengubah markah kesemua subjek calon secara serentak.</p>
+            <h2 class="text-xl font-bold text-white">Senarai Penuh &amp; Pengurusan Markah Calon (40 Orang)</h2>
+            <p class="text-xs text-slate-400 mt-1">Semua data calon tersusun kemas. Tekan butang kemaskini untuk memasukkan markah kesemua mata pelajaran.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <button onclick="fetchGoogleSheetData()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition shadow-md shadow-emerald-600/30 flex items-center gap-1.5">
+            <button onclick="fetchGoogleSheetData()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition shadow flex items-center gap-1.5">
               <i class="fa-solid fa-rotate"></i> Muat Semula Data Sheet
             </button>
-            <button onclick="exportDataCSV()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-md shadow-indigo-600/30">
-              <i class="fa-solid fa-file-arrow-down mr-1.5"></i> Muat Turun CSV
+            <button onclick="exportDataCSV()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition shadow flex items-center gap-1.5">
+              <i class="fa-solid fa-file-arrow-down"></i> Eksport CSV
             </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+        <!-- Carian & Penapis Kelas -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
           <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="Cari nama calon..." class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
           
           <select id="tableClassFilter" onchange="filterStudentTable()" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none">
@@ -508,13 +515,13 @@
             <option value="5S3">5 Sains 3 (5S3 - 12 Calon)</option>
           </select>
 
-          <div class="flex items-center text-xs text-slate-400 px-3 bg-slate-950 rounded-xl border border-slate-800" id="tableRecordCount">
+          <div class="flex items-center text-xs text-slate-400 px-4 bg-slate-950 rounded-xl border border-slate-800" id="tableRecordCount">
             Memaparkan 40 Calon
           </div>
         </div>
 
-        <!-- Jadual Data Murid -->
-        <div class="overflow-x-auto rounded-2xl border border-slate-800">
+        <!-- Jadual Data Murid (Lengkap & Teratur) -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 custom-scrollbar">
           <table class="w-full text-left text-xs text-slate-300">
             <thead class="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
               <tr>
@@ -545,7 +552,7 @@
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 no-print flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
           <h2 class="text-xl font-bold text-white">Cetak Slip Pelaporan Prestasi Murid</h2>
-          <p class="text-xs text-slate-400 mt-1">Pilih mana-mana calon untuk menjana format laporan rasmi A4 bersama foto murid.</p>
+          <p class="text-xs text-slate-400 mt-1">Pilih mana-mana calon daripada 40 orang murid untuk menjana format laporan rasmi A4 bersama foto calon.</p>
         </div>
         <div class="flex items-center space-x-3 w-full md:w-auto">
           <select id="printSelect" onchange="renderPrintSlip()" class="flex-grow md:flex-initial bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-64 md:w-80">
@@ -577,7 +584,7 @@
             <p><span class="font-bold text-slate-600">NAMA CALON:</span> <span id="p-name" class="font-extrabold text-slate-900 text-sm uppercase">AFIF HAFIY BIN MOHD AFIQ</span></p>
             <p><span class="font-bold text-slate-600">TINGKATAN:</span> <span id="p-class" class="font-bold text-slate-900">5S1</span></p>
             <p><span class="font-bold text-slate-600">TAHUN PEPERIKSAAN:</span> <span class="font-bold">SPM 2026</span></p>
-            <p><span class="font-bold text-slate-600">SYARAT LAYAK SIJIL SPM:</span> <span id="p-cert-status" class="font-black text-emerald-700">LAYAK</span></p>
+            <p><span class="font-bold text-slate-600">STATUS SIJIL SPM:</span> <span id="p-cert-status" class="font-black text-emerald-700">LAYAK</span></p>
           </div>
           
           <div class="w-20 h-24 border-2 border-slate-400 rounded-lg overflow-hidden bg-white flex items-center justify-center flex-shrink-0">
@@ -648,7 +655,7 @@
         </button>
       </div>
 
-      <div class="p-6 overflow-y-auto space-y-4 flex-grow" id="modalSubjectsContainer">
+      <div class="p-6 overflow-y-auto space-y-4 flex-grow custom-scrollbar" id="modalSubjectsContainer">
         <!-- Diisi dinamik -->
       </div>
 
@@ -656,7 +663,7 @@
         <button onclick="closeFullEditModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold">
           Batal
         </button>
-        <button onclick="saveFullStudentMarks()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-indigo-600/30 flex items-center gap-1.5">
+        <button onclick="saveFullStudentMarks()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5">
           <i class="fa-solid fa-floppy-disk"></i> Simpan Semua Markah &amp; Selaraskan
         </button>
       </div>
@@ -668,7 +675,7 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    // Pangkalan Data Calon (40 Orang)
+    // Pangkalan Data Lengkap 40 Calon SEMEKAR (Disahkan Lengkap)
     let students = [
       // 5S1 (9 CALON)
       { id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1", photo: "", marks: {
@@ -1128,7 +1135,7 @@
     let editingStudentId = null;
     let currentFocusFilter = 'top15';
 
-    // Instances Carta Perjalanan
+    // Instances Graf Perjalanan
     let journeySchoolChartInstance = null;
     let journeyClassChartInstance = null;
     let journeySubjectChartInstance = null;
@@ -1137,7 +1144,6 @@
     window.addEventListener("DOMContentLoaded", () => {
       populateStudentDropdowns();
       populateJourneySubjectDropdown();
-      renderDashboardCharts();
       renderStudentRadar();
       renderFocusGroups();
       initJourneyCharts();
@@ -1190,17 +1196,17 @@
     }
 
     // ==============================================================
-    // ENJIN MODUL PERJALANAN PENCAPAIAN (JOURNEY ENGINE)
+    // ENJIN MODUL PERJALANAN PENCAPAIAN (KEMAS & KONSISTEN)
     // ==============================================================
     function switchJourneyLevel(level) {
       const levels = ['school', 'class', 'subject', 'student'];
       levels.forEach(l => {
         document.getElementById(`journey-${l}-view`).classList.add('hidden');
-        document.getElementById(`btn-journey-${l}`).className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white";
+        document.getElementById(`btn-journey-${l}`).className = "px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white";
       });
 
       document.getElementById(`journey-${level}-view`).classList.remove('hidden');
-      document.getElementById(`btn-journey-${level}`).className = "px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow";
+      document.getElementById(`btn-journey-${level}`).className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow";
 
       if (level === 'school' && journeySchoolChartInstance) journeySchoolChartInstance.update();
       if (level === 'class' && journeyClassChartInstance) journeyClassChartInstance.update();
@@ -1209,7 +1215,7 @@
     }
 
     function initJourneyCharts() {
-      // 1. Carta Perjalanan Sekolah (GPS Lonjakan)
+      // 1. Perjalanan Sekolah
       const ctxSchool = document.getElementById("journeySchoolChart").getContext("2d");
       journeySchoolChartInstance = new Chart(ctxSchool, {
         type: 'line',
@@ -1243,7 +1249,7 @@
           maintainAspectRatio: false,
           scales: {
             y: {
-              reverse: true, // Nilai kecil lebih baik
+              reverse: true,
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
               ticks: { color: '#94a3b8' }
             },
@@ -1255,7 +1261,7 @@
         }
       });
 
-      // 2. Carta Perjalanan Kelas
+      // 2. Perjalanan Kelas
       const ctxClass = document.getElementById("journeyClassChart").getContext("2d");
       journeyClassChartInstance = new Chart(ctxClass, {
         type: 'line',
@@ -1304,7 +1310,7 @@
         }
       });
 
-      // 3. Carta Perjalanan Subjek
+      // 3. Perjalanan Subjek
       const ctxSubject = document.getElementById("journeySubjectChart").getContext("2d");
       journeySubjectChartInstance = new Chart(ctxSubject, {
         type: 'line',
@@ -1349,7 +1355,7 @@
         }
       });
 
-      // 4. Carta Perjalanan Individu
+      // 4. Perjalanan Individu
       const ctxStudent = document.getElementById("journeyStudentChart").getContext("2d");
       journeyStudentChartInstance = new Chart(ctxStudent, {
         type: 'line',
@@ -1414,7 +1420,6 @@
 
       document.getElementById("journeyStudentNameBadge").innerText = `${student.name} (${student.class})`;
 
-      // Hitung purata bagi setiap fasa
       const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
       const averages = phases.map(ph => {
         let sum = 0, count = 0;
@@ -1432,7 +1437,7 @@
     }
 
     // ==============================================================
-    // 4 KUMPULAN SASARAN: TOP 15, GAGAL SEJ, GAGAL BM, GAGAL KEDUA-DUA
+    // 4 KUMPULAN SASARAN & INTERVENSI (TERKINI & BEBAS BERSEPAH)
     // ==============================================================
     function renderFocusGroups() {
       const calculatedStudents = students.map(s => {
@@ -1469,13 +1474,14 @@
 
     function showFocusTab(filterType) {
       currentFocusFilter = filterType;
-      
+
+      // Kemaskini border kad aktif
       ['top15', 'failSej', 'failBm', 'failBoth'].forEach(f => {
-        const btn = document.getElementById(`btn-focus-${f}`);
+        const card = document.getElementById(`card-focus-${f}`);
         if (f === filterType) {
-          btn.className = "px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold";
+          card.className = "cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition-all shadow-md";
         } else {
-          btn.className = "px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-semibold";
+          card.className = "cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all";
         }
       });
 
@@ -1485,6 +1491,7 @@
     function renderFocusTable(calculatedStudents, filterType) {
       const tbody = document.getElementById("focusTableBody");
       const title = document.getElementById("focusTableTitle");
+      const countLabel = document.getElementById("focusTableCount");
       tbody.innerHTML = "";
 
       let displayList = [];
@@ -1502,6 +1509,8 @@
         title.innerText = "Senarai Calon Berisiko Kritikal (Gagal Sejarah & BM Serentak)";
         displayList = calculatedStudents.filter(s => s.failBoth).sort((a, b) => (a.bm + a.sej) - (b.bm + b.sej));
       }
+
+      countLabel.innerText = `${displayList.length} Rekod Calon`;
 
       displayList.forEach((s, idx) => {
         const photoHtml = s.photo 
@@ -1521,12 +1530,11 @@
           : `<span class="px-2 py-0.5 bg-rose-500/10 text-rose-400 rounded text-[10px] font-bold border border-rose-500/20">TIDAK LAYAK</span>`;
 
         const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-800/40 transition-colors cursor-pointer";
+        tr.className = "hover:bg-slate-800/50 transition-colors cursor-pointer";
         tr.onclick = () => {
           document.getElementById("studentSelect").value = s.id;
           renderStudentRadar();
           updateStudentJourneyChart();
-          window.location.hash = "#tab-dashboard";
         };
 
         tr.innerHTML = `
@@ -1602,7 +1610,7 @@
     }
 
     // ==============================================================
-    // MODAL INPUT SEMUA MATA PELAJARAN
+    // MODAL INPUT SEMUA MATA PELAJARAN (LENGKAP)
     // ==============================================================
     function openFullEditModal(studentId) {
       editingStudentId = studentId;
@@ -1621,7 +1629,7 @@
         div.innerHTML = `
           <div class="flex items-center justify-between">
             <span class="font-bold text-xs text-white">${sub}</span>
-            <span class="text-[10px] text-slate-500 font-mono">Skor Terkini: ${data.ar2 ?? 0}</span>
+            <span class="text-[10px] text-slate-400 font-mono">Skor AR2 Semasa: ${data.ar2 ?? 0}</span>
           </div>
           <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
             <div>
@@ -1703,7 +1711,7 @@
     }
 
     // ==============================================================
-    // VISUAL RADAR CHART INDIVIDU
+    // VISUAL RADAR CHART INDIVIDU (SPIDER WEB GRAPH)
     // ==============================================================
     function renderStudentRadar() {
       const currentId = parseInt(document.getElementById("studentSelect").value) || students[0].id;
@@ -1812,72 +1820,9 @@
       });
     }
 
-    // DASHBOARD OVERALL CHARTS
-    function renderDashboardCharts() {
-      new Chart(document.getElementById("gpsTrendChart").getContext("2d"), {
-        type: 'line',
-        data: {
-          labels: ['OTR1', 'AR1', 'OTR2', 'AR2'],
-          datasets: [{
-            label: 'GPS Sekolah',
-            data: [6.07, 6.39, 5.59, 5.65],
-            borderColor: '#38bdf8',
-            backgroundColor: 'rgba(56, 189, 248, 0.12)',
-            fill: true,
-            tension: 0.35,
-            borderWidth: 3.5,
-            pointBackgroundColor: '#38bdf8',
-            pointBorderColor: '#fff',
-            pointRadius: 5
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              reverse: true,
-              grid: { color: 'rgba(255, 255, 255, 0.06)' },
-              ticks: { color: '#94a3b8' }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#94a3b8', font: { weight: '600' } }
-            }
-          }
-        }
-      });
-
-      new Chart(document.getElementById("subjectGpaChart").getContext("2d"), {
-        type: 'bar',
-        data: {
-          labels: ['P.Islam', 'Kelestarian', 'BM', 'BC', 'P.Moral', 'Biologi', 'BI', 'Fizik', 'Sejarah', 'Kimia', 'PSV', 'Perniagaan', 'M.Tamb', 'Sains', 'Matematik'],
-          datasets: [{
-            label: 'GPMP AR2',
-            data: [2.89, 3.29, 3.93, 4.64, 5.31, 5.50, 5.60, 5.78, 5.98, 6.11, 6.39, 6.42, 7.00, 7.19, 7.65],
-            backgroundColor: '#818cf8',
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              reverse: true,
-              grid: { color: 'rgba(255, 255, 255, 0.06)' },
-              ticks: { color: '#94a3b8' }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: '#94a3b8', font: { size: 9, weight: '600' } }
-            }
-          }
-        }
-      });
-    }
-
-    // JADUAL PENGURUSAN DATA
+    // ==============================================================
+    // JADUAL DATA UTAMA (SEMUA 40 ORANG CALON)
+    // ==============================================================
     function renderDataTable() {
       const tbody = document.getElementById("studentTableBody");
       tbody.innerHTML = "";
@@ -1903,19 +1848,19 @@
           <td class="p-3.5 text-center font-mono font-bold">${bi}</td>
           <td class="p-3.5 text-center font-mono font-bold">${mat}</td>
           <td class="p-3.5 text-center font-mono font-bold">${sej}</td>
-          <td class="p-3.5 text-center space-x-1.5">
-            <button onclick="triggerRowUpload(${s.id})" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-semibold" title="Muat Naik Foto Calon">
+          <td class="p-3.5 text-center space-x-1.5 whitespace-nowrap">
+            <button onclick="triggerRowUpload(${s.id})" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[11px] font-semibold" title="Muat Naik Foto Calon">
               <i class="fa-solid fa-camera mr-1"></i> Foto
             </button>
             <button onclick="openFullEditModal(${s.id})" class="px-3 py-1 bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white rounded-lg transition text-[11px] font-bold">
-              <i class="fa-solid fa-layer-group mr-1"></i> Kemaskini Semua Mata Pelajaran
+              <i class="fa-solid fa-layer-group mr-1"></i> Kemaskini Semua
             </button>
           </td>
         `;
         tbody.appendChild(tr);
       });
 
-      document.getElementById("tableRecordCount").innerText = `Memaparkan ${students.length} Calon`;
+      document.getElementById("tableRecordCount").innerText = `Memaparkan ${students.length} Calon Lengkap`;
     }
 
     function fetchGoogleSheetData() {
@@ -1932,7 +1877,7 @@
             updateStudentJourneyChart();
           }
         })
-        .catch(err => console.log("Google Apps Script standby."));
+        .catch(err => console.log("Google Apps Script sedia beroperasi."));
     }
 
     function filterStudentTable() {
@@ -1974,7 +1919,9 @@
       document.body.removeChild(link);
     }
 
-    // SLIP CETAKAN
+    // ==============================================================
+    // SLIP CETAKAN RASMI (A4 FORMAT)
+    // ==============================================================
     function renderPrintSlip() {
       const selectedId = parseInt(document.getElementById("printSelect").value) || students[0].id;
       const student = students.find(s => s.id === selectedId) || students[0];
