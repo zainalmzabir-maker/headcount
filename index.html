@@ -166,7 +166,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN -->
+      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (SEKOLAH, KELAS, SUBJEK, INDIVIDU) -->
       <!-- ============================================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -237,22 +237,73 @@
           </div>
         </div>
 
-        <!-- Peringkat 2: Kelas -->
+        <!-- Peringkat 2: Kelas (DUA GRAF BERASINGAN: MARKAH PURATA & GRED PURATA KELAS) -->
         <div id="journey-class-view" class="hidden space-y-6">
-          <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-              <div>
-                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Perjalanan Purata Markah Mengikut Kelas</h4>
-                <p class="text-[11px] text-slate-400">Perbandingan trajektori markah purata antara 5S1, 5S2, dan 5S3.</p>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Graf 1: Markah Purata (%) -->
+            <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">1. Perjalanan Markah Purata (%) Mengikut Kelas</h4>
+                  <p class="text-[10px] text-slate-400">Skala 0% - 100% (Makin tinggi makin baik)</p>
+                </div>
+                <div class="flex gap-3 text-[11px] font-mono font-bold">
+                  <span class="text-blue-400">● 5S1</span>
+                  <span class="text-indigo-400">● 5S2</span>
+                  <span class="text-emerald-400">● 5S3</span>
+                </div>
               </div>
-              <div class="flex gap-4 text-xs font-mono font-bold">
-                <span class="text-blue-400">● 5S1</span>
-                <span class="text-indigo-400">● 5S2</span>
-                <span class="text-emerald-400">● 5S3</span>
+              <div class="h-64">
+                <canvas id="journeyClassChart"></canvas>
               </div>
             </div>
-            <div class="h-64">
-              <canvas id="journeyClassChart"></canvas>
+
+            <!-- Graf 2: Gred Purata Kelas (GPK) -->
+            <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">2. Perjalanan Gred Purata Kelas (GPK)</h4>
+                  <p class="text-[10px] text-amber-400">Skala 0.0 - 9.0 Terbalik (Makin rendah makin cemerlang)</p>
+                </div>
+                <div class="flex gap-3 text-[11px] font-mono font-bold">
+                  <span class="text-blue-400">● 5S1</span>
+                  <span class="text-indigo-400">● 5S2</span>
+                  <span class="text-emerald-400">● 5S3</span>
+                </div>
+              </div>
+              <div class="h-64">
+                <canvas id="journeyClassGpkChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kad Ringkasan GPK Terkini AR2 Mengikut Kelas -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-blue-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider">5 SAINS 1 (5S1)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s1">3.98</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-blue-500/10 text-blue-300 rounded-xl text-xs font-bold border border-blue-500/20">Purata 68.9%</span>
+            </div>
+
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-indigo-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">5 SAINS 2 (5S2)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s2">5.74</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-indigo-500/10 text-indigo-300 rounded-xl text-xs font-bold border border-indigo-500/20">Purata 57.2%</span>
+            </div>
+
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-emerald-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">5 SAINS 3 (5S3)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s3">6.95</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded-xl text-xs font-bold border border-emerald-500/20">Purata 41.2%</span>
             </div>
           </div>
         </div>
@@ -305,9 +356,15 @@
           </div>
 
           <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
-            <div class="flex items-center justify-between mb-2">
-              <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Graf Peningkatan Markah Purata Calon (TOV ➔ ETR)</h4>
-              <span class="text-[11px] text-slate-400 font-mono">Skala: 0% - 100%</span>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+              <div>
+                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Graf Peningkatan Markah Purata &amp; Gred Purata Individu (TOV ➔ ETR)</h4>
+                <p class="text-[11px] text-slate-400">Dwi-Garisan: Markah Purata (%) pada paksi kiri &amp; Nilai GPI (0-9 Terbalik) pada paksi kanan.</p>
+              </div>
+              <div class="flex items-center gap-4 text-xs font-mono font-bold">
+                <span class="flex items-center gap-1.5 text-indigo-400"><span class="w-3 h-1 bg-indigo-400 inline-block rounded"></span> Markah Purata (%)</span>
+                <span class="flex items-center gap-1.5 text-amber-400"><span class="w-3 h-1 bg-amber-400 inline-block rounded"></span> GPI (Nilai Rendah = Cemerlang)</span>
+              </div>
             </div>
             <div class="h-64">
               <canvas id="journeyStudentChart"></canvas>
@@ -317,7 +374,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL 2: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK (SEMUA SUBJEK) -->
+      <!-- MODUL 2: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK -->
       <!-- ============================================================== -->
       <div class="space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -367,7 +424,7 @@
           </div>
         </div>
 
-        <!-- Jadual Calon Kumpulan Terpilih (Dengan Paparan Gred A+, A, A- dsb.) -->
+        <!-- Jadual Calon Kumpulan Terpilih -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
@@ -380,7 +437,7 @@
           <div class="overflow-x-auto rounded-2xl border border-slate-800 custom-scrollbar max-h-96 overflow-y-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800" id="focusTableThead">
-                <!-- Diisi dinamik mengikut mod tab -->
+                <!-- Diisi dinamik -->
               </thead>
               <tbody id="focusTableBody" class="divide-y divide-slate-800/60 font-medium">
                 <!-- Diisi dinamik -->
@@ -434,6 +491,7 @@
                 </div>
               </div>
 
+              <!-- Butang Muat Naik Foto -->
               <label for="studentPhotoInput" class="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-full cursor-pointer shadow-lg transition-transform hover:scale-110 flex items-center justify-center border-2 border-slate-900" title="Muat Naik Foto Calon">
                 <i class="fa-solid fa-camera text-xs"></i>
               </label>
@@ -679,7 +737,7 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    // Skala Gred Rasmi SPM & Mata Kredit Nilai Gred (Gred Purata)
+    // Skala Gred Rasmi SPM & Nilai Mata Kredit Gred
     function getSpmGrade(mark) {
       if (mark === null || mark === undefined || isNaN(mark)) return { grade: "TH", point: 9 };
       const m = parseInt(mark);
@@ -1157,6 +1215,7 @@
 
     let journeySchoolChartInstance = null;
     let journeyClassChartInstance = null;
+    let journeyClassGpkChartInstance = null;
     let journeySubjectChartInstance = null;
     let journeyStudentChartInstance = null;
 
@@ -1218,7 +1277,7 @@
     }
 
     // ==============================================================
-    // ENJIN MODUL PERJALANAN PENCAPAIAN
+    // ENJIN MODUL PERJALANAN PENCAPAIAN (TERMASUK DUA GRAF KELAS)
     // ==============================================================
     function switchJourneyLevel(level) {
       const levels = ['school', 'class', 'subject', 'student'];
@@ -1231,12 +1290,16 @@
       document.getElementById(`btn-journey-${level}`).className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow";
 
       if (level === 'school' && journeySchoolChartInstance) journeySchoolChartInstance.update();
-      if (level === 'class' && journeyClassChartInstance) journeyClassChartInstance.update();
+      if (level === 'class') {
+        if (journeyClassChartInstance) journeyClassChartInstance.update();
+        if (journeyClassGpkChartInstance) journeyClassGpkChartInstance.update();
+      }
       if (level === 'subject' && journeySubjectChartInstance) updateSubjectJourneyChart();
       if (level === 'student') updateStudentJourneyChart();
     }
 
     function initJourneyCharts() {
+      // 1. Sekolah
       const ctxSchool = document.getElementById("journeySchoolChart").getContext("2d");
       journeySchoolChartInstance = new Chart(ctxSchool, {
         type: 'line',
@@ -1282,6 +1345,7 @@
         }
       });
 
+      // 2A. Kelas - Graf 1: Markah Purata (%)
       const ctxClass = document.getElementById("journeyClassChart").getContext("2d");
       journeyClassChartInstance = new Chart(ctxClass, {
         type: 'line',
@@ -1319,6 +1383,8 @@
           maintainAspectRatio: false,
           scales: {
             y: {
+              suggestedMin: 0,
+              suggestedMax: 100,
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
               ticks: { color: '#94a3b8' }
             },
@@ -1330,6 +1396,62 @@
         }
       });
 
+      // 2B. Kelas - Graf 2: Gred Purata Kelas (GPK) (Skala Terbalik)
+      const ctxClassGpk = document.getElementById("journeyClassGpkChart").getContext("2d");
+      journeyClassGpkChartInstance = new Chart(ctxClassGpk, {
+        type: 'line',
+        data: {
+          labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
+          datasets: [
+            {
+              label: '5S1 (GPK)',
+              data: [4.85, 4.52, 4.60, 4.21, 3.98, 3.45],
+              borderColor: '#3b82f6',
+              borderDash: [4, 4],
+              borderWidth: 3,
+              pointBackgroundColor: '#3b82f6',
+              tension: 0.3
+            },
+            {
+              label: '5S2 (GPK)',
+              data: [6.52, 6.15, 6.28, 5.89, 5.74, 5.15],
+              borderColor: '#6366f1',
+              borderDash: [4, 4],
+              borderWidth: 3,
+              pointBackgroundColor: '#6366f1',
+              tension: 0.3
+            },
+            {
+              label: '5S3 (GPK)',
+              data: [7.82, 7.35, 7.62, 7.10, 6.95, 6.30],
+              borderColor: '#10b981',
+              borderDash: [4, 4],
+              borderWidth: 3,
+              pointBackgroundColor: '#10b981',
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              reverse: true, // Nilai kecil lebih cemerlang
+              suggestedMin: 1,
+              suggestedMax: 9,
+              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+              ticks: { color: '#f59e0b', stepSize: 1 }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#cbd5e1', font: { weight: 'bold' } }
+            }
+          }
+        }
+      });
+
+      // 3. Subjek
       const ctxSubject = document.getElementById("journeySubjectChart").getContext("2d");
       journeySubjectChartInstance = new Chart(ctxSubject, {
         type: 'line',
@@ -1374,6 +1496,7 @@
         }
       });
 
+      // 4. Individu (DWI-PAKSI: MARKAH PURATA & GPI)
       const ctxStudent = document.getElementById("journeyStudentChart").getContext("2d");
       journeyStudentChartInstance = new Chart(ctxStudent, {
         type: 'line',
@@ -1381,27 +1504,68 @@
           labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
           datasets: [
             {
-              label: 'Markah Purata Calon',
+              label: 'Markah Purata (%)',
               data: [52, 57, 59, 63, 67, 72],
-              borderColor: '#a855f7',
-              backgroundColor: 'rgba(168, 85, 247, 0.15)',
+              borderColor: '#818cf8',
+              backgroundColor: 'rgba(129, 140, 248, 0.15)',
               fill: true,
               borderWidth: 3.5,
-              pointBackgroundColor: '#a855f7',
-              pointRadius: 6,
-              tension: 0.35
+              pointBackgroundColor: '#818cf8',
+              pointRadius: 5,
+              tension: 0.35,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Gred Purata Individu (GPI)',
+              data: [6.40, 5.80, 5.60, 5.10, 4.70, 4.20],
+              borderColor: '#f59e0b',
+              borderDash: [5, 5],
+              borderWidth: 3,
+              pointBackgroundColor: '#f59e0b',
+              pointRadius: 5,
+              tension: 0.35,
+              yAxisID: 'y1'
             }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
           scales: {
             y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
               suggestedMin: 0,
               suggestedMax: 100,
+              title: {
+                display: true,
+                text: 'Markah Purata (%)',
+                color: '#818cf8',
+                font: { weight: 'bold', size: 11 }
+              },
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
               ticks: { color: '#94a3b8' }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              reverse: true,
+              suggestedMin: 0,
+              suggestedMax: 9,
+              title: {
+                display: true,
+                text: 'GPI (Terbalik: 0 Terbilang - 9 Gagal)',
+                color: '#f59e0b',
+                font: { weight: 'bold', size: 11 }
+              },
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#f59e0b', stepSize: 1 }
             },
             x: {
               grid: { display: false },
@@ -1439,18 +1603,32 @@
       document.getElementById("journeyStudentNameBadge").innerText = `${student.name} (${student.class})`;
 
       const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
-      const averages = phases.map(ph => {
-        let sum = 0, count = 0;
+      const markAverages = [];
+      const gpiValues = [];
+
+      phases.forEach(ph => {
+        let sumMarks = 0;
+        let sumPoints = 0;
+        let count = 0;
+
         for (const sub in student.marks) {
-          if (student.marks[sub][ph] !== undefined) {
-            sum += student.marks[sub][ph];
+          const m = student.marks[sub][ph];
+          if (m !== undefined && m !== null) {
+            sumMarks += m;
+            sumPoints += getSpmGrade(m).point;
             count++;
           }
         }
-        return Math.round(sum / (count || 1));
+
+        const avg = Math.round(sumMarks / (count || 1));
+        const gpi = parseFloat((sumPoints / (count || 1)).toFixed(2));
+
+        markAverages.push(avg);
+        gpiValues.push(gpi);
       });
 
-      journeyStudentChartInstance.data.datasets[0].data = averages;
+      journeyStudentChartInstance.data.datasets[0].data = markAverages;
+      journeyStudentChartInstance.data.datasets[1].data = gpiValues;
       journeyStudentChartInstance.update();
     }
 
@@ -1479,7 +1657,6 @@
         const totalA = gradeCounts["A+"] + gradeCounts["A"] + gradeCounts["A-"];
         const totalB = gradeCounts["B+"] + gradeCounts["B"];
         const totalC = gradeCounts["C+"] + gradeCounts["C"];
-        const totalPass = count - gradeCounts["G"];
         const avg = Math.round(totalMarks / (count || 1));
         const gpi = (totalPoints / (count || 1)).toFixed(2);
 
@@ -1543,27 +1720,25 @@
         title.innerText = "Senarai Murid Potensi Terbaik (Analisis Semua Mata Pelajaran AR2)";
         document.getElementById("focusTableSubtitle").innerText = "Disusun mengikut bilangan Gred A (A+, A, A-) & Gred Purata Individu (GPI).";
         
-        // Disusun mengikut bilangan gred A terbanyak, diikuti purata markah
         displayList = [...calculatedStudents].sort((a, b) => {
           if (b.totalA !== a.totalA) return b.totalA - a.totalA;
           if (parseFloat(a.gpi) !== parseFloat(b.gpi)) return parseFloat(a.gpi) - parseFloat(b.gpi);
           return b.avgAR2 - a.avgAR2;
         }).slice(0, 15);
 
-        // Header Khusus Tab Potensi Terbaik dengan Taburan Gred A+, A, A- dsb.
         thead.innerHTML = `
           <tr>
             <th class="p-3">Ked</th>
             <th class="p-3">Foto</th>
             <th class="p-3">Nama Calon</th>
             <th class="p-3">Kelas</th>
-            <th class="p-3 text-center">Jumlah Subjek</th>
-            <th class="p-3 text-center bg-emerald-950/40 text-emerald-300">Ringkasan Gred A [A+, A, A-]</th>
+            <th class="p-3 text-center">Jumlah MP</th>
+            <th class="p-3 text-center bg-emerald-950/40 text-emerald-300">Gred A [A+, A, A-]</th>
             <th class="p-3 text-center">Gred B [B+, B]</th>
             <th class="p-3 text-center">Gred C [C+, C]</th>
             <th class="p-3 text-center">Gred D / E</th>
             <th class="p-3 text-center bg-rose-950/40 text-rose-300">Gred G</th>
-            <th class="p-3 text-center">Purata</th>
+            <th class="p-3 text-center">Purata (%)</th>
             <th class="p-3 text-center font-bold text-amber-400">GPI</th>
           </tr>
         `;
@@ -1606,7 +1781,6 @@
         });
 
       } else {
-        // Paparan untuk Tab Gagal Sejarah, Gagal BM, atau Gagal Kedua-dua
         if (filterType === 'failSej') {
           title.innerText = "Senarai Calon Belum Capai Tahap Lulus Sejarah (< 40 Markah)";
           document.getElementById("focusTableSubtitle").innerText = "Fokus intervensi penguasaan mata pelajaran Sejarah untuk melayakkan calon mendapat sijil SPM.";
