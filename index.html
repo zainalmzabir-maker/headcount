@@ -444,7 +444,7 @@
 
   </main>
 
-  <!-- MODAL EDIT MARKAH SEMUA MATA PELAJARAN -->
+  <!-- MODAL EDIT MARKAH -->
   <div id="fullEditModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
       <div class="p-5 border-b border-slate-800 flex items-center justify-between">
@@ -466,7 +466,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT UTAMA (OPTIMIZED & LIGHTWEIGHT) -->
+  <!-- SCRIPT UTAMA -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
@@ -547,25 +547,6 @@
       "Bahasa Cina": { calon: 11, otr1: 4.73, ar1: 5.73, otr2: 4.36, ar2: 4.64 },
       "Tasawwur Islam": { calon: 20, otr1: 3.35, ar1: 6.25, otr2: 3.55, ar2: 5.05 }
     };
-
-    let radarChartInstance = null;
-    let currentUploadTargetStudentId = null;
-    let editingStudentId = null;
-    let currentFocusFilter = 'top15';
-    let currentJourneyLevel = 'school';
-    let journeyChartInstance = null;
-
-    window.addEventListener("DOMContentLoaded", () => {
-      populateStudentDropdowns();
-      populateSingleSubjectDropdown();
-      renderStudentRadar();
-      renderFocusGroups();
-      setJourneyTab('school');
-      renderSubjectTable();
-      renderDataTable();
-      renderPrintSlip();
-      fetchGoogleSheetData();
-    });
   </script>
 </body>
 </html>
