@@ -166,7 +166,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (DENGAN DUA GRAF KELAS)      -->
+      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (SEKOLAH, KELAS, SUBJEK, INDIVIDU) -->
       <!-- ============================================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -274,6 +274,36 @@
               </div>
             </div>
           </div>
+
+          <!-- Kad Ringkasan GPK Terkini AR2 Mengikut Kelas -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-blue-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider">5 SAINS 1 (5S1)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s1">3.98</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-blue-500/10 text-blue-300 rounded-xl text-xs font-bold border border-blue-500/20">Purata 68.9%</span>
+            </div>
+
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-indigo-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">5 SAINS 2 (5S2)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s2">5.74</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-indigo-500/10 text-indigo-300 rounded-xl text-xs font-bold border border-indigo-500/20">Purata 57.2%</span>
+            </div>
+
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-emerald-500/30 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">5 SAINS 3 (5S3)</span>
+                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s3">6.95</p>
+                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
+              </div>
+              <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded-xl text-xs font-bold border border-emerald-500/20">Purata 41.2%</span>
+            </div>
+          </div>
         </div>
 
         <!-- Peringkat 3: Mata Pelajaran -->
@@ -342,22 +372,41 @@
       </div>
 
       <!-- ========================================================================= -->
-      <!-- MODUL BAHARU: MATRIKS MARKAH MENGIKUT MATA PELAJARAN & JENIS PEPERIKSAAN -->
-      <!-- ============================================================== -->
+      <!-- MODUL: PAPARAN MARKAH MURID MENGIKUT MATA PELAJARAN (MOD SUBJEK & MOD MATRIX) -->
+      <!-- ========================================================================= -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-5">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
             <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest font-mono">
-              <i class="fa-solid fa-table-cells"></i>
-              <span>Matriks Keputusan Mengikut Peperiksaan</span>
+              <i class="fa-solid fa-list-ol"></i>
+              <span>Senarai Markah Mengikut Mata Pelajaran</span>
             </div>
-            <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Paparan Markah Murid Mengikut Mata Pelajaran</h3>
-            <p class="text-xs text-slate-400 mt-0.5">Pilih jenis peperiksaan untuk memaparkan markah dan gred kesemua mata pelajaran bagi setiap calon.</p>
+            <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Paparan Markah Calon Mengikut Mata Pelajaran</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Lihat senarai markah penuh mana-mana mata pelajaran (TOV, OTR1, AR1, OTR2, AR2, ETR) atau tukar ke mod matriks peperiksaan.</p>
           </div>
 
-          <!-- Pemilih Jenis Peperiksaan & Kelas -->
+          <!-- Pilihan Mod & Kawalan Penapis -->
           <div class="flex flex-wrap items-center gap-2.5">
-            <div class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+            <!-- Suis Mod Paparan -->
+            <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 space-x-1">
+              <button onclick="setExamViewMode('bySubject')" id="btn-mode-bySubject" class="px-3 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow">
+                <i class="fa-solid fa-book-bookmark mr-1"></i>Mod Subjek
+              </button>
+              <button onclick="setExamViewMode('matrix')" id="btn-mode-matrix" class="px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white">
+                <i class="fa-solid fa-table-cells mr-1"></i>Mod Matriks
+              </button>
+            </div>
+
+            <!-- Pemilih Subjek (Hanya aktif dalam Mod Subjek) -->
+            <div id="subjectPickerWrapper" class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+              <label class="text-[11px] font-bold text-slate-400">SUBJEK:</label>
+              <select id="singleSubjectSelect" onchange="renderExamMatrixTable()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded-lg px-2.5 py-1 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+                <!-- Diisi dinamik -->
+              </select>
+            </div>
+
+            <!-- Pemilih Peperiksaan (Hanya aktif dalam Mod Matriks) -->
+            <div id="examPickerWrapper" class="hidden items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
               <label class="text-[11px] font-bold text-slate-400">PEPERIKSAAN:</label>
               <select id="examPhaseSelect" onchange="renderExamMatrixTable()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded-lg px-2.5 py-1 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
                 <option value="ar2" selected>AR2 (Terkini)</option>
@@ -369,6 +418,7 @@
               </select>
             </div>
 
+            <!-- Penapis Kelas -->
             <div class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
               <label class="text-[11px] font-bold text-slate-400">KELAS:</label>
               <select id="examMatrixClassFilter" onchange="renderExamMatrixTable()" class="bg-slate-900 border border-slate-700 text-slate-200 font-semibold rounded-lg px-2.5 py-1 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
@@ -379,39 +429,30 @@
               </select>
             </div>
 
-            <input type="text" id="examMatrixSearch" onkeyup="renderExamMatrixTable()" placeholder="Cari nama murid..." class="bg-slate-950 border border-slate-800 text-xs px-3 py-2 rounded-xl text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500 w-40">
+            <input type="text" id="examMatrixSearch" onkeyup="renderExamMatrixTable()" placeholder="Cari calon..." class="bg-slate-950 border border-slate-800 text-xs px-3 py-2 rounded-xl text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500 w-36">
           </div>
         </div>
 
-        <!-- Petunjuk Warna Gred -->
-        <div class="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 font-mono">
-          <span class="font-bold text-slate-300">Skala Gred:</span>
-          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-emerald-500/80 inline-block"></span> A (70-100)</span>
-          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-blue-500/80 inline-block"></span> B (60-69)</span>
-          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-amber-500/80 inline-block"></span> C (50-59)</span>
-          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-orange-500/80 inline-block"></span> D/E (40-49)</span>
-          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-rose-500/80 inline-block"></span> G (&lt;40)</span>
+        <!-- Petunjuk Warna Gred & Status Subjek -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] text-slate-400 font-mono">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="font-bold text-slate-300">Skala Gred:</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-emerald-500/80 inline-block"></span> A (70-100)</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-blue-500/80 inline-block"></span> B (60-69)</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-amber-500/80 inline-block"></span> C (50-59)</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-orange-500/80 inline-block"></span> D/E (40-49)</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-rose-500/80 inline-block"></span> G (&lt;40)</span>
+          </div>
+          <span id="examTableSubtitleBadge" class="text-indigo-300 font-bold bg-indigo-950/60 px-3 py-1 rounded-xl border border-indigo-500/20">
+            Subjek: Bahasa Melayu
+          </span>
         </div>
 
-        <!-- Jadual Matriks Penuh Mengikut Mata Pelajaran -->
+        <!-- Jadual Markah Dinamik -->
         <div class="overflow-x-auto rounded-2xl border border-slate-800 custom-scrollbar max-h-[500px] overflow-y-auto">
           <table class="w-full text-left text-xs text-slate-300 border-collapse">
-            <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800 z-10 whitespace-nowrap">
-              <tr>
-                <th class="p-3 bg-slate-950">Bil</th>
-                <th class="p-3 bg-slate-950">Nama Calon</th>
-                <th class="p-3 bg-slate-950">Kelas</th>
-                <th class="p-3 text-center bg-slate-950">BM</th>
-                <th class="p-3 text-center bg-slate-950">BI</th>
-                <th class="p-3 text-center bg-slate-950">MAT</th>
-                <th class="p-3 text-center bg-slate-950">SEJ</th>
-                <th class="p-3 text-center bg-slate-950">PI / PM</th>
-                <th class="p-3 text-center bg-slate-950">SN / FIZ / BIO / KIM</th>
-                <th class="p-3 text-center bg-slate-950">ELEKTIF 1</th>
-                <th class="p-3 text-center bg-slate-950">ELEKTIF 2</th>
-                <th class="p-3 text-center bg-slate-950 font-bold text-white">Purata</th>
-                <th class="p-3 text-center bg-slate-950 font-bold text-amber-400">GPI</th>
-              </tr>
+            <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800 z-10 whitespace-nowrap" id="examMatrixThead">
+              <!-- Diisi dinamik mengikut mod paparan -->
             </thead>
             <tbody id="examMatrixTableBody" class="divide-y divide-slate-800/60 font-medium">
               <!-- Diisi dinamik -->
@@ -432,6 +473,7 @@
           <span class="self-start sm:self-auto px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-mono font-semibold">Berdasarkan AR2</span>
         </div>
 
+        <!-- 4 Kad Navigasi Pilihan -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div onclick="showFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition-all shadow-md">
             <div class="flex items-center justify-between text-amber-400 text-xs font-bold uppercase">
@@ -470,6 +512,7 @@
           </div>
         </div>
 
+        <!-- Jadual Calon Kumpulan Terpilih -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
@@ -571,6 +614,7 @@
             </div>
           </div>
 
+          <!-- Radar Prestasi Calon (Spider Web Graph) -->
           <div class="lg:col-span-8 flex flex-col items-center justify-center p-2">
             <div class="w-full max-w-lg aspect-square">
               <canvas id="studentRadarChart"></canvas>
@@ -1255,6 +1299,7 @@
     let currentUploadTargetStudentId = null;
     let editingStudentId = null;
     let currentFocusFilter = 'top15';
+    let currentExamViewMode = 'bySubject'; // 'bySubject' atau 'matrix'
 
     let journeySchoolChartInstance = null;
     let journeyClassChartInstance = null;
@@ -1265,6 +1310,7 @@
     window.addEventListener("DOMContentLoaded", () => {
       populateStudentDropdowns();
       populateJourneySubjectDropdown();
+      populateSingleSubjectDropdown();
       renderStudentRadar();
       renderFocusGroups();
       initJourneyCharts();
@@ -1320,17 +1366,50 @@
       });
     }
 
+    function populateSingleSubjectDropdown() {
+      const select = document.getElementById("singleSubjectSelect");
+      select.innerHTML = "";
+      Object.keys(subjectAnalysisData).forEach(sub => {
+        select.add(new Option(sub, sub));
+      });
+    }
+
     // ==============================================================
-    // MODUL BAHARU: MATRIKS MARKAH MENGIKUT MATA PELAJARAN & PEPERIKSAAN
+    // KAWALAN MOD: MOD SUBJEK VS MOD MATRIKS
+    // ==============================================================
+    function setExamViewMode(mode) {
+      currentExamViewMode = mode;
+      const btnSubject = document.getElementById("btn-mode-bySubject");
+      const btnMatrix = document.getElementById("btn-mode-matrix");
+      const subjectWrapper = document.getElementById("subjectPickerWrapper");
+      const examWrapper = document.getElementById("examPickerWrapper");
+
+      if (mode === 'bySubject') {
+        btnSubject.className = "px-3 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow";
+        btnMatrix.className = "px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white";
+        subjectWrapper.classList.remove("hidden");
+        examWrapper.classList.add("hidden");
+      } else {
+        btnMatrix.className = "px-3 py-1 rounded-lg text-xs font-bold transition bg-indigo-600 text-white shadow";
+        btnSubject.className = "px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-400 hover:text-white";
+        subjectWrapper.classList.add("hidden");
+        examWrapper.classList.remove("hidden");
+      }
+
+      renderExamMatrixTable();
+    }
+
+    // ==============================================================
+    // ENJIN JADUAL KEPUTUSAN (MENGIKUT MATA PELAJARAN / MATRIKS)
     // ==============================================================
     function renderExamMatrixTable() {
-      const phase = document.getElementById("examPhaseSelect").value;
       const classFilter = document.getElementById("examMatrixClassFilter").value;
       const term = (document.getElementById("examMatrixSearch").value || "").toLowerCase();
+      const thead = document.getElementById("examMatrixThead");
       const tbody = document.getElementById("examMatrixTableBody");
+      const badge = document.getElementById("examTableSubtitleBadge");
       tbody.innerHTML = "";
 
-      // Format sel markah dengan warna gred
       function formatCell(mark) {
         if (mark === undefined || mark === null || isNaN(mark)) {
           return `<td class="p-3 text-center text-slate-600 font-mono">-</td>`;
@@ -1346,108 +1425,171 @@
         return `<td class="p-3 text-center font-mono ${colorClass}" title="${gr.grade}">${mark} <span class="text-[9px] opacity-70">(${gr.grade})</span></td>`;
       }
 
-      const filtered = students.filter(s => {
-        const matchClass = (classFilter === "ALL" || s.class === classFilter);
-        const matchName = s.name.toLowerCase().includes(term);
-        return matchClass && matchName;
-      });
+      // MOD 1: MENGIKUT MATA PELAJARAN PILIHAN
+      if (currentExamViewMode === 'bySubject') {
+        const selectedSub = document.getElementById("singleSubjectSelect").value;
+        badge.innerText = `Mata Pelajaran: ${selectedSub}`;
 
-      filtered.forEach((s, idx) => {
-        const bm = s.marks["Bahasa Melayu"]?.[phase];
-        const bi = s.marks["Bahasa Inggeris"]?.[phase];
-        const mat = s.marks["Matematik"]?.[phase];
-        const sej = s.marks["Sejarah"]?.[phase];
-        
-        // Agama / Moral
-        const pi = s.marks["Pendidikan Islam"]?.[phase];
-        const pm = s.marks["Pendidikan Moral"]?.[phase];
-        const relMark = pi !== undefined ? pi : pm;
-
-        // Sains / Fizik / Kimia / Bio
-        const sc = s.marks["Sains"]?.[phase];
-        const fiz = s.marks["Fizik"]?.[phase];
-        const bio = s.marks["Biologi"]?.[phase];
-        const kim = s.marks["Kimia"]?.[phase];
-        const scienceMark = sc !== undefined ? sc : (fiz !== undefined ? fiz : (bio !== undefined ? bio : kim));
-
-        // Elektif
-        const mt = s.marks["Matematik Tambahan"]?.[phase];
-        const psv = s.marks["Pendidikan Seni Visual"]?.[phase];
-        const pn = s.marks["Perniagaan"]?.[phase];
-        const bc = s.marks["Bahasa Cina"]?.[phase];
-        const tas = s.marks["Tasawwur Islam"]?.[phase];
-        const kel = s.marks["Asas Kelestarian"]?.[phase];
-
-        const electives = [];
-        if (mt !== undefined) electives.push({ sub: "M.Tamb", mark: mt });
-        if (psv !== undefined) electives.push({ sub: "PSV", mark: psv });
-        if (pn !== undefined) electives.push({ sub: "Pern", mark: pn });
-        if (bc !== undefined) electives.push({ sub: "BC", mark: bc });
-        if (tas !== undefined) electives.push({ sub: "Tasawwur", mark: tas });
-        if (kel !== undefined) electives.push({ sub: "Kelestarian", mark: kel });
-
-        // Hitung purata & GPI bagi fasa yang dipilih
-        let sumMarks = 0;
-        let sumPoints = 0;
-        let totalSubjects = 0;
-
-        for (const sub in s.marks) {
-          const val = s.marks[sub][phase];
-          if (val !== undefined && val !== null) {
-            sumMarks += val;
-            sumPoints += getSpmGrade(val).point;
-            totalSubjects++;
-          }
-        }
-
-        const avg = Math.round(sumMarks / (totalSubjects || 1));
-        const gpi = (sumPoints / (totalSubjects || 1)).toFixed(2);
-
-        const tr = document.createElement("tr");
-        tr.className = "hover:bg-slate-800/40 transition-colors";
-        tr.innerHTML = `
-          <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
-          <td class="p-3 font-bold text-white whitespace-nowrap cursor-pointer hover:text-indigo-400" onclick="syncStudentSelection(${s.id}); window.location.hash='#tab-dashboard';">${s.name}</td>
-          <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
-          ${formatCell(bm)}
-          ${formatCell(bi)}
-          ${formatCell(mat)}
-          ${formatCell(sej)}
-          ${formatCell(relMark)}
-          ${formatCell(scienceMark)}
-          ${formatCell(electives[0]?.mark)}
-          ${formatCell(electives[1]?.mark)}
-          <td class="p-3 text-center font-bold text-white bg-slate-950/40">${avg}%</td>
-          <td class="p-3 text-center font-mono font-black text-amber-400 bg-slate-950/40">${gpi}</td>
+        thead.innerHTML = `
+          <tr>
+            <th class="p-3 bg-slate-950">Bil</th>
+            <th class="p-3 bg-slate-950">Nama Calon</th>
+            <th class="p-3 bg-slate-950">Kelas</th>
+            <th class="p-3 text-center bg-slate-950">TOV</th>
+            <th class="p-3 text-center bg-slate-950">OTR1</th>
+            <th class="p-3 text-center bg-slate-950">AR1</th>
+            <th class="p-3 text-center bg-slate-950">OTR2</th>
+            <th class="p-3 text-center bg-indigo-950/40 text-indigo-300">AR2 (Terkini)</th>
+            <th class="p-3 text-center bg-amber-950/30 text-amber-300">ETR (Sasaran)</th>
+            <th class="p-3 text-center bg-slate-950">Beza (AR2 - OTR2)</th>
+            <th class="p-3 text-center bg-slate-950">Status Kelulusan</th>
+          </tr>
         `;
-        tbody.appendChild(tr);
-      });
-    }
 
-    // ==============================================================
-    // ENJIN MODUL PERJALANAN PENCAPAIAN
-    // ==============================================================
-    function switchJourneyLevel(level) {
-      const levels = ['school', 'class', 'subject', 'student'];
-      levels.forEach(l => {
-        document.getElementById(`journey-${l}-view`).classList.add('hidden');
-        document.getElementById(`btn-journey-${l}`).className = "px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white";
-      });
+        // Ambil murid yang mengambil subjek tersebut
+        const subStudents = students.filter(s => {
+          const hasSubject = s.marks[selectedSub] !== undefined;
+          const matchClass = (classFilter === "ALL" || s.class === classFilter);
+          const matchName = s.name.toLowerCase().includes(term);
+          return hasSubject && matchClass && matchName;
+        });
 
-      document.getElementById(`journey-${level}-view`).classList.remove('hidden');
-      document.getElementById(`btn-journey-${level}`).className = "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow";
+        // Susun mengikut markah AR2 tertinggi
+        subStudents.sort((a, b) => (b.marks[selectedSub]?.ar2 || 0) - (a.marks[selectedSub]?.ar2 || 0));
 
-      if (level === 'school' && journeySchoolChartInstance) journeySchoolChartInstance.update();
-      if (level === 'class') {
-        if (journeyClassChartInstance) journeyClassChartInstance.update();
-        if (journeyClassGpkChartInstance) journeyClassGpkChartInstance.update();
+        subStudents.forEach((s, idx) => {
+          const d = s.marks[selectedSub] || {};
+          const ar2 = d.ar2 ?? 0;
+          const otr2 = d.otr2 ?? 0;
+          const diff = ar2 - otr2;
+          const diffHtml = diff >= 0 
+            ? `<span class="text-emerald-400 font-mono font-bold">+${diff}</span>` 
+            : `<span class="text-rose-400 font-mono font-bold">${diff}</span>`;
+
+          const passBadge = ar2 >= 40 
+            ? `<span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">LULUS</span>` 
+            : `<span class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 text-[10px] font-bold border border-rose-500/20">GAGAL</span>`;
+
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-800/40 transition-colors";
+          tr.innerHTML = `
+            <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+            <td class="p-3 font-bold text-white whitespace-nowrap cursor-pointer hover:text-indigo-400" onclick="syncStudentSelection(${s.id}); window.location.hash='#tab-dashboard';">${s.name}</td>
+            <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+            ${formatCell(d.tov)}
+            ${formatCell(d.otr1)}
+            ${formatCell(d.ar1)}
+            ${formatCell(d.otr2)}
+            ${formatCell(d.ar2)}
+            ${formatCell(d.etr)}
+            <td class="p-3 text-center">${diffHtml}</td>
+            <td class="p-3 text-center">${passBadge}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } else {
+        // MOD 2: MOD MATRIKS SATU PEPERIKSAAN (SEMUA SUBJEK)
+        const phase = document.getElementById("examPhaseSelect").value;
+        badge.innerText = `Peperiksaan: ${phase.toUpperCase()}`;
+
+        thead.innerHTML = `
+          <tr>
+            <th class="p-3 bg-slate-950">Bil</th>
+            <th class="p-3 bg-slate-950">Nama Calon</th>
+            <th class="p-3 bg-slate-950">Kelas</th>
+            <th class="p-3 text-center bg-slate-950">BM</th>
+            <th class="p-3 text-center bg-slate-950">BI</th>
+            <th class="p-3 text-center bg-slate-950">MAT</th>
+            <th class="p-3 text-center bg-slate-950">SEJ</th>
+            <th class="p-3 text-center bg-slate-950">PI / PM</th>
+            <th class="p-3 text-center bg-slate-950">SN / FIZ / BIO / KIM</th>
+            <th class="p-3 text-center bg-slate-950">ELEKTIF 1</th>
+            <th class="p-3 text-center bg-slate-950">ELEKTIF 2</th>
+            <th class="p-3 text-center bg-slate-950 font-bold text-white">Purata</th>
+            <th class="p-3 text-center bg-slate-950 font-bold text-amber-400">GPI</th>
+          </tr>
+        `;
+
+        const filtered = students.filter(s => {
+          const matchClass = (classFilter === "ALL" || s.class === classFilter);
+          const matchName = s.name.toLowerCase().includes(term);
+          return matchClass && matchName;
+        });
+
+        filtered.forEach((s, idx) => {
+          const bm = s.marks["Bahasa Melayu"]?.[phase];
+          const bi = s.marks["Bahasa Inggeris"]?.[phase];
+          const mat = s.marks["Matematik"]?.[phase];
+          const sej = s.marks["Sejarah"]?.[phase];
+          
+          const pi = s.marks["Pendidikan Islam"]?.[phase];
+          const pm = s.marks["Pendidikan Moral"]?.[phase];
+          const relMark = pi !== undefined ? pi : pm;
+
+          const sc = s.marks["Sains"]?.[phase];
+          const fiz = s.marks["Fizik"]?.[phase];
+          const bio = s.marks["Biologi"]?.[phase];
+          const kim = s.marks["Kimia"]?.[phase];
+          const scienceMark = sc !== undefined ? sc : (fiz !== undefined ? fiz : (bio !== undefined ? bio : kim));
+
+          const mt = s.marks["Matematik Tambahan"]?.[phase];
+          const psv = s.marks["Pendidikan Seni Visual"]?.[phase];
+          const pn = s.marks["Perniagaan"]?.[phase];
+          const bc = s.marks["Bahasa Cina"]?.[phase];
+          const tas = s.marks["Tasawwur Islam"]?.[phase];
+          const kel = s.marks["Asas Kelestarian"]?.[phase];
+
+          const electives = [];
+          if (mt !== undefined) electives.push(mt);
+          if (psv !== undefined) electives.push(psv);
+          if (pn !== undefined) electives.push(pn);
+          if (bc !== undefined) electives.push(bc);
+          if (tas !== undefined) electives.push(tas);
+          if (kel !== undefined) electives.push(kel);
+
+          let sumMarks = 0;
+          let sumPoints = 0;
+          let totalSubjects = 0;
+
+          for (const sub in s.marks) {
+            const val = s.marks[sub][phase];
+            if (val !== undefined && val !== null) {
+              sumMarks += val;
+              sumPoints += getSpmGrade(val).point;
+              totalSubjects++;
+            }
+          }
+
+          const avg = Math.round(sumMarks / (totalSubjects || 1));
+          const gpi = (sumPoints / (totalSubjects || 1)).toFixed(2);
+
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-800/40 transition-colors";
+          tr.innerHTML = `
+            <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+            <td class="p-3 font-bold text-white whitespace-nowrap cursor-pointer hover:text-indigo-400" onclick="syncStudentSelection(${s.id}); window.location.hash='#tab-dashboard';">${s.name}</td>
+            <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+            ${formatCell(bm)}
+            ${formatCell(bi)}
+            ${formatCell(mat)}
+            ${formatCell(sej)}
+            ${formatCell(relMark)}
+            ${formatCell(scienceMark)}
+            ${formatCell(electives[0])}
+            ${formatCell(electives[1])}
+            <td class="p-3 text-center font-bold text-white bg-slate-950/40">${avg}%</td>
+            <td class="p-3 text-center font-mono font-black text-amber-400 bg-slate-950/40">${gpi}</td>
+          `;
+          tbody.appendChild(tr);
+        });
       }
-      if (level === 'subject' && journeySubjectChartInstance) updateSubjectJourneyChart();
-      if (level === 'student') updateStudentJourneyChart();
     }
 
+    // ==============================================================
+    // INISIALISASI CARTA PERJALANAN
+    // ==============================================================
     function initJourneyCharts() {
-      // 1. Sekolah
       const ctxSchool = document.getElementById("journeySchoolChart").getContext("2d");
       journeySchoolChartInstance = new Chart(ctxSchool, {
         type: 'line',
@@ -1493,7 +1635,6 @@
         }
       });
 
-      // 2A. Kelas - Graf 1: Markah Purata (%)
       const ctxClass = document.getElementById("journeyClassChart").getContext("2d");
       journeyClassChartInstance = new Chart(ctxClass, {
         type: 'line',
@@ -1544,7 +1685,6 @@
         }
       });
 
-      // 2B. Kelas - Graf 2: Gred Purata Kelas (GPK) (Skala Terbalik)
       const ctxClassGpk = document.getElementById("journeyClassGpkChart").getContext("2d");
       journeyClassGpkChartInstance = new Chart(ctxClassGpk, {
         type: 'line',
@@ -1585,7 +1725,7 @@
           maintainAspectRatio: false,
           scales: {
             y: {
-              reverse: true, // Nilai kecil lebih cemerlang
+              reverse: true,
               suggestedMin: 1,
               suggestedMax: 9,
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
@@ -1599,7 +1739,6 @@
         }
       });
 
-      // 3. Subjek
       const ctxSubject = document.getElementById("journeySubjectChart").getContext("2d");
       journeySubjectChartInstance = new Chart(ctxSubject, {
         type: 'line',
@@ -1644,7 +1783,6 @@
         }
       });
 
-      // 4. Individu (DWI-PAKSI: MARKAH PURATA & GPI)
       const ctxStudent = document.getElementById("journeyStudentChart").getContext("2d");
       journeyStudentChartInstance = new Chart(ctxStudent, {
         type: 'line',
@@ -1781,7 +1919,7 @@
     }
 
     // =========================================================================
-    // MODUL 3: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK (SEMUA SUBJEK)
+    // MODUL 3: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK
     // =========================================================================
     function renderFocusGroups() {
       const calculatedStudents = students.map(s => {
@@ -2000,7 +2138,7 @@
     }
 
     // ==============================================================
-    // SINKRONISASI PEMILIHAN CALON ANTARA MODUL
+    // SINKRONISASI PEMILIHAN CALON
     // ==============================================================
     function syncStudentSelection(studentId) {
       const sId = parseInt(studentId);
