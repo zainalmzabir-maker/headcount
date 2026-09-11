@@ -25,8 +25,8 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- NAVBAR ATAS -->
-  <header class="bg-slate-900/95 backdrop-blur border-b border-slate-800 sticky top-0 z-50 no-print">
+  <!-- NAVBAR -->
+  <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-50 no-print">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       <div class="flex items-center space-x-3">
         <div class="h-10 w-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center p-1 shadow">
@@ -115,7 +115,104 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 1: TRAJEKTORI PENINGKATAN (TOV ➔ ETR)     -->
+      <!-- MODUL BARU: ANALISIS DAPATAN TRIVIA BERNOMBOR  -->
+      <!-- ============================================== -->
+      <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 shadow-lg space-y-6">
+        <div class="border-b border-slate-800 pb-4">
+          <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest font-mono">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Rumusan Eksekutif &amp; Analisis Pintar</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Analisis Dapatan &amp; Trivia Headcount SPM 2026</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Ringkasan analitikal prestasi semasa warga SMK Kamarul Ariffin (SEMEKAR).</p>
+        </div>
+
+        <!-- Grid Trivia Bernombor (1 hingga 8) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- 1 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">01</span>
+            <div>
+              <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider font-mono">Lonjakan GPS</span>
+              <h4 class="text-sm font-bold text-white mt-1">Peningkatan AR2 (+0.74)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">GPS AR2 mencatatkan angka <strong>5.65</strong>, melonjak ketara berbanding AR1 (6.39) dan hampir merapatkan jurang sasaran OTR2 (5.59).</p>
+          </div>
+
+          <!-- 2 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">02</span>
+            <div>
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider font-mono">Subjek Juara</span>
+              <h4 class="text-sm font-bold text-white mt-1">Pendidikan Islam (GPS 2.89)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Subjek paling cemerlang dengan seramai <strong>13 orang calon</strong> daripada 27 peserta berjaya meraih gred A+ dan A.</p>
+          </div>
+
+          <!-- 3 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">03</span>
+            <div>
+              <span class="text-[10px] text-rose-400 font-bold uppercase tracking-wider font-mono">Cabaran Utama</span>
+              <h4 class="text-sm font-bold text-white mt-1">Matematik (GPS 7.65)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Menjadi tumpuan gerak gempur utama sekolah kerana seramai <strong>28 daripada 40 calon</strong> masih memerlukan bimbingan lulus.</p>
+          </div>
+
+          <!-- 4 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">04</span>
+            <div>
+              <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider font-mono">Benteng Teras</span>
+              <h4 class="text-sm font-bold text-white mt-1">Bahasa Melayu (GPS 3.93)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Mengekalkan prestasi kukuh di bawah paras GPS 4.0 di mana **17 calon** berada pada kelompok gred cemerlang tinggi.</p>
+          </div>
+
+          <!-- 5 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">05</span>
+            <div>
+              <span class="text-[10px] text-red-400 font-bold uppercase tracking-wider font-mono">Zon Kritikal Sijil</span>
+              <h4 class="text-sm font-bold text-white mt-1">3 Calon Berisiko</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Tepat <strong>3 orang murid</strong> dikesan gagal serentak dalam subjek BM dan Sejarah, memerlukan intervensi pemulihan segera.</p>
+          </div>
+
+          <!-- 6 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">06</span>
+            <div>
+              <span class="text-[10px] text-teal-400 font-bold uppercase tracking-wider font-mono">Potensi Elektif</span>
+              <h4 class="text-sm font-bold text-white mt-1">Asas Kelestarian (GPS 3.29)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Mencatatkan rekod 100% lulus bersih tanpa sebarang Gred G, membuktikan potensi skor cemerlang elektif.</p>
+          </div>
+
+          <!-- 7 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">07</span>
+            <div>
+              <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider font-mono">Taburan Kelas</span>
+              <h4 class="text-sm font-bold text-white mt-1">Majoriti di 5S2 (19 Calon)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Kelas 5 Sains 2 menampung beban calon terbesar, memerlukan strategi pembahagian kumpulan bimbingan akademik.</p>
+          </div>
+
+          <!-- 8 -->
+          <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 relative overflow-hidden flex flex-col justify-between">
+            <span class="absolute top-2 right-3 text-3xl font-black text-slate-800 score-font select-none">08</span>
+            <div>
+              <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider font-mono">Sasaran Akhir</span>
+              <h4 class="text-sm font-bold text-white mt-1">Jurang ETR (0.80 Mata)</h4>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Sekolah memerlukan pecutan akhir sebanyak **0.80 mata** lagi untuk mencapai GPS sasaran ETR pada angka **4.85**.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- MODUL: TRAJEKTORI PENINGKATAN (TOV ➔ ETR)     -->
       <!-- ============================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -164,7 +261,7 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 2: MATRIKS MARKAH MATA PELAJARAN         -->
+      <!-- MODUL: SENARAI MARKAH MENGIKUT MATA PELAJARAN  -->
       <!-- ============================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -200,7 +297,7 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 3: ANALISIS KUMPULAN SASARAN & INTERVENSI  -->
+      <!-- MODUL: ANALISIS KUMPULAN SASARAN & INTERVENSI  -->
       <!-- ============================================== -->
       <div class="space-y-4">
         <h3 class="text-lg sm:text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
@@ -222,7 +319,7 @@
           </div>
           <div onclick="setFocusTab('failBoth')" id="card-focus-failBoth" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-red-500">
             <div class="flex justify-between text-red-400 text-xs font-bold uppercase"><span>Gagal BM & Sejarah</span><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
+            <div class="text-2xl font-black text-white mt-2" id="count-failBoth">3 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Kritikal Sijil SPM</p>
           </div>
         </div>
@@ -242,7 +339,7 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 4: PROFIL REPUTASI & SPIDER WEB RADAR INDIVIDU -->
+      <!-- MODUL: PROFIL REPUTASI & SPIDER WEB RADAR INDIVIDU -->
       <!-- ============================================== -->
       <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 relative overflow-hidden shadow">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
@@ -466,7 +563,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT UTAMA (ROBUST & BULLETPROOF) -->
+  <!-- SCRIPT UTAMA -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
@@ -547,476 +644,6 @@
       "Bahasa Cina": { calon: 11, otr1: 4.73, ar1: 5.73, otr2: 4.36, ar2: 4.64 },
       "Tasawwur Islam": { calon: 20, otr1: 3.35, ar1: 6.25, otr2: 3.55, ar2: 5.05 }
     };
-
-    let radarChartInstance = null;
-    let journeyChartInstance = null;
-    let currentFocusFilter = 'top15';
-
-    window.addEventListener("DOMContentLoaded", () => {
-      populateStudentDropdowns();
-      populateSingleSubjectDropdown();
-      renderStudentRadar();
-      renderFocusGroups();
-      setJourneyTab('school');
-      renderSubjectTable();
-      renderDataTable();
-      renderPrintSlip();
-    });
-
-    function switchTab(tab) {
-      ['dashboard', 'data-entry', 'cetakan'].forEach(t => {
-        const el = document.getElementById(`tab-${t}`);
-        const nav = document.getElementById(`nav-${t}`);
-        if (el) el.classList.add('hidden');
-        if (nav) nav.className = "px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800";
-      });
-      const activeEl = document.getElementById(`tab-${tab}`);
-      const activeNav = document.getElementById(`nav-${tab}`);
-      if (activeEl) activeEl.classList.remove('hidden');
-      if (activeNav) activeNav.className = "px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow";
-    }
-
-    function populateStudentDropdowns() {
-      const studentSelect = document.getElementById("studentSelect");
-      const printSelect = document.getElementById("printSelect");
-      if (studentSelect) studentSelect.innerHTML = "";
-      if (printSelect) printSelect.innerHTML = "";
-
-      students.forEach(s => {
-        if (studentSelect) studentSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
-        if (printSelect) printSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
-      });
-    }
-
-    function populateSingleSubjectDropdown() {
-      const select = document.getElementById("singleSubjectSelect");
-      if (!select) return;
-      select.innerHTML = "";
-      Object.keys(subjectAnalysisData).forEach(sub => {
-        select.add(new Option(sub, sub));
-      });
-    }
-
-    function setJourneyTab(level) {
-      ['school', 'class', 'subject', 'student'].forEach(l => {
-        const btn = document.getElementById(`jtab-${l}`);
-        if (btn) btn.className = (l === level) ? "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow" : "px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white";
-      });
-
-      const bar = document.getElementById("journey-controls-bar");
-      const header = document.getElementById("journeyChartHeader");
-      const badge = document.getElementById("journeyChartSubBadge");
-      const passFailSec = document.getElementById("subjectPassFailSection");
-
-      if (level === 'subject') passFailSec.classList.remove("hidden");
-      else passFailSec.classList.add("hidden");
-
-      if (level === 'school') {
-        header.innerText = "Trajektori GPS Keseluruhan Sekolah (TOV ➔ ETR)";
-        badge.innerText = "Sasaran ETR: 4.85 • AR2 Semasa: 5.65";
-        bar.innerHTML = `<span class="text-indigo-400 font-bold">● GPS Sebenar vs Sasaran Headcount</span>`;
-        createOrUpdateChart({
-          type: 'line',
-          data: {
-            labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
-            datasets: [
-              { label: 'GPS Sebenar', data: [6.39, null, 6.39, null, 5.65, null], borderColor: '#818cf8', borderWidth: 3.5, tension: 0.3 },
-              { label: 'Sasaran OTR/ETR', data: [6.39, 6.07, null, 5.59, null, 4.85], borderColor: '#f59e0b', borderDash: [6, 6], borderWidth: 2.5, tension: 0.3 }
-            ]
-          },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { reverse: true } } }
-        });
-      } 
-      else if (level === 'class') {
-        header.innerText = "Perjalanan Markah Purata (%) Mengikut Kelas";
-        badge.innerText = "5S1, 5S2 & 5S3";
-        bar.innerHTML = `<span class="text-indigo-300 font-bold">Perbandingan Markah Purata Fasa Peperiksaan</span>`;
-        createOrUpdateChart({
-          type: 'line',
-          data: {
-            labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
-            datasets: [
-              { label: '5S1', data: [60.2, 63.8, 62.4, 66.5, 68.9, 72.5], borderColor: '#3b82f6', borderWidth: 3, tension: 0.3 },
-              { label: '5S2', data: [47.5, 52.1, 50.8, 55.4, 57.2, 62.0], borderColor: '#6366f1', borderWidth: 3, tension: 0.3 },
-              { label: '5S3', data: [27.4, 33.6, 29.8, 38.5, 41.2, 47.8], borderColor: '#10b981', borderWidth: 3, tension: 0.3 }
-            ]
-          },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { suggestedMin: 0, suggestedMax: 100 } } }
-        });
-      } 
-      else if (level === 'subject') {
-        header.innerText = "Trajektori Peratus Lulus & GPS Mata Pelajaran";
-        badge.innerText = "Analisis Lulus, Gagal & GPMP";
-        
-        let subOpts = "";
-        Object.keys(subjectAnalysisData).forEach(sub => subOpts += `<option value="${sub}">${sub}</option>`);
-        bar.innerHTML = `
-          <div class="flex items-center space-x-2">
-            <label class="font-bold text-slate-400">SUBJEK:</label>
-            <select id="journeySubSelect" onchange="renderSubjectJourneyChart()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded px-2 py-1">${subOpts}</select>
-          </div>
-        `;
-        renderSubjectJourneyChart();
-      } 
-      else if (level === 'student') {
-        header.innerText = "Graf Peningkatan Markah & GPI Individu";
-        badge.innerText = "Dwi-Garisan Markah & Gred Purata Individu";
-        let studOpts = "";
-        students.forEach(s => studOpts += `<option value="${s.id}">${s.id}. ${s.name} (${s.class})</option>`);
-        bar.innerHTML = `
-          <div class="flex items-center space-x-2">
-            <label class="font-bold text-slate-400">CALON:</label>
-            <select id="journeyStudentSelect" onchange="renderStudentJourneyChart(this.value)" class="bg-slate-900 border border-slate-700 text-slate-100 font-bold rounded px-2 py-1 w-64">${studOpts}</select>
-          </div>
-        `;
-        renderStudentJourneyChart();
-      }
-    }
-
-    function createOrUpdateChart(config) {
-      const ctx = document.getElementById("journeyDynamicChart").getContext("2d");
-      if (journeyChartInstance) journeyChartInstance.destroy();
-      journeyChartInstance = new Chart(ctx, config);
-    }
-
-    function renderSubjectJourneyChart() {
-      const sub = document.getElementById("journeySubSelect")?.value || "Bahasa Melayu";
-      const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
-      const passP = [], failP = [], passC = [], failC = [], gpmp = [];
-      let totalC = 0;
-
-      phases.forEach(ph => {
-        let p = 0, f = 0, t = 0, pts = 0;
-        students.forEach(s => {
-          const m = s.marks[sub]?.[ph];
-          if (m !== undefined && m !== null && !isNaN(m)) {
-            t++; if (m >= 40) p++; else f++; pts += getSpmGrade(m).point;
-          }
-        });
-        totalC = t || totalC;
-        passP.push(t > 0 ? parseFloat(((p/t)*100).toFixed(1)) : 0);
-        failP.push(t > 0 ? parseFloat(((f/t)*100).toFixed(1)) : 0);
-        passC.push(p); failC.push(f);
-        gpmp.push(t > 0 ? parseFloat((pts/t).toFixed(2)) : 0);
-      });
-
-      document.getElementById("passFailTableTitle").innerText = `Analisis Lulus & Gagal: ${sub}`;
-      document.getElementById("passFailCandidateCount").innerText = `${totalC} Calon`;
-
-      document.getElementById("subjectPassFailTableBody").innerHTML = `
-        <tr><td class="p-2 text-left font-bold text-emerald-400">Peratus Lulus (%)</td>${passP.map(v => `<td class="p-2 font-black text-emerald-400">${v}%</td>`).join('')}</tr>
-        <tr><td class="p-2 text-left text-slate-400 pl-4">Bil. Lulus</td>${passC.map(v => `<td class="p-2">${v}/${totalC}</td>`).join('')}</tr>
-        <tr><td class="p-2 text-left font-bold text-rose-400">Peratus Gagal (%)</td>${failP.map(v => `<td class="p-2 font-black text-rose-400">${v}%</td>`).join('')}</tr>
-        <tr><td class="p-2 text-left text-slate-400 pl-4">Bil. Gagal</td>${failC.map(v => `<td class="p-2">${v}/${totalC}</td>`).join('')}</tr>
-        <tr class="bg-slate-900/50"><td class="p-2 text-left font-bold text-amber-300">GPMP Subjek</td>${gpmp.map(v => `<td class="p-2 font-bold text-amber-300">${v}</td>`).join('')}</tr>
-      `;
-
-      createOrUpdateChart({
-        type: 'bar',
-        data: {
-          labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
-          datasets: [
-            { label: 'Peratus Lulus (%)', data: passP, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 6, yAxisID: 'y' },
-            { label: 'Peratus Gagal (%)', data: failP, backgroundColor: 'rgba(244, 63, 94, 0.75)', borderRadius: 6, yAxisID: 'y' },
-            { type: 'line', label: 'GPMP', data: gpmp, borderColor: '#f59e0b', borderWidth: 3, pointBackgroundColor: '#f59e0b', tension: 0.3, yAxisID: 'y1' }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          scales: {
-            y: { type: 'linear', position: 'left', min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } },
-            y1: { type: 'linear', position: 'right', reverse: true, min: 0, max: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } },
-            x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
-          }
-        }
-      });
-    }
-
-    function renderStudentJourneyChart(studentId) {
-      const curId = studentId ? parseInt(studentId) : (parseInt(document.getElementById("journeyStudentSelect")?.value) || students[0].id);
-      const student = students.find(s => s.id === curId) || students[0];
-      const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
-      const marks = [], gpis = [];
-
-      phases.forEach(ph => {
-        let sm = 0, sp = 0, c = 0;
-        for (const sub in student.marks) {
-          const m = student.marks[sub][ph];
-          if (m !== undefined && m !== null) { sm += m; sp += getSpmGrade(m).point; c++; }
-        }
-        marks.push(Math.round(sm / (c || 1)));
-        gpis.push(parseFloat((sp / (c || 1)).toFixed(2)));
-      });
-
-      createOrUpdateChart({
-        type: 'line',
-        data: {
-          labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
-          datasets: [
-            { label: 'Markah Purata (%)', data: marks, borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.15)', fill: true, borderWidth: 3.5, tension: 0.35, yAxisID: 'y' },
-            { label: 'GPI', data: gpis, borderColor: '#f59e0b', borderDash: [5, 5], borderWidth: 3, tension: 0.35, yAxisID: 'y1' }
-          ]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          scales: {
-            y: { type: 'linear', position: 'left', suggestedMin: 0, suggestedMax: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } },
-            y1: { type: 'linear', position: 'right', reverse: true, suggestedMin: 0, suggestedMax: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } },
-            x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
-          }
-        }
-      });
-    }
-
-    function renderSubjectTable() {
-      const sub = document.getElementById("singleSubjectSelect")?.value || "Bahasa Melayu";
-      const cls = document.getElementById("subjectClassFilter")?.value || "ALL";
-      const term = (document.getElementById("subjectSearchInput")?.value || "").toLowerCase();
-      const tbody = document.getElementById("subjectTableBody");
-      if (!tbody) return;
-      tbody.innerHTML = "";
-
-      const filtered = students.filter(s => s.marks[sub] !== undefined && (cls === "ALL" || s.class === cls) && s.name.toLowerCase().includes(term));
-      filtered.sort((a, b) => (b.marks[sub]?.ar2 || 0) - (a.marks[sub]?.ar2 || 0));
-
-      filtered.forEach((s, idx) => {
-        const d = s.marks[sub];
-        const ar2 = d.ar2 ?? 0;
-        const diff = ar2 - (d.otr2 ?? 0);
-        tbody.innerHTML += `
-          <tr class="hover:bg-slate-800/40">
-            <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
-            <td class="p-3 font-bold text-white cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id})">${s.name}</td>
-            <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded font-mono text-[11px]">${s.class}</span></td>
-            <td class="p-3 text-center font-mono">${d.tov ?? '-'}</td>
-            <td class="p-3 text-center font-mono">${d.otr1 ?? '-'}</td>
-            <td class="p-3 text-center font-mono">${d.ar1 ?? '-'}</td>
-            <td class="p-3 text-center font-mono">${d.otr2 ?? '-'}</td>
-            <td class="p-3 text-center font-mono font-black bg-indigo-950/40 text-indigo-300">${ar2}</td>
-            <td class="p-3 text-center font-mono font-bold bg-amber-950/30 text-amber-300">${d.etr ?? '-'}</td>
-            <td class="p-3 text-center font-mono font-bold ${diff>=0?'text-emerald-400':'text-rose-400'}">${diff>=0?'+'+diff:diff}</td>
-            <td class="p-3 text-center font-mono font-bold">${getSpmGrade(ar2).grade}</td>
-          </tr>
-        `;
-      });
-    }
-
-    function renderFocusGroups() {
-      const calculated = students.map(s => {
-        const subs = Object.keys(s.marks);
-        const grades = { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":0, "C":0, "D":0, "E":0, "G":0 };
-        let tm = 0, tp = 0, c = 0;
-        subs.forEach(sub => {
-          const m = s.marks[sub]?.ar2;
-          if (m !== undefined && m !== null) {
-            const gr = getSpmGrade(m);
-            grades[gr.grade]++; tm += m; tp += gr.point; c++;
-          }
-        });
-        const ta = grades["A+"] + grades["A"] + grades["A-"];
-        const avg = Math.round(tm / (c || 1));
-        const gpi = (tp / (c || 1)).toFixed(2);
-        const bm = s.marks["Bahasa Melayu"]?.ar2 ?? 0;
-        const sej = s.marks["Sejarah"]?.ar2 ?? 0;
-        return { ...s, avgAR2: avg, gpi, totalSubjects: c, totalA: ta, grades, bm, sej, failBm: bm < 40, failSej: sej < 40, failBoth: bm < 40 && sej < 40 };
-      });
-
-      document.getElementById("count-failSej").innerText = `${calculated.filter(s => s.failSej).length} Calon`;
-      document.getElementById("count-failBm").innerText = `${calculated.filter(s => s.failBm).length} Calon`;
-      document.getElementById("count-failBoth").innerText = `${calculated.filter(s => s.failBoth).length} Calon`;
-
-      renderFocusTable(calculated, currentFocusFilter);
-    }
-
-    function setFocusTab(fType) {
-      currentFocusFilter = fType;
-      ['top15', 'failSej', 'failBm', 'failBoth'].forEach(f => {
-        const card = document.getElementById(`card-focus-${f}`);
-        if (card) card.className = (f === fType) ? "cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 shadow" : "cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-slate-700";
-      });
-      renderFocusGroups();
-    }
-
-    function renderFocusTable(calculated, fType) {
-      const thead = document.getElementById("focusTableThead");
-      const tbody = document.getElementById("focusTableBody");
-      const title = document.getElementById("focusTableTitle");
-      const countLabel = document.getElementById("focusTableCount");
-      if (!tbody) return;
-      tbody.innerHTML = "";
-
-      let list = [];
-      if (fType === 'top15') {
-        title.innerText = "Senarai Murid Potensi Terbaik (Semua Mata Pelajaran AR2)";
-        list = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 15);
-        thead.innerHTML = `<tr><th class="p-3">Ked</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Gred A [A+, A, A-]</th><th class="p-3 text-center">Gred B</th><th class="p-3 text-center">Gred C</th><th class="p-3 text-center">Gred G</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center text-amber-400">GPI</th></tr>`;
-        list.forEach((s, idx) => {
-          tbody.innerHTML += `<tr class="hover:bg-slate-800/50 cursor-pointer" onclick="syncStudent(${s.id})"><td class="p-3 font-mono font-bold">${idx+1}</td><td class="p-3 font-bold text-white">${s.name}</td><td class="p-3 font-mono text-[11px]">${s.class}</td><td class="p-3 text-center text-emerald-400 font-bold">${s.totalA}A (${s.grades['A+']}A+, ${s.grades['A']}A, ${s.grades['A-']}A-)</td><td class="p-3 text-center">${s.grades['B+']+s.grades['B']}B</td><td class="p-3 text-center">${s.grades['C+']+s.grades['C']}C</td><td class="p-3 text-center text-rose-400 font-bold">${s.grades['G']}</td><td class="p-3 text-center font-bold">${s.avgAR2}%</td><td class="p-3 text-center font-mono font-black text-amber-400">${s.gpi}</td></tr>`;
-        });
-      } else {
-        if (fType === 'failSej') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Sejarah (< 40)"; list = calculated.filter(s => s.failSej).sort((a,b)=>a.sej-b.sej); }
-        else if (fType === 'failBm') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Bahasa Melayu (< 40)"; list = calculated.filter(s => s.failBm).sort((a,b)=>a.bm-b.bm); }
-        else if (fType === 'failBoth') { title.innerText = "Senarai Calon Berisiko Kritikal (Gagal Sejarah & BM)"; list = calculated.filter(s => s.failBoth).sort((a,b)=>(a.bm+a.sej)-(b.bm+b.sej)); }
-
-        thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM</th><th class="p-3 text-center">Sejarah</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th><th class="p-3 text-center">Status</th></tr>`;
-        list.forEach((s, idx) => {
-          tbody.innerHTML += `<tr class="hover:bg-slate-800/50 cursor-pointer" onclick="syncStudent(${s.id})"><td class="p-3 font-mono font-bold">${idx+1}</td><td class="p-3 font-bold text-white">${s.name}</td><td class="p-3 font-mono text-[11px]">${s.class}</td><td class="p-3 text-center text-rose-400 font-bold">${s.bm}</td><td class="p-3 text-center text-rose-400 font-bold">${s.sej}</td><td class="p-3 text-center font-bold">${s.avgAR2}%</td><td class="p-3 text-center text-rose-400 font-bold">${s.grades['G']} MP</td><td class="p-3 text-center font-bold text-rose-400">TIDAK LAYAK</td></tr>`;
-        });
-      }
-      countLabel.innerText = `${list.length} Rekod`;
-    }
-
-    function syncStudent(studentId) {
-      const sId = parseInt(studentId);
-      const sel = document.getElementById("studentSelect");
-      if (sel) sel.value = sId;
-      renderStudentRadar();
-    }
-
-    function filterRadarStudentDropdown() {
-      const cls = document.getElementById("radarClassFilter").value;
-      const select = document.getElementById("studentSelect");
-      if (!select) return;
-      select.innerHTML = "";
-      const filtered = (cls === "ALL") ? students : students.filter(s => s.class === cls);
-      filtered.forEach(s => select.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id)));
-      if (filtered.length > 0) syncStudent(filtered[0].id);
-    }
-
-    function renderStudentRadar() {
-      const curId = parseInt(document.getElementById("studentSelect")?.value) || students[0].id;
-      const student = students.find(s => s.id === curId) || students[0];
-      if (!student) return;
-
-      const img = document.getElementById("avatar-img");
-      const placeholder = document.getElementById("avatar-placeholder");
-      if (student.photo) { img.src = student.photo; img.classList.remove("hidden"); placeholder.classList.add("hidden"); }
-      else { img.src = ""; img.classList.add("hidden"); placeholder.classList.remove("hidden"); }
-
-      const subjects = Object.keys(student.marks);
-      const ar2Scores = subjects.map(sub => student.marks[sub].ar2 || 0);
-      const etrScores = subjects.map(sub => student.marks[sub].etr || 0);
-
-      document.getElementById("rpg-name").innerText = student.name;
-      document.getElementById("rpg-class").innerText = `TINGKATAN ${student.class}`;
-      const totalMarks = ar2Scores.reduce((a, b) => a + b, 0);
-      const avg = Math.round(totalMarks / (ar2Scores.length || 1));
-      document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} IPC`;
-      document.getElementById("rpg-avg").innerText = `${avg}%`;
-
-      const ctx = document.getElementById("studentRadarChart").getContext("2d");
-      if (radarChartInstance) radarChartInstance.destroy();
-
-      radarChartInstance = new Chart(ctx, {
-        type: 'radar',
-        data: {
-          labels: subjects,
-          datasets: [
-            { label: 'AR2', data: ar2Scores, backgroundColor: 'rgba(99, 102, 241, 0.4)', borderColor: '#818cf8', borderWidth: 2.5, pointRadius: 4 },
-            { label: 'ETR', data: etrScores, backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: '#f59e0b', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 3 }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
-      });
-    }
-
-    function triggerRowUpload(studentId) {
-      currentUploadTargetStudentId = studentId;
-      document.getElementById("studentPhotoInput").click();
-    }
-
-    function handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const targetId = currentUploadTargetStudentId || parseInt(document.getElementById("studentSelect").value) || students[0].id;
-      const student = students.find(s => s.id === targetId);
-      if (!student) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          canvas.width = 250; canvas.height = (img.height * 250) / img.width;
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          student.photo = canvas.toDataURL("image/jpeg", 0.7);
-          renderStudentRadar(); renderDataTable(); renderPrintSlip();
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function renderDataTable() {
-      const tbody = document.getElementById("studentTableBody");
-      if (!tbody) return;
-      tbody.innerHTML = "";
-      students.forEach((s, index) => {
-        const bm = s.marks["Bahasa Melayu"]?.ar2 ?? "-";
-        const bi = s.marks["Bahasa Inggeris"]?.ar2 ?? "-";
-        const mat = s.marks["Matematik"]?.ar2 ?? "-";
-        const sej = s.marks["Sejarah"]?.ar2 ?? "-";
-        const photoHtml = s.photo ? `<img src="${s.photo}" class="w-8 h-8 rounded-full object-cover border border-indigo-500">` : `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold text-[10px]">${s.name.substring(0, 2)}</div>`;
-
-        tbody.innerHTML += `
-          <tr class="hover:bg-slate-800/40">
-            <td class="p-3.5 text-slate-400 font-mono">${index + 1}</td>
-            <td class="p-3.5">${photoHtml}</td>
-            <td class="p-3.5 font-bold text-white">${s.name}</td>
-            <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-800 rounded font-mono text-[11px]">${s.class}</span></td>
-            <td class="p-3.5 text-center font-mono font-bold">${bm}</td>
-            <td class="p-3.5 text-center font-mono font-bold">${bi}</td>
-            <td class="p-3.5 text-center font-mono font-bold">${mat}</td>
-            <td class="p-3.5 text-center font-mono font-bold">${sej}</td>
-            <td class="p-3.5 text-center space-x-1.5 whitespace-nowrap">
-              <button onclick="triggerRowUpload(${s.id})" class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded-lg text-[11px]">Foto</button>
-            </td>
-          </tr>
-        `;
-      });
-    }
-
-    function renderPrintSlip() {
-      const selectedId = parseInt(document.getElementById("printSelect")?.value) || students[0].id;
-      const student = students.find(s => s.id === selectedId) || students[0];
-      if (!student) return;
-
-      document.getElementById("p-name").innerText = student.name;
-      document.getElementById("p-class").innerText = student.class;
-
-      const pPhoto = document.getElementById("p-photo");
-      const pPlaceholder = document.getElementById("p-photo-placeholder");
-      if (student.photo) { pPhoto.src = student.photo; pPhoto.classList.remove("hidden"); pPlaceholder.classList.add("hidden"); }
-      else { pPhoto.src = ""; pPhoto.classList.add("hidden"); pPlaceholder.classList.remove("hidden"); }
-
-      const tbody = document.getElementById("printSubjectTable");
-      tbody.innerHTML = "";
-      let totalAR2 = 0, count = 0;
-
-      for (const [sub, data] of Object.entries(student.marks)) {
-        totalAR2 += (data.ar2 || 0); count++;
-        tbody.innerHTML += `<tr><td class="border border-slate-400 p-2 text-left font-bold text-slate-800">${sub}</td><td class="border border-slate-400 p-2 font-mono">${data.tov ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.otr1 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.ar1 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.otr2 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono font-black bg-indigo-50">${data.ar2 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono font-bold bg-amber-50">${data.etr ?? '-'}</td></tr>`;
-      }
-      document.getElementById("p-avg").innerText = `${Math.round(totalAR2 / (count || 1))}%`;
-    }
-
-    function fetchGoogleSheetData() {
-      fetch(`${SCRIPT_URL}?sheetId=${SHEET_ID}`)
-        .then(res => res.json())
-        .then(data => {
-          if (Array.isArray(data) && data.length > 0 && data[0].marks) {
-            students = data;
-            populateStudentDropdowns();
-            renderStudentRadar();
-            renderFocusGroups();
-            renderSubjectTable();
-            renderDataTable();
-            renderPrintSlip();
-          }
-        })
-        .catch(() => {});
-    }
   </script>
 </body>
 </html>
