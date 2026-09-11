@@ -166,7 +166,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (SEKOLAH, KELAS, SUBJEK, INDIVIDU) -->
+      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (DENGAN DUA GRAF KELAS)      -->
       <!-- ============================================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -237,14 +237,13 @@
           </div>
         </div>
 
-        <!-- Peringkat 2: Kelas (DUA GRAF BERASINGAN: MARKAH PURATA & GRED PURATA KELAS) -->
+        <!-- Peringkat 2: Kelas (Dua Graf: Markah Purata & GPK) -->
         <div id="journey-class-view" class="hidden space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Graf 1: Markah Purata (%) -->
             <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
-                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">1. Perjalanan Markah Purata (%) Mengikut Kelas</h4>
+                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">1. Markah Purata (%) Mengikut Kelas</h4>
                   <p class="text-[10px] text-slate-400">Skala 0% - 100% (Makin tinggi makin baik)</p>
                 </div>
                 <div class="flex gap-3 text-[11px] font-mono font-bold">
@@ -258,11 +257,10 @@
               </div>
             </div>
 
-            <!-- Graf 2: Gred Purata Kelas (GPK) -->
             <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
-                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">2. Perjalanan Gred Purata Kelas (GPK)</h4>
+                  <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">2. Gred Purata Kelas (GPK)</h4>
                   <p class="text-[10px] text-amber-400">Skala 0.0 - 9.0 Terbalik (Makin rendah makin cemerlang)</p>
                 </div>
                 <div class="flex gap-3 text-[11px] font-mono font-bold">
@@ -274,36 +272,6 @@
               <div class="h-64">
                 <canvas id="journeyClassGpkChart"></canvas>
               </div>
-            </div>
-          </div>
-
-          <!-- Kad Ringkasan GPK Terkini AR2 Mengikut Kelas -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div class="bg-slate-950/80 p-4 rounded-2xl border border-blue-500/30 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider">5 SAINS 1 (5S1)</span>
-                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s1">3.98</p>
-                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
-              </div>
-              <span class="px-2.5 py-1 bg-blue-500/10 text-blue-300 rounded-xl text-xs font-bold border border-blue-500/20">Purata 68.9%</span>
-            </div>
-
-            <div class="bg-slate-950/80 p-4 rounded-2xl border border-indigo-500/30 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-wider">5 SAINS 2 (5S2)</span>
-                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s2">5.74</p>
-                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
-              </div>
-              <span class="px-2.5 py-1 bg-indigo-500/10 text-indigo-300 rounded-xl text-xs font-bold border border-indigo-500/20">Purata 57.2%</span>
-            </div>
-
-            <div class="bg-slate-950/80 p-4 rounded-2xl border border-emerald-500/30 flex items-center justify-between">
-              <div>
-                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">5 SAINS 3 (5S3)</span>
-                <p class="text-2xl font-black text-white score-font mt-0.5" id="gpk-val-5s3">6.95</p>
-                <p class="text-[10px] text-slate-400">GPK Peperiksaan AR2</p>
-              </div>
-              <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded-xl text-xs font-bold border border-emerald-500/20">Purata 41.2%</span>
             </div>
           </div>
         </div>
@@ -328,7 +296,7 @@
           </div>
         </div>
 
-        <!-- Peringkat 4: Individu Murid -->
+        <!-- Peringkat 4: Individu Murid (DWI-PAKSI DENGAN DROPDOWN NAMA) -->
         <div id="journey-student-view" class="hidden space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 p-4 rounded-2xl border border-slate-800 gap-3">
             <div class="flex flex-wrap items-center gap-3">
@@ -373,8 +341,87 @@
         </div>
       </div>
 
+      <!-- ========================================================================= -->
+      <!-- MODUL BAHARU: MATRIKS MARKAH MENGIKUT MATA PELAJARAN & JENIS PEPERIKSAAN -->
       <!-- ============================================================== -->
-      <!-- MODUL 2: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-7 shadow-lg space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest font-mono">
+              <i class="fa-solid fa-table-cells"></i>
+              <span>Matriks Keputusan Mengikut Peperiksaan</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-white mt-1">Paparan Markah Murid Mengikut Mata Pelajaran</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Pilih jenis peperiksaan untuk memaparkan markah dan gred kesemua mata pelajaran bagi setiap calon.</p>
+          </div>
+
+          <!-- Pemilih Jenis Peperiksaan & Kelas -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <div class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+              <label class="text-[11px] font-bold text-slate-400">PEPERIKSAAN:</label>
+              <select id="examPhaseSelect" onchange="renderExamMatrixTable()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded-lg px-2.5 py-1 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="ar2" selected>AR2 (Terkini)</option>
+                <option value="otr2">OTR2 (Sasaran 2)</option>
+                <option value="ar1">AR1 (Pertengahan)</option>
+                <option value="otr1">OTR1 (Sasaran 1)</option>
+                <option value="tov">TOV (Asas Awal)</option>
+                <option value="etr">ETR (Sasaran Akhir)</option>
+              </select>
+            </div>
+
+            <div class="flex items-center space-x-1.5 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+              <label class="text-[11px] font-bold text-slate-400">KELAS:</label>
+              <select id="examMatrixClassFilter" onchange="renderExamMatrixTable()" class="bg-slate-900 border border-slate-700 text-slate-200 font-semibold rounded-lg px-2.5 py-1 text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="ALL">Semua Kelas</option>
+                <option value="5S1">5S1</option>
+                <option value="5S2">5S2</option>
+                <option value="5S3">5S3</option>
+              </select>
+            </div>
+
+            <input type="text" id="examMatrixSearch" onkeyup="renderExamMatrixTable()" placeholder="Cari nama murid..." class="bg-slate-950 border border-slate-800 text-xs px-3 py-2 rounded-xl text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500 w-40">
+          </div>
+        </div>
+
+        <!-- Petunjuk Warna Gred -->
+        <div class="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 font-mono">
+          <span class="font-bold text-slate-300">Skala Gred:</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-emerald-500/80 inline-block"></span> A (70-100)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-blue-500/80 inline-block"></span> B (60-69)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-amber-500/80 inline-block"></span> C (50-59)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-orange-500/80 inline-block"></span> D/E (40-49)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-rose-500/80 inline-block"></span> G (&lt;40)</span>
+        </div>
+
+        <!-- Jadual Matriks Penuh Mengikut Mata Pelajaran -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 custom-scrollbar max-h-[500px] overflow-y-auto">
+          <table class="w-full text-left text-xs text-slate-300 border-collapse">
+            <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800 z-10 whitespace-nowrap">
+              <tr>
+                <th class="p-3 bg-slate-950">Bil</th>
+                <th class="p-3 bg-slate-950">Nama Calon</th>
+                <th class="p-3 bg-slate-950">Kelas</th>
+                <th class="p-3 text-center bg-slate-950">BM</th>
+                <th class="p-3 text-center bg-slate-950">BI</th>
+                <th class="p-3 text-center bg-slate-950">MAT</th>
+                <th class="p-3 text-center bg-slate-950">SEJ</th>
+                <th class="p-3 text-center bg-slate-950">PI / PM</th>
+                <th class="p-3 text-center bg-slate-950">SN / FIZ / BIO / KIM</th>
+                <th class="p-3 text-center bg-slate-950">ELEKTIF 1</th>
+                <th class="p-3 text-center bg-slate-950">ELEKTIF 2</th>
+                <th class="p-3 text-center bg-slate-950 font-bold text-white">Purata</th>
+                <th class="p-3 text-center bg-slate-950 font-bold text-amber-400">GPI</th>
+              </tr>
+            </thead>
+            <tbody id="examMatrixTableBody" class="divide-y divide-slate-800/60 font-medium">
+              <!-- Diisi dinamik -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- MODUL 3: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK -->
       <!-- ============================================================== -->
       <div class="space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -385,7 +432,6 @@
           <span class="self-start sm:self-auto px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-mono font-semibold">Berdasarkan AR2</span>
         </div>
 
-        <!-- 4 Kad Navigasi Pilihan -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div onclick="showFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition-all shadow-md">
             <div class="flex items-center justify-between text-amber-400 text-xs font-bold uppercase">
@@ -424,7 +470,6 @@
           </div>
         </div>
 
-        <!-- Jadual Calon Kumpulan Terpilih -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
@@ -448,7 +493,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL 3: PROFIL REPUTASI & RADAR POTENSI INDIVIDU CALON -->
+      <!-- MODUL 4: PROFIL REPUTASI & RADAR POTENSI INDIVIDU CALON -->
       <!-- ============================================================== -->
       <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-6 lg:p-7 relative overflow-hidden shadow-xl">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -491,7 +536,6 @@
                 </div>
               </div>
 
-              <!-- Butang Muat Naik Foto -->
               <label for="studentPhotoInput" class="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-full cursor-pointer shadow-lg transition-transform hover:scale-110 flex items-center justify-center border-2 border-slate-900" title="Muat Naik Foto Calon">
                 <i class="fa-solid fa-camera text-xs"></i>
               </label>
@@ -527,7 +571,6 @@
             </div>
           </div>
 
-          <!-- Radar Prestasi Calon (Spider Web Graph) -->
           <div class="lg:col-span-8 flex flex-col items-center justify-center p-2">
             <div class="w-full max-w-lg aspect-square">
               <canvas id="studentRadarChart"></canvas>
@@ -737,7 +780,7 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    // Skala Gred Rasmi SPM & Nilai Mata Kredit Gred
+    // Skala Gred Rasmi SPM
     function getSpmGrade(mark) {
       if (mark === null || mark === undefined || isNaN(mark)) return { grade: "TH", point: 9 };
       const m = parseInt(mark);
@@ -1225,6 +1268,7 @@
       renderStudentRadar();
       renderFocusGroups();
       initJourneyCharts();
+      renderExamMatrixTable();
       renderDataTable();
       renderPrintSlip();
       fetchGoogleSheetData();
@@ -1277,7 +1321,111 @@
     }
 
     // ==============================================================
-    // ENJIN MODUL PERJALANAN PENCAPAIAN (TERMASUK DUA GRAF KELAS)
+    // MODUL BAHARU: MATRIKS MARKAH MENGIKUT MATA PELAJARAN & PEPERIKSAAN
+    // ==============================================================
+    function renderExamMatrixTable() {
+      const phase = document.getElementById("examPhaseSelect").value;
+      const classFilter = document.getElementById("examMatrixClassFilter").value;
+      const term = (document.getElementById("examMatrixSearch").value || "").toLowerCase();
+      const tbody = document.getElementById("examMatrixTableBody");
+      tbody.innerHTML = "";
+
+      // Format sel markah dengan warna gred
+      function formatCell(mark) {
+        if (mark === undefined || mark === null || isNaN(mark)) {
+          return `<td class="p-3 text-center text-slate-600 font-mono">-</td>`;
+        }
+        const gr = getSpmGrade(mark);
+        let colorClass = "text-slate-300";
+        if (gr.grade.startsWith("A")) colorClass = "text-emerald-400 font-bold bg-emerald-950/20";
+        else if (gr.grade.startsWith("B")) colorClass = "text-blue-400 font-semibold";
+        else if (gr.grade.startsWith("C")) colorClass = "text-amber-400 font-semibold";
+        else if (gr.grade === "D" || gr.grade === "E") colorClass = "text-orange-400";
+        else if (gr.grade === "G") colorClass = "text-rose-400 font-bold bg-rose-950/20";
+
+        return `<td class="p-3 text-center font-mono ${colorClass}" title="${gr.grade}">${mark} <span class="text-[9px] opacity-70">(${gr.grade})</span></td>`;
+      }
+
+      const filtered = students.filter(s => {
+        const matchClass = (classFilter === "ALL" || s.class === classFilter);
+        const matchName = s.name.toLowerCase().includes(term);
+        return matchClass && matchName;
+      });
+
+      filtered.forEach((s, idx) => {
+        const bm = s.marks["Bahasa Melayu"]?.[phase];
+        const bi = s.marks["Bahasa Inggeris"]?.[phase];
+        const mat = s.marks["Matematik"]?.[phase];
+        const sej = s.marks["Sejarah"]?.[phase];
+        
+        // Agama / Moral
+        const pi = s.marks["Pendidikan Islam"]?.[phase];
+        const pm = s.marks["Pendidikan Moral"]?.[phase];
+        const relMark = pi !== undefined ? pi : pm;
+
+        // Sains / Fizik / Kimia / Bio
+        const sc = s.marks["Sains"]?.[phase];
+        const fiz = s.marks["Fizik"]?.[phase];
+        const bio = s.marks["Biologi"]?.[phase];
+        const kim = s.marks["Kimia"]?.[phase];
+        const scienceMark = sc !== undefined ? sc : (fiz !== undefined ? fiz : (bio !== undefined ? bio : kim));
+
+        // Elektif
+        const mt = s.marks["Matematik Tambahan"]?.[phase];
+        const psv = s.marks["Pendidikan Seni Visual"]?.[phase];
+        const pn = s.marks["Perniagaan"]?.[phase];
+        const bc = s.marks["Bahasa Cina"]?.[phase];
+        const tas = s.marks["Tasawwur Islam"]?.[phase];
+        const kel = s.marks["Asas Kelestarian"]?.[phase];
+
+        const electives = [];
+        if (mt !== undefined) electives.push({ sub: "M.Tamb", mark: mt });
+        if (psv !== undefined) electives.push({ sub: "PSV", mark: psv });
+        if (pn !== undefined) electives.push({ sub: "Pern", mark: pn });
+        if (bc !== undefined) electives.push({ sub: "BC", mark: bc });
+        if (tas !== undefined) electives.push({ sub: "Tasawwur", mark: tas });
+        if (kel !== undefined) electives.push({ sub: "Kelestarian", mark: kel });
+
+        // Hitung purata & GPI bagi fasa yang dipilih
+        let sumMarks = 0;
+        let sumPoints = 0;
+        let totalSubjects = 0;
+
+        for (const sub in s.marks) {
+          const val = s.marks[sub][phase];
+          if (val !== undefined && val !== null) {
+            sumMarks += val;
+            sumPoints += getSpmGrade(val).point;
+            totalSubjects++;
+          }
+        }
+
+        const avg = Math.round(sumMarks / (totalSubjects || 1));
+        const gpi = (sumPoints / (totalSubjects || 1)).toFixed(2);
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+          <td class="p-3 font-bold text-white whitespace-nowrap cursor-pointer hover:text-indigo-400" onclick="syncStudentSelection(${s.id}); window.location.hash='#tab-dashboard';">${s.name}</td>
+          <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+          ${formatCell(bm)}
+          ${formatCell(bi)}
+          ${formatCell(mat)}
+          ${formatCell(sej)}
+          ${formatCell(relMark)}
+          ${formatCell(scienceMark)}
+          ${formatCell(electives[0]?.mark)}
+          ${formatCell(electives[1]?.mark)}
+          <td class="p-3 text-center font-bold text-white bg-slate-950/40">${avg}%</td>
+          <td class="p-3 text-center font-mono font-black text-amber-400 bg-slate-950/40">${gpi}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ==============================================================
+    // ENJIN MODUL PERJALANAN PENCAPAIAN
     // ==============================================================
     function switchJourneyLevel(level) {
       const levels = ['school', 'class', 'subject', 'student'];
@@ -1633,7 +1781,7 @@
     }
 
     // =========================================================================
-    // MODUL 2: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK (SEMUA SUBJEK)
+    // MODUL 3: ANALISIS KUMPULAN SASARAN & POTENSI TERBAIK (SEMUA SUBJEK)
     // =========================================================================
     function renderFocusGroups() {
       const calculatedStudents = students.map(s => {
@@ -1929,6 +2077,7 @@
 
           renderStudentRadar();
           renderFocusGroups();
+          renderExamMatrixTable();
           renderDataTable();
           renderPrintSlip();
           currentUploadTargetStudentId = null;
@@ -2035,6 +2184,7 @@
       closeFullEditModal();
       renderStudentRadar();
       renderFocusGroups();
+      renderExamMatrixTable();
       renderDataTable();
       renderPrintSlip();
       updateStudentJourneyChart();
@@ -2202,6 +2352,7 @@
             populateStudentDropdowns();
             renderStudentRadar();
             renderFocusGroups();
+            renderExamMatrixTable();
             renderDataTable();
             renderPrintSlip();
             updateStudentJourneyChart();
