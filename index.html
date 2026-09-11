@@ -547,6 +547,25 @@
       "Bahasa Cina": { calon: 11, otr1: 4.73, ar1: 5.73, otr2: 4.36, ar2: 4.64 },
       "Tasawwur Islam": { calon: 20, otr1: 3.35, ar1: 6.25, otr2: 3.55, ar2: 5.05 }
     };
+
+    let radarChartInstance = null;
+    let currentUploadTargetStudentId = null;
+    let editingStudentId = null;
+    let currentFocusFilter = 'top15';
+    let currentJourneyLevel = 'school';
+    let journeyChartInstance = null;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      populateStudentDropdowns();
+      populateSingleSubjectDropdown();
+      renderStudentRadar();
+      renderFocusGroups();
+      setJourneyTab('school');
+      renderSubjectTable();
+      renderDataTable();
+      renderPrintSlip();
+      fetchGoogleSheetData();
+    });
   </script>
 </body>
 </html>
