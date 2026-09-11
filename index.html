@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Headcount SPM 2026 - SMK Kamarul Ariffin</title>
-  
-  <!-- CDN Dioptimumkan -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .score-font { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .score-font { font-family: 'Orbitron', sans-serif; }
     @media print {
       body { background: white !important; color: black !important; }
       body * { visibility: hidden; }
@@ -29,7 +27,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       <div class="flex items-center space-x-3">
         <div class="h-10 w-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center p-1 shadow">
-          <i class="fa-solid fa-graduation-cap text-indigo-400 text-xl"></i>
+          <img src="logo.png" alt="Logo SEMEKAR" class="h-full w-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-graduation-cap text-indigo-400\'></i>';">
         </div>
         <div>
           <div class="flex items-center space-x-2">
@@ -57,10 +55,12 @@
   <!-- KANDUNGAN UTAMA -->
   <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
 
-    <!-- 1. PAPAN PEMUKA -->
+    <!-- ============================================== -->
+    <!-- TAB 1: PAPAN PEMUKA (DASHBOARD) -->
+    <!-- ============================================== -->
     <section id="tab-dashboard" class="space-y-8">
       
-      <!-- KAD METRIK RINGKASAN -->
+      <!-- KAD METRIK -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
           <div class="flex justify-between text-slate-400 text-xs font-semibold">
@@ -69,7 +69,7 @@
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-3xl font-black text-indigo-400">5.65</span>
-            <span class="text-xs text-emerald-400 font-bold"><i class="fa-solid fa-arrow-trend-up"></i> +0.74</span>
+            <span class="text-xs text-emerald-400 font-bold">+0.74</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Sasaran OTR2: 5.59</p>
         </div>
@@ -80,7 +80,7 @@
             <i class="fa-solid fa-users text-blue-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
-            <span class="text-3xl font-black text-white" id="stat-total-students">40</span>
+            <span class="text-3xl font-black text-white">40</span>
             <span class="text-xs text-slate-400">Calon</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">5S1 (9) • 5S2 (19) • 5S3 (12)</p>
@@ -88,12 +88,12 @@
 
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
           <div class="flex justify-between text-slate-400 text-xs font-semibold">
-            <span>SUBJEK TERBAIK (AR2)</span>
+            <span>SUBJEK TERBAIK</span>
             <i class="fa-solid fa-award text-amber-400"></i>
           </div>
           <div class="flex items-baseline space-x-2 mt-2">
             <span class="text-2xl font-black text-amber-400 truncate">P. Islam</span>
-            <span class="text-xs text-amber-300 score-font">2.89</span>
+            <span class="text-xs text-amber-300 font-mono">2.89</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Kelestarian: 3.29 • BM: 3.93</p>
         </div>
@@ -111,47 +111,198 @@
         </div>
       </div>
 
-      <!-- ANALISIS TRAJEKTORI -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-5">
+      <!-- ============================================== -->
+      <!-- MODUL: TRAJEKTORI PENINGKATAN (PILIHAN TAHAP)   -->
+      <!-- ============================================== -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
-            <div class="flex items-center space-x-2 text-indigo-400 text-xs font-bold uppercase tracking-widest score-font">
-              <i class="fa-solid fa-route"></i>
-              <span>Peta Perjalanan Pencapaian SPM 2026</span>
-            </div>
+            <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest font-mono">Peta Perjalanan Pencapaian</span>
             <h3 class="text-lg sm:text-xl font-black text-white mt-0.5">Analisis Trajektori Peningkatan (TOV ➔ ETR)</h3>
+          </div>
+
+          <!-- 4 Tab Peringkat -->
+          <div class="flex flex-wrap bg-slate-950 p-1 rounded-2xl border border-slate-800 gap-1">
+            <button onclick="setJourneyTab('school')" id="jtab-school" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow">Sekolah</button>
+            <button onclick="setJourneyTab('class')" id="jtab-class" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white">Kelas</button>
+            <button onclick="setJourneyTab('subject')" id="jtab-subject" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white">Mata Pelajaran</button>
+            <button onclick="setJourneyTab('student')" id="jtab-student" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white">Individu</button>
           </div>
         </div>
 
-        <!-- GRAF TRAJEKTORI -->
-        <div class="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800">
-          <div class="h-64 sm:h-72 w-full">
-            <canvas id="journeyChart"></canvas>
+        <!-- Bar Kawalan Dinamik -->
+        <div id="journey-controls-bar" class="p-3 bg-slate-950 rounded-2xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <!-- Diisi automatik -->
+        </div>
+
+        <!-- Paparan Graf Utama -->
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <div class="flex items-center justify-between mb-2 text-xs">
+            <span class="font-bold text-slate-300" id="journeyChartHeader">Trajektori GPS Sekolah</span>
+            <span class="text-[11px] text-slate-400 font-mono" id="journeyChartSubBadge">SPM 2026</span>
+          </div>
+          <div class="h-64 w-full">
+            <canvas id="journeyDynamicChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Kotak Peratus Lulus & Gagal (Khusus Tab Subjek) -->
+        <div id="subjectPassFailSection" class="hidden bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2 text-xs">
+            <span class="font-bold text-white uppercase" id="passFailTableTitle">Analisis Lulus & Gagal</span>
+            <span class="text-indigo-300 font-mono" id="passFailCandidateCount">40 Calon</span>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <table class="w-full text-left text-xs text-slate-300 border-collapse">
+              <thead class="bg-slate-900 text-slate-400 uppercase font-mono text-center">
+                <tr>
+                  <th class="p-2 text-left bg-slate-900">Metrik</th>
+                  <th class="p-2">TOV</th><th class="p-2">OTR1</th><th class="p-2">AR1</th><th class="p-2">OTR2</th><th class="p-2 bg-indigo-950/40 text-indigo-300">AR2</th><th class="p-2 bg-amber-950/40 text-amber-300">ETR</th>
+                </tr>
+              </thead>
+              <tbody id="subjectPassFailTableBody" class="divide-y divide-slate-800/60 font-mono text-center text-xs"></tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      <!-- SPIDER WEB RADAR INDIVIDU -->
-      <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 shadow">
+      <!-- ============================================== -->
+      <!-- MODUL: SENARAI MARKAH MENGIKUT MATA PELAJARAN  -->
+      <!-- ============================================== -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest font-mono">Matriks Subjek</span>
+            <h3 class="text-lg sm:text-xl font-black text-white mt-0.5">Senarai Markah Calon Mengikut Mata Pelajaran</h3>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <select id="singleSubjectSelect" onchange="renderSubjectTable()" class="bg-slate-950 border border-slate-700 text-indigo-300 font-bold rounded-xl px-3 py-2 outline-none">
+              <!-- Diisi automatik -->
+            </select>
+            <select id="subjectClassFilter" onchange="renderSubjectTable()" class="bg-slate-950 border border-slate-700 text-slate-200 font-semibold rounded-xl px-3 py-2 outline-none">
+              <option value="ALL">Semua Kelas</option>
+              <option value="5S1">5S1</option><option value="5S2">5S2</option><option value="5S3">5S3</option>
+            </select>
+            <input type="text" id="subjectSearchInput" onkeyup="renderSubjectTable()" placeholder="Cari..." class="bg-slate-950 border border-slate-800 px-3 py-2 rounded-xl text-slate-200 outline-none w-32">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72 overflow-y-auto">
+          <table class="w-full text-left text-xs text-slate-300 border-collapse">
+            <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800 whitespace-nowrap">
+              <tr>
+                <th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th>
+                <th class="p-3 text-center">TOV</th><th class="p-3 text-center">OTR1</th><th class="p-3 text-center">AR1</th>
+                <th class="p-3 text-center">OTR2</th><th class="p-3 text-center bg-indigo-950/50 text-indigo-300 font-black">AR2</th>
+                <th class="p-3 text-center bg-amber-950/40 text-amber-300 font-bold">ETR</th><th class="p-3 text-center">Beza</th><th class="p-3 text-center">Gred</th>
+              </tr>
+            </thead>
+            <tbody id="subjectTableBody" class="divide-y divide-slate-800/60 font-medium"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- MODUL: ANALISIS KUMPULAN SASARAN & INTERVENSI  -->
+      <!-- ============================================== -->
+      <div class="space-y-4">
+        <h3 class="text-lg sm:text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div onclick="setFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow">
+            <div class="flex justify-between text-amber-400 text-xs font-bold uppercase"><span>Potensi Terbaik</span><i class="fa-solid fa-crown"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-top15">15 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Gred A &amp; Purata Tertinggi</p>
+          </div>
+          <div onclick="setFocusTab('failSej')" id="card-focus-failSej" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-rose-500">
+            <div class="flex justify-between text-rose-400 text-xs font-bold uppercase"><span>Gagal Sejarah (&lt;40)</span><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-failSej">8 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Intervensi Sejarah</p>
+          </div>
+          <div onclick="setFocusTab('failBm')" id="card-focus-failBm" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-orange-500">
+            <div class="flex justify-between text-orange-400 text-xs font-bold uppercase"><span>Gagal BM (&lt;40)</span><i class="fa-solid fa-book-bookmark"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-failBm">3 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Intervensi BM</p>
+          </div>
+          <div onclick="setFocusTab('failBoth')" id="card-focus-failBoth" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-red-500">
+            <div class="flex justify-between text-red-400 text-xs font-bold uppercase"><span>Gagal BM & Sejarah</span><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Kritikal Sijil SPM</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow">
+          <div class="flex justify-between items-center mb-3">
+            <h4 class="font-bold text-white text-sm" id="focusTableTitle">Senarai Murid Potensi Terbaik</h4>
+            <span class="text-xs text-slate-400 font-mono" id="focusTableCount">15 Rekod</span>
+          </div>
+          <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72 overflow-y-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-950 text-slate-400 uppercase font-mono sticky top-0 border-b border-slate-800" id="focusTableThead"></thead>
+              <tbody id="focusTableBody" class="divide-y divide-slate-800/60 font-medium"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- MODUL: PROFIL REPUTASI & SPIDER WEB RADAR INDIVIDU -->
+      <!-- ============================================== -->
+      <div class="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-indigo-500/30 rounded-3xl p-5 sm:p-7 relative overflow-hidden shadow">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <h2 class="text-lg sm:text-xl font-black text-white">Profil Pencapaian Calon (Radar Graph)</h2>
+            <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest score-font">Profil Calon &amp; Spider Web Graph</span>
+            <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">Pencapaian Mengikut Mata Pelajaran (Individu)</h2>
           </div>
           
-          <div class="flex items-center gap-2">
-            <select id="studentSelect" onchange="updateRadarChart(this.value)" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3.5 py-1.5 text-xs sm:text-sm font-semibold outline-none">
-              <!-- Diisi dinamik oleh JS -->
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="radarClassFilter" onchange="filterRadarStudentDropdown()" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold outline-none">
+              <option value="ALL">Semua Kelas</option><option value="5S1">5S1</option><option value="5S2">5S2</option><option value="5S3">5S3</option>
+            </select>
+            <select id="studentSelect" onchange="syncStudent(this.value)" class="bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3.5 py-1.5 text-xs sm:text-sm font-semibold outline-none w-64 md:w-80">
+              <!-- Diisi automatik -->
             </select>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center mt-5">
-          <div class="lg:col-span-4 bg-slate-950/70 border border-slate-800 rounded-2xl p-5 flex flex-col items-center text-center">
-            <h3 class="text-base font-bold text-white mt-1" id="rpg-name">-</h3>
-            <p class="text-xs text-indigo-400 font-semibold" id="rpg-class">-</p>
+          <div class="lg:col-span-4 bg-slate-950/70 border border-slate-800 rounded-2xl p-5 flex flex-col items-center text-center relative">
+            <div id="rpg-rank" class="absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-black uppercase score-font border border-amber-500/30">
+              TAHAP: CEMERLANG
+            </div>
+            
+            <div class="relative group my-2">
+              <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-indigo-500 to-rose-500 p-1 shadow">
+                <div class="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center overflow-hidden">
+                  <img id="avatar-img" src="" alt="Muka Calon" class="w-full h-full object-cover hidden">
+                  <div id="avatar-placeholder" class="flex flex-col items-center text-slate-400">
+                    <i class="fa-solid fa-user-graduate text-3xl text-indigo-400 mb-1"></i>
+                    <span class="text-[9px] font-mono uppercase text-slate-500">Tiada Foto</span>
+                  </div>
+                </div>
+              </div>
+              <label for="studentPhotoInput" class="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-500 text-white p-2 rounded-full cursor-pointer shadow border-2 border-slate-900" title="Muat Naik Foto Calon">
+                <i class="fa-solid fa-camera text-xs"></i>
+              </label>
+              <input type="file" id="studentPhotoInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+            </div>
+
+            <h3 class="text-base font-bold text-white tracking-wide mt-1" id="rpg-name">AFIF HAFIY BIN MOHD AFIQ</h3>
+            <p class="text-xs text-indigo-400 font-semibold" id="rpg-class">TINGKATAN 5S1</p>
+            <div class="mt-2 px-3 py-0.5 bg-slate-900 border border-slate-800 rounded-lg text-xs font-mono text-slate-300" id="rpg-title">⭐ Tokoh Harapan Cemerlang</div>
+
+            <div class="w-full grid grid-cols-2 gap-2.5 mt-4 pt-3 border-t border-slate-800 text-left">
+              <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 uppercase font-bold">Indeks Prestasi</span>
+                <p class="text-lg font-black text-amber-400 score-font mt-0.5" id="rpg-combat-power">740 IPC</p>
+              </div>
+              <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 uppercase font-bold">Purata Markah</span>
+                <p class="text-lg font-black text-emerald-400 score-font mt-0.5" id="rpg-avg">74%</p>
+              </div>
+            </div>
           </div>
 
-          <div class="lg:col-span-8 flex justify-center p-2">
+          <div class="lg:col-span-8 flex flex-col items-center justify-center p-2">
             <div class="w-full max-w-md aspect-square">
               <canvas id="studentRadarChart"></canvas>
             </div>
@@ -160,25 +311,39 @@
       </div>
     </section>
 
-    <!-- 2. PENGISIAN DATA -->
+    <!-- ============================================== -->
+    <!-- TAB 2: PENGISIAN DATA -->
+    <!-- ============================================== -->
     <section id="tab-data-entry" class="hidden space-y-5">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
           <div>
-            <h2 class="text-lg font-bold text-white">Pengurusan Data Calon</h2>
-            <p class="text-xs text-slate-400">Senarai kemaskini markah calon mengikut kelas.</p>
+            <h2 class="text-lg font-bold text-white">Senarai Penuh &amp; Pengurusan Markah Calon (40 Orang)</h2>
+            <p class="text-xs text-slate-400">Tekan 'Kemaskini Semua' untuk mengubah markah kesemua mata pelajaran calon.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="fetchGoogleSheetData()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+              <i class="fa-solid fa-rotate"></i> Muat Semula Data Sheet
+            </button>
+            <button onclick="exportDataCSV()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+              <i class="fa-solid fa-file-arrow-down"></i> Eksport CSV
+            </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-          <input type="text" id="tableSearch" oninput="debouncedSearch()" placeholder="Cari nama calon..." class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+          <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="Cari nama calon..." class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
           
-          <select id="tableClassFilter" onchange="renderStudentTable()" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
-            <option value="ALL">Semua Kelas</option>
-            <option value="5S1">5 Sains 1</option>
-            <option value="5S2">5 Sains 2</option>
-            <option value="5S3">5 Sains 3</option>
+          <select id="tableClassFilter" onchange="filterStudentTable()" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-200 outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="ALL">Semua Kelas (40 Calon)</option>
+            <option value="5S1">5 Sains 1 (5S1 - 9 Calon)</option>
+            <option value="5S2">5 Sains 2 (5S2 - 19 Calon)</option>
+            <option value="5S3">5 Sains 3 (5S3 - 12 Calon)</option>
           </select>
+
+          <div class="flex items-center text-xs text-slate-400 px-4 bg-slate-950 rounded-xl border border-slate-800" id="tableRecordCount">
+            Memaparkan 40 Calon
+          </div>
         </div>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-800">
@@ -186,206 +351,901 @@
             <thead class="bg-slate-950 text-slate-400 uppercase font-mono border-b border-slate-800">
               <tr>
                 <th class="p-3.5">Bil</th>
+                <th class="p-3.5">Foto</th>
                 <th class="p-3.5">Nama Penuh Calon</th>
                 <th class="p-3.5">Kelas</th>
                 <th class="p-3.5 text-center">BM (AR2)</th>
                 <th class="p-3.5 text-center">BI (AR2)</th>
                 <th class="p-3.5 text-center">MAT (AR2)</th>
                 <th class="p-3.5 text-center">SEJ (AR2)</th>
+                <th class="p-3.5 text-center">Tindakan</th>
               </tr>
             </thead>
-            <tbody id="studentTableBody" class="divide-y divide-slate-800/60 font-medium">
-              <!-- Diisi dinamik oleh JavaScript -->
-            </tbody>
+            <tbody id="studentTableBody" class="divide-y divide-slate-800/60 font-medium"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- 3. SLIP CETAKAN -->
+    <!-- ============================================== -->
+    <!-- TAB 3: SLIP CETAKAN (A4) -->
+    <!-- ============================================== -->
     <section id="tab-cetakan" class="hidden space-y-5">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 no-print flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <h2 class="text-lg font-bold text-white">Cetak Slip Pelaporan</h2>
+          <h2 class="text-lg font-bold text-white">Cetak Slip Pelaporan Prestasi Murid</h2>
+          <p class="text-xs text-slate-400">Pilih calon murid untuk mencetak format laporan rasmi A4 bersama foto murid.</p>
         </div>
         <div class="flex items-center space-x-3">
-          <select id="printSelect" onchange="renderPrintSlip(this.value)" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-2 text-xs sm:text-sm outline-none w-64"></select>
-          <button onclick="window.print()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow">
+          <select id="printSelect" onchange="renderPrintSlip()" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-2 text-xs sm:text-sm outline-none w-64 md:w-80"></select>
+          <button onclick="window.print()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow whitespace-nowrap">
             <i class="fa-solid fa-print"></i> Cetak Slip
           </button>
         </div>
       </div>
 
       <!-- KAWASAN CETAKAN -->
-      <div id="print-area" class="bg-white text-slate-900 p-8 rounded-3xl shadow max-w-4xl mx-auto border border-slate-200">
-        <div class="text-center border-b-2 border-slate-900 pb-4 mb-5">
-          <h2 class="text-xl font-black uppercase text-slate-950">SMK KAMARUL ARIFFIN</h2>
-          <p class="text-xs font-bold text-indigo-900 mt-1 uppercase">SLIP PELAPORAN HEADCOUNT SPM 2026</p>
+      <div id="print-area" class="bg-white text-slate-900 p-8 sm:p-12 rounded-3xl shadow max-w-4xl mx-auto border border-slate-200">
+        <div class="flex items-center border-b-2 border-slate-900 pb-4 mb-5">
+          <div class="w-16 h-16 flex-shrink-0 flex items-center justify-center mr-4">
+            <img src="logo.png" alt="Logo" class="h-16 w-auto object-contain" onerror="this.style.display='none'">
+          </div>
+          <div class="text-center flex-grow">
+            <h2 class="text-xl font-black uppercase text-slate-950">SMK KAMARUL ARIFFIN</h2>
+            <p class="text-[11px] font-serif font-bold text-slate-700">JALAN TENANG, 85300 LABIS, SEGAMAT, JOHOR (KOD: JEA7039)</p>
+            <p class="text-xs font-extrabold text-indigo-900 mt-1 uppercase">SLIP PELAPORAN HEADCOUNT SPM 2026</p>
+          </div>
+          <div class="w-16 hidden sm:block"></div>
         </div>
 
-        <div class="border border-slate-300 p-3.5 rounded-xl bg-slate-50 mb-5 text-xs space-y-1">
-          <p><span class="font-bold text-slate-600">NAMA CALON:</span> <span id="p-name" class="font-extrabold text-slate-900 uppercase">-</span></p>
-          <p><span class="font-bold text-slate-600">TINGKATAN:</span> <span id="p-class" class="font-bold text-slate-900">-</span></p>
+        <div class="flex items-center justify-between border border-slate-300 p-3.5 rounded-xl bg-slate-50 mb-5">
+          <div class="text-xs space-y-1">
+            <p><span class="font-bold text-slate-600">NAMA CALON:</span> <span id="p-name" class="font-extrabold text-slate-900 uppercase">AFIF HAFIY</span></p>
+            <p><span class="font-bold text-slate-600">TINGKATAN:</span> <span id="p-class" class="font-bold text-slate-900">5S1</span></p>
+            <p><span class="font-bold text-slate-600">TAHUN:</span> <span class="font-bold">2026</span></p>
+            <p><span class="font-bold text-slate-600">STATUS SIJIL SPM:</span> <span id="p-cert-status" class="font-black text-emerald-700">LAYAK</span></p>
+          </div>
+          <div class="w-20 h-24 border-2 border-slate-400 rounded-lg overflow-hidden bg-white flex items-center justify-center flex-shrink-0">
+            <img id="p-photo" src="" alt="Foto" class="w-full h-full object-cover hidden">
+            <span id="p-photo-placeholder" class="text-[9px] text-slate-400 font-mono">Foto Calon</span>
+          </div>
+        </div>
+
+        <table class="w-full text-xs border border-collapse border-slate-400 mb-5 text-center">
+          <thead class="bg-slate-100 font-bold border-b border-slate-400 text-slate-800">
+            <tr>
+              <th class="border border-slate-400 p-2 text-left">MATA PELAJARAN</th>
+              <th class="border border-slate-400 p-2 w-14">TOV</th>
+              <th class="border border-slate-400 p-2 w-14">OTR1</th>
+              <th class="border border-slate-400 p-2 w-14">AR1</th>
+              <th class="border border-slate-400 p-2 w-14">OTR2</th>
+              <th class="border border-slate-400 p-2 w-14 bg-indigo-50 font-black">AR2</th>
+              <th class="border border-slate-400 p-2 w-14 bg-amber-50">ETR</th>
+            </tr>
+          </thead>
+          <tbody id="printSubjectTable" class="divide-y divide-slate-300 font-medium"></tbody>
+        </table>
+
+        <div class="grid grid-cols-2 gap-4 text-xs mb-8">
+          <div class="border border-slate-300 p-3 rounded-xl">
+            <p class="font-bold text-slate-700 mb-1">Rumusan AR2:</p>
+            <p>Purata Markah: <span id="p-avg" class="font-bold text-slate-900">74%</span></p>
+          </div>
+          <div class="border border-slate-300 p-3 rounded-xl">
+            <p class="font-bold text-slate-700 mb-1">Ulasan Guru Tingkatan:</p>
+            <p class="italic text-slate-600">"Pencapaian menunjukkan perkembangan positif. Tingkatkan usaha untuk capai target ETR."</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6 text-center text-xs pt-10">
+          <div><div class="border-b border-slate-900 pb-10"></div><p class="mt-2 font-bold">Tandatangan Calon</p></div>
+          <div><div class="border-b border-slate-900 pb-10"></div><p class="mt-2 font-bold">Guru Tingkatan</p></div>
+          <div><div class="border-b border-slate-900 pb-10"></div><p class="mt-2 font-bold">Pengetua / GPK Pentadbiran</p></div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- JAVASCRIPT OPTIMUM & RINGAN -->
+  <!-- MODAL EDIT MARKAH SEMUA MATA PELAJARAN -->
+  <div id="fullEditModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <div>
+          <h3 class="text-base font-bold text-white" id="modalStudentName">Kemaskini Markah</h3>
+          <p class="text-xs text-indigo-400" id="modalStudentClass">Kelas</p>
+        </div>
+        <button onclick="closeFullEditModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-3 flex-grow" id="modalSubjectsContainer"></div>
+
+      <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-between">
+        <button onclick="closeFullEditModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">Batal</button>
+        <button onclick="saveFullStudentMarks()" class="px-4 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan Semua
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT RINGAN & PANTAS -->
   <script>
-    // 1. DATA SAMPLE (CONTOH RINGAN)
-    const studentsData = [
-      { id: "1", name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1", bm: 82, bi: 75, mat: 68, sej: 80 },
-      { id: "2", name: "AMIRA AHMAD", class: "5S1", bm: 78, bi: 82, mat: 70, sej: 85 },
-      { id: "3", name: "DANIAL HAKIM", class: "5S2", bm: 65, bi: 58, mat: 50, sej: 60 },
-      { id: "4", name: "NURUL AIN", class: "5S3", bm: 45, bi: 40, mat: 35, sej: 42 }
-    ];
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
+    const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    let journeyChartInstance = null;
-    let radarChartInstance = null;
-    let searchTimeout = null;
-
-    // 2. TUKAR TAB
-    function switchTab(tabId) {
-      document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-
-      document.querySelectorAll('nav button').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('text-slate-400');
-      });
-      const activeBtn = document.getElementById(`nav-${tabId}`);
-      activeBtn.classList.add('bg-indigo-600', 'text-white');
-      activeBtn.classList.remove('text-slate-400');
+    function getSpmGrade(mark) {
+      if (mark === null || mark === undefined || isNaN(mark)) return { grade: "TH", point: 9 };
+      const m = parseInt(mark);
+      if (m >= 90) return { grade: "A+", point: 0 };
+      if (m >= 80) return { grade: "A", point: 1 };
+      if (m >= 70) return { grade: "A-", point: 2 };
+      if (m >= 65) return { grade: "B+", point: 3 };
+      if (m >= 60) return { grade: "B", point: 4 };
+      if (m >= 55) return { grade: "C+", point: 5 };
+      if (m >= 50) return { grade: "C", point: 6 };
+      if (m >= 45) return { grade: "D", point: 7 };
+      if (m >= 40) return { grade: "E", point: 8 };
+      return { grade: "G", point: 9 };
     }
 
-    // 3. RENDER GRAF TRAJEKTORI (MENCEGAH MEMORY LEAK)
-    function initJourneyChart() {
-      const ctx = document.getElementById('journeyChart').getContext('2d');
-      if (journeyChartInstance) journeyChartInstance.destroy();
+    let students = [
+      { id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:65,otr1:68,ar1:72,otr2:72,ar2:75,etr:75}, "Bahasa Inggeris": {tov:77,otr1:79,ar1:70,otr2:81,ar2:76,etr:83}, "Matematik": {tov:41,otr1:49,ar1:43,otr2:57,ar2:50,etr:65}, "Sejarah": {tov:53,otr1:57,ar1:65,otr2:61,ar2:55,etr:65}, "Pendidikan Islam": {tov:70,otr1:73,ar1:83,otr2:77,ar2:93,etr:80}, "Fizik": {tov:38,otr1:40,ar1:49,otr2:42,ar2:50,etr:44}, "Kimia": {tov:23,otr1:29,ar1:38,otr2:34,ar2:50,etr:40}, "Matematik Tambahan": {tov:8,otr1:19,ar1:6,otr2:29,ar2:10,etr:40}, "Asas Kelestarian": {tov:40,otr1:48,ar1:53,otr2:57,ar2:71,etr:65}, "Tasawwur Islam": {tov:70,otr1:73,ar1:51,otr2:77,ar2:60,etr:80} }},
+      { id: 2, name: "CHENG ZHI XUEN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:69,otr1:72,ar1:75,otr2:76,ar2:80,etr:79}, "Bahasa Inggeris": {tov:68,otr1:70,ar1:64,otr2:73,ar2:73,etr:75}, "Matematik": {tov:75,otr1:77,ar1:81,otr2:78,ar2:81,etr:80}, "Sejarah": {tov:46,otr1:51,ar1:52,otr2:55,ar2:52,etr:60}, "Pendidikan Moral": {tov:54,otr1:63,ar1:55,otr2:71,ar2:70,etr:80}, "Biologi": {tov:40,otr1:43,ar1:27,otr2:47,ar2:40,etr:50}, "Fizik": {tov:48,otr1:54,ar1:53,otr2:59,ar2:46,etr:65}, "Kimia": {tov:35,otr1:43,ar1:34,otr2:52,ar2:43,etr:60}, "Matematik Tambahan": {tov:34,otr1:36,ar1:43,otr2:38,ar2:41,etr:40}, "Bahasa Cina": {tov:75,otr1:77,ar1:65,otr2:78,ar2:73,etr:80} }},
+      { id: 3, name: "HONG ZI XIN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:51,otr1:54,ar1:61,otr2:57,ar2:67,etr:60}, "Bahasa Inggeris": {tov:56,otr1:58,ar1:62,otr2:60,ar2:65,etr:62}, "Matematik": {tov:81,otr1:84,ar1:62,otr2:87,ar2:63,etr:90}, "Sejarah": {tov:61,otr1:64,ar1:50,otr2:67,ar2:67,etr:70}, "Pendidikan Moral": {tov:51,otr1:61,ar1:43,otr2:70,ar2:71,etr:80}, "Biologi": {tov:23,otr1:29,ar1:11,otr2:34,ar2:30,etr:40}, "Fizik": {tov:40,otr1:47,ar1:39,otr2:53,ar2:36,etr:60}, "Kimia": {tov:17,otr1:25,ar1:28,otr2:32,ar2:40,etr:40}, "Matematik Tambahan": {tov:41,otr1:42,ar1:51,otr2:43,ar2:27,etr:44}, "Bahasa Cina": {tov:73,otr1:75,ar1:75,otr2:78,ar2:72,etr:80} }},
+      { id: 4, name: "JENNISER YOW YI EN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:66,otr1:72,ar1:74,otr2:79,ar2:82,etr:85}, "Bahasa Inggeris": {tov:54,otr1:57,ar1:55,otr2:59,ar2:60,etr:62}, "Matematik": {tov:91,otr1:92,ar1:95,otr2:94,ar2:92,etr:95}, "Sejarah": {tov:46,otr1:56,ar1:65,otr2:65,ar2:65,etr:75}, "Pendidikan Moral": {tov:61,otr1:67,ar1:58,otr2:74,ar2:73,etr:80}, "Biologi": {tov:76,otr1:78,ar1:41,otr2:79,ar2:65,etr:81}, "Fizik": {tov:55,otr1:60,ar1:57,otr2:65,ar2:60,etr:70}, "Kimia": {tov:47,otr1:55,ar1:68,otr2:62,ar2:60,etr:70}, "Matematik Tambahan": {tov:72,otr1:75,ar1:90,otr2:77,ar2:70,etr:80}, "Bahasa Cina": {tov:78,otr1:79,ar1:68,otr2:79,ar2:79,etr:80} }},
+      { id: 5, name: "JONATHAN TAN HAO YUAN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:55,otr1:58,ar1:70,otr2:62,ar2:70,etr:65}, "Bahasa Inggeris": {tov:66,otr1:68,ar1:65,otr2:70,ar2:67,etr:72}, "Matematik": {tov:46,otr1:57,ar1:54,otr2:69,ar2:46,etr:80}, "Sejarah": {tov:51,otr1:57,ar1:41,otr2:64,ar2:60,etr:70}, "Pendidikan Moral": {tov:59,otr1:66,ar1:57,otr2:73,ar2:66,etr:80}, "Biologi": {tov:77,otr1:79,ar1:70,otr2:80,ar2:89,etr:82}, "Fizik": {tov:82,otr1:84,ar1:64,otr2:87,ar2:70,etr:89}, "Kimia": {tov:26,otr1:36,ar1:52,otr2:45,ar2:27,etr:55}, "Matematik Tambahan": {tov:10,otr1:20,ar1:11,otr2:30,ar2:20,etr:40}, "Bahasa Cina": {tov:51,otr1:54,ar1:41,otr2:57,ar2:55,etr:60} }},
+      { id: 6, name: "LIM QI SHENG", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:55,otr1:58,ar1:71,otr2:62,ar2:63,etr:65}, "Bahasa Inggeris": {tov:46,otr1:49,ar1:50,otr2:52,ar2:49,etr:55}, "Matematik": {tov:90,otr1:92,ar1:83,otr2:93,ar2:81,etr:95}, "Sejarah": {tov:66,otr1:72,ar1:74,otr2:79,ar2:65,etr:85}, "Pendidikan Moral": {tov:61,otr1:71,ar1:50,otr2:80,ar2:72,etr:90}, "Biologi": {tov:56,otr1:59,ar1:44,otr2:63,ar2:66,etr:66}, "Fizik": {tov:54,otr1:58,ar1:52,otr2:61,ar2:60,etr:65}, "Kimia": {tov:53,otr1:62,ar1:61,otr2:71,ar2:65,etr:80}, "Matematik Tambahan": {tov:56,otr1:57,ar1:55,otr2:59,ar2:70,etr:60}, "Bahasa Cina": {tov:65,otr1:70,ar1:63,otr2:75,ar2:70,etr:80} }},
+      { id: 7, name: "MARCUS EE PIAO XUAN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:51,otr1:56,ar1:61,otr2:60,ar2:65,etr:65}, "Bahasa Inggeris": {tov:56,otr1:58,ar1:56,otr2:60,ar2:68,etr:62}, "Matematik": {tov:72,otr1:75,ar1:54,otr2:77,ar2:49,etr:80}, "Sejarah": {tov:62,otr1:65,ar1:40,otr2:67,ar2:45,etr:70}, "Pendidikan Moral": {tov:29,otr1:46,ar1:41,otr2:63,ar2:56,etr:80}, "Biologi": {tov:24,otr1:29,ar1:25,otr2:35,ar2:32,etr:40}, "Fizik": {tov:37,otr1:38,ar1:45,otr2:39,ar2:34,etr:40}, "Kimia": {tov:23,otr1:30,ar1:32,otr2:38,ar2:32,etr:45}, "Matematik Tambahan": {tov:8,otr1:19,ar1:28,otr2:29,ar2:16,etr:40}, "Bahasa Cina": {tov:56,otr1:64,ar1:65,otr2:72,ar2:61,etr:80} }},
+      { id: 8, name: "NUR ALIESYA TAN BINTI ABDULLAH", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:71,otr1:74,ar1:75,otr2:78,ar2:80,etr:81}, "Bahasa Inggeris": {tov:64,otr1:66,ar1:70,otr2:68,ar2:75,etr:70}, "Matematik": {tov:76,otr1:77,ar1:75,otr2:79,ar2:85,etr:80}, "Sejarah": {tov:68,otr1:72,ar1:55,otr2:76,ar2:70,etr:80}, "Pendidikan Islam": {tov:87,otr1:88,ar1:77,otr2:89,ar2:86,etr:90}, "Biologi": {tov:30,otr1:33,ar1:24,otr2:37,ar2:46,etr:40}, "Fizik": {tov:46,otr1:49,ar1:53,otr2:52,ar2:60,etr:55}, "Kimia": {tov:40,otr1:48,ar1:63,otr2:57,ar2:60,etr:65}, "Matematik Tambahan": {tov:32,otr1:35,ar1:40,otr2:39,ar2:50,etr:42}, "Tasawwur Islam": {tov:87,otr1:88,ar1:67,otr2:88,ar2:80,etr:89} }},
+      { id: 9, name: "NUR SYAAFIAH SABRINA BINTI ABDULLAH", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:73,otr1:79,ar1:81,otr2:84,ar2:85,etr:90}, "Bahasa Inggeris": {tov:72,otr1:74,ar1:77,otr2:76,ar2:82,etr:78}, "Matematik": {tov:61,otr1:67,ar1:50,otr2:74,ar2:63,etr:80}, "Sejarah": {tov:70,otr1:75,ar1:60,otr2:80,ar2:80,etr:85}, "Pendidikan Islam": {tov:70,otr1:73,ar1:79,otr2:77,ar2:92,etr:80}, "Biologi": {tov:47,otr1:50,ar1:33,otr2:54,ar2:60,etr:57}, "Fizik": {tov:48,otr1:50,ar1:52,otr2:53,ar2:45,etr:55}, "Kimia": {tov:42,otr1:50,ar1:60,otr2:57,ar2:61,etr:65}, "Matematik Tambahan": {tov:11,otr1:21,ar1:22,otr2:30,ar2:15,etr:40}, "Tasawwur Islam": {tov:70,otr1:73,ar1:71,otr2:77,ar2:70,etr:80} }},
+      { id: 10, name: "ABBY ALKASHA BINTI ANUAR", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:68,otr1:71,ar1:63,otr2:75,ar2:73,etr:78}, "Bahasa Inggeris": {tov:51,otr1:54,ar1:52,otr2:57,ar2:67,etr:60}, "Matematik": {tov:19,otr1:28,ar1:41,otr2:36,ar2:23,etr:45}, "Sejarah": {tov:49,otr1:51,ar1:42,otr2:53,ar2:60,etr:55}, "Pendidikan Islam": {tov:47,otr1:50,ar1:81,otr2:53,ar2:70,etr:56}, "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:67,otr2:73,ar2:50,etr:77}, "Sains": {tov:50,otr1:53,ar1:55,otr2:57,ar2:55,etr:60}, "Asas Kelestarian": {tov:40,otr1:48,ar1:50,otr2:57,ar2:65,etr:65}, "Tasawwur Islam": {tov:67,otr1:68,ar1:49,otr2:69,ar2:67,etr:70} }},
+      { id: 11, name: "ADAM RAYYAN BIN KHAIRUL ANUAR", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:57,otr1:58,ar1:0,otr2:59,ar2:58,etr:60}, "Bahasa Inggeris": {tov:33,otr1:35,ar1:21,otr2:38,ar2:40,etr:40}, "Matematik": {tov:13,otr1:22,ar1:11,otr2:31,ar2:22,etr:40}, "Sejarah": {tov:42,otr1:46,ar1:0,otr2:51,ar2:43,etr:55}, "Pendidikan Islam": {tov:55,otr1:58,ar1:0,otr2:62,ar2:65,etr:65}, "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:48,otr2:59,ar2:45,etr:60}, "Sains": {tov:33,otr1:39,ar1:19,otr2:46,ar2:41,etr:52}, "Perniagaan": {tov:40,otr1:41,ar1:40,otr2:43,ar2:26,etr:44}, "Tasawwur Islam": {tov:57,otr1:58,ar1:29,otr2:59,ar2:44,etr:60} }},
+      { id: 12, name: "AMMAR SHAKIR BIN MAZLAN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:49,otr1:53,ar1:47,otr2:56,ar2:51,etr:60}, "Bahasa Inggeris": {tov:56,otr1:58,ar1:63,otr2:60,ar2:75,etr:62}, "Matematik": {tov:16,otr1:24,ar1:24,otr2:32,ar2:17,etr:40}, "Sejarah": {tov:40,otr1:42,ar1:32,otr2:43,ar2:42,etr:45}, "Pendidikan Islam": {tov:52,otr1:55,ar1:52,otr2:58,ar2:56,etr:61}, "Pendidikan Seni Visual": {tov:55,otr1:56,ar1:39,otr2:58,ar2:56,etr:59}, "Sains": {tov:26,otr1:33,ar1:33,otr2:41,ar2:27,etr:48}, "Perniagaan": {tov:26,otr1:31,ar1:30,otr2:35,ar2:32,etr:40}, "Tasawwur Islam": {tov:60,otr1:62,ar1:32,otr2:63,ar2:40,etr:65} }},
+      { id: 13, name: "JUNO WONG JUN LE", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:53,otr1:57,ar1:60,otr2:61,ar2:62,etr:65}, "Bahasa Inggeris": {tov:48,otr1:48,ar1:42,otr2:48,ar2:45,etr:48}, "Matematik": {tov:23,otr1:29,ar1:23,otr2:34,ar2:47,etr:40}, "Sejarah": {tov:38,otr1:39,ar1:45,otr2:39,ar2:47,etr:40}, "Pendidikan Moral": {tov:38,otr1:49,ar1:36,otr2:59,ar2:56,etr:70}, "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:38,otr2:59,ar2:40,etr:60}, "Sains": {tov:52,otr1:55,ar1:36,otr2:59,ar2:50,etr:62}, "Bahasa Cina": {tov:43,otr1:50,ar1:41,otr2:58,ar2:48,etr:65}, "Tasawwur Islam": {tov:26,otr1:31,ar1:14,otr2:35,ar2:28,etr:40} }},
+      { id: 14, name: "KHADIJAH BINTI SALIHEN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:60,otr1:65,ar1:65,otr2:70,ar2:77,etr:75}, "Bahasa Inggeris": {tov:50,otr1:53,ar1:48,otr2:56,ar2:50,etr:59}, "Matematik": {tov:31,otr1:37,ar1:40,otr2:44,ar2:29,etr:50}, "Sejarah": {tov:73,otr1:75,ar1:76,otr2:78,ar2:75,etr:80}, "Pendidikan Islam": {tov:80,otr1:83,ar1:90,otr2:87,ar2:90,etr:90}, "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:42,otr2:73,ar2:55,etr:77}, "Sains": {tov:63,otr1:69,ar1:55,otr2:76,ar2:73,etr:82}, "Asas Kelestarian": {tov:50,otr1:60,ar1:55,otr2:70,ar2:71,etr:80}, "Tasawwur Islam": {tov:90,otr1:92,ar1:81,otr2:93,ar2:83,etr:95} }},
+      { id: 15, name: "MUHAMAD AFIQ BIN NORAZLI", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:55,otr1:58,ar1:61,otr2:62,ar2:61,etr:65}, "Bahasa Inggeris": {tov:37,otr1:38,ar1:32,otr2:39,ar2:40,etr:40}, "Matematik": {tov:18,otr1:29,ar1:34,otr2:39,ar2:22,etr:50}, "Sejarah": {tov:57,otr1:60,ar1:51,otr2:62,ar2:60,etr:65}, "Pendidikan Islam": {tov:75,otr1:80,ar1:82,otr2:85,ar2:85,etr:90}, "Pendidikan Seni Visual": {tov:65,otr1:69,ar1:52,otr2:74,ar2:55,etr:78}, "Sains": {tov:48,otr1:56,ar1:44,otr2:63,ar2:43,etr:71}, "Perniagaan": {tov:61,otr1:64,ar1:60,otr2:66,ar2:54,etr:69}, "Tasawwur Islam": {tov:71,otr1:72,ar1:53,otr2:74,ar2:55,etr:75} }},
+      { id: 16, name: "MUHAMMAD AZIQ THAQIF BIN MOHD ISA", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:1,otr1:22,ar1:0,otr2:44,ar2:53,etr:65}, "Bahasa Inggeris": {tov:35,otr1:38,ar1:49,otr2:40,ar2:50,etr:43}, "Matematik": {tov:10,otr1:20,ar1:12,otr2:30,ar2:12,etr:40}, "Sejarah": {tov:19,otr1:26,ar1:7,otr2:33,ar2:30,etr:40}, "Pendidikan Islam": {tov:40,otr1:44,ar1:27,otr2:47,ar2:50,etr:51}, "Pendidikan Seni Visual": {tov:52,otr1:53,ar1:37,otr2:53,ar2:45,etr:54}, "Sains": {tov:28,otr1:34,ar1:29,otr2:40,ar2:26,etr:46}, "Perniagaan": {tov:19,otr1:26,ar1:29,otr2:33,ar2:19,etr:40}, "Tasawwur Islam": {tov:45,otr1:47,ar1:22,otr2:48,ar2:36,etr:50} }},
+      { id: 17, name: "MUHAMMAD DANIAL ARASH BIN SARKAN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:53,otr1:59,ar1:50,otr2:64,ar2:60,etr:70}, "Bahasa Inggeris": {tov:73,otr1:75,ar1:55,otr2:78,ar2:73,etr:80}, "Matematik": {tov:14,otr1:23,ar1:14,otr2:31,ar2:13,etr:40}, "Sejarah": {tov:40,otr1:45,ar1:19,otr2:50,ar2:41,etr:55}, "Pendidikan Islam": {tov:40,otr1:44,ar1:56,otr2:47,ar2:67,etr:51}, "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:56,otr2:78,ar2:50,etr:79}, "Sains": {tov:46,otr1:52,ar1:53,otr2:59,ar2:46,etr:65}, "Perniagaan": {tov:27,otr1:31,ar1:30,otr2:36,ar2:50,etr:40}, "Tasawwur Islam": {tov:32,otr1:35,ar1:32,otr2:37,ar2:53,etr:40} }},
+      { id: 18, name: "MUHAMMAD MU'IZ BIN RAZALI", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:60,otr1:63,ar1:73,otr2:67,ar2:68,etr:70}, "Bahasa Inggeris": {tov:49,otr1:51,ar1:50,otr2:53,ar2:57,etr:55}, "Matematik": {tov:19,otr1:28,ar1:23,otr2:36,ar2:25,etr:45}, "Sejarah": {tov:41,otr1:46,ar1:14,otr2:50,ar2:50,etr:55}, "Pendidikan Islam": {tov:67,otr1:71,ar1:88,otr2:76,ar2:90,etr:80}, "Pendidikan Seni Visual": {tov:52,otr1:53,ar1:45,otr2:55,ar2:51,etr:56}, "Sains": {tov:60,otr1:63,ar1:52,otr2:67,ar2:46,etr:70}, "Asas Kelestarian": {tov:35,otr1:42,ar1:26,otr2:48,ar2:45,etr:55}, "Tasawwur Islam": {tov:73,otr1:75,ar1:45,otr2:78,ar2:52,etr:80} }},
+      { id: 19, name: "NUR FATIHA BINTI KAHAR", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:60,otr1:67,ar1:74,otr2:73,ar2:75,etr:80}, "Bahasa Inggeris": {tov:67,otr1:69,ar1:73,otr2:71,ar2:75,etr:73}, "Matematik": {tov:24,otr1:33,ar1:36,otr2:41,ar2:24,etr:50}, "Sejarah": {tov:51,otr1:57,ar1:46,otr2:64,ar2:63,etr:70}, "Pendidikan Islam": {tov:66,otr1:71,ar1:82,otr2:75,ar2:83,etr:80}, "Pendidikan Seni Visual": {tov:71,otr1:74,ar1:55,otr2:76,ar2:50,etr:79}, "Sains": {tov:72,otr1:75,ar1:65,otr2:77,ar2:62,etr:80}, "Asas Kelestarian": {tov:48,otr1:55,ar1:48,otr2:61,ar2:66,etr:68}, "Tasawwur Islam": {tov:74,otr1:76,ar1:56,otr2:78,ar2:48,etr:80} }},
+      { id: 20, name: "NURFAHANA BINTI MOHD YUSUF", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:52,otr1:56,ar1:65,otr2:61,ar2:64,etr:65}, "Bahasa Inggeris": {tov:31,otr1:34,ar1:41,otr2:37,ar2:45,etr:40}, "Matematik": {tov:22,otr1:28,ar1:40,otr2:34,ar2:24,etr:40}, "Sejarah": {tov:46,otr1:49,ar1:50,otr2:52,ar2:50,etr:55}, "Pendidikan Islam": {tov:56,otr1:58,ar1:86,otr2:59,ar2:91,etr:61}, "Pendidikan Seni Visual": {tov:60,otr1:62,ar1:70,otr2:63,ar2:55,etr:65}, "Sains": {tov:48,otr1:54,ar1:50,otr2:60,ar2:42,etr:66}, "Perniagaan": {tov:40,otr1:41,ar1:50,otr2:43,ar2:60,etr:44}, "Tasawwur Islam": {tov:60,otr1:62,ar1:51,otr2:63,ar2:61,etr:65} }},
+      { id: 21, name: "PUTERA AZHAD BIN MOHD ROUB", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:64,otr1:69,ar1:69,otr2:75,ar2:63,etr:80}, "Bahasa Inggeris": {tov:65,otr1:67,ar1:65,otr2:69,ar2:67,etr:71}, "Matematik": {tov:18,otr1:29,ar1:20,otr2:39,ar2:19,etr:50}, "Sejarah": {tov:42,otr1:46,ar1:40,otr2:51,ar2:50,etr:55}, "Pendidikan Islam": {tov:71,otr1:74,ar1:81,otr2:78,ar2:86,etr:81}, "Pendidikan Seni Visual": {tov:57,otr1:58,ar1:50,otr2:60,ar2:47,etr:61}, "Sains": {tov:51,otr1:61,ar1:45,otr2:72,ar2:47,etr:82}, "Asas Kelestarian": {tov:43,otr1:50,ar1:38,otr2:56,ar2:62,etr:63}, "Tasawwur Islam": {tov:85,otr1:86,ar1:53,otr2:88,ar2:60,etr:89} }},
+      { id: 22, name: "PUTERI NATASYA ALYAA BINTI ZAIDI", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:63,otr1:66,ar1:66,otr2:70,ar2:76,etr:73}, "Bahasa Inggeris": {tov:57,otr1:58,ar1:61,otr2:59,ar2:65,etr:60}, "Matematik": {tov:44,otr1:53,ar1:40,otr2:61,ar2:19,etr:70}, "Sejarah": {tov:40,otr1:45,ar1:45,otr2:50,ar2:40,etr:55}, "Pendidikan Islam": {tov:60,otr1:62,ar1:80,otr2:64,ar2:80,etr:66}, "Pendidikan Seni Visual": {tov:77,otr1:80,ar1:62,otr2:84,ar2:51,etr:87}, "Sains": {tov:61,otr1:65,ar1:60,otr2:68,ar2:58,etr:72}, "Perniagaan": {tov:53,otr1:55,ar1:60,otr2:57,ar2:63,etr:59}, "Tasawwur Islam": {tov:65,otr1:67,ar1:54,otr2:68,ar2:57,etr:70} }},
+      { id: 23, name: "PUTERI QALEESYA ARYANA BINTI BAHRIN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:60,otr1:63,ar1:67,otr2:67,ar2:76,etr:70}, "Bahasa Inggeris": {tov:51,otr1:53,ar1:60,otr2:55,ar2:67,etr:57}, "Matematik": {tov:30,otr1:33,ar1:41,otr2:37,ar2:18,etr:40}, "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:70,etr:55}, "Pendidikan Islam": {tov:50,otr1:52,ar1:78,otr2:54,ar2:80,etr:56}, "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:50,otr2:78,ar2:50,etr:79}, "Sains": {tov:48,otr1:54,ar1:50,otr2:59,ar2:50,etr:65}, "Perniagaan": {tov:46,otr1:49,ar1:60,otr2:51,ar2:61,etr:54}, "Tasawwur Islam": {tov:65,otr1:67,ar1:47,otr2:68,ar2:61,etr:70} }},
+      { id: 24, name: "HARINI A/P VADIVELAN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:45,otr1:48,ar1:49,otr2:52,ar2:53,etr:55}, "Bahasa Inggeris": {tov:38,otr1:39,ar1:43,otr2:39,ar2:56,etr:40}, "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:20,etr:40}, "Sejarah": {tov:31,otr1:34,ar1:40,otr2:37,ar2:45,etr:40}, "Pendidikan Moral": {tov:26,otr1:36,ar1:32,otr2:45,ar2:50,etr:55}, "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:28,otr2:59,ar2:42,etr:60}, "Sains": {tov:32,otr1:36,ar1:26,otr2:41,ar2:42,etr:45}, "Perniagaan": {tov:22,otr1:28,ar1:23,otr2:34,ar2:47,etr:40} }},
+      { id: 25, name: "SURENTARN A/L K NARAYANAN", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:46,otr1:49,ar1:54,otr2:53,ar2:54,etr:56}, "Bahasa Inggeris": {tov:46,otr1:48,ar1:47,otr2:50,ar2:47,etr:52}, "Matematik": {tov:12,otr1:21,ar1:26,otr2:31,ar2:18,etr:40}, "Sejarah": {tov:36,otr1:37,ar1:45,otr2:39,ar2:51,etr:40}, "Pendidikan Moral": {tov:55,otr1:63,ar1:32,otr2:72,ar2:54,etr:80}, "Pendidikan Seni Visual": {tov:51,otr1:52,ar1:44,otr2:54,ar2:51,etr:55}, "Sains": {tov:40,otr1:45,ar1:25,otr2:50,ar2:32,etr:55}, "Perniagaan": {tov:26,otr1:31,ar1:40,otr2:35,ar2:46,etr:40}, "Tasawwur Islam": {tov:26,otr1:31,ar1:32,otr2:35,ar2:25,etr:40} }},
+      { id: 26, name: "TAN TAI FENG", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:37,otr1:41,ar1:43,otr2:46,ar2:48,etr:50}, "Bahasa Inggeris": {tov:29,otr1:33,ar1:41,otr2:36,ar2:41,etr:40}, "Matematik": {tov:41,otr1:49,ar1:55,otr2:57,ar2:40,etr:65}, "Sejarah": {tov:34,otr1:38,ar1:26,otr2:41,ar2:30,etr:45}, "Pendidikan Moral": {tov:6,otr1:19,ar1:9,otr2:32,ar2:30,etr:45}, "Pendidikan Seni Visual": {tov:58,otr1:59,ar1:48,otr2:61,ar2:51,etr:62}, "Sains": {tov:18,otr1:27,ar1:25,otr2:36,ar2:28,etr:45}, "Perniagaan": {tov:14,otr1:23,ar1:24,otr2:31,ar2:41,etr:40}, "Bahasa Cina": {tov:57,otr1:60,ar1:51,otr2:62,ar2:52,etr:65} }},
+      { id: 27, name: "NUR FARAH ALYSAH BINTI ZULKEFPLAI", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:63,otr1:69,ar1:72,otr2:74,ar2:78,etr:80}, "Bahasa Inggeris": {tov:63,otr1:65,ar1:53,otr2:68,ar2:55,etr:70}, "Matematik": {tov:19,otr1:28,ar1:44,otr2:36,ar2:28,etr:45}, "Sejarah": {tov:71,otr1:74,ar1:70,otr2:77,ar2:75,etr:80}, "Pendidikan Islam": {tov:76,otr1:78,ar1:88,otr2:79,ar2:90,etr:81}, "Pendidikan Seni Visual": {tov:77,otr1:78,ar1:68,otr2:78,ar2:55,etr:79}, "Sains": {tov:48,otr1:54,ar1:61,otr2:60,ar2:65,etr:66}, "Perniagaan": {tov:65,otr1:68,ar1:60,otr2:72,ar2:63,etr:75}, "Tasawwur Islam": {tov:80,otr1:82,ar1:66,otr2:83,ar2:67,etr:85} }},
+      { id: 28, name: "PUTERI ILEEYA MAISARA BINTI ISMAIL", class: "5S2", photo: "", marks: { "Bahasa Melayu": {tov:73,otr1:77,ar1:75,otr2:81,ar2:78,etr:85}, "Bahasa Inggeris": {tov:51,otr1:52,ar1:52,otr2:53,ar2:67,etr:54}, "Matematik": {tov:21,otr1:29,ar1:26,otr2:37,ar2:15,etr:45}, "Sejarah": {tov:47,otr1:51,ar1:45,otr2:56,ar2:61,etr:60}, "Pendidikan Islam": {tov:55,otr1:57,ar1:86,otr2:58,ar2:82,etr:60}, "Pendidikan Seni Visual": {tov:51,otr1:52,ar1:72,otr2:54,ar2:50,etr:55}, "Sains": {tov:60,otr1:63,ar1:53,otr2:67,ar2:54,etr:70}, "Asas Kelestarian": {tov:37,otr1:44,ar1:52,otr2:50,ar2:70,etr:57}, "Tasawwur Islam": {tov:72,otr1:75,ar1:54,otr2:77,ar2:66,etr:80} }},
+      { id: 29, name: "GOH YU ZHE", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:19,otr1:26,ar1:20,otr2:33,ar2:29,etr:40}, "Bahasa Inggeris": {tov:26,otr1:31,ar1:32,otr2:35,ar2:38,etr:40}, "Matematik": {tov:26,otr1:32,ar1:25,otr2:39,ar2:40,etr:45}, "Sejarah": {tov:32,otr1:35,ar1:24,otr2:37,ar2:34,etr:40}, "Pendidikan Moral": {tov:3,otr1:15,ar1:4,otr2:28,ar2:10,etr:40}, "Pendidikan Seni Visual": {tov:48,otr1:49,ar1:38,otr2:51,ar2:40,etr:52}, "Sains": {tov:21,otr1:28,ar1:16,otr2:35,ar2:28,etr:42}, "Bahasa Cina": {tov:50,otr1:52,ar1:43,otr2:53,ar2:65,etr:55} }},
+      { id: 30, name: "SITINORMASHIDATUL BINTI MOHD ROZI", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:49,otr1:53,ar1:64,otr2:56,ar2:79,etr:60}, "Bahasa Inggeris": {tov:32,otr1:35,ar1:34,otr2:37,ar2:40,etr:40}, "Matematik": {tov:16,otr1:24,ar1:19,otr2:32,ar2:22,etr:40}, "Sejarah": {tov:41,otr1:44,ar1:50,otr2:47,ar2:58,etr:50}, "Pendidikan Islam": {tov:64,otr1:66,ar1:71,otr2:68,ar2:77,etr:70}, "Pendidikan Seni Visual": {tov:75,otr1:76,ar1:63,otr2:78,ar2:55,etr:79}, "Sains": {tov:36,otr1:44,ar1:24,otr2:52,ar2:49,etr:60} }},
+      { id: 31, name: "MUHAMMAD ALIF SAFWAN BIN ABDULLAH", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:29,otr1:34,ar1:35,otr2:40,ar2:50,etr:45}, "Bahasa Inggeris": {tov:25,otr1:30,ar1:22,otr2:35,ar2:30,etr:40}, "Matematik": {tov:14,otr1:23,ar1:20,otr2:31,ar2:20,etr:40}, "Sejarah": {tov:35,otr1:37,ar1:19,otr2:38,ar2:41,etr:40}, "Pendidikan Islam": {tov:7,otr1:18,ar1:32,otr2:29,ar2:45,etr:40}, "Pendidikan Seni Visual": {tov:55,otr1:56,ar1:45,otr2:58,ar2:51,etr:59}, "Sains": {tov:27,otr1:32,ar1:19,otr2:36,ar2:41,etr:41} }},
+      { id: 32, name: "MUHAMMAD ASFA RAZAN BIN MOHD GHARIB", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:1,otr1:14,ar1:29,otr2:27,ar2:43,etr:40}, "Bahasa Inggeris": {tov:1,otr1:14,ar1:25,otr2:27,ar2:35,etr:40}, "Matematik": {tov:0,otr1:13,ar1:18,otr2:27,ar2:7,etr:40}, "Sejarah": {tov:10,otr1:20,ar1:15,otr2:30,ar2:31,etr:40}, "Pendidikan Islam": {tov:0,otr1:13,ar1:31,otr2:27,ar2:31,etr:40}, "Pendidikan Seni Visual": {tov:0,otr1:14,ar1:30,otr2:29,ar2:41,etr:43}, "Sains": {tov:0,otr1:14,ar1:10,otr2:27,ar2:14,etr:41} }},
+      { id: 33, name: "MUHAMMAD DANIEL SHAH BIN HASZELLI", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:40,otr1:45,ar1:52,otr2:50,ar2:71,etr:55}, "Bahasa Inggeris": {tov:29,otr1:33,ar1:24,otr2:36,ar2:30,etr:40}, "Matematik": {tov:10,otr1:20,ar1:15,otr2:30,ar2:15,etr:40}, "Sejarah": {tov:40,otr1:42,ar1:40,otr2:43,ar2:46,etr:45}, "Pendidikan Islam": {tov:50,otr1:52,ar1:62,otr2:54,ar2:67,etr:56}, "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:44,otr2:58,ar2:52,etr:59}, "Sains": {tov:40,otr1:48,ar1:24,otr2:57,ar2:51,etr:65} }},
+      { id: 34, name: "MUHAMMAD IRFAN BIN ABDUL JABAR ALI", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:30,otr1:37,ar1:29,otr2:43,ar2:40,etr:50}, "Bahasa Inggeris": {tov:29,otr1:33,ar1:22,otr2:36,ar2:30,etr:40}, "Matematik": {tov:6,otr1:17,ar1:18,otr2:29,ar2:13,etr:40}, "Sejarah": {tov:33,otr1:37,ar1:29,otr2:41,ar2:18,etr:45}, "Pendidikan Islam": {tov:25,otr1:30,ar1:37,otr2:35,ar2:40,etr:40}, "Pendidikan Seni Visual": {tov:53,otr1:53,ar1:43,otr2:54,ar2:42,etr:54}, "Sains": {tov:23,otr1:31,ar1:11,otr2:38,ar2:28,etr:46} }},
+      { id: 35, name: "MUHAMMAD RAYYAN BIN HEDLY", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:34,otr1:38,ar1:31,otr2:41,ar2:57,etr:45}, "Bahasa Inggeris": {tov:31,otr1:34,ar1:31,otr2:37,ar2:38,etr:40}, "Matematik": {tov:6,otr1:17,ar1:17,otr2:29,ar2:9,etr:40}, "Sejarah": {tov:22,otr1:28,ar1:22,otr2:34,ar2:23,etr:40}, "Pendidikan Islam": {tov:18,otr1:25,ar1:36,otr2:33,ar2:40,etr:40}, "Pendidikan Seni Visual": {tov:41,otr1:42,ar1:35,otr2:43,ar2:45,etr:44}, "Sains": {tov:18,otr1:26,ar1:16,otr2:34,ar2:28,etr:42} }},
+      { id: 36, name: "NUR AIN ADLINA BINTI ABDUL RAHMAN", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:47,otr1:53,ar1:61,otr2:59,ar2:74,etr:65}, "Bahasa Inggeris": {tov:31,otr1:34,ar1:31,otr2:37,ar2:35,etr:40}, "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:15,etr:40}, "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:46,etr:55}, "Pendidikan Islam": {tov:56,otr1:58,ar1:76,otr2:59,ar2:57,etr:61}, "Pendidikan Seni Visual": {tov:70,otr1:73,ar1:75,otr2:76,ar2:50,etr:79}, "Sains": {tov:36,otr1:42,ar1:19,otr2:49,ar2:48,etr:55} }},
+      { id: 37, name: "NUR QASEH BINTI RAZIM", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:52,otr1:56,ar1:68,otr2:61,ar2:80,etr:65}, "Bahasa Inggeris": {tov:39,otr1:39,ar1:43,otr2:40,ar2:45,etr:40}, "Matematik": {tov:14,otr1:23,ar1:15,otr2:31,ar2:12,etr:40}, "Sejarah": {tov:40,otr1:45,ar1:40,otr2:50,ar2:50,etr:55}, "Pendidikan Islam": {tov:64,otr1:66,ar1:69,otr2:68,ar2:60,etr:70}, "Pendidikan Seni Visual": {tov:56,otr1:57,ar1:61,otr2:59,ar2:52,etr:60}, "Sains": {tov:34,otr1:39,ar1:10,otr2:45,ar2:41,etr:50} }},
+      { id: 38, name: "TEO KAH ZHENG", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:24,otr1:29,ar1:0,otr2:35,ar2:15,etr:40}, "Bahasa Inggeris": {tov:16,otr1:24,ar1:14,otr2:32,ar2:30,etr:40}, "Matematik": {tov:10,otr1:20,ar1:0,otr2:30,ar2:0,etr:40}, "Sejarah": {tov:18,otr1:25,ar1:0,otr2:33,ar2:6,etr:40}, "Pendidikan Moral": {tov:4,otr1:18,ar1:0,otr2:31,ar2:10,etr:45}, "Pendidikan Seni Visual": {tov:32,otr1:36,ar1:25,otr2:39,ar2:40,etr:43}, "Sains": {tov:19,otr1:26,ar1:11,otr2:33,ar2:12,etr:40}, "Bahasa Cina": {tov:18,otr1:25,ar1:28,otr2:33,ar2:0,etr:40} }},
+      { id: 39, name: "TEY MING FONG", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:17,otr1:25,ar1:23,otr2:32,ar2:26,etr:40}, "Bahasa Inggeris": {tov:23,otr1:29,ar1:26,otr2:34,ar2:35,etr:40}, "Matematik": {tov:9,otr1:19,ar1:18,otr2:30,ar2:0,etr:40}, "Sejarah": {tov:21,otr1:27,ar1:11,otr2:34,ar2:20,etr:40}, "Pendidikan Moral": {tov:2,otr1:18,ar1:8,otr2:34,ar2:12,etr:50}, "Pendidikan Seni Visual": {tov:46,otr1:46,ar1:33,otr2:47,ar2:40,etr:47}, "Sains": {tov:19,otr1:28,ar1:12,otr2:36,ar2:17,etr:45}, "Bahasa Cina": {tov:23,otr1:29,ar1:10,otr2:34,ar2:13,etr:40} }},
+      { id: 40, name: "MUHAMMAD NAZRAN BIN HASBULLAH", class: "5S3", photo: "", marks: { "Bahasa Melayu": {tov:34,otr1:39,ar1:47,otr2:45,ar2:55,etr:50}, "Bahasa Inggeris": {tov:23,otr1:29,ar1:32,otr2:34,ar2:43,etr:40}, "Matematik": {tov:15,otr1:23,ar1:18,otr2:32,ar2:15,etr:40}, "Sejarah": {tov:34,otr1:36,ar1:30,otr2:38,ar2:41,etr:40}, "Pendidikan Islam": {tov:30,otr1:33,ar1:50,otr2:37,ar2:53,etr:40}, "Pendidikan Seni Visual": {tov:40,otr1:42,ar1:48,otr2:43,ar2:50,etr:45}, "Sains": {tov:30,otr1:38,ar1:21,otr2:47,ar2:45,etr:55} }}
+    ];
 
-      journeyChartInstance = new Chart(ctx, {
-        type: 'line',
+    const subjectAnalysisData = {
+      "Bahasa Melayu": { calon: 40, otr1: 5.43, ar1: 4.88, otr2: 4.63, ar2: 3.93 },
+      "Bahasa Inggeris": { calon: 40, otr1: 6.53, ar1: 6.43, otr2: 6.20, ar2: 5.60 },
+      "Matematik": { calon: 40, otr1: 7.43, ar1: 7.58, otr2: 7.13, ar2: 7.65 },
+      "Sejarah": { calon: 40, otr1: 6.60, ar1: 6.05, otr2: 6.05, ar2: 5.98 },
+      "Pendidikan Islam": { calon: 27, otr1: 4.78, ar1: 4.67, otr2: 4.67, ar2: 2.89 },
+      "Pendidikan Moral": { calon: 13, otr1: 6.23, ar1: 7.69, otr2: 4.85, ar2: 5.31 },
+      "Pendidikan Seni Visual": { calon: 31, otr1: 4.81, ar1: 6.45, otr2: 4.58, ar2: 6.39 },
+      "Sains": { calon: 31, otr1: 6.97, ar1: 7.65, otr2: 6.06, ar2: 7.19 },
+      "Biologi": { calon: 8, otr1: 6.25, ar1: 7.88, otr2: 5.88, ar2: 5.50 },
+      "Fizik": { calon: 9, otr1: 6.00, ar1: 6.22, otr2: 5.33, ar2: 5.78 },
+      "Perniagaan": { calon: 12, otr1: 7.42, ar1: 6.92, otr2: 7.17, ar2: 6.42 },
+      "Kimia": { calon: 9, otr1: 7.33, ar1: 6.22, otr2: 6.22, ar2: 6.11 },
+      "Asas Kelestarian": { calon: 7, otr1: 6.71, ar1: 6.86, otr2: 4.86, ar2: 3.29 },
+      "Matematik Tambahan": { calon: 9, otr1: 7.67, ar1: 7.00, otr2: 7.67, ar2: 7.00 },
+      "Bahasa Cina": { calon: 11, otr1: 4.73, ar1: 5.73, otr2: 4.36, ar2: 4.64 },
+      "Tasawwur Islam": { calon: 20, otr1: 3.35, ar1: 6.25, otr2: 3.55, ar2: 5.05 }
+    };
+
+    let radarChartInstance = null;
+    let currentUploadTargetStudentId = null;
+    let editingStudentId = null;
+    let currentFocusFilter = 'top15';
+    let currentJourneyLevel = 'school';
+    let journeyChartInstance = null;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      populateStudentDropdowns();
+      populateSingleSubjectDropdown();
+      renderStudentRadar();
+      renderFocusGroups();
+      setJourneyTab('school');
+      renderSubjectTable();
+      renderDataTable();
+      renderPrintSlip();
+      fetchGoogleSheetData();
+    });
+
+    function switchTab(tab) {
+      ['dashboard', 'data-entry', 'cetakan'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).className = "px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800";
+      });
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+      document.getElementById(`nav-${tab}`).className = "px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow";
+    }
+
+    function populateStudentDropdowns() {
+      const studentSelect = document.getElementById("studentSelect");
+      const printSelect = document.getElementById("printSelect");
+      if (studentSelect) studentSelect.innerHTML = "";
+      if (printSelect) printSelect.innerHTML = "";
+
+      students.forEach(s => {
+        if (studentSelect) studentSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
+        if (printSelect) printSelect.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id));
+      });
+    }
+
+    function populateSingleSubjectDropdown() {
+      const select = document.getElementById("singleSubjectSelect");
+      if (!select) return;
+      select.innerHTML = "";
+      Object.keys(subjectAnalysisData).forEach(sub => {
+        select.add(new Option(sub, sub));
+      });
+    }
+
+    function setJourneyTab(level) {
+      currentJourneyLevel = level;
+      ['school', 'class', 'subject', 'student'].forEach(l => {
+        const btn = document.getElementById(`jtab-${l}`);
+        if (btn) {
+          btn.className = (l === level)
+            ? "px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow"
+            : "px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white";
+        }
+      });
+
+      const bar = document.getElementById("journey-controls-bar");
+      const header = document.getElementById("journeyChartHeader");
+      const badge = document.getElementById("journeyChartSubBadge");
+      const passFailSec = document.getElementById("subjectPassFailSection");
+
+      if (level === 'subject') {
+        passFailSec.classList.remove("hidden");
+      } else {
+        passFailSec.classList.add("hidden");
+      }
+
+      if (level === 'school') {
+        header.innerText = "Trajektori GPS Keseluruhan Sekolah (TOV ➔ ETR)";
+        badge.innerText = "Sasaran ETR: 4.85 • AR2 Semasa: 5.65";
+        bar.innerHTML = `
+          <div class="flex items-center gap-4 text-xs font-mono">
+            <span class="text-indigo-400 font-bold">● GPS Sebenar (AR)</span>
+            <span class="text-amber-400 font-bold">-- Sasaran Headcount (OTR/ETR)</span>
+          </div>
+          <span class="text-slate-400 text-[11px]">Skor lebih kecil menunjukkan pencapaian lebih cemerlang.</span>
+        `;
+        createOrUpdateChart({
+          type: 'line',
+          data: {
+            labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
+            datasets: [
+              { label: 'GPS Sebenar', data: [6.39, null, 6.39, null, 5.65, null], borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.2)', borderWidth: 3.5, pointBackgroundColor: '#818cf8', pointRadius: 6, tension: 0.3 },
+              { label: 'Sasaran Headcount (OTR/ETR)', data: [6.39, 6.07, null, 5.59, null, 4.85], borderColor: '#f59e0b', borderDash: [6, 6], borderWidth: 2.5, pointBackgroundColor: '#f59e0b', pointRadius: 5, tension: 0.3 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+              y: { reverse: true, grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' } },
+              x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
+            }
+          }
+        });
+      } 
+      else if (level === 'class') {
+        header.innerText = "Perjalanan Markah Purata (%) Mengikut Kelas";
+        badge.innerText = "Perbandingan Antara 5S1, 5S2 & 5S3";
+        bar.innerHTML = `
+          <div class="flex gap-3 text-xs font-mono font-bold">
+            <span class="text-blue-400">● 5S1 (Sains Tulen)</span>
+            <span class="text-indigo-400">● 5S2 (Sains Kemanusiaan)</span>
+            <span class="text-emerald-400">● 5S3 (Sastera & Seni)</span>
+          </div>
+        `;
+        createOrUpdateChart({
+          type: 'line',
+          data: {
+            labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
+            datasets: [
+              { label: '5S1', data: [60.2, 63.8, 62.4, 66.5, 68.9, 72.5], borderColor: '#3b82f6', borderWidth: 3, pointBackgroundColor: '#3b82f6', tension: 0.3 },
+              { label: '5S2', data: [47.5, 52.1, 50.8, 55.4, 57.2, 62.0], borderColor: '#6366f1', borderWidth: 3, pointBackgroundColor: '#6366f1', tension: 0.3 },
+              { label: '5S3', data: [27.4, 33.6, 29.8, 38.5, 41.2, 47.8], borderColor: '#10b981', borderWidth: 3, pointBackgroundColor: '#10b981', tension: 0.3 }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+              y: { suggestedMin: 0, suggestedMax: 100, grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' } },
+              x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
+            }
+          }
+        });
+      } 
+      else if (level === 'subject') {
+        header.innerText = "Trajektori Peratus Lulus & GPS Mata Pelajaran";
+        badge.innerText = "Analisis Lulus, Gagal dan GPMP";
+        
+        let subOptions = "";
+        Object.keys(subjectAnalysisData).forEach(sub => {
+          subOptions += `<option value="${sub}">${sub}</option>`;
+        });
+
+        bar.innerHTML = `
+          <div class="flex items-center space-x-2">
+            <label class="font-bold text-slate-400">PILIH MATA PELAJARAN:</label>
+            <select id="journeySubSelect" onchange="renderSubjectJourneyChart()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded-lg px-2.5 py-1 text-xs outline-none">
+              ${subOptions}
+            </select>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono font-bold">
+            <span class="text-emerald-400">● Peratus Lulus (%)</span>
+            <span class="text-rose-400">● Peratus Gagal (%)</span>
+          </div>
+        `;
+        renderSubjectJourneyChart();
+      } 
+      else if (level === 'student') {
+        header.innerText = "Graf Peningkatan Markah & GPI Individu";
+        badge.innerText = "Dwi-Garisan Markah & Gred Purata Individu";
+
+        let studentOptions = "";
+        students.forEach(s => {
+          studentOptions += `<option value="${s.id}">${s.id}. ${s.name} (${s.class})</option>`;
+        });
+
+        bar.innerHTML = `
+          <div class="flex items-center space-x-2">
+            <label class="font-bold text-slate-400">PILIH CALON:</label>
+            <select id="journeyStudentSelect" onchange="renderStudentJourneyChart(this.value)" class="bg-slate-900 border border-slate-700 text-slate-100 font-bold rounded-lg px-3 py-1 text-xs outline-none w-64 md:w-80">
+              ${studentOptions}
+            </select>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono font-bold">
+            <span class="text-indigo-400">● Markah Purata (%)</span>
+            <span class="text-amber-400">-- GPI (Terbalik: 0 Terbaik)</span>
+          </div>
+        `;
+        renderStudentJourneyChart();
+      }
+    }
+
+    function createOrUpdateChart(config) {
+      const ctx = document.getElementById("journeyDynamicChart").getContext("2d");
+      if (journeyChartInstance) journeyChartInstance.destroy();
+      journeyChartInstance = new Chart(ctx, config);
+    }
+
+    function renderSubjectJourneyChart() {
+      const sub = document.getElementById("journeySubSelect")?.value || "Bahasa Melayu";
+      const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
+      const passPercentages = [];
+      const failPercentages = [];
+      const passCounts = [];
+      const failCounts = [];
+      const gpmpValues = [];
+      let totalCandidates = 0;
+
+      phases.forEach(ph => {
+        let pass = 0, fail = 0, total = 0, points = 0;
+        students.forEach(s => {
+          const val = s.marks[sub]?.[ph];
+          if (val !== undefined && val !== null && !isNaN(val)) {
+            total++;
+            if (val >= 40) pass++; else fail++;
+            points += getSpmGrade(val).point;
+          }
+        });
+        totalCandidates = total || totalCandidates;
+        passPercentages.push(total > 0 ? parseFloat(((pass / total) * 100).toFixed(1)) : 0);
+        failPercentages.push(total > 0 ? parseFloat(((fail / total) * 100).toFixed(1)) : 0);
+        passCounts.push(pass);
+        failCounts.push(fail);
+        gpmpValues.push(total > 0 ? parseFloat((points / total).toFixed(2)) : 0);
+      });
+
+      document.getElementById("passFailTableTitle").innerText = `Analisis Lulus & Gagal: ${sub}`;
+      document.getElementById("passFailCandidateCount").innerText = `${totalCandidates} Calon`;
+
+      const tbody = document.getElementById("subjectPassFailTableBody");
+      tbody.innerHTML = `
+        <tr><td class="p-2 text-left font-bold text-emerald-400">Peratus Lulus (%)</td>${passPercentages.map(p => `<td class="p-2 font-black text-emerald-400">${p}%</td>`).join('')}</tr>
+        <tr><td class="p-2 text-left text-slate-400 pl-4">Bil. Lulus</td>${passCounts.map(c => `<td class="p-2">${c} / ${totalCandidates}</td>`).join('')}</tr>
+        <tr><td class="p-2 text-left font-bold text-rose-400">Peratus Gagal (%)</td>${failPercentages.map(f => `<td class="p-2 font-black text-rose-400">${f}%</td>`).join('')}</tr>
+        <tr><td class="p-2 text-left text-slate-400 pl-4">Bil. Gagal</td>${failCounts.map(c => `<td class="p-2">${c} / ${totalCandidates}</td>`).join('')}</tr>
+        <tr class="bg-slate-900/50"><td class="p-2 text-left font-bold text-amber-300">GPMP Subjek</td>${gpmpValues.map(g => `<td class="p-2 font-bold text-amber-300">${g}</td>`).join('')}</tr>
+      `;
+
+      createOrUpdateChart({
+        type: 'bar',
         data: {
           labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
-          datasets: [{
-            label: 'GPS Keseluruhan',
-            data: [6.39, 6.00, 5.80, 5.59, 5.65, 4.85],
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99, 102, 241, 0.2)',
-            fill: true,
-            tension: 0.3
-          }]
+          datasets: [
+            { label: 'Peratus Lulus (%)', data: passPercentages, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 6, yAxisID: 'y' },
+            { label: 'Peratus Gagal (%)', data: failPercentages, backgroundColor: 'rgba(244, 63, 94, 0.75)', borderRadius: 6, yAxisID: 'y' },
+            { type: 'line', label: 'GPMP', data: gpmpValues, borderColor: '#f59e0b', borderWidth: 3, pointBackgroundColor: '#f59e0b', pointRadius: 5, tension: 0.3, yAxisID: 'y1' }
+          ]
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { labels: { color: '#cbd5e1' } } },
+          responsive: true, maintainAspectRatio: false,
           scales: {
-            y: { reverse: true, ticks: { color: '#94a3b8' } },
-            x: { ticks: { color: '#94a3b8' } }
+            y: { type: 'linear', position: 'left', min: 0, max: 100, title: { display: true, text: 'Peratusan (%)', color: '#10b981', font: { weight: 'bold', size: 10 } }, grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' } },
+            y1: { type: 'linear', position: 'right', reverse: true, min: 0, max: 9, title: { display: true, text: 'GPMP (0 Terbaik)', color: '#f59e0b', font: { weight: 'bold', size: 10 } }, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } },
+            x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
           }
         }
       });
     }
 
-    // 4. RENDER CARTA RADAR INDIVIDU
-    function updateRadarChart(studentId) {
-      const student = studentsData.find(s => s.id === studentId) || studentsData[0];
-      document.getElementById('rpg-name').innerText = student.name;
-      document.getElementById('rpg-class').innerText = `TINGKATAN ${student.class}`;
+    function renderStudentJourneyChart(studentId) {
+      const curId = studentId ? parseInt(studentId) : (parseInt(document.getElementById("journeyStudentSelect")?.value) || students[0].id);
+      const student = students.find(s => s.id === curId) || students[0];
 
-      const ctx = document.getElementById('studentRadarChart').getContext('2d');
-      if (radarChartInstance) radarChartInstance.destroy();
+      const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
+      const markAverages = [];
+      const gpiValues = [];
 
-      radarChartInstance = new Chart(ctx, {
-        type: 'radar',
+      phases.forEach(ph => {
+        let sumMarks = 0, sumPoints = 0, count = 0;
+        for (const sub in student.marks) {
+          const m = student.marks[sub][ph];
+          if (m !== undefined && m !== null) {
+            sumMarks += m;
+            sumPoints += getSpmGrade(m).point;
+            count++;
+          }
+        }
+        markAverages.push(Math.round(sumMarks / (count || 1)));
+        gpiValues.push(parseFloat((sumPoints / (count || 1)).toFixed(2)));
+      });
+
+      createOrUpdateChart({
+        type: 'line',
         data: {
-          labels: ['BM', 'BI', 'Matematik', 'Sejarah'],
-          datasets: [{
-            label: 'Markah AR2',
-            data: [student.bm, student.bi, student.mat, student.sej],
-            backgroundColor: 'rgba(99, 102, 241, 0.2)',
-            borderColor: '#6366f1',
-            pointBackgroundColor: '#818cf8'
-          }]
+          labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
+          datasets: [
+            { label: 'Markah Purata (%)', data: markAverages, borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.15)', fill: true, borderWidth: 3.5, pointBackgroundColor: '#818cf8', pointRadius: 5, tension: 0.35, yAxisID: 'y' },
+            { label: 'Gred Purata Individu (GPI)', data: gpiValues, borderColor: '#f59e0b', borderDash: [5, 5], borderWidth: 3, pointBackgroundColor: '#f59e0b', pointRadius: 5, tension: 0.35, yAxisID: 'y1' }
+          ]
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { r: { min: 0, max: 100, ticks: { display: false } } }
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            y: { type: 'linear', position: 'left', suggestedMin: 0, suggestedMax: 100, grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' } },
+            y1: { type: 'linear', position: 'right', reverse: true, suggestedMin: 0, suggestedMax: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } },
+            x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
+          }
         }
       });
     }
 
-    // 5. RENDER JADUAL DENGAN DOCUMENT FRAGMENT (PERFORMANCE FIX)
-    function renderStudentTable() {
-      const filterClass = document.getElementById('tableClassFilter').value;
-      const searchQuery = document.getElementById('tableSearch').value.toLowerCase();
-      const tbody = document.getElementById('studentTableBody');
-      
-      tbody.innerHTML = '';
-      const fragment = document.createDocumentFragment();
+    // ==============================================================
+    // MODUL: JADUAL MARKAH CALON MENGIKUT MATA PELAJARAN
+    // ==============================================================
+    function renderSubjectTable() {
+      const selectedSub = document.getElementById("singleSubjectSelect").value || "Bahasa Melayu";
+      const classFilter = document.getElementById("subjectClassFilter").value;
+      const term = (document.getElementById("subjectSearchInput").value || "").toLowerCase();
+      const tbody = document.getElementById("subjectTableBody");
+      tbody.innerHTML = "";
 
-      const filtered = studentsData.filter(s => {
-        const matchesClass = filterClass === 'ALL' || s.class === filterClass;
-        const matchesSearch = s.name.toLowerCase().includes(searchQuery);
-        return matchesClass && matchesSearch;
+      function formatCell(mark) {
+        if (mark === undefined || mark === null || isNaN(mark)) return `<td class="p-3 text-center text-slate-600 font-mono">-</td>`;
+        const gr = getSpmGrade(mark);
+        let colorClass = "text-slate-300";
+        if (gr.grade.startsWith("A")) colorClass = "text-emerald-400 font-bold bg-emerald-950/20";
+        else if (gr.grade.startsWith("B")) colorClass = "text-blue-400 font-semibold";
+        else if (gr.grade.startsWith("C")) colorClass = "text-amber-400 font-semibold";
+        else if (gr.grade === "D" || gr.grade === "E") colorClass = "text-orange-400";
+        else if (gr.grade === "G") colorClass = "text-rose-400 font-bold bg-rose-950/20";
+        return `<td class="p-3 text-center font-mono ${colorClass}">${mark} <span class="text-[9px] opacity-70">(${gr.grade})</span></td>`;
+      }
+
+      const subStudents = students.filter(s => {
+        const hasSub = s.marks[selectedSub] !== undefined;
+        const matchCls = (classFilter === "ALL" || s.class === classFilter);
+        const matchName = s.name.toLowerCase().includes(term);
+        return hasSub && matchCls && matchName;
       });
 
-      filtered.forEach((student, index) => {
-        const tr = document.createElement('tr');
-        tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30";
+      subStudents.sort((a, b) => (b.marks[selectedSub]?.ar2 || 0) - (a.marks[selectedSub]?.ar2 || 0));
+
+      subStudents.forEach((s, idx) => {
+        const d = s.marks[selectedSub] || {};
+        const ar2 = d.ar2 ?? 0;
+        const otr2 = d.otr2 ?? 0;
+        const diff = ar2 - otr2;
+        const diffHtml = diff >= 0 ? `<span class="text-emerald-400 font-mono font-bold">+${diff}</span>` : `<span class="text-rose-400 font-mono font-bold">${diff}</span>`;
+        const gr = getSpmGrade(ar2).grade;
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 transition-colors";
         tr.innerHTML = `
-          <td class="p-3.5">${index + 1}</td>
-          <td class="p-3.5 font-bold text-white">${student.name}</td>
-          <td class="p-3.5">${student.class}</td>
-          <td class="p-3.5 text-center score-font">${student.bm}</td>
-          <td class="p-3.5 text-center score-font">${student.bi}</td>
-          <td class="p-3.5 text-center score-font">${student.mat}</td>
-          <td class="p-3.5 text-center score-font">${student.sej}</td>
+          <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+          <td class="p-3 font-bold text-white whitespace-nowrap cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id});">${s.name}</td>
+          <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+          ${formatCell(d.tov)}
+          ${formatCell(d.otr1)}
+          ${formatCell(d.ar1)}
+          ${formatCell(d.otr2)}
+          ${formatCell(d.ar2)}
+          ${formatCell(d.etr)}
+          <td class="p-3 text-center">${diffHtml}</td>
+          <td class="p-3 text-center font-mono font-bold">${gr}</td>
         `;
-        fragment.appendChild(tr);
-      });
-
-      tbody.appendChild(fragment);
-    }
-
-    // 6. DEBOUNCE CARET SEARCH (CELEKKAN PERGERAKAN MENAIP)
-    function debouncedSearch() {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        renderStudentTable();
-      }, 300);
-    }
-
-    // 7. ISI POPULASI DROPDOWN & SLIP
-    function populateDropdowns() {
-      const studentSelect = document.getElementById('studentSelect');
-      const printSelect = document.getElementById('printSelect');
-
-      studentsData.forEach(student => {
-        const opt = `<option value="${student.id}">${student.name} (${student.class})</option>`;
-        studentSelect.innerHTML += opt;
-        printSelect.innerHTML += opt;
+        tbody.appendChild(tr);
       });
     }
 
-    function renderPrintSlip(studentId) {
-      const student = studentsData.find(s => s.id === studentId) || studentsData[0];
-      document.getElementById('p-name').innerText = student.name;
-      document.getElementById('p-class').innerText = student.class;
+    // ==============================================================
+    // MODUL: ANALISIS KUMPULAN SASARAN
+    // ==============================================================
+    function renderFocusGroups() {
+      const calculated = students.map(s => {
+        const subs = Object.keys(s.marks);
+        const grades = { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":0, "C":0, "D":0, "E":0, "G":0 };
+        let totalMarks = 0, totalPoints = 0, count = 0;
+
+        subs.forEach(sub => {
+          const m = s.marks[sub]?.ar2;
+          if (m !== undefined && m !== null) {
+            const gr = getSpmGrade(m);
+            grades[gr.grade] = (grades[gr.grade] || 0) + 1;
+            totalMarks += m;
+            totalPoints += gr.point;
+            count++;
+          }
+        });
+
+        const totalA = grades["A+"] + grades["A"] + grades["A-"];
+        const avg = Math.round(totalMarks / (count || 1));
+        const gpi = (totalPoints / (count || 1)).toFixed(2);
+        const bm = s.marks["Bahasa Melayu"]?.ar2 ?? 0;
+        const sej = s.marks["Sejarah"]?.ar2 ?? 0;
+
+        return { ...s, totalAR2: totalMarks, avgAR2: avg, gpi, totalSubjects: count, totalA, grades, bm, sej, failBm: bm < 40, failSej: sej < 40, failBoth: bm < 40 && sej < 40 };
+      });
+
+      document.getElementById("count-failSej").innerText = `${calculated.filter(s => s.failSej).length} Calon`;
+      document.getElementById("count-failBm").innerText = `${calculated.filter(s => s.failBm).length} Calon`;
+      document.getElementById("count-failBoth").innerText = `${calculated.filter(s => s.failBoth).length} Calon`;
+
+      renderFocusTable(calculated, currentFocusFilter);
     }
 
-    // INIT PADA Halaman Utama
-    window.addEventListener('DOMContentLoaded', () => {
-      populateDropdowns();
-      initJourneyChart();
-      updateRadarChart(studentsData[0].id);
-      renderStudentTable();
-      renderPrintSlip(studentsData[0].id);
-    });
+    function setFocusTab(filterType) {
+      currentFocusFilter = filterType;
+      ['top15', 'failSej', 'failBm', 'failBoth'].forEach(f => {
+        const card = document.getElementById(`card-focus-${f}`);
+        card.className = (f === filterType)
+          ? "cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow"
+          : "cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-slate-700 transition";
+      });
+      renderFocusGroups();
+    }
+
+    function renderFocusTable(calculated, filterType) {
+      const thead = document.getElementById("focusTableThead");
+      const tbody = document.getElementById("focusTableBody");
+      const title = document.getElementById("focusTableTitle");
+      const countLabel = document.getElementById("focusTableCount");
+      tbody.innerHTML = "";
+
+      let displayList = [];
+
+      if (filterType === 'top15') {
+        title.innerText = "Senarai Murid Potensi Terbaik (Semua Mata Pelajaran AR2)";
+        displayList = [...calculated].sort((a, b) => {
+          if (b.totalA !== a.totalA) return b.totalA - a.totalA;
+          if (parseFloat(a.gpi) !== parseFloat(b.gpi)) return parseFloat(a.gpi) - parseFloat(b.gpi);
+          return b.avgAR2 - a.avgAR2;
+        }).slice(0, 15);
+
+        thead.innerHTML = `
+          <tr><th class="p-3">Ked</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Gred A [A+, A, A-]</th><th class="p-3 text-center">Gred B</th><th class="p-3 text-center">Gred C</th><th class="p-3 text-center">Gred D/E</th><th class="p-3 text-center">Gred G</th><th class="p-3 text-center">Purata (%)</th><th class="p-3 text-center font-bold text-amber-400">GPI</th></tr>
+        `;
+
+        displayList.forEach((s, idx) => {
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-800/50 transition-colors cursor-pointer";
+          tr.onclick = () => syncStudent(s.id);
+          tr.innerHTML = `
+            <td class="p-3 text-slate-400 font-mono font-bold">${idx + 1}</td>
+            <td class="p-3 font-bold text-white hover:text-indigo-400">${s.name}</td>
+            <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+            <td class="p-3 text-center font-bold text-emerald-400">${s.totalA}A (${s.grades['A+']}A+, ${s.grades['A']}A, ${s.grades['A-']}A-)</td>
+            <td class="p-3 text-center">${s.grades['B+'] + s.grades['B']}B</td>
+            <td class="p-3 text-center">${s.grades['C+'] + s.grades['C']}C</td>
+            <td class="p-3 text-center">${s.grades['D'] + s.grades['E']}</td>
+            <td class="p-3 text-center font-bold text-rose-400">${s.grades['G']}</td>
+            <td class="p-3 text-center font-bold text-white">${s.avgAR2}%</td>
+            <td class="p-3 text-center font-mono font-black text-amber-400">${s.gpi}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } else {
+        if (filterType === 'failSej') {
+          title.innerText = "Senarai Calon Belum Capai Tahap Lulus Sejarah (< 40 Markah)";
+          displayList = calculated.filter(s => s.failSej).sort((a, b) => a.sej - b.sej);
+        } else if (filterType === 'failBm') {
+          title.innerText = "Senarai Calon Belum Capai Tahap Lulus Bahasa Melayu (< 40 Markah)";
+          displayList = calculated.filter(s => s.failBm).sort((a, b) => a.bm - b.bm);
+        } else if (filterType === 'failBoth') {
+          title.innerText = "Senarai Calon Berisiko Kritikal (Gagal Sejarah & BM Serentak)";
+          displayList = calculated.filter(s => s.failBoth).sort((a, b) => (a.bm + a.sej) - (b.bm + b.sej));
+        }
+
+        thead.innerHTML = `
+          <tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM (AR2)</th><th class="p-3 text-center">Sejarah (AR2)</th><th class="p-3 text-center">Purata Semua MP</th><th class="p-3 text-center">Bil. Gred G</th><th class="p-3 text-center">Status Sijil</th></tr>
+        `;
+
+        displayList.forEach((s, idx) => {
+          const bmB = s.bm >= 40 ? `<span class="text-emerald-400 font-bold">${s.bm}</span>` : `<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold">${s.bm}</span>`;
+          const sejB = s.sej >= 40 ? `<span class="text-emerald-400 font-bold">${s.sej}</span>` : `<span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold">${s.sej}</span>`;
+          const certB = (s.bm >= 40 && s.sej >= 40) ? `<span class="text-emerald-400 font-bold">LAYAK</span>` : `<span class="text-rose-400 font-bold">TIDAK LAYAK</span>`;
+
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-800/50 transition-colors cursor-pointer";
+          tr.onclick = () => syncStudent(s.id);
+          tr.innerHTML = `
+            <td class="p-3 text-slate-400 font-mono font-bold">${idx + 1}</td>
+            <td class="p-3 font-bold text-white hover:text-indigo-400">${s.name}</td>
+            <td class="p-3"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+            <td class="p-3 text-center">${bmB}</td><td class="p-3 text-center">${sejB}</td>
+            <td class="p-3 text-center font-bold text-white">${s.avgAR2}%</td>
+            <td class="p-3 text-center font-mono font-bold text-rose-400">${s.grades['G']} MP</td>
+            <td class="p-3 text-center">${certB}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      countLabel.innerText = `${displayList.length} Rekod`;
+    }
+
+    function syncStudent(studentId) {
+      const sId = parseInt(studentId);
+      const sel = document.getElementById("studentSelect");
+      if (sel) sel.value = sId;
+      renderStudentRadar();
+    }
+
+    function filterRadarStudentDropdown() {
+      const cls = document.getElementById("radarClassFilter").value;
+      const select = document.getElementById("studentSelect");
+      select.innerHTML = "";
+      const filtered = (cls === "ALL") ? students : students.filter(s => s.class === cls);
+      filtered.forEach(s => select.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id)));
+      if (filtered.length > 0) syncStudent(filtered[0].id);
+    }
+
+    function triggerRowUpload(studentId) {
+      currentUploadTargetStudentId = studentId;
+      document.getElementById("studentPhotoInput").click();
+    }
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const targetId = currentUploadTargetStudentId || parseInt(document.getElementById("studentSelect").value) || students[0].id;
+      const student = students.find(s => s.id === targetId);
+      if (!student) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = 250; canvas.height = (img.height * 250) / img.width;
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const compressed = canvas.toDataURL("image/jpeg", 0.7);
+
+          student.photo = compressed;
+          fetch(SCRIPT_URL, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: "update_photo", sheetId: SHEET_ID, studentId: student.id, photoBase64: compressed })
+          });
+
+          renderStudentRadar();
+          renderDataTable();
+          renderPrintSlip();
+          currentUploadTargetStudentId = null;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      event.target.value = "";
+    }
+
+    function openFullEditModal(studentId) {
+      editingStudentId = studentId;
+      const student = students.find(s => s.id === studentId);
+      if (!student) return;
+      document.getElementById("modalStudentName").innerText = student.name;
+      document.getElementById("modalStudentClass").innerText = `Kelas: ${student.class}`;
+
+      const container = document.getElementById("modalSubjectsContainer");
+      container.innerHTML = "";
+
+      for (const [sub, data] of Object.entries(student.marks)) {
+        const div = document.createElement("div");
+        div.className = "bg-slate-950 p-2.5 rounded-xl border border-slate-800 space-y-1";
+        div.innerHTML = `
+          <div class="flex justify-between text-xs font-bold text-white"><span>${sub}</span><span class="text-slate-400 font-mono text-[10px]">AR2: ${data.ar2 ?? 0}</span></div>
+          <div class="grid grid-cols-6 gap-1 text-[11px]">
+            <div><label class="text-[9px] text-slate-500">TOV</label><input type="number" id="inp-${sub}-tov" value="${data.tov ?? ''}" class="w-full bg-slate-900 border border-slate-700 rounded text-center text-white font-mono"></div>
+            <div><label class="text-[9px] text-slate-500">OTR1</label><input type="number" id="inp-${sub}-otr1" value="${data.otr1 ?? ''}" class="w-full bg-slate-900 border border-slate-700 rounded text-center text-white font-mono"></div>
+            <div><label class="text-[9px] text-slate-500">AR1</label><input type="number" id="inp-${sub}-ar1" value="${data.ar1 ?? ''}" class="w-full bg-slate-900 border border-slate-700 rounded text-center text-white font-mono"></div>
+            <div><label class="text-[9px] text-slate-500">OTR2</label><input type="number" id="inp-${sub}-otr2" value="${data.otr2 ?? ''}" class="w-full bg-slate-900 border border-slate-700 rounded text-center text-white font-mono"></div>
+            <div><label class="text-[9px] text-indigo-400 font-bold">AR2</label><input type="number" id="inp-${sub}-ar2" value="${data.ar2 ?? ''}" class="w-full bg-slate-900 border border-indigo-500 rounded text-center text-indigo-300 font-bold font-mono"></div>
+            <div><label class="text-[9px] text-amber-400">ETR</label><input type="number" id="inp-${sub}-etr" value="${data.etr ?? ''}" class="w-full bg-slate-900 border border-slate-700 rounded text-center text-amber-300 font-mono"></div>
+          </div>
+        `;
+        container.appendChild(div);
+      }
+      document.getElementById("fullEditModal").classList.remove("hidden");
+    }
+
+    function closeFullEditModal() {
+      document.getElementById("fullEditModal").classList.add("hidden");
+      editingStudentId = null;
+    }
+
+    function saveFullStudentMarks() {
+      if (!editingStudentId) return;
+      const student = students.find(s => s.id === editingStudentId);
+      if (!student) return;
+
+      const payload = {};
+      for (const [sub] of Object.entries(student.marks)) {
+        student.marks[sub] = {
+          tov: parseInt(document.getElementById(`inp-${sub}-tov`)?.value) || 0,
+          otr1: parseInt(document.getElementById(`inp-${sub}-otr1`)?.value) || 0,
+          ar1: parseInt(document.getElementById(`inp-${sub}-ar1`)?.value) || 0,
+          otr2: parseInt(document.getElementById(`inp-${sub}-otr2`)?.value) || 0,
+          ar2: parseInt(document.getElementById(`inp-${sub}-ar2`)?.value) || 0,
+          etr: parseInt(document.getElementById(`inp-${sub}-etr`)?.value) || 0
+        };
+        payload[sub] = student.marks[sub];
+      }
+
+      fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: "update_full_student", sheetId: SHEET_ID, studentId: student.id, studentName: student.name, marks: payload, updatedAt: new Date().toISOString() })
+      });
+
+      closeFullEditModal();
+      renderStudentRadar();
+      renderFocusGroups();
+      renderSubjectTable();
+      renderDataTable();
+      renderPrintSlip();
+    }
+
+    function renderDataTable() {
+      const tbody = document.getElementById("studentTableBody");
+      tbody.innerHTML = "";
+      students.forEach((s, index) => {
+        const bm = s.marks["Bahasa Melayu"]?.ar2 ?? "-";
+        const bi = s.marks["Bahasa Inggeris"]?.ar2 ?? "-";
+        const mat = s.marks["Matematik"]?.ar2 ?? "-";
+        const sej = s.marks["Sejarah"]?.ar2 ?? "-";
+        const photoHtml = s.photo ? `<img src="${s.photo}" class="w-8 h-8 rounded-full object-cover border border-indigo-500">` : `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 font-bold text-[10px]">${s.name.substring(0, 2)}</div>`;
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 transition-colors";
+        tr.innerHTML = `
+          <td class="p-3.5 text-slate-400 font-mono">${index + 1}</td>
+          <td class="p-3.5">${photoHtml}</td>
+          <td class="p-3.5 font-bold text-white">${s.name}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-800 rounded text-[11px] font-mono">${s.class}</span></td>
+          <td class="p-3.5 text-center font-mono font-bold">${bm}</td>
+          <td class="p-3.5 text-center font-mono font-bold">${bi}</td>
+          <td class="p-3.5 text-center font-mono font-bold">${mat}</td>
+          <td class="p-3.5 text-center font-mono font-bold">${sej}</td>
+          <td class="p-3.5 text-center space-x-1.5 whitespace-nowrap">
+            <button onclick="triggerRowUpload(${s.id})" class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded-lg text-[11px]">Foto</button>
+            <button onclick="openFullEditModal(${s.id})" class="px-3 py-1 bg-indigo-600/20 text-indigo-300 rounded-lg text-[11px] font-bold">Kemaskini Semua</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById("tableRecordCount").innerText = `Memaparkan ${students.length} Calon`;
+    }
+
+    function fetchGoogleSheetData() {
+      fetch(`${SCRIPT_URL}?sheetId=${SHEET_ID}`)
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data) && data.length > 0 && data[0].marks) {
+            students = data;
+            populateStudentDropdowns();
+            renderStudentRadar();
+            renderFocusGroups();
+            renderSubjectTable();
+            renderDataTable();
+            renderPrintSlip();
+          }
+        })
+        .catch(() => {});
+    }
+
+    function filterStudentTable() {
+      const term = document.getElementById("tableSearch").value.toLowerCase();
+      const cls = document.getElementById("tableClassFilter").value;
+      const rows = document.querySelectorAll("#studentTableBody tr");
+      let count = 0;
+      rows.forEach(r => {
+        const name = r.children[2].innerText.toLowerCase();
+        const studentClass = r.children[3].innerText.trim();
+        const match = name.includes(term) && (cls === 'ALL' || studentClass === cls);
+        r.style.display = match ? "" : "none";
+        if (match) count++;
+      });
+      document.getElementById("tableRecordCount").innerText = `Memaparkan ${count} Calon`;
+    }
+
+    function exportDataCSV() {
+      let csv = "ID,NAMA,KELAS,BM_AR2,BI_AR2,MAT_AR2,SEJ_AR2\n";
+      students.forEach(s => {
+        csv += `"${s.id}","${s.name}","${s.class}",${s.marks["Bahasa Melayu"]?.ar2||0},${s.marks["Bahasa Inggeris"]?.ar2||0},${s.marks["Matematik"]?.ar2||0},${s.marks["Sejarah"]?.ar2||0}\n`;
+      });
+      const link = document.createElement("a");
+      link.href = encodeURI("data:text/csv;charset=utf-8," + csv);
+      link.download = "HEADCOUNT_SPM_SEMEKAR.csv";
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+
+    function renderPrintSlip() {
+      const selectedId = parseInt(document.getElementById("printSelect").value) || students[0].id;
+      const student = students.find(s => s.id === selectedId) || students[0];
+      document.getElementById("p-name").innerText = student.name;
+      document.getElementById("p-class").innerText = student.class;
+
+      const pPhoto = document.getElementById("p-photo");
+      const pPlaceholder = document.getElementById("p-photo-placeholder");
+      if (student.photo) {
+        pPhoto.src = student.photo; pPhoto.classList.remove("hidden"); pPlaceholder.classList.add("hidden");
+      } else {
+        pPhoto.src = ""; pPhoto.classList.add("hidden"); pPlaceholder.classList.remove("hidden");
+      }
+
+      const tbody = document.getElementById("printSubjectTable");
+      tbody.innerHTML = "";
+      let totalAR2 = 0, count = 0;
+
+      for (const [sub, data] of Object.entries(student.marks)) {
+        totalAR2 += (data.ar2 || 0); count++;
+        tbody.innerHTML += `<tr><td class="border border-slate-400 p-2 text-left font-bold text-slate-800">${sub}</td><td class="border border-slate-400 p-2 font-mono">${data.tov ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.otr1 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.ar1 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono">${data.otr2 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono font-black bg-indigo-50">${data.ar2 ?? '-'}</td><td class="border border-slate-400 p-2 font-mono font-bold bg-amber-50">${data.etr ?? '-'}</td></tr>`;
+      }
+      document.getElementById("p-avg").innerText = `${Math.round(totalAR2 / (count || 1))}%`;
+      const cert = document.getElementById("p-cert-status");
+      if ((student.marks["Bahasa Melayu"]?.ar2 || 0) >= 40 && (student.marks["Sejarah"]?.ar2 || 0) >= 40) {
+        cert.innerText = "LAYAK MENDAPAT SIJIL"; cert.className = "font-black text-emerald-700";
+      } else {
+        cert.innerText = "BELUM LAYAK (Gagal BM / Sejarah)"; cert.className = "font-black text-rose-600";
+      }
+    }
   </script>
 </body>
 </html>
