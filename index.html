@@ -112,7 +112,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- MODUL UTAMA: PERJALANAN PENCAPAIAN (KINI RESPONSIF & RINGAN) -->
+      <!-- MODUL UTAMA: ANALISIS TRAJEKTORI PENINGKATAN (TOV ➔ ETR)      -->
       <!-- ============================================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-5">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -124,7 +124,7 @@
             <h3 class="text-lg sm:text-xl font-black text-white mt-0.5">Analisis Trajektori Peningkatan (TOV ➔ ETR)</h3>
           </div>
 
-          <!-- 4 Butang Peringkat Perjalanan -->
+          <!-- 4 Tab Pemilih Tahap -->
           <div class="flex flex-wrap bg-slate-950 p-1 rounded-2xl border border-slate-800 gap-1">
             <button onclick="setJourneyTab('school')" id="jtab-school" class="px-3 py-1.5 rounded-xl text-xs font-bold transition bg-indigo-600 text-white shadow">Sekolah</button>
             <button onclick="setJourneyTab('class')" id="jtab-class" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">Kelas</button>
@@ -133,19 +133,52 @@
           </div>
         </div>
 
-        <!-- Bar Kawalan Dinamik Mengikut Tahap Yang Dipilih -->
+        <!-- Bar Kawalan Pilihan -->
         <div id="journey-controls-bar" class="p-3 bg-slate-950 rounded-2xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <!-- Diisi secara dinamik oleh JS: Dropdown Subjek, Kelas, atau Nama Calon -->
+          <!-- Diisi dinamik oleh JS -->
         </div>
 
-        <!-- Kotak Graf Perjalanan Pintar -->
-        <div class="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800">
-          <div class="flex items-center justify-between mb-3 text-xs">
-            <span class="font-bold text-slate-300" id="journeyChartHeader">Trajektori GPS Keseluruhan Sekolah</span>
-            <span class="text-[11px] text-slate-400 font-mono" id="journeyChartSubBadge">Fasa: TOV ➔ OTR1 ➔ AR1 ➔ OTR2 ➔ AR2 ➔ ETR</span>
+        <!-- Kontena Graf & Jadual Peratus Lulus/Gagal Subjek -->
+        <div class="space-y-4">
+          <div class="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="font-bold text-slate-300" id="journeyChartHeader">Trajektori GPS Keseluruhan Sekolah</span>
+              <span class="text-[11px] text-slate-400 font-mono" id="journeyChartSubBadge">Fasa: TOV ➔ OTR1 ➔ AR1 ➔ OTR2 ➔ AR2 ➔ ETR</span>
+            </div>
+            <div class="h-64 sm:h-72 w-full">
+              <canvas id="journeyDynamicChart"></canvas>
+            </div>
           </div>
-          <div class="h-64 sm:h-72 w-full">
-            <canvas id="journeyDynamicChart"></canvas>
+
+          <!-- KOTAK KHAS PERATUS LULUS & GAGAL BAGI MATA PELAJARAN (HANYA AKTIF DALAM TAB SUBJEK) -->
+          <div id="subjectPassFailSection" class="hidden bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider" id="passFailTableTitle">Analisis Peratus Lulus &amp; Gagal: Bahasa Melayu</h4>
+                <p class="text-[11px] text-slate-400">Penetapan SPM: Lulus $\ge 40$ markah (A+ hingga E) • Gagal $< 40$ markah (Gred G)</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-indigo-300 bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-500/20" id="passFailCandidateCount">40 Calon</span>
+            </div>
+
+            <!-- Jadual Peratus Lulus & Gagal Setiap Fasa (TOV ➔ ETR) -->
+            <div class="overflow-x-auto rounded-xl border border-slate-800">
+              <table class="w-full text-left text-xs text-slate-300 border-collapse">
+                <thead class="bg-slate-900 text-slate-400 uppercase font-mono border-b border-slate-800 text-center">
+                  <tr>
+                    <th class="p-2.5 text-left bg-slate-900">Petunjuk Prestasi</th>
+                    <th class="p-2.5">TOV (Asas)</th>
+                    <th class="p-2.5">OTR1 (Sasaran 1)</th>
+                    <th class="p-2.5">AR1 (Pertengahan)</th>
+                    <th class="p-2.5">OTR2 (Sasaran 2)</th>
+                    <th class="p-2.5 bg-indigo-950/40 text-indigo-300 font-bold">AR2 (Terkini)</th>
+                    <th class="p-2.5 bg-amber-950/40 text-amber-300 font-bold">ETR (Sasaran Akhir)</th>
+                  </tr>
+                </thead>
+                <tbody id="subjectPassFailTableBody" class="divide-y divide-slate-800/60 font-mono text-center">
+                  <!-- Diisi secara dinamik -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -588,7 +621,6 @@
     let editingStudentId = null;
     let currentFocusFilter = 'top15';
     let currentJourneyLevel = 'school';
-
     let journeyChartInstance = null;
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -634,7 +666,7 @@
     }
 
     // ==============================================================
-    // ENJIN MODUL PERJALANAN PENCAPAIAN DENGAN SATU KANVAS RESPONSIF
+    // ENJIN MODUL PERJALANAN PENCAPAIAN (TERMASUK PERATUS LULUS & GAGAL)
     // ==============================================================
     function setJourneyTab(level) {
       currentJourneyLevel = level;
@@ -647,6 +679,13 @@
       const bar = document.getElementById("journey-controls-bar");
       const header = document.getElementById("journeyChartHeader");
       const badge = document.getElementById("journeyChartSubBadge");
+      const passFailSec = document.getElementById("subjectPassFailSection");
+
+      if (level === 'subject') {
+        passFailSec.classList.remove("hidden");
+      } else {
+        passFailSec.classList.add("hidden");
+      }
 
       if (level === 'school') {
         header.innerText = "Trajektori GPS Keseluruhan Sekolah (TOV ➔ ETR)";
@@ -680,8 +719,8 @@
         renderClassJourneyChart();
       } 
       else if (level === 'subject') {
-        header.innerText = "Trajektori GPS Mata Pelajaran (Sasaran OTR vs Sebenar AR)";
-        badge.innerText = "Pilih mana-mana mata pelajaran di bawah";
+        header.innerText = "Trajektori Peratus Lulus & GPS Mata Pelajaran (TOV ➔ ETR)";
+        badge.innerText = "Analisis Peratus Lulus, Gagal dan GPMP";
         
         let subOptions = "";
         Object.keys(subjectAnalysisData).forEach(sub => {
@@ -695,7 +734,11 @@
               ${subOptions}
             </select>
           </div>
-          <div id="journeySubStatusTxt" class="font-mono text-emerald-400 font-bold">Status: Memuaskan</div>
+          <div class="flex items-center gap-4 text-xs font-mono font-bold">
+            <span class="text-emerald-400">● Peratus Lulus (%)</span>
+            <span class="text-rose-400">● Peratus Gagal (%)</span>
+            <span class="text-amber-400">-- GPMP / GPS Subjek</span>
+          </div>
         `;
         renderSubjectJourneyChart();
       } 
@@ -742,26 +785,8 @@
         data: {
           labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
           datasets: [
-            {
-              label: 'GPS Sebenar',
-              data: [6.39, null, 6.39, null, 5.65, null],
-              borderColor: '#818cf8',
-              backgroundColor: 'rgba(129, 140, 248, 0.2)',
-              borderWidth: 3.5,
-              pointBackgroundColor: '#818cf8',
-              pointRadius: 6,
-              tension: 0.3
-            },
-            {
-              label: 'Sasaran Headcount (OTR/ETR)',
-              data: [6.39, 6.07, null, 5.59, null, 4.85],
-              borderColor: '#f59e0b',
-              borderDash: [6, 6],
-              borderWidth: 2.5,
-              pointBackgroundColor: '#f59e0b',
-              pointRadius: 5,
-              tension: 0.3
-            }
+            { label: 'GPS Sebenar', data: [6.39, null, 6.39, null, 5.65, null], borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.2)', borderWidth: 3.5, pointBackgroundColor: '#818cf8', pointRadius: 6, tension: 0.3 },
+            { label: 'Sasaran Headcount (OTR/ETR)', data: [6.39, 6.07, null, 5.59, null, 4.85], borderColor: '#f59e0b', borderDash: [6, 6], borderWidth: 2.5, pointBackgroundColor: '#f59e0b', pointRadius: 5, tension: 0.3 }
           ]
         },
         options: {
@@ -820,35 +845,129 @@
       }
     }
 
+    // ==============================================================
+    // PENGIRAAN & GRAF PERATUS LULUS & GAGAL SETIAP MATA PELAJARAN
+    // ==============================================================
     function renderSubjectJourneyChart() {
       const sub = document.getElementById("journeySubSelect")?.value || "Bahasa Melayu";
-      const data = subjectAnalysisData[sub] || { otr1: 5.0, ar1: 5.0, otr2: 4.5, ar2: 4.0 };
+      const phases = ['tov', 'otr1', 'ar1', 'otr2', 'ar2', 'etr'];
+      const passPercentages = [];
+      const failPercentages = [];
+      const passCounts = [];
+      const failCounts = [];
+      const gpmpValues = [];
 
-      const statusTxt = document.getElementById("journeySubStatusTxt");
-      if (statusTxt) {
-        if (data.ar2 <= data.otr2) {
-          statusTxt.innerText = `Status ${sub}: Melepasi Sasaran OTR2 (GPS ${data.ar2.toFixed(2)})`;
-          statusTxt.className = "font-mono text-emerald-400 font-bold";
-        } else {
-          statusTxt.innerText = `Status ${sub}: Perlu Intervensi (GPS ${data.ar2.toFixed(2)})`;
-          statusTxt.className = "font-mono text-rose-400 font-bold";
-        }
+      let totalCandidates = 0;
+
+      phases.forEach(ph => {
+        let pass = 0;
+        let fail = 0;
+        let total = 0;
+        let points = 0;
+
+        students.forEach(s => {
+          const val = s.marks[sub]?.[ph];
+          if (val !== undefined && val !== null && !isNaN(val)) {
+            total++;
+            if (val >= 40) pass++;
+            else fail++;
+            points += getSpmGrade(val).point;
+          }
+        });
+
+        totalCandidates = total || totalCandidates;
+        const pPass = total > 0 ? parseFloat(((pass / total) * 100).toFixed(1)) : 0;
+        const pFail = total > 0 ? parseFloat(((fail / total) * 100).toFixed(1)) : 0;
+        const gpmp = total > 0 ? parseFloat((points / total).toFixed(2)) : 0;
+
+        passPercentages.push(pPass);
+        failPercentages.push(pFail);
+        passCounts.push(pass);
+        failCounts.push(fail);
+        gpmpValues.push(gpmp);
+      });
+
+      // Kemaskini Tajuk & Bilangan Calon
+      const passFailTitle = document.getElementById("passFailTableTitle");
+      const passFailCount = document.getElementById("passFailCandidateCount");
+      if (passFailTitle) passFailTitle.innerText = `Analisis Peratus Lulus & Gagal: ${sub}`;
+      if (passFailCount) passFailCount.innerText = `${totalCandidates} Orang Calon`;
+
+      // Kemaskini Jadual Perincian Lulus & Gagal
+      const tbody = document.getElementById("subjectPassFailTableBody");
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr class="hover:bg-slate-900/60">
+            <td class="p-2.5 text-left font-bold text-emerald-400 font-sans">Peratus Lulus (%)</td>
+            ${passPercentages.map(p => `<td class="p-2.5 font-black text-emerald-400">${p}%</td>`).join('')}
+          </tr>
+          <tr class="hover:bg-slate-900/60 text-slate-400 text-[11px]">
+            <td class="p-2 text-left font-sans pl-4">Bilangan Calon Lulus</td>
+            ${passCounts.map(c => `<td class="p-2">${c} / ${totalCandidates}</td>`).join('')}
+          </tr>
+          <tr class="hover:bg-slate-900/60">
+            <td class="p-2.5 text-left font-bold text-rose-400 font-sans">Peratus Gagal (%)</td>
+            ${failPercentages.map(f => `<td class="p-2.5 font-black text-rose-400">${f}%</td>`).join('')}
+          </tr>
+          <tr class="hover:bg-slate-900/60 text-slate-400 text-[11px]">
+            <td class="p-2 text-left font-sans pl-4">Bilangan Calon Gagal</td>
+            ${failCounts.map(c => `<td class="p-2">${c} / ${totalCandidates}</td>`).join('')}
+          </tr>
+          <tr class="hover:bg-slate-900/60 bg-slate-900/40">
+            <td class="p-2.5 text-left font-bold text-amber-300 font-sans">GPMP / GPS Subjek</td>
+            ${gpmpValues.map(g => `<td class="p-2.5 font-bold text-amber-300">${g}</td>`).join('')}
+          </tr>
+        `;
       }
 
+      // Graf Kombinasi: Bar Peratus Lulus/Gagal & Garisan GPMP
       createOrUpdateChart({
-        type: 'line',
+        type: 'bar',
         data: {
-          labels: ['OTR1', 'AR1', 'OTR2', 'AR2'],
+          labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
           datasets: [
-            { label: 'GPS Sebenar (AR)', data: [null, data.ar1, null, data.ar2], borderColor: '#38bdf8', borderWidth: 3.5, pointBackgroundColor: '#38bdf8', pointRadius: 6, tension: 0.2 },
-            { label: 'Sasaran OTR', data: [data.otr1, null, data.otr2, null], borderColor: '#f59e0b', borderDash: [5, 5], borderWidth: 2.5, pointBackgroundColor: '#f59e0b', pointRadius: 5, tension: 0.2 }
+            {
+              label: 'Peratus Lulus (%)',
+              data: passPercentages,
+              backgroundColor: 'rgba(16, 185, 129, 0.8)',
+              borderRadius: 6,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Peratus Gagal (%)',
+              data: failPercentages,
+              backgroundColor: 'rgba(244, 63, 94, 0.75)',
+              borderRadius: 6,
+              yAxisID: 'y'
+            },
+            {
+              type: 'line',
+              label: 'GPMP (Gred Purata)',
+              data: gpmpValues,
+              borderColor: '#f59e0b',
+              borderWidth: 3,
+              pointBackgroundColor: '#f59e0b',
+              pointRadius: 5,
+              tension: 0.3,
+              yAxisID: 'y1'
+            }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
           scales: {
-            y: { reverse: true, grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' } },
+            y: {
+              type: 'linear', position: 'left', min: 0, max: 100,
+              title: { display: true, text: 'Peratusan (%)', color: '#10b981', font: { weight: 'bold', size: 10 } },
+              grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' }
+            },
+            y1: {
+              type: 'linear', position: 'right', reverse: true, min: 0, max: 9,
+              title: { display: true, text: 'GPMP (Terbalik: 0 Terbaik)', color: '#f59e0b', font: { weight: 'bold', size: 10 } },
+              grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 }
+            },
             x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
           }
         }
@@ -914,10 +1033,12 @@
           scales: {
             y: {
               type: 'linear', position: 'left', suggestedMin: 0, suggestedMax: 100,
+              title: { display: true, text: 'Markah Purata (%)', color: '#818cf8', font: { weight: 'bold', size: 11 } },
               grid: { color: 'rgba(255, 255, 255, 0.06)' }, ticks: { color: '#94a3b8' }
             },
             y1: {
               type: 'linear', position: 'right', reverse: true, suggestedMin: 0, suggestedMax: 9,
+              title: { display: true, text: 'GPI (Terbalik: 0 Terbilang - 9 Gagal)', color: '#f59e0b', font: { weight: 'bold', size: 11 } },
               grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 }
             },
             x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
@@ -1158,99 +1279,6 @@
       const filtered = (cls === "ALL") ? students : students.filter(s => s.class === cls);
       filtered.forEach(s => select.add(new Option(`${s.id}. ${s.name} (${s.class})`, s.id)));
       if (filtered.length > 0) syncStudent(filtered[0].id);
-    }
-
-    // ==============================================================
-    // VISUAL RADAR CHART INDIVIDU (SPIDER WEB GRAPH)
-    // ==============================================================
-    function renderStudentRadar() {
-      const curId = parseInt(document.getElementById("studentSelect")?.value) || students[0].id;
-      const student = students.find(s => s.id === curId) || students[0];
-
-      const img = document.getElementById("avatar-img");
-      const placeholder = document.getElementById("avatar-placeholder");
-
-      if (student.photo) {
-        img.src = student.photo;
-        img.classList.remove("hidden");
-        placeholder.classList.add("hidden");
-      } else {
-        img.src = "";
-        img.classList.add("hidden");
-        placeholder.classList.remove("hidden");
-      }
-
-      const subjects = Object.keys(student.marks);
-      const ar2Scores = subjects.map(sub => student.marks[sub].ar2 || 0);
-      const etrScores = subjects.map(sub => student.marks[sub].etr || 0);
-
-      document.getElementById("rpg-name").innerText = student.name;
-      document.getElementById("rpg-class").innerText = `TINGKATAN ${student.class}`;
-
-      const totalMarks = ar2Scores.reduce((a, b) => a + b, 0);
-      const avg = Math.round(totalMarks / (ar2Scores.length || 1));
-      
-      document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} IPC`;
-      document.getElementById("rpg-avg").innerText = `${avg}%`;
-
-      const rankBadge = document.getElementById("rpg-rank");
-      if (avg >= 80) {
-        rankBadge.innerText = "TAHAP: MUMTAZ (A)";
-        rankBadge.className = "absolute top-4 right-4 bg-amber-500/20 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-black uppercase score-font border border-amber-500/40";
-      } else if (avg >= 65) {
-        rankBadge.innerText = "TAHAP: CEMERLANG (B+)";
-        rankBadge.className = "absolute top-4 right-4 bg-indigo-500/20 text-indigo-300 text-[10px] px-2.5 py-1 rounded-full font-black uppercase score-font border border-indigo-500/40";
-      } else if (avg >= 50) {
-        rankBadge.innerText = "TAHAP: KEPUJIAN (C+)";
-        rankBadge.className = "absolute top-4 right-4 bg-emerald-500/20 text-emerald-300 text-[10px] px-2.5 py-1 rounded-full font-black uppercase score-font border border-emerald-500/40";
-      } else {
-        rankBadge.innerText = "TAHAP: HARAPAN (D/E)";
-        rankBadge.className = "absolute top-4 right-4 bg-rose-500/20 text-rose-300 text-[10px] px-2.5 py-1 rounded-full font-black uppercase score-font border border-rose-500/40";
-      }
-
-      const ctx = document.getElementById("studentRadarChart").getContext("2d");
-      if (radarChartInstance) radarChartInstance.destroy();
-
-      radarChartInstance = new Chart(ctx, {
-        type: 'radar',
-        data: {
-          labels: subjects,
-          datasets: [
-            {
-              label: 'Pencapaian AR2',
-              data: ar2Scores,
-              backgroundColor: 'rgba(99, 102, 241, 0.4)',
-              borderColor: '#818cf8',
-              borderWidth: 2.5,
-              pointBackgroundColor: '#c7d2fe',
-              pointRadius: 4
-            },
-            {
-              label: 'Sasaran ETR',
-              data: etrScores,
-              backgroundColor: 'rgba(245, 158, 11, 0.1)',
-              borderColor: '#f59e0b',
-              borderWidth: 1.5,
-              borderDash: [4, 4],
-              pointBackgroundColor: '#f59e0b',
-              pointRadius: 3
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            r: {
-              angleLines: { color: 'rgba(255, 255, 255, 0.12)' },
-              grid: { color: 'rgba(255, 255, 255, 0.08)' },
-              pointLabels: { color: '#e2e8f0', font: { size: 9, weight: 'bold' } },
-              suggestedMin: 0, suggestedMax: 100, ticks: { display: false }
-            }
-          },
-          plugins: { legend: { display: false } }
-        }
-      });
     }
 
     // ==============================================================
