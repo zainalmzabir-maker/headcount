@@ -280,9 +280,9 @@
               <input type="file" id="studentPhotoInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
             </div>
 
-            <!-- TAHAP DIPINDAHKAN KE BAWAH GAMBAR -->
-            <div id="rpg-rank" class="mt-2 bg-amber-500/20 text-amber-300 text-[10px] px-3 py-1 rounded-full font-black uppercase score-font border border-amber-500/30">
-              TAHAP: CEMERLANG
+            <!-- TAHAP DINAMIK MENGIKUT MARKAH PURATA -->
+            <div id="rpg-rank" class="mt-2 text-[10px] px-3 py-1 rounded-full font-black uppercase score-font border">
+              TAHAP: -
             </div>
 
             <h3 class="text-base font-bold text-white tracking-wide mt-2" id="rpg-name">AFIF HAFIY BIN MOHD AFIQ</h3>
@@ -904,6 +904,29 @@
       const avg = Math.round(totalMarks / (ar2Scores.length || 1));
       document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} IPC`;
       document.getElementById("rpg-avg").innerText = `${avg}%`;
+
+      // Logik Tahap Dinamik Mengikut Markah Purata
+      let rankText = "";
+      let rankClass = "";
+      if (avg >= 60) {
+        rankText = "Calon Cemerlang";
+        rankClass = "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
+      } else if (avg >= 50) {
+        rankText = "Calon Baik";
+        rankClass = "bg-blue-500/20 text-blue-300 border-blue-500/30";
+      } else if (avg >= 40) {
+        rankText = "Calon Lulus";
+        rankClass = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+      } else {
+        rankText = "Calon Gagal";
+        rankClass = "bg-rose-500/20 text-rose-300 border-rose-500/30";
+      }
+
+      const rankEl = document.getElementById("rpg-rank");
+      if (rankEl) {
+        rankEl.className = `mt-2 text-[10px] px-3 py-1 rounded-full font-black uppercase score-font border ${rankClass}`;
+        rankEl.innerText = `TAHAP: ${rankText}`;
+      }
 
       const ctx = document.getElementById("studentRadarChart").getContext("2d");
       if (radarChartInstance) radarChartInstance.destroy();
