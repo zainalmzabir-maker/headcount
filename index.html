@@ -155,9 +155,9 @@
         <h3 class="text-lg sm:text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
         <p class="text-xs text-slate-400 italic">💡 Letakkan kursor (*hover*) pada kad ringkasan di atas ATAU pada lajur Gred/Bil. G dalam jadual di bawah untuk melihat senarai mata pelajaran terperinci.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div onclick="setFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow">
+          <div onclick="setFocusTab('top20')" id="card-focus-top20" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow">
             <div class="flex justify-between text-amber-400 text-xs font-bold uppercase"><span>Potensi Terbaik</span><i class="fa-solid fa-crown"></i></div>
-            <div class="text-2xl font-black text-white mt-2" id="count-top15">15 Calon</div>
+            <div class="text-2xl font-black text-white mt-2" id="count-top20">20 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Gred A &amp; Purata Tertinggi</p>
           </div>
           <div onclick="setFocusTab('failSej')" id="card-focus-failSej" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-rose-500">
@@ -175,11 +175,26 @@
             <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Kritikal Sijil SPM</p>
           </div>
+          <div onclick="setFocusTab('fail1')" id="card-focus-fail1" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-amber-500">
+            <div class="flex justify-between text-amber-400 text-xs font-bold uppercase"><span>Near Miss 1 MP</span><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-fail1">0 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Gagal Tepat 1 MP</p>
+          </div>
+          <div onclick="setFocusTab('fail2')" id="card-focus-fail2" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-yellow-500">
+            <div class="flex justify-between text-yellow-400 text-xs font-bold uppercase"><span>Near Miss 2 MP</span><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-fail2">0 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Gagal Tepat 2 MP</p>
+          </div>
+          <div onclick="setFocusTab('fail3')" id="card-focus-fail3" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-amber-600">
+            <div class="flex justify-between text-amber-500 text-xs font-bold uppercase"><span>Near Miss 3 MP</span><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="text-2xl font-black text-white mt-2" id="count-fail3">0 Calon</div>
+            <p class="text-[11px] text-slate-400 mt-1">Gagal Tepat 3 MP</p>
+          </div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow">
           <div class="flex justify-between items-center mb-3">
             <h4 class="font-bold text-white text-sm" id="focusTableTitle">Senarai Murid Potensi Terbaik</h4>
-            <span class="text-xs text-slate-400 font-mono" id="focusTableCount">15 Rekod</span>
+            <span class="text-xs text-slate-400 font-mono" id="focusTableCount">20 Rekod</span>
           </div>
           <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72 overflow-y-auto">
             <table class="w-full text-left text-xs text-slate-300">
@@ -400,7 +415,7 @@
 
     let radarChartInstance = null;
     let journeyChartInstance = null;
-    let currentFocusFilter = 'top15';
+    let currentFocusFilter = 'top20';
 
     window.addEventListener("DOMContentLoaded", () => {
       renderAllUI();
@@ -706,24 +721,33 @@
       const failSejList = calculated.filter(s => s.failSej).sort((a,b)=>a.sej-b.sej);
       const failBmList = calculated.filter(s => s.failBm).sort((a,b)=>a.bm-b.bm);
       const failBothList = calculated.filter(s => s.failBoth).sort((a,b)=>(a.bm+a.sej)-(b.bm+b.sej));
-      const top15List = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 15);
+      const fail1List = calculated.filter(s => s.grades['G'] === 1).sort((a,b)=>b.avgAR2 - a.avgAR2);
+      const fail2List = calculated.filter(s => s.grades['G'] === 2).sort((a,b)=>b.avgAR2 - a.avgAR2);
+      const fail3List = calculated.filter(s => s.grades['G'] === 3).sort((a,b)=>b.avgAR2 - a.avgAR2);
+      const top20List = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 20);
 
       document.getElementById("count-failSej").innerText = `${failSejList.length} Calon`;
       document.getElementById("count-failBm").innerText = `${failBmList.length} Calon`;
       document.getElementById("count-failBoth").innerText = `${failBothList.length} Calon`;
-      document.getElementById("count-top15").innerText = `${top15List.length} Calon`;
+      document.getElementById("count-fail1").innerText = `${fail1List.length} Calon`;
+      document.getElementById("count-fail2").innerText = `${fail2List.length} Calon`;
+      document.getElementById("count-fail3").innerText = `${fail3List.length} Calon`;
+      document.getElementById("count-top20").innerText = `${top20List.length} Calon`;
 
-      setCardTooltip('card-focus-top15', `<strong>Top Potensi Terbaik:</strong><br>` + top15List.slice(0,6).map(s => `• ${s.name} (${s.class}) - <span class="text-amber-400">${s.totalA}A</span>`).join('<br>') + (top15List.length > 6 ? '<br><em>...dan lain-lain</em>' : ''));
+      setCardTooltip('card-focus-top20', `<strong>Top 20 Potensi Terbaik:</strong><br>` + top20List.slice(0,8).map(s => `• ${s.name} (${s.class}) - <span class="text-amber-400">${s.totalA}A</span>`).join('<br>') + (top20List.length > 8 ? '<br><em>...dan lain-lain</em>' : ''));
       setCardTooltip('card-focus-failSej', `<strong>Senarai Gagal Sejarah (&lt;40):</strong><br>` + (failSejList.length > 0 ? failSejList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-rose-400">${s.sej}</strong>`).join('<br>') : 'Tiada calon gagal.'));
       setCardTooltip('card-focus-failBm', `<strong>Senarai Gagal BM (&lt;40):</strong><br>` + (failBmList.length > 0 ? failBmList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-orange-400">${s.bm}</strong>`).join('<br>') : 'Tiada calon gagal.'));
       setCardTooltip('card-focus-failBoth', `<strong>Senarai Berisiko (Gagal BM & Sejarah):</strong><br>` + (failBothList.length > 0 ? failBothList.map(s => `• ${s.name} (${s.class}) - BM:${s.bm}, Sej:${s.sej}`).join('<br>') : 'Tiada calon kritikal.'));
+      setCardTooltip('card-focus-fail1', `<strong>Near Miss (Gagal Tepat 1 MP):</strong><br>` + (fail1List.length > 0 ? fail1List.map(s => `• ${s.name} (${s.class}) - Purata: ${s.avgAR2}%`).join('<br>') : 'Tiada rekod.'));
+      setCardTooltip('card-focus-fail2', `<strong>Near Miss (Gagal Tepat 2 MP):</strong><br>` + (fail2List.length > 0 ? fail2List.map(s => `• ${s.name} (${s.class}) - Purata: ${s.avgAR2}%`).join('<br>') : 'Tiada rekod.'));
+      setCardTooltip('card-focus-fail3', `<strong>Near Miss (Gagal Tepat 3 MP):</strong><br>` + (fail3List.length > 0 ? fail3List.map(s => `• ${s.name} (${s.class}) - Purata: ${s.avgAR2}%`).join('<br>') : 'Tiada rekod.'));
 
       renderFocusTable(calculated, currentFocusFilter);
     }
 
     function setFocusTab(fType) {
       currentFocusFilter = fType;
-      ['top15', 'failSej', 'failBm', 'failBoth'].forEach(f => {
+      ['top20', 'failSej', 'failBm', 'failBoth', 'fail1', 'fail2', 'fail3'].forEach(f => {
         const card = document.getElementById(`card-focus-${f}`);
         if (card) card.className = (f === fType) ? "cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 shadow" : "cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 hover:border-slate-700";
       });
@@ -739,9 +763,9 @@
       tbody.innerHTML = "";
       let list = [];
 
-      if (fType === 'top15') {
-        title.innerText = "Senarai Murid Potensi Terbaik (Semua Mata Pelajaran AR2)";
-        list = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 15);
+      if (fType === 'top20') {
+        title.innerText = "Senarai Murid Top 20 Potensi Terbaik (Semua Mata Pelajaran AR2)";
+        list = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 20);
         thead.innerHTML = `<tr><th class="p-3">Ked</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Gred A [A+, A, A-]</th><th class="p-3 text-center">Gred B</th><th class="p-3 text-center">Gred C</th><th class="p-3 text-center">Gred G</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center text-amber-400">GPI</th></tr>`;
         
         list.forEach((s, idx) => {
@@ -772,8 +796,11 @@
         if (fType === 'failSej') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Sejarah (< 40)"; list = calculated.filter(s => s.failSej).sort((a,b)=>a.sej-b.sej); }
         else if (fType === 'failBm') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Bahasa Melayu (< 40)"; list = calculated.filter(s => s.failBm).sort((a,b)=>a.bm-b.bm); }
         else if (fType === 'failBoth') { title.innerText = "Senarai Calon Berisiko Kritikal (Gagal Sejarah & BM)"; list = calculated.filter(s => s.failBoth).sort((a,b)=>(a.bm+a.sej)-(b.bm+b.sej)); }
+        else if (fType === 'fail1') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 1 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 1).sort((a,b)=>b.avgAR2 - a.avgAR2); }
+        else if (fType === 'fail2') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 2 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 2).sort((a,b)=>b.avgAR2 - a.avgAR2); }
+        else if (fType === 'fail3') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 3 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 3).sort((a,b)=>b.avgAR2 - a.avgAR2); }
 
-        thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM</th><th class="p-3 text-center">Sejarah</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th><th class="p-3 text-center">Status</th></tr>`;
+        thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th><th class="p-3 text-center">Status</th></tr>`;
         
         list.forEach((s, idx) => {
           tbody.innerHTML += `
@@ -781,8 +808,6 @@
               <td class="p-3 font-mono font-bold cursor-pointer" onclick="syncStudent(${s.id})">${idx+1}</td>
               <td class="p-3 font-bold text-white cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id})">${s.name}</td>
               <td class="p-3 font-mono text-[11px]">${s.class}</td>
-              <td class="p-3 text-center text-rose-400 font-bold">${s.bm}</td>
-              <td class="p-3 text-center text-rose-400 font-bold">${s.sej}</td>
               <td class="p-3 text-center font-bold">${s.avgAR2}%</td>
               <td class="p-3 text-center text-rose-400 font-bold cursor-help underline decoration-dotted"
                   onmouseenter="showStudentSubTooltip(event, ${s.id}, 'fail')"
@@ -790,7 +815,7 @@
                   onmouseleave="hideCellTooltip()">
                 ${s.grades['G']} MP
               </td>
-              <td class="p-3 text-center font-bold text-rose-400">TIDAK LAYAK</td>
+              <td class="p-3 text-center font-bold text-amber-400">NEAR MISS</td>
             </tr>`;
         });
       }
@@ -841,7 +866,6 @@
       const ctx = document.getElementById("studentRadarChart").getContext("2d");
       if (radarChartInstance) radarChartInstance.destroy();
       
-      // RADAR CHART DENGAN GARIS GRID, SUDUT, DAN NOMBOR SKALA YANG JELAS KELIHATAN
       radarChartInstance = new Chart(ctx, {
         type: 'radar',
         data: {
