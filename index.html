@@ -895,7 +895,7 @@
         const numAxes = chart.data.labels.length;
         const angleStep = (Math.PI * 2) / numAxes;
 
-        // Skala Gred & Pilihan Warna Terbaik:
+        // Zon Gred & Pilihan Warna Terbaik:
         // A (70 - 100): Hijau Terang (Emerald)
         // B (60 - 69): Ungu (Purple)
         // C (50 - 59): Biru (Cyan)
@@ -973,14 +973,14 @@
       const ctx = document.getElementById("studentRadarChart").getContext("2d");
       if (radarChartInstance) radarChartInstance.destroy();
       
-      // SKALA DALAM RADAR DIKOSONGKAN (BERSIH) KERANA LEGEND DI TEPI TELAH DISEDIAKAN
+      // GARISAN BIRU AR2 TANPA SHADE BIRU DI DALAMNYA (BACKGROUND: 'transparent')
       radarChartInstance = new Chart(ctx, {
         type: 'radar',
         data: {
           labels: subjects,
           datasets: [
-            { label: 'AR2', data: ar2Scores, backgroundColor: 'rgba(99, 102, 241, 0.4)', borderColor: '#818cf8', borderWidth: 2.5, pointRadius: 4 },
-            { label: 'ETR', data: etrScores, backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: '#f59e0b', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 3 }
+            { label: 'AR2', data: ar2Scores, backgroundColor: 'transparent', borderColor: '#38bdf8', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#38bdf8' },
+            { label: 'ETR', data: etrScores, backgroundColor: 'transparent', borderColor: '#f59e0b', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 3 }
           ]
         },
         options: {
