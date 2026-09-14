@@ -589,7 +589,6 @@
         header.innerText = "Trajektori GPS Keseluruhan Sekolah (TOV ➔ ETR)";
         badge.innerText = "Sasaran ETR: 4.85 • AR2 Semasa: 5.65";
         bar.innerHTML = `<span class="text-indigo-400 font-bold">● GPS Sebenar vs Sasaran Headcount</span>`;
-        // PENAMBAHAN spanGaps: true SUPAYA GARISAN TIDAK TERPUTUS PADA SEMUA FASA SEKOLAH
         createOrUpdateChart({
           type: 'line',
           data: {
@@ -604,7 +603,7 @@
       } else if (level === 'class') {
         header.innerText = "Perjalanan Markah Purata (%) Mengikut Kelas"; badge.innerText = "5S1, 5S2 & 5S3";
         bar.innerHTML = `<span class="text-indigo-300 font-bold">Perbandingan Markah Purata Fasa Peperiksaan</span>`;
-        createOrUpdateChart({ type: 'line', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: '5S1', data: [60.2, 63.8, 62.4, 66.5, 68.9, 72.5], borderColor: '#3b82f6', borderWidth: 3, tension: 0.3 }, { label: '5S2', data: [47.5, 52.1, 50.8, 55.4, 57.2, 62.0], borderColor: '#6366f1', borderWidth: 3, tension: 0.3 }, { label: '5S3', data: [27.4, 33.6, 29.8, 38.5, 41.2, 47.8], borderColor: '#10b981', borderWidth: 3, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { suggestedMin: 0, suggestedMax: 100 } } } });
+        createOrUpdateChart({ type: 'line', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: '5S1', data: [60.2, 63.8, 62.4, 66.5, 68.9, 72.5], borderColor: '#3b82f6', borderWidth: 3, tension: 0.3, spanGaps: true }, { label: '5S2', data: [47.5, 52.1, 50.8, 55.4, 57.2, 62.0], borderColor: '#6366f1', borderWidth: 3, tension: 0.3, spanGaps: true }, { label: '5S3', data: [27.4, 33.6, 29.8, 38.5, 41.2, 47.8], borderColor: '#10b981', borderWidth: 3, tension: 0.3, spanGaps: true }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { suggestedMin: 0, suggestedMax: 100 } } } });
       } else if (level === 'subject') {
         header.innerText = "Trajektori Peratus Lulus & GPS Mata Pelajaran"; badge.innerText = "Analisis Lulus, Gagal & GPMP";
         let subOpts = ""; Object.keys(subjectAnalysisData).forEach(sub => subOpts += `<option value="${sub}">${sub}</option>`);
@@ -650,7 +649,7 @@
         <tr><td class="p-2 text-left text-slate-400 pl-4">Bil. Gagal</td>${failC.map(v => `<td class="p-2">${v}/${totalC}</td>`).join('')}</tr>
         <tr class="bg-slate-900/50"><td class="p-2 text-left font-bold text-amber-300">GPMP Subjek</td>${gpmp.map(v => `<td class="p-2 font-bold text-amber-300">${v}</td>`).join('')}</tr>
       `;
-      createOrUpdateChart({ type: 'bar', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: 'Peratus Lulus (%)', data: passP, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 6, yAxisID: 'y' }, { label: 'Peratus Gagal (%)', data: failP, backgroundColor: 'rgba(244, 63, 94, 0.75)', borderRadius: 6, yAxisID: 'y' }, { type: 'line', label: 'GPMP', data: gpmp, borderColor: '#f59e0b', borderWidth: 3, pointBackgroundColor: '#f59e0b', tension: 0.3, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left', min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } }, y1: { type: 'linear', position: 'right', reverse: true, min: 0, max: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } }, x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } } } } });
+      createOrUpdateChart({ type: 'bar', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: 'Peratus Lulus (%)', data: passP, backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 6, yAxisID: 'y' }, { label: 'Peratus Gagal (%)', data: failP, backgroundColor: 'rgba(244, 63, 94, 0.75)', borderRadius: 6, yAxisID: 'y' }, { type: 'line', label: 'GPMP', data: gpmp, borderColor: '#f59e0b', borderWidth: 3, pointBackgroundColor: '#f59e0b', tension: 0.3, spanGaps: true, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left', min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } }, y1: { type: 'linear', position: 'right', reverse: true, min: 0, max: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } }, x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } } } } });
     }
 
     function renderStudentJourneyChart(studentId) {
@@ -667,7 +666,7 @@
         marks.push(Math.round(sm / (c || 1)));
         gpis.push(parseFloat((sp / (c || 1)).toFixed(2)));
       });
-      createOrUpdateChart({ type: 'line', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: 'Markah Purata (%)', data: marks, borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.15)', fill: true, borderWidth: 3.5, tension: 0.35, yAxisID: 'y' }, { label: 'GPI', data: gpis, borderColor: '#f59e0b', borderDash: [5, 5], borderWidth: 3, tension: 0.35, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left', suggestedMin: 0, suggestedMax: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } }, y1: { type: 'linear', position: 'right', reverse: true, suggestedMin: 0, suggestedMax: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } }, x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } } } } });
+      createOrUpdateChart({ type: 'line', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: 'Markah Purata (%)', data: marks, borderColor: '#818cf8', backgroundColor: 'rgba(129, 140, 248, 0.15)', fill: true, borderWidth: 3.5, tension: 0.35, spanGaps: true, yAxisID: 'y' }, { label: 'GPI', data: gpis, borderColor: '#f59e0b', borderDash: [5, 5], borderWidth: 3, tension: 0.35, spanGaps: true, yAxisID: 'y1' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'linear', position: 'left', suggestedMin: 0, suggestedMax: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8' } }, y1: { type: 'linear', position: 'right', reverse: true, suggestedMin: 0, suggestedMax: 9, grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b', stepSize: 1 } }, x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } } } } });
     }
 
     function renderSubjectTable() {
@@ -841,7 +840,46 @@
 
       const ctx = document.getElementById("studentRadarChart").getContext("2d");
       if (radarChartInstance) radarChartInstance.destroy();
-      radarChartInstance = new Chart(ctx, { type: 'radar', data: { labels: subjects, datasets: [{ label: 'AR2', data: ar2Scores, backgroundColor: 'rgba(99, 102, 241, 0.4)', borderColor: '#818cf8', borderWidth: 2.5, pointRadius: 4 }, { label: 'ETR', data: etrScores, backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: '#f59e0b', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 3 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } } });
+      
+      // RADAR CHART DENGAN GARIS GRID, SUDUT, DAN NOMBOR SKALA YANG JELAS KELIHATAN
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: subjects,
+          datasets: [
+            { label: 'AR2', data: ar2Scores, backgroundColor: 'rgba(99, 102, 241, 0.4)', borderColor: '#818cf8', borderWidth: 2.5, pointRadius: 4 },
+            { label: 'ETR', data: etrScores, backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: '#f59e0b', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 3 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                display: true,
+                stepSize: 25,
+                color: '#94a3b8',
+                font: { size: 9 },
+                backdropColor: 'transparent'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.15)'
+              },
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.15)'
+              },
+              pointLabels: {
+                color: '#f8fafc',
+                font: { size: 10, weight: 'bold' }
+              }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
     }
 
     let currentUploadTargetStudentId = null;
