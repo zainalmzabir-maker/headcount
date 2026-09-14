@@ -46,6 +46,9 @@
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow">
           <i class="fa-solid fa-chart-pie mr-1"></i>Papan Pemuka
         </button>
+        <button onclick="switchTab('taburan')" id="nav-taburan" class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800">
+          <i class="fa-solid fa-chart-bar mr-1"></i>Taburan Markah
+        </button>
         <button onclick="switchTab('data-entry')" id="nav-data-entry" class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800">
           <i class="fa-solid fa-pen-to-square mr-1"></i>Pengisian Data
         </button>
@@ -172,7 +175,7 @@
           </div>
           <div onclick="setFocusTab('failBoth')" id="card-focus-failBoth" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-red-500">
             <div class="flex justify-between text-red-400 text-xs font-bold uppercase"><span>Gagal BM & Sejarah</span><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div class="text-2xl font-black text-white mt-2" id="count-failBoth">3 Calon</div>
+            <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Kritikal Sijil SPM</p>
           </div>
           <div onclick="setFocusTab('fail1')" id="card-focus-fail1" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-amber-500">
@@ -264,6 +267,55 @@
               <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded bg-orange-500 inline-block"></span><span class="text-orange-300">E (40-44)</span></div>
               <div class="flex items-center space-x-1.5"><span class="w-3 h-3 rounded bg-red-500 inline-block"></span><span class="text-red-300">G (0-39)</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- TAB BARU: TABURAN MARKAH (DISTRIBUTION VIEW)   -->
+    <!-- ============================================== -->
+    <section id="tab-taburan" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-6">
+        <div>
+          <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest font-mono">Analisis Terperinci</span>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-0.5">Taburan Markah &amp; Gred Keseluruhan (AR2)</h2>
+          <p class="text-xs text-slate-400 mt-1">Paparan komprehensif taburan pencapaian gred murid bagi setiap mata pelajaran.</p>
+        </div>
+
+        <!-- GRAF BAR TABURAN MENGIKUT SUBJEK -->
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wider">Taburan Kekerapan Gred Mengikut Mata Pelajaran</h4>
+            <select id="distSubjectSelect" onchange="renderDistributionChart()" class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold rounded-xl px-3 py-1.5 text-xs outline-none">
+              <!-- Diisi automatik -->
+            </select>
+          </div>
+          <div class="h-64 sm:h-72 w-full">
+            <canvas id="distributionChart"></canvas>
+          </div>
+        </div>
+
+        <!-- JADUAL MATRIKS TABURAN GRED KESELURUHAN -->
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider">Rumusan Taburan Gred Mata Pelajaran SPM</h4>
+          <div class="overflow-x-auto rounded-xl border border-slate-800">
+            <table class="w-full text-left text-xs text-slate-300 border-collapse">
+              <thead class="bg-slate-900 text-slate-400 uppercase font-mono text-center">
+                <tr>
+                  <th class="p-3 text-left">Mata Pelajaran</th>
+                  <th class="p-3">Calon</th>
+                  <th class="p-3 text-emerald-400">Gred A (A+,A,A-)</th>
+                  <th class="p-3 text-purple-300">Gred B (B+,B)</th>
+                  <th class="p-3 text-cyan-300">Gred C (C+,C)</th>
+                  <th class="p-3 text-yellow-300">Gred D &amp; E</th>
+                  <th class="p-3 text-rose-400">Gagal (G)</th>
+                  <th class="p-3 text-emerald-300">% Lulus</th>
+                  <th class="p-3 text-amber-400">GPMP</th>
+                </tr>
+              </thead>
+              <tbody id="distributionTableBody" class="divide-y divide-slate-800/60 text-xs"></tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -433,6 +485,7 @@
 
     let radarChartInstance = null;
     let journeyChartInstance = null;
+    let distributionChartInstance = null;
     let currentFocusFilter = 'top20';
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -565,8 +618,11 @@
     function renderAllUI() {
       populateStudentDropdowns();
       populateSingleSubjectDropdown();
+      populateDistributionDropdown();
       renderStudentRadar();
       renderFocusGroups();
+      renderDistributionMatrix();
+      renderDistributionChart();
       setJourneyTab('school');
       renderSubjectTable();
       renderDataTable();
@@ -574,7 +630,7 @@
     }
 
     function switchTab(tab) {
-      ['dashboard', 'data-entry', 'cetakan'].forEach(t => {
+      ['dashboard', 'taburan', 'data-entry', 'cetakan'].forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         const nav = document.getElementById(`nav-${t}`);
         if (el) el.classList.add('hidden');
@@ -603,6 +659,112 @@
       select.innerHTML = "";
       Object.keys(subjectAnalysisData).forEach(sub => {
         select.add(new Option(sub, sub));
+      });
+    }
+
+    function populateDistributionDropdown() {
+      const select = document.getElementById("distSubjectSelect");
+      if (!select) return;
+      const currentVal = select.value;
+      select.innerHTML = "";
+      Object.keys(subjectAnalysisData).forEach(sub => {
+        select.add(new Option(sub, sub));
+      });
+      if (currentVal) select.value = currentVal;
+    }
+
+    function renderDistributionMatrix() {
+      const tbody = document.getElementById("distributionTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      Object.keys(subjectAnalysisData).forEach(sub => {
+        let counts = { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":0, "C":0, "D":0, "E":0, "G":0 };
+        let total = 0, pass = 0, totalPoints = 0;
+
+        students.forEach(s => {
+          const m = s.marks[sub]?.ar2;
+          if (m !== undefined && m !== null) {
+            const gr = getSpmGrade(m);
+            if (counts[gr.grade] !== undefined) counts[gr.grade]++;
+            total++;
+            totalPoints += gr.point;
+            if (m >= 40) pass++;
+          }
+        });
+
+        if (total > 0) {
+          const gpmp = (totalPoints / total).toFixed(2);
+          const passPercentage = ((pass / total) * 100).toFixed(1);
+          const aTotal = counts["A+"] + counts["A"] + counts["A-"];
+          const bTotal = counts["B+"] + counts["B"];
+          const cTotal = counts["C+"] + counts["C"];
+          const deTotal = counts["D"] + counts["E"];
+          const gTotal = counts["G"];
+
+          tbody.innerHTML += `
+            <tr class="hover:bg-slate-800/40 text-center font-mono">
+              <td class="p-3 text-left font-bold text-white font-sans">${sub}</td>
+              <td class="p-3">${total}</td>
+              <td class="p-3 text-emerald-400 font-bold">${aTotal}</td>
+              <td class="p-3 text-purple-300">${bTotal}</td>
+              <td class="p-3 text-cyan-300">${cTotal}</td>
+              <td class="p-3 text-yellow-300">${deTotal}</td>
+              <td class="p-3 text-rose-400 font-bold">${gTotal}</td>
+              <td class="p-3 text-emerald-300 font-bold">${passPercentage}%</td>
+              <td class="p-3 text-amber-400 font-black">${gpmp}</td>
+            </tr>
+          `;
+        }
+      });
+    }
+
+    function renderDistributionChart() {
+      const sub = document.getElementById("distSubjectSelect")?.value || "Bahasa Melayu";
+      const gradesOrder = ["A+", "A", "A-", "B+", "B", "C+", "C", "D", "E", "G"];
+      let counts = { "A+":0, "A":0, "A-":0, "B+":0, "B":0, "C+":0, "C":0, "D":0, "E":0, "G":0 };
+
+      students.forEach(s => {
+        const m = s.marks[sub]?.ar2;
+        if (m !== undefined && m !== null) {
+          const gr = getSpmGrade(m);
+          if (counts[gr.grade] !== undefined) counts[gr.grade]++;
+        }
+      });
+
+      const dataValues = gradesOrder.map(g => counts[g]);
+      const backgroundColors = gradesOrder.map(g => {
+        if (g === 'G') return 'rgba(239, 68, 68, 0.85)';
+        if (g === 'E') return 'rgba(249, 115, 22, 0.85)';
+        if (g === 'D') return 'rgba(234, 179, 8, 0.85)';
+        if (g === 'C+' || g === 'C') return 'rgba(6, 182, 212, 0.85)';
+        if (g === 'B+' || g === 'B') return 'rgba(168, 85, 247, 0.85)';
+        return 'rgba(16, 185, 129, 0.85)';
+      });
+
+      const ctx = document.getElementById("distributionChart").getContext("2d");
+      if (distributionChartInstance) distributionChartInstance.destroy();
+
+      distributionChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: gradesOrder,
+          datasets: [{
+            label: 'Bilangan Calon',
+            data: dataValues,
+            backgroundColor: backgroundColors,
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#94a3b8', stepSize: 1, font: { weight: 'bold' } } },
+            x: { grid: { display: false }, ticks: { color: '#cbd5e1', font: { weight: 'bold' } } }
+          },
+          plugins: { legend: { display: false } }
+        }
       });
     }
 
