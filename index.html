@@ -14,6 +14,7 @@
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.5); border-radius: 4px; }
+    #customTooltip { max-height: 260px; overflow-y: auto; }
     @media print {
       body { background: white !important; color: black !important; }
       body * { visibility: hidden; }
@@ -146,9 +147,10 @@
         </div>
       </div>
 
-      <!-- KUMPULAN SASARAN -->
+      <!-- KUMPULAN SASARAN (DENGAN HOVER TOOLTIP INTERAKTIF) -->
       <div class="space-y-4">
         <h3 class="text-lg sm:text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
+        <p class="text-xs text-slate-400 italic">💡 Letakkan kursor (*hover*) pada mana-mana kad di bawah untuk melihat senarai penuh dan data terperinci.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div onclick="setFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow">
             <div class="flex justify-between text-amber-400 text-xs font-bold uppercase"><span>Potensi Terbaik</span><i class="fa-solid fa-crown"></i></div>
@@ -313,6 +315,9 @@
     </section>
   </main>
 
+  <!-- FLOATING CUSTOM TOOLTIP UNTUK HOVER DATA -->
+  <div id="customTooltip" class="fixed z-50 hidden bg-slate-900/95 backdrop-blur border border-slate-700 text-slate-200 p-3 rounded-xl shadow-2xl text-xs pointer-events-none max-w-xs space-y-1"></div>
+
   <!-- DIALOG / TOAST NOTIFICATION STATUS MUAT NAIK -->
   <div id="uploadToast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border border-slate-700 text-slate-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300">
     <div id="toastIcon"></div>
@@ -422,6 +427,33 @@
         setTimeout(() => { toast.classList.add("hidden"); }, 4000);
       }
       toast.classList.remove("hidden");
+    }
+
+    // FUNGSI MENGURUSKAN TOOLTIP INTERAKTIF APABILA CURSOR DILETAK KE ATAS KAD
+    function setCardTooltip(cardId, htmlContent) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      card.onmouseenter = (e) => {
+        const tooltip = document.getElementById("customTooltip");
+        tooltip.innerHTML = htmlContent;
+        tooltip.classList.remove("hidden");
+        updateTooltipPosition(e);
+      };
+      card.onmousemove = (e) => {
+        updateTooltipPosition(e);
+      };
+      card.onmouseleave = () => {
+        const tooltip = document.getElementById("customTooltip");
+        tooltip.classList.add("hidden");
+      };
+    }
+
+    function updateTooltipPosition(e) {
+      const tooltip = document.getElementById("customTooltip");
+      const x = e.clientX + 15;
+      const y = e.clientY + 15;
+      tooltip.style.left = `${Math.min(x, window.innerWidth - 320)}px`;
+      tooltip.style.top = `${Math.min(y, window.innerHeight - 250)}px`;
     }
 
     function renderAllUI() {
@@ -587,9 +619,23 @@
         const sej = s.marks["Sejarah"]?.ar2 ?? 0;
         return { ...s, avgAR2: avg, gpi, totalSubjects: c, totalA: ta, grades, bm, sej, failBm: bm < 40, failSej: sej < 40, failBoth: bm < 40 && sej < 40 };
       });
-      document.getElementById("count-failSej").innerText = `${calculated.filter(s => s.failSej).length} Calon`;
-      document.getElementById("count-failBm").innerText = `${calculated.filter(s => s.failBm).length} Calon`;
-      document.getElementById("count-failBoth").innerText = `${calculated.filter(s => s.failBoth).length} Calon`;
+
+      const failSejList = calculated.filter(s => s.failSej).sort((a,b)=>a.sej-b.sej);
+      const failBmList = calculated.filter(s => s.failBm).sort((a,b)=>a.bm-b.bm);
+      const failBothList = calculated.filter(s => s.failBoth).sort((a,b)=>(a.bm+a.sej)-(b.bm+b.sej));
+      const top15List = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 15);
+
+      document.getElementById("count-failSej").innerText = `${failSejList.length} Calon`;
+      document.getElementById("count-failBm").innerText = `${failBmList.length} Calon`;
+      document.getElementById("count-failBoth").innerText = `${failBothList.length} Calon`;
+      document.getElementById("count-top15").innerText = `${top15List.length} Calon`;
+
+      // JANA TOOLTIP DATA LENGKAP APABILA HOVER PADA KAD
+      setCardTooltip('card-focus-top15', `<strong>Top Potensi Terbaik:</strong><br>` + top15List.slice(0,6).map(s => `• ${s.name} (${s.class}) - <span class="text-amber-400">${s.totalA}A</span>`).join('<br>') + (top15List.length > 6 ? '<br><em>...dan lain-lain</em>' : ''));
+      setCardTooltip('card-focus-failSej', `<strong>Senarai Gagal Sejarah (&lt;40):</strong><br>` + (failSejList.length > 0 ? failSejList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-rose-400">${s.sej}</strong>`).join('<br>') : 'Tiada calon gagal.'));
+      setCardTooltip('card-focus-failBm', `<strong>Senarai Gagal BM (&lt;40):</strong><br>` + (failBmList.length > 0 ? failBmList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-orange-400">${s.bm}</strong>`).join('<br>') : 'Tiada calon gagal.'));
+      setCardTooltip('card-focus-failBoth', `<strong>Senarai Berisiko (Gagal BM & Sejarah):</strong><br>` + (failBothList.length > 0 ? failBothList.map(s => `• ${s.name} (${s.class}) - BM:${s.bm}, Sej:${s.sej}`).join('<br>') : 'Tiada calon kritikal.'));
+
       renderFocusTable(calculated, currentFocusFilter);
     }
 
