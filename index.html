@@ -147,10 +147,10 @@
         </div>
       </div>
 
-      <!-- KUMPULAN SASARAN (DENGAN HOVER TOOLTIP INTERAKTIF) -->
+      <!-- KUMPULAN SASARAN -->
       <div class="space-y-4">
         <h3 class="text-lg sm:text-xl font-black text-white">Analisis Kumpulan Sasaran &amp; Intervensi SPM</h3>
-        <p class="text-xs text-slate-400 italic">💡 Letakkan kursor (*hover*) pada mana-mana kad di bawah untuk melihat senarai penuh dan data terperinci.</p>
+        <p class="text-xs text-slate-400 italic">💡 Letakkan kursor (*hover*) pada kad ringkasan di atas ATAU pada lajur Gred/Bil. G dalam jadual di bawah untuk melihat senarai mata pelajaran terperinci.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div onclick="setFocusTab('top15')" id="card-focus-top15" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border-2 border-indigo-500 transition shadow">
             <div class="flex justify-between text-amber-400 text-xs font-bold uppercase"><span>Potensi Terbaik</span><i class="fa-solid fa-crown"></i></div>
@@ -429,7 +429,6 @@
       toast.classList.remove("hidden");
     }
 
-    // FUNGSI MENGURUSKAN TOOLTIP INTERAKTIF APABILA CURSOR DILETAK KE ATAS KAD
     function setCardTooltip(cardId, htmlContent) {
       const card = document.getElementById(cardId);
       if (!card) return;
@@ -439,13 +438,23 @@
         tooltip.classList.remove("hidden");
         updateTooltipPosition(e);
       };
-      card.onmousemove = (e) => {
-        updateTooltipPosition(e);
-      };
+      card.onmousemove = (e) => { updateTooltipPosition(e); };
       card.onmouseleave = () => {
         const tooltip = document.getElementById("customTooltip");
         tooltip.classList.add("hidden");
       };
+    }
+
+    function showCellTooltip(event, htmlContent) {
+      const tooltip = document.getElementById("customTooltip");
+      tooltip.innerHTML = htmlContent;
+      tooltip.classList.remove("hidden");
+      updateTooltipPosition(event);
+    }
+
+    function hideCellTooltip() {
+      const tooltip = document.getElementById("customTooltip");
+      tooltip.classList.add("hidden");
     }
 
     function updateTooltipPosition(e) {
@@ -630,7 +639,6 @@
       document.getElementById("count-failBoth").innerText = `${failBothList.length} Calon`;
       document.getElementById("count-top15").innerText = `${top15List.length} Calon`;
 
-      // JANA TOOLTIP DATA LENGKAP APABILA HOVER PADA KAD
       setCardTooltip('card-focus-top15', `<strong>Top Potensi Terbaik:</strong><br>` + top15List.slice(0,6).map(s => `• ${s.name} (${s.class}) - <span class="text-amber-400">${s.totalA}A</span>`).join('<br>') + (top15List.length > 6 ? '<br><em>...dan lain-lain</em>' : ''));
       setCardTooltip('card-focus-failSej', `<strong>Senarai Gagal Sejarah (&lt;40):</strong><br>` + (failSejList.length > 0 ? failSejList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-rose-400">${s.sej}</strong>`).join('<br>') : 'Tiada calon gagal.'));
       setCardTooltip('card-focus-failBm', `<strong>Senarai Gagal BM (&lt;40):</strong><br>` + (failBmList.length > 0 ? failBmList.map(s => `• ${s.name} (${s.class}) - Markah: <strong class="text-orange-400">${s.bm}</strong>`).join('<br>') : 'Tiada calon gagal.'));
@@ -656,17 +664,79 @@
       if (!tbody) return;
       tbody.innerHTML = "";
       let list = [];
+
       if (fType === 'top15') {
         title.innerText = "Senarai Murid Potensi Terbaik (Semua Mata Pelajaran AR2)";
         list = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 15);
         thead.innerHTML = `<tr><th class="p-3">Ked</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Gred A [A+, A, A-]</th><th class="p-3 text-center">Gred B</th><th class="p-3 text-center">Gred C</th><th class="p-3 text-center">Gred G</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center text-amber-400">GPI</th></tr>`;
-        list.forEach((s, idx) => { tbody.innerHTML += `<tr class="hover:bg-slate-800/50 cursor-pointer" onclick="syncStudent(${s.id})"><td class="p-3 font-mono font-bold">${idx+1}</td><td class="p-3 font-bold text-white">${s.name}</td><td class="p-3 font-mono text-[11px]">${s.class}</td><td class="p-3 text-center text-emerald-400 font-bold">${s.totalA}A (${s.grades['A+']}A+, ${s.grades['A']}A, ${s.grades['A-']}A-)</td><td class="p-3 text-center">${s.grades['B+']+s.grades['B']}B</td><td class="p-3 text-center">${s.grades['C+']+s.grades['C']}C</td><td class="p-3 text-center text-rose-400 font-bold">${s.grades['G']}</td><td class="p-3 text-center font-bold">${s.avgAR2}%</td><td class="p-3 text-center font-mono font-black text-amber-400">${s.gpi}</td></tr>`; });
+        
+        list.forEach((s, idx) => {
+          // Senarai subjek cemerlang untuk tooltip murid ini
+          const excSubs = Object.entries(s.marks)
+            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 >= 70)
+            .map(([sub, d]) => `• ${sub}: <strong>${d.ar2}% (${getSpmGrade(d.ar2).grade})</strong>`)
+            .join('<br>');
+          
+          // Senarai subjek gagal untuk tooltip murid ini
+          const failSubs = Object.entries(s.marks)
+            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 < 40)
+            .map(([sub, d]) => `• ${sub}: <strong class="text-rose-400">${d.ar2}% (G)</strong>`)
+            .join('<br>');
+
+          tbody.innerHTML += `
+            <tr class="hover:bg-slate-800/50">
+              <td class="p-3 font-mono font-bold cursor-pointer" onclick="syncStudent(${s.id})">${idx+1}</td>
+              <td class="p-3 font-bold text-white cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id})">${s.name}</td>
+              <td class="p-3 font-mono text-[11px]">${s.class}</td>
+              <td class="p-3 text-center text-emerald-400 font-bold cursor-help underline decoration-dotted"
+                  onmouseenter="showCellTooltip(event, '<strong>Subjek Cemerlang (${s.totalA}):</strong><br>${excSubs || 'Tiada'}')"
+                  onmousemove="updateTooltipPosition(event)"
+                  onmouseleave="hideCellTooltip()">
+                ${s.totalA}A (${s.grades['A+']}A+, ${s.grades['A']}A, ${s.grades['A-']}A-)
+              </td>
+              <td class="p-3 text-center">${s.grades['B+']+s.grades['B']}B</td>
+              <td class="p-3 text-center">${s.grades['C+']+s.grades['C']}C</td>
+              <td class="p-3 text-center text-rose-400 font-bold cursor-help underline decoration-dotted"
+                  onmouseenter="showCellTooltip(event, '<strong>Subjek Gagal (G):</strong><br>${failSubs || 'Tiada'}')"
+                  onmousemove="updateTooltipPosition(event)"
+                  onmouseleave="hideCellTooltip()">
+                ${s.grades['G']}
+              </td>
+              <td class="p-3 text-center font-bold">${s.avgAR2}%</td>
+              <td class="p-3 text-center font-mono font-black text-amber-400">${s.gpi}</td>
+            </tr>`;
+        });
       } else {
         if (fType === 'failSej') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Sejarah (< 40)"; list = calculated.filter(s => s.failSej).sort((a,b)=>a.sej-b.sej); }
         else if (fType === 'failBm') { title.innerText = "Senarai Calon Belum Capai Tahap Lulus Bahasa Melayu (< 40)"; list = calculated.filter(s => s.failBm).sort((a,b)=>a.bm-b.bm); }
         else if (fType === 'failBoth') { title.innerText = "Senarai Calon Berisiko Kritikal (Gagal Sejarah & BM)"; list = calculated.filter(s => s.failBoth).sort((a,b)=>(a.bm+a.sej)-(b.bm+b.sej)); }
+
         thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM</th><th class="p-3 text-center">Sejarah</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th><th class="p-3 text-center">Status</th></tr>`;
-        list.forEach((s, idx) => { tbody.innerHTML += `<tr class="hover:bg-slate-800/50 cursor-pointer" onclick="syncStudent(${s.id})"><td class="p-3 font-mono font-bold">${idx+1}</td><td class="p-3 font-bold text-white">${s.name}</td><td class="p-3 font-mono text-[11px]">${s.class}</td><td class="p-3 text-center text-rose-400 font-bold">${s.bm}</td><td class="p-3 text-center text-rose-400 font-bold">${s.sej}</td><td class="p-3 text-center font-bold">${s.avgAR2}%</td><td class="p-3 text-center text-rose-400 font-bold">${s.grades['G']} MP</td><td class="p-3 text-center font-bold text-rose-400">TIDAK LAYAK</td></tr>`; });
+        
+        list.forEach((s, idx) => {
+          // Senarai kesemua subjek gagal murid ini
+          const failSubs = Object.entries(s.marks)
+            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 < 40)
+            .map(([sub, d]) => `• ${sub}: <strong class="text-rose-400">${d.ar2}% (G)</strong>`)
+            .join('<br>');
+
+          tbody.innerHTML += `
+            <tr class="hover:bg-slate-800/50">
+              <td class="p-3 font-mono font-bold cursor-pointer" onclick="syncStudent(${s.id})">${idx+1}</td>
+              <td class="p-3 font-bold text-white cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id})">${s.name}</td>
+              <td class="p-3 font-mono text-[11px]">${s.class}</td>
+              <td class="p-3 text-center text-rose-400 font-bold">${s.bm}</td>
+              <td class="p-3 text-center text-rose-400 font-bold">${s.sej}</td>
+              <td class="p-3 text-center font-bold">${s.avgAR2}%</td>
+              <td class="p-3 text-center text-rose-400 font-bold cursor-help underline decoration-dotted"
+                  onmouseenter="showCellTooltip(event, '<strong>Kesemua Subjek Gagal (${s.grades['G']} MP):</strong><br>${failSubs || 'Tiada'}')"
+                  onmousemove="updateTooltipPosition(event)"
+                  onmouseleave="hideCellTooltip()">
+                ${s.grades['G']} MP
+              </td>
+              <td class="p-3 text-center font-bold text-rose-400">TIDAK LAYAK</td>
+            </tr>`;
+        });
       }
       countLabel.innerText = `${list.length} Rekod`;
     }
