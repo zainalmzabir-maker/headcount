@@ -978,6 +978,18 @@
       if (!student) return;
       document.getElementById("p-name").innerText = student.name;
       document.getElementById("p-class").innerText = student.class;
+
+      // SYARAT SIJIL SPM: Wajib Lulus BM (>=40) DAN Sejarah (>=40)
+      const bmMark = student.marks["Bahasa Melayu"]?.ar2 ?? 0;
+      const sejMark = student.marks["Sejarah"]?.ar2 ?? 0;
+      const isCertEligible = (bmMark >= 40) && (sejMark >= 40);
+
+      const certStatusEl = document.getElementById("p-cert-status");
+      if (certStatusEl) {
+        certStatusEl.innerText = isCertEligible ? "LAYAK" : "TIDAK LAYAK";
+        certStatusEl.className = isCertEligible ? "font-black text-emerald-700" : "font-black text-rose-600";
+      }
+
       const pPhoto = document.getElementById("p-photo");
       const pPlaceholder = document.getElementById("p-photo-placeholder");
       if (student.photo) { pPhoto.src = student.photo; pPhoto.classList.remove("hidden"); pPlaceholder.classList.add("hidden"); }
