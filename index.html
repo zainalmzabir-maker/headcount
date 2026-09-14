@@ -135,6 +135,9 @@
               <option value="ALL">Semua Kelas</option><option value="5S1">5S1</option><option value="5S2">5S2</option><option value="5S3">5S3</option>
             </select>
             <input type="text" id="subjectSearchInput" onkeyup="renderSubjectTable()" placeholder="Cari..." class="bg-slate-950 border border-slate-800 px-3 py-2 rounded-xl text-slate-200 outline-none w-32">
+            <button onclick="exportSubjectMatrixExcel()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow" title="Muat Turun Excel Matriks Subjek">
+              <i class="fa-solid fa-file-excel"></i> Excel
+            </button>
           </div>
         </div>
         <div class="overflow-x-auto rounded-2xl border border-slate-800 max-h-72 overflow-y-auto">
@@ -444,7 +447,6 @@
       };
     }
 
-    // FUNGSI KHAS UNTUK HOVER PADA TABEL (CEMERLANG & GAGAL)
     function showStudentSubTooltip(event, studentId, type) {
       const student = students.find(s => s.id === studentId);
       if (!student) return;
@@ -481,6 +483,51 @@
       const y = e.clientY + 15;
       tooltip.style.left = `${Math.min(x, window.innerWidth - 320)}px`;
       tooltip.style.top = `${Math.min(y, window.innerHeight - 250)}px`;
+    }
+
+    // FUNGSI MUAT TURUN EXCEL MATRIKS SUBJEK
+    function exportSubjectMatrixExcel() {
+      const sub = document.getElementById("singleSubjectSelect")?.value || "Bahasa Melayu";
+      const cls = document.getElementById("subjectClassFilter")?.value || "ALL";
+      const term = (document.getElementById("subjectSearchInput")?.value || "").toLowerCase();
+
+      const filtered = students.filter(s => s.marks[sub] !== undefined && (cls === "ALL" || s.class === cls) && s.name.toLowerCase().includes(term));
+      filtered.sort((a, b) => (b.marks[sub]?.ar2 || 0) - (a.marks[sub]?.ar2 || 0));
+
+      let csvContent = "\ufeff"; // BOM untuk sokongan UTF-8 Excel
+      csvContent += `Bil,Nama Calon,Kelas,TOV,OTR1,AR1,OTR2,AR2 (Terkini),ETR (Sasaran),Beza,Gred\n`;
+
+      filtered.forEach((s, idx) => {
+        const d = s.marks[sub];
+        const ar2 = d.ar2 ?? 0;
+        const diff = ar2 - (d.otr2 ?? 0);
+        const grade = getSpmGrade(ar2).grade;
+        const name = `"${s.name.replace(/"/g, '""')}"`;
+        const row = [
+          idx + 1,
+          name,
+          s.class,
+          d.tov ?? '-',
+          d.otr1 ?? '-',
+          d.ar1 ?? '-',
+          d.otr2 ?? '-',
+          ar2,
+          d.etr ?? '-',
+          diff >= 0 ? '+' + diff : diff,
+          grade
+        ];
+        csvContent += row.join(",") + "\n";
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Matriks_Subjek_${sub.replace(/\s+/g, '_')}_${cls}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Berjaya Dimuat Turun", `Fail Excel bagi subjek ${sub} telah dimuat turun.`, "success");
     }
 
     function renderAllUI() {
