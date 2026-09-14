@@ -172,7 +172,7 @@
           </div>
           <div onclick="setFocusTab('failBoth')" id="card-focus-failBoth" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-red-500">
             <div class="flex justify-between text-red-400 text-xs font-bold uppercase"><span>Gagal BM & Sejarah</span><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div class="text-2xl font-black text-red-400 mt-2" id="count-failBoth">3 Calon</div>
+            <div class="text-2xl font-black text-white mt-2" id="count-failBoth">3 Calon</div>
             <p class="text-[11px] text-slate-400 mt-1">Kritikal Sijil SPM</p>
           </div>
           <div onclick="setFocusTab('fail1')" id="card-focus-fail1" class="cursor-pointer bg-slate-900 p-4 rounded-2xl border border-slate-800 transition hover:border-amber-500">
@@ -729,10 +729,7 @@
       const fail1List = calculated.filter(s => s.grades['G'] === 1).sort((a,b)=>b.avgAR2 - a.avgAR2);
       const fail2List = calculated.filter(s => s.grades['G'] === 2).sort((a,b)=>b.avgAR2 - a.avgAR2);
       const fail3List = calculated.filter(s => s.grades['G'] === 3).sort((a,b)=>b.avgAR2 - a.avgAR2);
-      
-      // Senarai murid gagal 4 MP ke atas (disusun dari bilangan gagal terbanyak ke terendah)
       const fail4PlusList = calculated.filter(s => s.grades['G'] >= 4).sort((a,b) => b.grades['G'] - a.grades['G'] || b.avgAR2 - a.avgAR2);
-
       const top20List = [...calculated].sort((a, b) => b.totalA !== a.totalA ? b.totalA - a.totalA : parseFloat(a.gpi) - parseFloat(b.gpi)).slice(0, 20);
 
       document.getElementById("count-failSej").innerText = `${failSejList.length} Calon`;
@@ -810,7 +807,7 @@
         else if (fType === 'fail1') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 1 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 1).sort((a,b)=>b.avgAR2 - a.avgAR2); }
         else if (fType === 'fail2') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 2 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 2).sort((a,b)=>b.avgAR2 - a.avgAR2); }
         else if (fType === 'fail3') { title.innerText = "Senarai Calon Near Miss (Gagal Tepat 3 Mata Pelajaran)"; list = calculated.filter(s => s.grades['G'] === 3).sort((a,b)=>b.avgAR2 - a.avgAR2); }
-        else if (fType === 'fail4plus') { title.innerText = "Senarai Murid Gagal 4 Mata Pelajaran Ke Atas (Disusun Bil. MP Gagal Terbanyak)"; list = calculated.filter(s => s.grades['G'] >= 4).sort((a,b) => b.grades['G'] - a.grades['G'] || b.avgAR2 - a.avgAR2); }
+        else if (fType === 'fail4plus') { title.innerText = "Senarai Murid Gagal 4 Mata Pelajaran Ke Atas"; list = calculated.filter(s => s.grades['G'] >= 4).sort((a,b) => b.grades['G'] - a.grades['G'] || b.avgAR2 - a.avgAR2); }
 
         if (fType === 'failSej' || fType === 'failBm' || fType === 'failBoth') {
           thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM</th><th class="p-3 text-center">Sejarah</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th></tr>`;
@@ -870,6 +867,72 @@
       if (filtered.length > 0) syncStudent(filtered[0].id);
     }
 
+    // PLUGIN KUSTOM CHART.JS UNTUK ZON WARNA GRED PADA RADAR CHART
+    const radarBackgroundPlugin = {
+      id: 'radarBackgroundPlugin',
+      beforeDraw: (chart) => {
+        if (chart.config.type !== 'radar') return;
+        const { ctx, scales } = chart;
+        const rScale = scales.r;
+        if (!rScale) return;
+
+        ctx.save();
+        const centerX = rScale.xCenter;
+        const centerY = rScale.yCenter;
+        const numAxes = chart.data.labels.length;
+        const angleStep = (Math.PI * 2) / numAxes;
+
+        // Zon Warna Mengikut Gred & Markah:
+        // G (0 - 39): Merah
+        // E (40 - 44): Oren
+        // D (45 - 49): Kuning
+        // C & C+ (50 - 59): Cyan
+        // B & B+ (60 - 69): Purple
+        // A-, A, A+ (70 - 100): Hijau
+        const zones = [
+          { min: 0, max: 39, color: 'rgba(239, 68, 68, 0.12)' },    // Merah (G)
+          { min: 39, max: 44, color: 'rgba(249, 115, 22, 0.12)' },  // Oren (E)
+          { min: 44, max: 49, color: 'rgba(234, 179, 8, 0.12)' },   // Kuning (D)
+          { min: 49, max: 59, color: 'rgba(6, 182, 212, 0.12)' },   // Cyan (C & C+)
+          { min: 59, max: 69, color: 'rgba(168, 85, 247, 0.12)' },  // Purple (B & B+)
+          { min: 69, max: 100, color: 'rgba(34, 197, 94, 0.12)' }   // Hijau (A-/A/A+)
+        ];
+
+        zones.forEach(zone => {
+          ctx.beginPath();
+          ctx.fillStyle = zone.color;
+
+          const rMin = rScale.getDistanceFromCenterForValue(zone.min);
+          const rMax = rScale.getDistanceFromCenterForValue(zone.max);
+
+          for (let i = 0; i < numAxes; i++) {
+            const angle = i * angleStep - Math.PI / 2;
+            const x = centerX + Math.cos(angle) * rMax;
+            const y = centerY + Math.sin(angle) * rMax;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.closePath();
+
+          if (zone.min > 0) {
+            for (let i = numAxes - 1; i >= 0; i--) {
+              const angle = i * angleStep - Math.PI / 2;
+              const x = centerX + Math.cos(angle) * rMin;
+              const y = centerY + Math.sin(angle) * rMin;
+              if (i === numAxes - 1) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+          }
+
+          ctx.fill('evenodd');
+        });
+
+        ctx.restore();
+      }
+    };
+    Chart.register(radarBackgroundPlugin);
+
     function renderStudentRadar() {
       const curId = parseInt(document.getElementById("studentSelect")?.value) || students[0].id;
       const student = students.find(s => s.id === curId) || students[0];
@@ -915,16 +978,29 @@
               max: 100,
               ticks: {
                 display: true,
-                stepSize: 25,
+                stepSize: 5,
                 color: '#94a3b8',
                 font: { size: 9 },
-                backdropColor: 'transparent'
+                backdropColor: 'transparent',
+                callback: function(value) {
+                  if (value === 0) return '0 (G)';
+                  if (value === 40) return '40 (E)';
+                  if (value === 45) return '45 (D)';
+                  if (value === 50) return '50 (C)';
+                  if (value === 55) return '55 (C+)';
+                  if (value === 60) return '60 (B)';
+                  if (value === 65) return '65 (B+)';
+                  if (value === 70) return '70 (A-)';
+                  if (value === 80) return '80 (A)';
+                  if (value === 90) return '90 (A+)';
+                  return '';
+                }
               },
               grid: {
-                color: 'rgba(255, 255, 255, 0.15)'
+                color: 'rgba(255, 255, 255, 0.12)'
               },
               angleLines: {
-                color: 'rgba(255, 255, 255, 0.15)'
+                color: 'rgba(255, 255, 255, 0.12)'
               },
               pointLabels: {
                 color: '#f8fafc',
