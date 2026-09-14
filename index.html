@@ -485,7 +485,6 @@
       tooltip.style.top = `${Math.min(y, window.innerHeight - 250)}px`;
     }
 
-    // FUNGSI MUAT TURUN EXCEL MATRIKS SUBJEK
     function exportSubjectMatrixExcel() {
       const sub = document.getElementById("singleSubjectSelect")?.value || "Bahasa Melayu";
       const cls = document.getElementById("subjectClassFilter")?.value || "ALL";
@@ -494,7 +493,7 @@
       const filtered = students.filter(s => s.marks[sub] !== undefined && (cls === "ALL" || s.class === cls) && s.name.toLowerCase().includes(term));
       filtered.sort((a, b) => (b.marks[sub]?.ar2 || 0) - (a.marks[sub]?.ar2 || 0));
 
-      let csvContent = "\ufeff"; // BOM untuk sokongan UTF-8 Excel
+      let csvContent = "\ufeff"; 
       csvContent += `Bil,Nama Calon,Kelas,TOV,OTR1,AR1,OTR2,AR2 (Terkini),ETR (Sasaran),Beza,Gred\n`;
 
       filtered.forEach((s, idx) => {
@@ -590,7 +589,18 @@
         header.innerText = "Trajektori GPS Keseluruhan Sekolah (TOV ➔ ETR)";
         badge.innerText = "Sasaran ETR: 4.85 • AR2 Semasa: 5.65";
         bar.innerHTML = `<span class="text-indigo-400 font-bold">● GPS Sebenar vs Sasaran Headcount</span>`;
-        createOrUpdateChart({ type: 'line', data: { labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'], datasets: [{ label: 'GPS Sebenar', data: [6.39, null, 6.39, null, 5.65, null], borderColor: '#818cf8', borderWidth: 3.5, tension: 0.3 }, { label: 'Sasaran OTR/ETR', data: [6.39, 6.07, null, 5.59, null, 4.85], borderColor: '#f59e0b', borderDash: [6, 6], borderWidth: 2.5, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: { reverse: true } } } });
+        // PENAMBAHAN spanGaps: true SUPAYA GARISAN TIDAK TERPUTUS PADA SEMUA FASA SEKOLAH
+        createOrUpdateChart({
+          type: 'line',
+          data: {
+            labels: ['TOV', 'OTR1', 'AR1', 'OTR2', 'AR2', 'ETR'],
+            datasets: [
+              { label: 'GPS Sebenar', data: [6.39, null, 6.39, null, 5.65, null], borderColor: '#818cf8', borderWidth: 3.5, tension: 0.3, spanGaps: true },
+              { label: 'Sasaran OTR/ETR', data: [6.39, 6.07, null, 5.59, null, 4.85], borderColor: '#f59e0b', borderDash: [6, 6], borderWidth: 2.5, tension: 0.3, spanGaps: true }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { reverse: true } } }
+        });
       } else if (level === 'class') {
         header.innerText = "Perjalanan Markah Purata (%) Mengikut Kelas"; badge.innerText = "5S1, 5S2 & 5S3";
         bar.innerHTML = `<span class="text-indigo-300 font-bold">Perbandingan Markah Purata Fasa Peperiksaan</span>`;
