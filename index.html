@@ -115,7 +115,7 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 1: TRAJEKTORI PENINGKATAN (TOV ➔ ETR)     -->
+      <!-- MODUL 1: TRAJEKTORI PENINGKATAN (TOV ➔ ETR)      -->
       <!-- ============================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -164,7 +164,7 @@
       </div>
 
       <!-- ============================================== -->
-      <!-- MODUL 2: MATRIKS MARKAH MATA PELAJARAN         -->
+      <!-- MODUL 2: MATRIKS MARKAH MATA PELAJARAN          -->
       <!-- ============================================== -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 shadow space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-4">
@@ -317,7 +317,7 @@
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
           <div>
             <h2 class="text-lg font-bold text-white">Senarai Penuh &amp; Pengurusan Markah Calon (40 Orang)</h2>
-            <p class="text-xs text-slate-400">Tekan 'Kemaskini Semua' untuk mengubah markah kesemua mata pelajaran calon.</p>
+            <p class="text-xs text-slate-400">Tekan 'Kemaskini Semua' atau muat naik foto untuk simpan terus ke Google Sheet.</p>
           </div>
           <div class="flex items-center gap-2">
             <button onclick="fetchGoogleSheetData()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
@@ -445,28 +445,6 @@
 
   </main>
 
-  <!-- MODAL EDIT MARKAH -->
-  <div id="fullEditModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
-      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
-        <div>
-          <h3 class="text-base font-bold text-white" id="modalStudentName">Kemaskini Markah</h3>
-          <p class="text-xs text-indigo-400" id="modalStudentClass">Kelas</p>
-        </div>
-        <button onclick="closeFullEditModal()" class="text-slate-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
-      </div>
-
-      <div class="p-5 overflow-y-auto space-y-3 flex-grow" id="modalSubjectsContainer"></div>
-
-      <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-between">
-        <button onclick="closeFullEditModal()" class="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">Batal</button>
-        <button onclick="saveFullStudentMarks()" class="px-4 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1">
-          <i class="fa-solid fa-floppy-disk"></i> Simpan Semua
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- SCRIPT UTAMA -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
@@ -554,14 +532,7 @@
     let currentFocusFilter = 'top15';
 
     window.addEventListener("DOMContentLoaded", () => {
-      populateStudentDropdowns();
-      populateSingleSubjectDropdown();
-      renderStudentRadar();
-      renderFocusGroups();
-      setJourneyTab('school');
-      renderSubjectTable();
-      renderDataTable();
-      renderPrintSlip();
+      fetchGoogleSheetData(); // Cuba muat data terus dari Google Sheet dahulu
     });
 
     function switchTab(tab) {
@@ -905,7 +876,6 @@
       document.getElementById("rpg-combat-power").innerText = `${totalMarks * 10} IPC`;
       document.getElementById("rpg-avg").innerText = `${avg}%`;
 
-      // Logik Tahap Dinamik Mengikut Markah Purata
       let rankText = "";
       let rankClass = "";
       if (avg >= 60) {
@@ -950,6 +920,22 @@
       document.getElementById("studentPhotoInput").click();
     }
 
+    // FUNGSI BARU: Hantar data ke Google Apps Script (Backend)
+    function saveStudentToSheet(student) {
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ sheetId: SHEET_ID, student: student })
+      })
+      .then(res => res.json())
+      .then(res => {
+        console.log("Data & Foto berjaya disimpan ke Google Sheet:", res);
+      })
+      .catch(err => {
+        console.error("Gagal simpan ke Google Sheet:", err);
+      });
+    }
+
     function handleImageUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -965,8 +951,15 @@
           const ctx = canvas.getContext("2d");
           canvas.width = 250; canvas.height = (img.height * 250) / img.width;
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          student.photo = canvas.toDataURL("image/jpeg", 0.7);
-          renderStudentRadar(); renderDataTable(); renderPrintSlip();
+          
+          student.photo = canvas.toDataURL("image/jpeg", 0.6);
+          
+          renderStudentRadar(); 
+          renderDataTable(); 
+          renderPrintSlip();
+
+          // Simpan terus secara automatik ke Google Sheet
+          saveStudentToSheet(student);
         };
         img.src = e.target.result;
       };
@@ -1032,15 +1025,28 @@
         .then(data => {
           if (Array.isArray(data) && data.length > 0 && data[0].marks) {
             students = data;
-            populateStudentDropdowns();
-            renderStudentRadar();
-            renderFocusGroups();
-            renderSubjectTable();
-            renderDataTable();
-            renderPrintSlip();
           }
+          // Kemaskini antaramuka (UI) menggunakan data semasa
+          populateStudentDropdowns();
+          populateSingleSubjectDropdown();
+          renderStudentRadar();
+          renderFocusGroups();
+          setJourneyTab('school');
+          renderSubjectTable();
+          renderDataTable();
+          renderPrintSlip();
         })
-        .catch(() => {});
+        .catch(err => {
+          console.warn("Gagal muat dari Google Sheet, menggunakan data fallback lalai:", err);
+          populateStudentDropdowns();
+          populateSingleSubjectDropdown();
+          renderStudentRadar();
+          renderFocusGroups();
+          setJourneyTab('school');
+          renderSubjectTable();
+          renderDataTable();
+          renderPrintSlip();
+        });
     }
   </script>
 </body>
