@@ -399,7 +399,6 @@
     let journeyChartInstance = null;
     let currentFocusFilter = 'top15';
 
-    // PAPAR SERTA-MERTA & TARIK GAMBAR DARI TAB 'Photos' DI LATAR BELAKANG
     window.addEventListener("DOMContentLoaded", () => {
       renderAllUI();
       fetchPhotosFromSheet();
@@ -445,9 +444,28 @@
       };
     }
 
-    function showCellTooltip(event, htmlContent) {
+    // FUNGSI KHAS UNTUK HOVER PADA TABEL (CEMERLANG & GAGAL)
+    function showStudentSubTooltip(event, studentId, type) {
+      const student = students.find(s => s.id === studentId);
+      if (!student) return;
+
+      let content = "";
+      if (type === 'fail') {
+        const failSubs = Object.entries(student.marks)
+          .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 < 40)
+          .map(([sub, d]) => `• ${sub}: <strong class="text-rose-400">${d.ar2}% (G)</strong>`)
+          .join('<br>');
+        content = `<strong>Subjek Gagal (< 40):</strong><br>${failSubs || 'Tiada'}`;
+      } else if (type === 'exc') {
+        const excSubs = Object.entries(student.marks)
+          .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 >= 70)
+          .map(([sub, d]) => `• ${sub}: <strong>${d.ar2}% (${getSpmGrade(d.ar2).grade})</strong>`)
+          .join('<br>');
+        content = `<strong>Subjek Cemerlang (A-/A/A+):</strong><br>${excSubs || 'Tiada'}`;
+      }
+
       const tooltip = document.getElementById("customTooltip");
-      tooltip.innerHTML = htmlContent;
+      tooltip.innerHTML = content;
       tooltip.classList.remove("hidden");
       updateTooltipPosition(event);
     }
@@ -671,25 +689,13 @@
         thead.innerHTML = `<tr><th class="p-3">Ked</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">Gred A [A+, A, A-]</th><th class="p-3 text-center">Gred B</th><th class="p-3 text-center">Gred C</th><th class="p-3 text-center">Gred G</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center text-amber-400">GPI</th></tr>`;
         
         list.forEach((s, idx) => {
-          // Senarai subjek cemerlang untuk tooltip murid ini
-          const excSubs = Object.entries(s.marks)
-            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 >= 70)
-            .map(([sub, d]) => `• ${sub}: <strong>${d.ar2}% (${getSpmGrade(d.ar2).grade})</strong>`)
-            .join('<br>');
-          
-          // Senarai subjek gagal untuk tooltip murid ini
-          const failSubs = Object.entries(s.marks)
-            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 < 40)
-            .map(([sub, d]) => `• ${sub}: <strong class="text-rose-400">${d.ar2}% (G)</strong>`)
-            .join('<br>');
-
           tbody.innerHTML += `
             <tr class="hover:bg-slate-800/50">
               <td class="p-3 font-mono font-bold cursor-pointer" onclick="syncStudent(${s.id})">${idx+1}</td>
               <td class="p-3 font-bold text-white cursor-pointer hover:text-indigo-400" onclick="syncStudent(${s.id})">${s.name}</td>
               <td class="p-3 font-mono text-[11px]">${s.class}</td>
               <td class="p-3 text-center text-emerald-400 font-bold cursor-help underline decoration-dotted"
-                  onmouseenter="showCellTooltip(event, '<strong>Subjek Cemerlang (${s.totalA}):</strong><br>${excSubs || 'Tiada'}')"
+                  onmouseenter="showStudentSubTooltip(event, ${s.id}, 'exc')"
                   onmousemove="updateTooltipPosition(event)"
                   onmouseleave="hideCellTooltip()">
                 ${s.totalA}A (${s.grades['A+']}A+, ${s.grades['A']}A, ${s.grades['A-']}A-)
@@ -697,7 +703,7 @@
               <td class="p-3 text-center">${s.grades['B+']+s.grades['B']}B</td>
               <td class="p-3 text-center">${s.grades['C+']+s.grades['C']}C</td>
               <td class="p-3 text-center text-rose-400 font-bold cursor-help underline decoration-dotted"
-                  onmouseenter="showCellTooltip(event, '<strong>Subjek Gagal (G):</strong><br>${failSubs || 'Tiada'}')"
+                  onmouseenter="showStudentSubTooltip(event, ${s.id}, 'fail')"
                   onmousemove="updateTooltipPosition(event)"
                   onmouseleave="hideCellTooltip()">
                 ${s.grades['G']}
@@ -714,12 +720,6 @@
         thead.innerHTML = `<tr><th class="p-3">Bil</th><th class="p-3">Nama Calon</th><th class="p-3">Kelas</th><th class="p-3 text-center">BM</th><th class="p-3 text-center">Sejarah</th><th class="p-3 text-center">Purata</th><th class="p-3 text-center">Bil. G</th><th class="p-3 text-center">Status</th></tr>`;
         
         list.forEach((s, idx) => {
-          // Senarai kesemua subjek gagal murid ini
-          const failSubs = Object.entries(s.marks)
-            .filter(([sub, d]) => d.ar2 !== undefined && d.ar2 !== null && d.ar2 < 40)
-            .map(([sub, d]) => `• ${sub}: <strong class="text-rose-400">${d.ar2}% (G)</strong>`)
-            .join('<br>');
-
           tbody.innerHTML += `
             <tr class="hover:bg-slate-800/50">
               <td class="p-3 font-mono font-bold cursor-pointer" onclick="syncStudent(${s.id})">${idx+1}</td>
@@ -729,7 +729,7 @@
               <td class="p-3 text-center text-rose-400 font-bold">${s.sej}</td>
               <td class="p-3 text-center font-bold">${s.avgAR2}%</td>
               <td class="p-3 text-center text-rose-400 font-bold cursor-help underline decoration-dotted"
-                  onmouseenter="showCellTooltip(event, '<strong>Kesemua Subjek Gagal (${s.grades['G']} MP):</strong><br>${failSubs || 'Tiada'}')"
+                  onmouseenter="showStudentSubTooltip(event, ${s.id}, 'fail')"
                   onmousemove="updateTooltipPosition(event)"
                   onmouseleave="hideCellTooltip()">
                 ${s.grades['G']} MP
