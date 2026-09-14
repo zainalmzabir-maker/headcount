@@ -313,12 +313,21 @@
     </section>
   </main>
 
+  <!-- DIALOG / TOAST NOTIFICATION STATUS MUAT NAIK -->
+  <div id="uploadToast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border border-slate-700 text-slate-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300">
+    <div id="toastIcon"></div>
+    <div>
+      <h5 id="toastTitle" class="text-xs font-bold text-white">Status Muat Naik</h5>
+      <p id="toastDesc" class="text-[11px] text-slate-400">Memproses gambar...</p>
+    </div>
+  </div>
+
   <!-- SCRIPT UTAMA -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqaoxOkcfecKHnngxeYyWbLLdQGvcYC53AWXCUc4P3EUAhTwhWltLSgZ31ZH6EGrH5ZA/exec";
     const SHEET_ID = "14tmpPdCwmW0CXE0zPi9Ncv1cWvZRJz9Oom5lMSy7yg0";
 
-    // Data Markah Penuh 40 Calon Dikembalikan Sepenuhnya Seperti Asal
+    // Data Markah Penuh 40 Calon 
     let students = [
       { id: 1, name: "AFIF HAFIY BIN MOHD AFIQ", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:65,otr1:68,ar1:72,otr2:72,ar2:75,etr:75}, "Bahasa Inggeris": {tov:77,otr1:79,ar1:70,otr2:81,ar2:76,etr:83}, "Matematik": {tov:41,otr1:49,ar1:43,otr2:57,ar2:50,etr:65}, "Sejarah": {tov:53,otr1:57,ar1:65,otr2:61,ar2:55,etr:65}, "Pendidikan Islam": {tov:70,otr1:73,ar1:83,otr2:77,ar2:93,etr:80}, "Fizik": {tov:38,otr1:40,ar1:49,otr2:42,ar2:50,etr:44}, "Kimia": {tov:23,otr1:29,ar1:38,otr2:34,ar2:50,etr:40}, "Matematik Tambahan": {tov:8,otr1:19,ar1:6,otr2:29,ar2:10,etr:40}, "Asas Kelestarian": {tov:40,otr1:48,ar1:53,otr2:57,ar2:71,etr:65}, "Tasawwur Islam": {tov:70,otr1:73,ar1:51,otr2:77,ar2:60,etr:80} }},
       { id: 2, name: "CHENG ZHI XUEN", class: "5S1", photo: "", marks: { "Bahasa Melayu": {tov:69,otr1:72,ar1:75,otr2:76,ar2:80,etr:79}, "Bahasa Inggeris": {tov:68,otr1:70,ar1:64,otr2:73,ar2:73,etr:75}, "Matematik": {tov:75,otr1:77,ar1:81,otr2:78,ar2:81,etr:80}, "Sejarah": {tov:46,otr1:51,ar1:52,otr2:55,ar2:52,etr:60}, "Pendidikan Moral": {tov:54,otr1:63,ar1:55,otr2:71,ar2:70,etr:80}, "Biologi": {tov:40,otr1:43,ar1:27,otr2:47,ar2:40,etr:50}, "Fizik": {tov:48,otr1:54,ar1:53,otr2:59,ar2:46,etr:65}, "Kimia": {tov:35,otr1:43,ar1:34,otr2:52,ar2:43,etr:60}, "Matematik Tambahan": {tov:34,otr1:36,ar1:43,otr2:38,ar2:41,etr:40}, "Bahasa Cina": {tov:75,otr1:77,ar1:65,otr2:78,ar2:73,etr:80} }},
@@ -390,6 +399,30 @@
       renderAllUI();
       fetchPhotosFromSheet();
     });
+
+    function showToast(title, desc, type = 'loading') {
+      const toast = document.getElementById("uploadToast");
+      const tTitle = document.getElementById("toastTitle");
+      const tDesc = document.getElementById("toastDesc");
+      const tIcon = document.getElementById("toastIcon");
+
+      tTitle.innerText = title;
+      tDesc.innerText = desc;
+
+      if (type === 'loading') {
+        tIcon.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-indigo-400 text-base"></i>';
+        toast.className = "fixed bottom-6 right-6 z-50 bg-slate-900 border border-indigo-500/50 text-slate-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300";
+      } else if (type === 'success') {
+        tIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>';
+        toast.className = "fixed bottom-6 right-6 z-50 bg-slate-900 border border-emerald-500/50 text-slate-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300";
+        setTimeout(() => { toast.classList.add("hidden"); }, 3500);
+      } else if (type === 'error') {
+        tIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-rose-400 text-base"></i>';
+        toast.className = "fixed bottom-6 right-6 z-50 bg-slate-900 border border-rose-500/50 text-slate-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all duration-300";
+        setTimeout(() => { toast.classList.add("hidden"); }, 4000);
+      }
+      toast.classList.remove("hidden");
+    }
 
     function renderAllUI() {
       populateStudentDropdowns();
@@ -645,11 +678,21 @@
     }
 
     function savePhotoToSheet(id, photo) {
+      showToast("Sedang Menyimpan", "Menghantar dan menyimpan foto ke Google Sheet...", "loading");
+
       fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ sheetId: SHEET_ID, id: id, photo: photo })
-      }).catch(err => console.error("Ralat simpan gambar:", err));
+      })
+      .then(res => res.json())
+      .then(res => {
+        showToast("Berjaya Disimpan!", "Foto murid telah kekal disimpan di tab Google Sheet 'Photos'.", "success");
+      })
+      .catch(err => {
+        console.error("Ralat simpan gambar:", err);
+        showToast("Gagal Menyimpan", "Sila semak sambungan internet dan cuba sekali lagi.", "error");
+      });
     }
 
     function handleImageUpload(event) {
@@ -659,13 +702,15 @@
       const student = students.find(s => s.id === targetId);
       if (!student) return;
 
+      showToast("Memproses Foto", "Sedang memampatkan saiz imej...", "loading");
+
       const reader = new FileReader();
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
-          canvas.width = 100; canvas.height = (img.height * 100) / img.width; // Saiz ringan khas untuk sel
+          canvas.width = 100; canvas.height = (img.height * 100) / img.width; 
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           
           student.photo = canvas.toDataURL("image/jpeg", 0.4); 
